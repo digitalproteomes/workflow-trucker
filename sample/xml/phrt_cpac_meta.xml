@@ -1,0 +1,69 @@
+<project id="001" unit="CPAC">
+  <project_leader ORCID="0000-0001-6719-9139"/>
+
+  <!-- The name of corresponding samples will be:
+   PHRT_projectId_sampleId_CPAC
+   E.g. PHRT_1_1_CPAC -->
+  <sample id="1" protocolId="clinical_sample"/>
+  <sample id="2" protocolId="clinical_sample"/>
+  <sample id="3" protocolId="clinical_sample"/>
+
+  <!-- Individual sample preparation -->
+  <sample id="100" protocolId="single_preparation">
+    <sample_ref sampleIdRef="1"/>
+  </sample>
+
+  <!-- Pooling multiple samples -->
+  <sample id="101" protocolId="pooling_preparation">
+    <sample_ref sampleIdRef="1"/>
+    <sample_ref sampleIdRef="2"/>
+  </sample>
+
+  <!-- Fractionation of one sample -->
+  <sample id="102" protocolId="fractionation_preparation">
+    <sample_ref sampleIdRef="3"/>
+  </sample>
+  <sample id="103" protocolId="fractionation_preparation">
+    <sample_ref sampleIdRef="3"/>
+  </sample>
+
+  <ms_run id="50" name="sgoetze_A1902_050" instrumentId="MS:1000649" protocolId="DDA_protocol">
+    <!-- instrumentId based on PSI pis-ms.obo (https://raw.githubusercontent.com/HUPO-PSI/psi-ms-CV/master/psi-ms.obo) -->
+    <sample_ref sampleIdRef="101"/>
+  </ms_run>
+
+  <!-- Technical replicate -->
+  <ms_run id="51" name="sgoetze_A1902_051" instrumentId="MS:1000649" protocolId="DDA_protocol">
+    <sample_ref sampleIdRef="101"/>
+  </ms_run>
+
+  <ms_run id="52" name="sgoetze_A1902_052" instrumentId="MS:1000649" protocolId="DDA_protocol">
+    <sample_ref sampleIdRef="102"/>
+  </ms_run>
+
+  <ms_run id="53" name="sgoetze_A1902_053" instrumentId="MS:1000649" protocolId="Dia_protocol">
+    <sample_ref sampleIdRef="103"/>
+  </ms_run>
+
+  <!-- The name of the corresponding spectral library will be:
+       PHRT_projectId_speclib_id 
+       E.g. PHRT_XXX_speclib_1  -->
+  <spectral_library id="1" protocolId="PD_study_protocol">
+    <!-- Name of the corresponding fasta database will be organism_version.fasta -->
+    <protein_database organism="UP000005640" version="YYMMDD"/>
+    <ms_run_ref msRunIdRef="50"/>
+    <ms_run_ref msRunIdRef="51"/>
+    <ms_run_ref msRunIdRef="52"/>
+  </spectral_library>
+
+  <!-- The name of the corresponding quantitative protein matrix will be:
+       PHRT_projectId_proteinmatrix_id 
+       E.g. PHRT_XXX_proteinmatrix_1  -->
+  <swath_analysis id="1" protocolId="SWATH_protocol">
+    <spectral_library_ref spectralLibraryIdRef="1"/>
+    <ms_run_ref msRunIdRef="53"/>
+  </swath_analysis>
+</project>
+
+
+

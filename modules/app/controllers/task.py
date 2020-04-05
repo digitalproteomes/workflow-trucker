@@ -1,11 +1,12 @@
 ''' controller and routes for tasks '''
 import os
-from flask import request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from bson.objectid import ObjectId
+
+import logger
 from app import app, mongo
 from app.schemas import validate_task, validate_task_update
-import logger
+from bson.objectid import ObjectId
+from flask import request, jsonify
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 ROOT_PATH = os.environ.get('ROOT_PATH')
 LOG = logger.get_root_logger(
@@ -76,3 +77,29 @@ def list_tasks():
         else:
             return_data = list(data)
         return jsonify({'ok': True, 'data': return_data})
+
+
+@app.route('/list/projects', methods=['GET'])
+@jwt_required
+def list_projects():
+    """ route to get all the tasks for a user """
+    user = get_jwt_identity()
+    if request.method == 'GET':
+        return jsonify({
+            'ok': True,
+            'data': {
+                'id': 'de3fecee-76bf-4652-bbfa-0e0b7d697902',
+                'unit': 'unit string',
+                'project_leader': {
+                    'ORCID': '0000-0001-6719-9139'
+                },
+                'spectral_library': {
+                    'id': 'b88ac8d9-8608-4d5e-9220-b49fb7e975e5',
+                    'protocol_id': '867e0db5-e1e8-4974-858b-2b9433664794',
+                    'entries': [
+                        {'protein_database': {'organism': 'organism string 1', 'version': 'version string 1'}}
+                        , {'protein_database': {'organism': 'organism string 2', 'version': 'version string 2'}}
+                    ]
+                }
+            }
+        })

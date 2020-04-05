@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Adapted from Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<!-- TODO implement xsd:keyref for IdRef attributes -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+           elementFormDefault="qualified">
+  <xs:element name="project">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="project_leader">
+          <xs:complexType>
+            <xs:attribute name="ORCID" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element maxOccurs="unbounded" name="sample">
+          <xs:complexType>
+            <xs:sequence minOccurs="0">
+              <xs:element maxOccurs="unbounded" name="sample_ref">
+                <xs:complexType>
+                  <xs:attribute name="sampleIdRef" type="xs:unsignedLong" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:unsignedLong" use="required"/>
+            <xs:attribute name="protocolId" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element maxOccurs="unbounded" name="ms_run">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sample_ref">
+                <xs:complexType>
+                  <xs:attribute name="sampleIdRef" type="xs:unsignedLong" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:unsignedLong" use="required"/>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="instrumentId" type="xs:string" use="required"/>
+            <xs:attribute name="protocolId" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="spectral_library">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="protein_database">
+                <xs:complexType>
+                  <xs:attribute name="organism" type="xs:string" use="required"/>
+                  <xs:attribute name="version" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element maxOccurs="unbounded" name="ms_run_ref">
+                <xs:complexType>
+                  <xs:attribute name="msRunIdRef" type="xs:unsignedLong" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:unsignedLong" use="required"/>
+            <xs:attribute name="protocolId" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="swath_analysis">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="spectral_library_ref">
+                <xs:complexType>
+                  <xs:attribute name="spectralLibraryIdRef" type="xs:unsignedLong" use="required"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ms_run_ref">
+                <xs:complexType>
+                  <xs:attribute name="msRunIdRef" type="xs:unsignedLong" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:unsignedLong" use="required"/>
+            <xs:attribute name="protocolId" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:unsignedLong" use="required"/>
+      <xs:attribute name="unit" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

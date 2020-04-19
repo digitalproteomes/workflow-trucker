@@ -12,7 +12,7 @@ services:
      - DB=mongodb://mongodb:27017/worfklow-tracker-dev
      - SECRET='workflow-tracker-app-secret'
   mongodb:
-    image: mongo:latest
+    image: mongo:3.6.17
     container_name: "mongodb"
     environment:
       - MONGO_DATA_DIR=/usr/data/db

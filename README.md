@@ -7,7 +7,20 @@ This is basic to-do app using flask + react + docker. To run this on local machi
 yarn install
 ```
 
-###Start and load the front-end app from docker container. 
+### Start python backend locally
+Install the dependencis
+```
+pip install -r requirements.txt
+```
+
+If the db is not started, execute this
+```
+docker-compose -f .\docker-compose-mongo-only.yml up --remove-orphans -d
+```
+
+### TODO - fix the mongo volume binding, otherwise the below commands won't work 
+
+## Start and load the front-end app from docker container. 
 ```
 yarn run build
 docker-compose up --build

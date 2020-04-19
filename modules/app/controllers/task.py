@@ -83,7 +83,6 @@ def list_tasks():
 @jwt_required
 def list_projects():
     """ route to get all the tasks for a user """
-    user = get_jwt_identity()
     if request.method == 'GET':
         return jsonify({
             'ok': True,

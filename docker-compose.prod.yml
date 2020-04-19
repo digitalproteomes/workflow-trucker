@@ -11,7 +11,7 @@ services:
      - PORT=4000
      - DB=mongodb://localhost:27017/workflow-tracker-prod
   mongodb:
-    image: mongo:latest
+    image: mongo:3.6.17
     container_name: "mongodb"
     environment:
       - MONGO_DATA_DIR=/usr/data/db

@@ -72,6 +72,8 @@ ENV/
 
 # IDE
 .idea
+.vs
+.vscode
 
 # log
 *.log

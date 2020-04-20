@@ -1,39 +1,5 @@
-# flask-to-do
+## Readme file
 
-This is basic to-do app using flask + react + docker. To run this on local machine, follow these steps after cloning the repository. Assuming that docker & docker-compose are already configured on your machine. 
-
-## Install npm dependencies
-```
-yarn install
-```
-
-### Start python backend locally
-Install the dependencis
-```
-pip install -r requirements.txt
-```
-
-If the db is not started, execute this
-```
-docker-compose -f .\docker-compose-mongo-only.yml up --remove-orphans -d
-```
-
-### TODO - fix the mongo volume binding, otherwise the below commands won't work 
-
-## Start and load the front-end app from docker container. 
-```
-yarn run build
-docker-compose up --build
-```
-You will be able to access the app on http://localhost:4000
-
-###Run UI in webpack-dev-server & backend in docker container with image build.
-```
-docker-compose up --build
-yarn run serve
-```
-
-You will be able to access the app on http://localhost:8080
 
 Backend in Docker, without rebuilding the image
 ```docker-compose up```

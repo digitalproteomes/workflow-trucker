@@ -1,5 +1,5 @@
 import React from 'react';
-import react_logo from './assets/react_logo.svg';
+import react_logo from './assets/WF_logo.png';
 
 const BasicLayout: React.FC = (props) => {
     return (

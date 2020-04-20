@@ -11,7 +11,11 @@
 
 @media (prefers-reduced-motion: no-preference) {
     .App-logo {
-        animation: App-logo-spin infinite 20s linear;
+        height: 75px;
+        margin-left: 2%;
+        text-align: left;
+        float: left;
+        /* animation: App-logo-spin infinite 20s linear; */
     }
 }
 

@@ -80,3 +80,4 @@ ENV/
 
 # excel files
 *.xlsx
+client-app/src/app/.DS_Store

@@ -43,7 +43,11 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-
-## Notes and todos
+## notes
 - Regarding TypeScript and tsconfig.json https://stackoverflow.com/a/42097465/1616493
+- more complex FunctionComponent examples can be found here https://fettblog.eu/typescript-react/components/
+
+## todos
+- typed css classes, so there is referencial integrity
 - use CDN for fast package downloads https://mobx.js.org/README.html
+- use nameof workaround instead of magic strings https://schneidenbach.gitbooks.io/typescript-cookbook/nameof-operator.html

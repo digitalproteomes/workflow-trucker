@@ -1,42 +1,53 @@
 import React from 'react';
 
-import Api from './api';
-import { Project, Counter } from './types';
+import { Project } from './types';
 import { ProjectView } from './components/projectView';
 import { ProjectEdit } from './components/projectEdit';
 import { observer } from 'mobx-react';
+import { AppStore } from '../../appStore';
 
 interface MainPageProps {
-    project: Project;
-    counter: Counter;
+    selectedProject: Project | null;
 }
 
 @observer
-class MainPage extends React.Component<MainPageProps, any> {
+class MainPage extends React.Component<MainPageProps, {}> {
     async componentDidMount() {
-        this.setState({ projects: await Api.list() });
+        await AppStore.fetchSelectedProject();
     }
 
     render() {
-        const { project, counter } = this.props;
+        const { selectedProject: project } = this.props;
+
+        if (project === null) {
+            return (
+                <div>
+                    <span>no project selected</span>
+                </div>
+            );
+        }
 
         return (
             <div>
-                {counter.countMessage}
-                <ProjectView project={project} />
                 <ProjectEdit
                     project={project}
                     onSave={() => {
-                        this.onSubmit(project, counter);
+                        this.onSubmit(project);
                     }}
                 />
+                <ProjectView project={project} />
             </div>
         );
     }
 
-    async onSubmit(project: Project, counter: Counter) {
-        counter.count++;
-        await Api.upsert(project);
+    async onSubmit(project: Project): Promise<void> {
+        try {
+            // return Api.upsert(project);
+            // todo - not sure were to put the .upsert. If the fetch is within the store, the upsert should be in that same place... ?
+        } catch (error) {
+            // throw error;
+            console.log(`on submit error: ${error}`);
+        }
     }
 }
 

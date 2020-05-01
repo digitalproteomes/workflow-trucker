@@ -21,3 +21,6 @@ Remove all stopped containers
 
 Remove a running container
 ```docker rm -f e123```
+
+## resources from around the world
+https://www.codevscolor.com/import-json-typescript/

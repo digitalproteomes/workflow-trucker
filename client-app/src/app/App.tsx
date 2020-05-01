@@ -3,16 +3,20 @@ import './App.css';
 import MainPage from './pages/main';
 import BasicLayout from './layouts';
 import { AppStore } from './appStore';
+import { observer } from 'mobx-react';
 
-function App() {
-    const { project, counter } = AppStore;
-    return (
-        <div className="App">
-            <BasicLayout>
-                <MainPage project={project} counter={counter}></MainPage>
-            </BasicLayout>
-        </div>
-    );
+@observer
+class App extends React.Component<any, any> {
+    render() {
+        const { project } = AppStore;
+        return (
+            <div className="App">
+                <BasicLayout>
+                    <MainPage selectedProject={project}></MainPage>
+                </BasicLayout>
+            </div>
+        );
+    }
 }
 
 export default App;

@@ -1,25 +1,42 @@
 import { observable, computed } from 'mobx';
 
-export class Project {
+export class SampleRef {
+    @observable
+    sampleIdRef: string = '';
+}
+
+export class Sample {
+    @observable
+    id: string = '';
+
     @observable
     name: string = '';
 
     @observable
-    owner: string = '';
+    protocolId: string = '';
 
     @observable
-    orcId: string = '';
-
-    @observable
-    id: string = '';
+    sample_ref: SampleRef[] | null = null;
 }
 
-export class Counter {
+export class ProjectLeader {
     @observable
-    count: number = 0;
+    ORCID: string = '';
 
-    @computed
-    get countMessage(): string {
-        return `counter is now ${this.count}`;
-    }
+    @observable
+    name: string = '';
+}
+
+export class Project {
+    @observable
+    id: string = '';
+
+    @observable
+    unit: string = '';
+
+    @observable
+    project_leader: ProjectLeader = new ProjectLeader();
+
+    @observable
+    sample: Sample[] | null = null;
 }

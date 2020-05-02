@@ -1,13 +1,15 @@
+from pprint import pprint
 from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
 
 app = Flask(__name__)
-from pprint import pprint
 
 app.config['MONGO_DBNAME'] = 'WorkflowDB'
 app.config['MONGO_URI'] = 'mongodb://127.0.0.1:27017/WorkflowDB'
 
 mongo = PyMongo(app)
+
+# Almost deprecated.TODO: remove this when umongo is safe
 
 
 @app.route('/project', methods=['GET'])
@@ -17,7 +19,8 @@ def get_all_projects():
 
     for q in project.find():
         # 'id': q['id'],
-        output.append({'name': q['unit'], 'project_leader': q['project_leader'], 'sample': q['sample']})
+        output.append(
+            {'name': q['unit'], 'project_leader': q['project_leader'], 'sample': q['sample']})
 
     return jsonify({'result': output})
 
@@ -55,7 +58,8 @@ def get_project_by_name(name):
     q = project.find_one({'unit': name})
 
     if q:
-        output = {'id': q['id'], 'name': q['unit'], 'project_leader': q['project_leader'], 'sample': q['sample']}
+        output = {'id': q['id'], 'name': q['unit'],
+                  'project_leader': q['project_leader'], 'sample': q['sample']}
 
     else:
         output = 'No results found'
@@ -85,7 +89,8 @@ def add_project():
     project_leader = request.json['project_leader']
     sample = request.json['sample']
 
-    project_id = project.insert({'id': id, 'unit': name, 'project_leader': project_leader, 'sample': sample})
+    project_id = project.insert(
+        {'id': id, 'unit': name, 'project_leader': project_leader, 'sample': sample})
     new_project = project.find_one({'_id': project_id})
 
     output = {'id': new_project['id'], 'name': new_project['unit'], 'project_leader': new_project['project_leader'],
@@ -113,7 +118,6 @@ def update_project():
               'sample': new_project['sample']}
 
     return jsonify({'result': output})
-
 
 
 if __name__ == '__main__':

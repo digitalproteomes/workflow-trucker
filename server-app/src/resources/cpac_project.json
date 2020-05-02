@@ -1,0 +1,8 @@
+new_project = {
+    "projectId": "5",
+    "name": "CPAC",
+    "ownerName": "Patrick Pedrioli",
+    "ownerORCID": "0000-0001-6719-9139",
+    "description": "MMA Project",
+    "isLocked": "false"
+}

@@ -3,8 +3,18 @@ from pymongo import MongoClient
 import umongo
 from umongo import Instance, Document, fields, validate
 
+import os
+
 # db = MongoClient().test
-db = MongoClient('localhost', 27017)
+
+try:
+    if (os.environ['WorkflowEnvironment'] == "Docker"):
+        db = MongoClient('host.docker.internal', 27017)
+    else:
+        db = MongoClient('localhost', 27017)
+except KeyError:
+    db = MongoClient('localhost', 27017)
+
 instance = Instance(db.WorkflowDB)
 
 @instance.register

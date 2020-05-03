@@ -81,7 +81,7 @@ def insertFractinationSample(sample):
 
 
 if __name__ == '__main__':
-    project_json = load_json("src/resources/sample_project.json")
+    project_json = load_json("resources/sample_project.json")
     new_project = {
         "projectId": "5",
         "name": "CPAC",

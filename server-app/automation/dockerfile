@@ -1,0 +1,6 @@
+FROM python:3.7
+ADD "src/" /src
+WORKDIR /src
+EXPOSE 5000
+RUN pip install -r requirements.txt
+CMD [ "bash", "./scripts/startup.sh" ]

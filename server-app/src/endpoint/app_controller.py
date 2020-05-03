@@ -13,6 +13,9 @@ app = Flask(__name__)
 
 # project section
 
+@app.route('/test', methods=['GET'])
+def getTestResponse():
+    return "test response"
 
 @app.route('/project', methods=['GET'])
 def getAllProjects():
@@ -54,4 +57,5 @@ def getPooledSamples():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # please note that binding to 0.0.0.0 may be a big security issue. please research
+    app.run(debug=True, host='0.0.0.0')

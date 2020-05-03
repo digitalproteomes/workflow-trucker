@@ -1,0 +1,187 @@
+{
+	"variables": [],
+	"info": {
+		"name": "WorkflowTracker",
+		"_postman_id": "3b8017ea-cfac-3226-0660-29383f75004d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "project",
+			"description": "requests related to the project entity\n",
+			"item": [
+				{
+					"name": "http://127.0.0.1:5000/project",
+					"request": {
+						"url": "http://127.0.0.1:5000/project",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sample",
+			"description": "Requests related to the sample entity",
+			"item": [
+				{
+					"name": "get all samples",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample?projectId=5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Gets all samples by project Id. Initial Project Id: 5"
+					},
+					"response": []
+				},
+				{
+					"name": "get samples by protocol",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/protocol?projectId=5&protocolId=3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"protocol"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "protocolId",
+									"value": "3",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Gets samples by protocol and project Id. \n    <protocol id=\"1\" name=\"clinical_sample\"/>\n    <protocol id=\"2\" name=\"single_preparation\"/>\n    <protocol id=\"3\" name=\"pooling_preparation\"/>\n    <protocol id=\"4\" name=\"fractionation_preparation\"/>"
+					},
+					"response": []
+				},
+				{
+					"name": "get fractionated sample",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/fractionated?projectId=5&parentId=231",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"fractionated"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "parentId",
+									"value": "231",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "give sample parent id and project id"
+					},
+					"response": []
+				},
+				{
+					"name": "get samples by pooled parent id",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/pooled?projectId=5&parentId=232",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"pooled"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "parentId",
+									"value": "232",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Gets samples by protocol and project Id. \n    <protocol id=\"1\" name=\"clinical_sample\"/>\n    <protocol id=\"2\" name=\"single_preparation\"/>\n    <protocol id=\"3\" name=\"pooling_preparation\"/>\n    <protocol id=\"4\" name=\"fractionation_preparation\"/>"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

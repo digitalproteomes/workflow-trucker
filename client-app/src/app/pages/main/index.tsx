@@ -5,6 +5,7 @@ import { ProjectView } from './components/projectView';
 import { ProjectEdit } from './components/projectEdit';
 import { observer } from 'mobx-react';
 import { AppStore } from '../../appStore';
+import { SamplesView } from './components/samplesView';
 
 interface MainPageProps {
     selectedProject: Project | null;
@@ -14,28 +15,36 @@ interface MainPageProps {
 class MainPage extends React.Component<MainPageProps, {}> {
     async componentDidMount() {
         await AppStore.fetchSelectedProject();
+        await AppStore.fetchSelectedProjectSamples();
     }
 
     render() {
-        const { selectedProject: project } = this.props;
+        const project = this.props.selectedProject;
 
-        if (project === null) {
-            return (
+        const projectView =
+            project === null ? (
+                <span>no project selected</span>
+            ) : (
                 <div>
-                    <span>no project selected</span>
+                    <ProjectEdit
+                        project={project}
+                        onSave={() => {
+                            this.onSubmit(project);
+                        }}
+                    />
+                    <ProjectView project={project} />
                 </div>
             );
-        }
+
+        const samples = AppStore.samples;
+
+        const samplesView =
+            samples === null ? <span>no samples present</span> : <SamplesView samples={samples} />;
 
         return (
             <div>
-                <ProjectEdit
-                    project={project}
-                    onSave={() => {
-                        this.onSubmit(project);
-                    }}
-                />
-                <ProjectView project={project} />
+                {projectView}
+                {samplesView}
             </div>
         );
     }

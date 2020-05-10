@@ -44,21 +44,25 @@ and set the correct global version using pyenv
 - bash into container
   - `docker run -it --entrypoint /bin/bash workflow-tracker-rest-api:0.1`
   - `docker run -it workflow-tracker-rest-api:0.1 bin/bash`
-- start up the entire app
-  - `workflow-tracker\server-app\automation> docker-compose up`
-  - or in detached mode `workflow-tracker\server-app\automation> docker-compose up -d`
-- stop the entire app
-  - `CTRL+C`
-  - `workflow-tracker\server-app\automation> docker-compose down`
+
 
 ## Docker nice to have commands
 
 - stop all `docker stop $(docker ps -a -q)`
 - remove all `docker rm $(docker ps -a -q)`
 - remove force all `docker rm -f $(docker ps -a -q)`
+- list orphan images `docker images | grep "<none>" | awk '{print $3}'`
+- remove orphan images `docker rmi -f $(docker images | grep "<none>" | awk '{print $3;}')`
 
 # Startup
 
+- start up the entire app
+  - `workflow-tracker\server-app\automation> docker-compose up`
+  - or in detached mode `workflow-tracker\server-app\automation> docker-compose up -d`
+- stop the entire app
+  - `CTRL+C`
+  - `workflow-tracker\server-app\automation> docker-compose down`
+  
 - initialize db `workflow-tracker\server-app\src> ..\env\python3.7\Scripts\python.exe -m resources.initial_load_db`
 - instantite endpoints `workflow-tracker\server-app\src> ..\env\python3.7\Scripts\python.exe -m endpoint.app_controller`
 

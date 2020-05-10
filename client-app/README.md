@@ -46,6 +46,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## notes
 - Regarding TypeScript and tsconfig.json https://stackoverflow.com/a/42097465/1616493
 - more complex FunctionComponent examples can be found here https://fettblog.eu/typescript-react/components/
+- deployment related https://create-react-app.dev/docs/deployment/
 
 ## todos
 - typed css classes, so there is referencial integrity

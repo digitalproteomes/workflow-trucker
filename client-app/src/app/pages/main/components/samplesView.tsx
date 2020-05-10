@@ -25,6 +25,11 @@ export class SamplesView extends React.Component<Props, {}> {
                 dataIndex: 'protocolId',
                 key: 'protocolId',
             },
+            {
+                title: 'Protocol Id',
+                dataIndex: 'protocolName',
+                key: 'protocolName',
+            },
         ];
 
         return <Table dataSource={this.props.samples} columns={columns} />;

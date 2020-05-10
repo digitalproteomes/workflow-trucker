@@ -69,6 +69,10 @@ def get_project_by_name(name):
 
 @app.route('/project/<name>', methods=['DELETE'])
 def delete_project_by_name(name):
+    # todo - get project by a unique id (not the primary key in the db, and not the project name)
+    # todo - all the project related operations should be done based on its defined unique identifier
+    # why? - e.g.: in case of a project rename, all the saved links/references, etc would still be valid.
+    # why? - The primary key should not be used as unique id because it would hurt future migrations and would expose the db details (not good)
     project = mongo.db.Project
 
     q = project.find_one({'unit': name})

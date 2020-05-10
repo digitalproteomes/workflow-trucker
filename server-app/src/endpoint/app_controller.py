@@ -3,8 +3,10 @@ from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
 from persistence import sample_DAO as sampleDAO
 from persistence import project_DAO as projectDAO
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # https://stackoverflow.com/a/23542795
 # silalbert@sysbc-mac-533 src % python -m endpoint.sample_controller
@@ -37,6 +39,8 @@ def getSamplesByProtocolId():
     protocolId = request.args.get('protocolId')
     samples = sampleDAO.getSamplesByProjectAndProtocolId(
         projectId, protocolId)
+    # todo - the projectId is string, and the protocolId is number. These should be consistent
+    # todo - projectId in this case is redundant, if possible it should be dropped from the return DTO
     return jsonify({'samples': samples, 'totalSize': len(samples)})
 
 

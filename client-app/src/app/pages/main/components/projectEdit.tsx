@@ -18,25 +18,25 @@ export class ProjectEdit extends React.Component<ProjectEditProps, any> {
                 <Form labelCol={{ span: 4 }} wrapperCol={{ span: 8 }} title="Project details">
                     <Form.Item label="Project name">
                         <Input
-                            value={project.project_leader.name}
+                            value={project.name}
                             onChange={(ev) => {
-                                project.project_leader.name = ev.target.value;
+                                project.name = ev.target.value;
                             }}
                         />
                     </Form.Item>
                     <Form.Item label="ORCID">
                         <Input
-                            value={project.project_leader.ORCID}
+                            value={project.ownerORCID}
                             onChange={(ev) => {
-                                project.project_leader.ORCID = ev.target.value;
+                                project.ownerORCID = ev.target.value;
                             }}
                         />
                     </Form.Item>
                     <Form.Item label="unit">
                         <Input
-                            value={project.unit}
+                            value={project.ownerName}
                             onChange={(ev) => {
-                                project.unit = ev.target.value;
+                                project.ownerName = ev.target.value;
                             }}
                         />
                     </Form.Item>

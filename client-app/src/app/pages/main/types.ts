@@ -1,10 +1,5 @@
 import { observable, computed } from 'mobx';
 
-export class SampleRef {
-    @observable
-    sampleIdRef: string = '';
-}
-
 export class Sample {
     @observable
     id: string = '';
@@ -13,18 +8,16 @@ export class Sample {
     name: string = '';
 
     @observable
-    protocolId: string = '';
+    projectId: string = '';
 
     @observable
-    sample_ref: SampleRef[] | null = null;
-}
-
-export class ProjectLeader {
-    @observable
-    ORCID: string = '';
+    protocolId: number = -1;
 
     @observable
-    name: string = '';
+    protocolName: string = '';
+
+    @observable
+    sampleId: number = -1;
 }
 
 export class Project {
@@ -32,11 +25,40 @@ export class Project {
     id: string = '';
 
     @observable
-    unit: string = '';
+    description: string = '';
 
     @observable
-    project_leader: ProjectLeader = new ProjectLeader();
+    createdDate: string = '';
 
     @observable
-    sample: Sample[] | null = null;
+    isLocked: boolean = false;
+
+    @observable
+    name: string = '';
+
+    @observable
+    ownerName: string = '';
+
+    @observable
+    ownerORCID: string = '';
+
+    @observable
+    projectId: number = -1;
+
+    @observable
+    updatedDate: string = '';
+
+    /*
+    {
+      "createdDate": "2020-05-08T13:46:32.067000+00:00",
+      "description": "MMA Project",
+      "id": "5eb562b8c65543aa9ac7e676",
+      "isLocked": false,
+      "name": "CPAC",
+      "ownerName": "Patrick Pedrioli",
+      "ownerORCID": "0000-0001-6719-9139",
+      "projectId": 5,
+      "updatedDate": "2020-05-08T13:46:32.067000+00:00"
+    }
+    */
 }

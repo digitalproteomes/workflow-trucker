@@ -47,6 +47,11 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - Regarding TypeScript and tsconfig.json https://stackoverflow.com/a/42097465/1616493
 - more complex FunctionComponent examples can be found here https://fettblog.eu/typescript-react/components/
 - deployment related https://create-react-app.dev/docs/deployment/
+- routing: use [nested routing?](https://reacttraining.com/react-router/web/guides/quick-start/2nd-example-nested-routing)
+
+## packages.json
+- check outdated packages with `npm outdated`
+- update to the latest versin with `npm install <package>@latest`
 
 ## todos
 - typed css classes, so there is referencial integrity

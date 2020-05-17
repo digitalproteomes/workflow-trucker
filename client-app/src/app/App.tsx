@@ -1,22 +1,35 @@
 import React from 'react';
 import './App.css';
-import MainPage from './pages/main';
+import { ProjectPage, SamplesPage } from './pages/main';
+import { About } from './pages/about';
 import BasicLayout from './layouts';
-import { AppStore } from './appStore';
-import { observer } from 'mobx-react';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
-@observer
-class App extends React.Component<any, any> {
-    render() {
-        const { project } = AppStore;
-        return (
-            <div className="App">
-                <BasicLayout>
+export function App() {
+    return (
+        <div className="App">
+            {/* <BasicLayout>
                     <MainPage selectedProject={project}></MainPage>
+                </BasicLayout> */}
+            {/* https://reacttraining.com/react-router/web/api/BrowserRouter */}
+            <BrowserRouter>
+                <BasicLayout>
+                    <Switch>
+                        <Route path="/about">
+                            <About />
+                        </Route>
+                        <Route path="/projects">
+                            <ProjectPage />
+                        </Route>
+                        <Route path="/samples">
+                            <SamplesPage />
+                        </Route>
+                        <Route path="/">
+                            <span>This is the landing page</span>
+                        </Route>
+                    </Switch>
                 </BasicLayout>
-            </div>
-        );
-    }
+            </BrowserRouter>
+        </div>
+    );
 }
-
-export default App;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { Project } from '../types';
 import { observer } from 'mobx-react';
+import { AppStore } from '../../../appStore';
 
 interface ProjectEditProps {
     project: Project;
@@ -11,7 +12,9 @@ interface ProjectEditProps {
 @observer
 export class ProjectEdit extends React.Component<ProjectEditProps, any> {
     render() {
-        const { project } = this.props;
+        // todo - use the Provider / Consumer pattern instead of directly referencing the AppStore
+        const { project } = AppStore;
+        if (project === null) return <span>no project selected</span>;
 
         return (
             <div>

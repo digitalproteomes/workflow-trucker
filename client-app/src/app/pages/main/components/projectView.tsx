@@ -1,11 +1,13 @@
 import React from 'react';
 import { Project } from '../types';
 import { Descriptions } from 'antd';
+import { observer } from 'mobx-react';
 
 type ProjectViewProps = {
     project: Project;
 };
 
+@observer
 export class ProjectView extends React.Component<ProjectViewProps, {}> {
     public render() {
         const project: Project = this.props.project;

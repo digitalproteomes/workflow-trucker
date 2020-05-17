@@ -20,6 +20,14 @@ class Store {
         const projectId: number = 5;
         this.samples = await Api.getSamplesAsync(projectId);
     }
+
+    @action
+    public async fetchSelectedProjectSamplesByProtocolIdAsync(
+        projectId: number,
+        protocolId: number,
+    ) {
+        this.samples = await Api.getSamplesByProtocolIdAsync(projectId, protocolId);
+    }
 }
 
 export const AppStore: Store = new Store();

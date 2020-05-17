@@ -3,23 +3,20 @@ import React from 'react';
 import { Project } from './types';
 import { ProjectView } from './components/projectView';
 import { ProjectEdit } from './components/projectEdit';
+import { SamplesPage } from './samplesPage';
 import { observer } from 'mobx-react';
 import { AppStore } from '../../appStore';
-import { SamplesView } from './components/samplesView';
 
-interface MainPageProps {
-    selectedProject: Project | null;
-}
+export { SamplesPage };
 
 @observer
-class MainPage extends React.Component<MainPageProps, {}> {
+export class ProjectPage extends React.Component<{}, {}> {
     async componentDidMount() {
         await AppStore.fetchSelectedProject();
-        await AppStore.fetchSelectedProjectSamples();
     }
 
     render() {
-        const project = this.props.selectedProject;
+        const { project } = AppStore;
 
         const projectView =
             project === null ? (
@@ -36,17 +33,7 @@ class MainPage extends React.Component<MainPageProps, {}> {
                 </div>
             );
 
-        const samples = AppStore.samples;
-
-        const samplesView =
-            samples === null ? <span>no samples present</span> : <SamplesView samples={samples} />;
-
-        return (
-            <div>
-                {projectView}
-                {samplesView}
-            </div>
-        );
+        return projectView;
     }
 
     async onSubmit(project: Project): Promise<void> {
@@ -59,5 +46,3 @@ class MainPage extends React.Component<MainPageProps, {}> {
         }
     }
 }
-
-export default MainPage;

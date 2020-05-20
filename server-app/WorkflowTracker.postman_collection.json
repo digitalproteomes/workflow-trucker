@@ -1,0 +1,364 @@
+{
+	"variables": [],
+	"info": {
+		"name": "WorkflowTracker",
+		"_postman_id": "816bf27a-1904-4cb2-d712-4a0ea6e9744b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "project",
+			"description": "requests related to the project entity\n",
+			"item": [
+				{
+					"name": "http://127.0.0.1:5000/project",
+					"request": {
+						"url": "http://127.0.0.1:5000/project",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sample",
+			"description": "Requests related to the sample entity",
+			"item": [
+				{
+					"name": "get all samples",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample?projectId=5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets all samples by project Id. Initial Project Id: 5"
+					},
+					"response": []
+				},
+				{
+					"name": "get samples by protocol",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/protocol?projectId=5&protocolId=3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"protocol"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "protocolId",
+									"value": "3",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets samples by protocol and project Id. \n    <protocol id=\"1\" name=\"clinical_sample\"/>\n    <protocol id=\"2\" name=\"single_preparation\"/>\n    <protocol id=\"3\" name=\"pooling_preparation\"/>\n    <protocol id=\"4\" name=\"fractionation_preparation\"/>"
+					},
+					"response": []
+				},
+				{
+					"name": "get fractionated sample",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/fractionated?projectId=5&parentId=231",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"fractionated"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "parentId",
+									"value": "231",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "give sample parent id and project id"
+					},
+					"response": []
+				},
+				{
+					"name": "get samples by pooled parent id",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/pooled?projectId=5&parentId=232",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"pooled"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "parentId",
+									"value": "232",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Gets samples by protocol and project Id. \n    <protocol id=\"1\" name=\"clinical_sample\"/>\n    <protocol id=\"2\" name=\"single_preparation\"/>\n    <protocol id=\"3\" name=\"pooling_preparation\"/>\n    <protocol id=\"4\" name=\"fractionation_preparation\"/>"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample/clinical",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/clinical",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"name\": \"TEST_SILVANA_99992\",\n\t\"projectId\": \"5\",\n\t\"sampleId\": 99992\n\t\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample/individual",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/clinical",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"name\": \"TEST_SILVANA_99992\",\n\t\"projectId\": \"5\",\n\t\"sampleId\": 99992\n\t\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample/pooled",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/clinical",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"name\": \"TEST_SILVANA_99992\",\n\t\"projectId\": \"5\",\n\t\"sampleId\": 99992\n\t\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample/fractionated",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/clinical",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"name\": \"TEST_SILVANA_99992\",\n\t\"projectId\": \"5\",\n\t\"sampleId\": 99992\n\t\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample/unlink",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/unlink",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sampleId\": 99992\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample edit name",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sampleId\": 99997,\n\t\"newName\": \"Silvana_wants_coffee_99997\"\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample?sampleId=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample"
+							],
+							"query": [
+								{
+									"key": "sampleId",
+									"value": "",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

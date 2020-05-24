@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "WorkflowTracker",
-		"_postman_id": "3b8017ea-cfac-3226-0660-29383f75004d",
+		"_postman_id": "816bf27a-1904-4cb2-d712-4a0ea6e9744b",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -17,7 +17,10 @@
 						"url": "http://127.0.0.1:5000/project",
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
@@ -56,7 +59,10 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Gets all samples by project Id. Initial Project Id: 5"
 					},
 					"response": []
@@ -96,7 +102,10 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Gets samples by protocol and project Id. \n    <protocol id=\"1\" name=\"clinical_sample\"/>\n    <protocol id=\"2\" name=\"single_preparation\"/>\n    <protocol id=\"3\" name=\"pooling_preparation\"/>\n    <protocol id=\"4\" name=\"fractionation_preparation\"/>"
 					},
 					"response": []
@@ -136,7 +145,10 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "give sample parent id and project id"
 					},
 					"response": []
@@ -176,8 +188,173 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": "Gets samples by protocol and project Id. \n    <protocol id=\"1\" name=\"clinical_sample\"/>\n    <protocol id=\"2\" name=\"single_preparation\"/>\n    <protocol id=\"3\" name=\"pooling_preparation\"/>\n    <protocol id=\"4\" name=\"fractionation_preparation\"/>"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample/clinical",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/clinical",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"name\": \"TEST_SILVANA_99992\",\n\t\"projectId\": \"5\",\n\t\"sampleId\": 99992\n\t\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample/individual",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/clinical",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"name\": \"TEST_SILVANA_99992\",\n\t\"projectId\": \"5\",\n\t\"sampleId\": 99992\n\t\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample/pooled",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/clinical",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"name\": \"TEST_SILVANA_99992\",\n\t\"projectId\": \"5\",\n\t\"sampleId\": 99992\n\t\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample/fractionated",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/clinical",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"name\": \"TEST_SILVANA_99992\",\n\t\"projectId\": \"5\",\n\t\"sampleId\": 99992\n\t\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample/unlink",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/unlink",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sampleId\": 99992\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample edit name",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"sampleId\": 99997,\n\t\"newName\": \"Silvana_wants_coffee_99997\"\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/sample",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample?sampleId=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample"
+							],
+							"query": [
+								{
+									"key": "sampleId",
+									"value": "",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "create clinical sample"
 					},
 					"response": []
 				}

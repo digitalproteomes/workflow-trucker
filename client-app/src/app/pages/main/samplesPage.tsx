@@ -15,7 +15,7 @@ export const SamplesPage = observer<any>(() => {
         async function fetchStuff() {
             AppStore.fetchSelectedProjectSamplesByProtocolIdAsync(projectId, protocolId);
         }
-        fetchStuff();
+        fetchStuff(); // todo - what happens here in case of an exception?
     }, [location]); //because we pass in the location as the 2nd param, only when it changes, the effect will be re-executed
     //https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input } from 'antd';
-import { Project } from '../types';
+import { Project } from '../../../types';
 import { observer } from 'mobx-react';
 import { AppStore } from '../../../appStore';
 

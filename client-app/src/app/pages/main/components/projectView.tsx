@@ -1,5 +1,5 @@
 import React from 'react';
-import { Project } from '../types';
+import { Project } from '../../../types';
 import { Descriptions } from 'antd';
 import { observer } from 'mobx-react';
 

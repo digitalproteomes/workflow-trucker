@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx';
-import { Project, Sample } from './pages/main/types';
+import { Project, Sample } from './types';
 import { Api } from './pages/main/api';
 
 class Store {

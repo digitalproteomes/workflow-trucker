@@ -1,14 +1,33 @@
 @import '~antd/dist/antd.css';
 
+/* .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+} */
+.logo {
+    /* height: 48px; */
+    /* background: rgba(255, 255, 255, 0.2); */
+    margin-top: 16px;
+    margin-left: 7px;
+    margin-bottom: 16px;
+    margin-right: 0px;
+}
+
+/* remove the site-layout related background color to have it in coold dark blue */
+.site-layout .site-layout-background {
+    background: #fff;
+}
+
 /* .App {
     text-align: center;
 } */
 
-.App-logo {
+/* .App-logo {
     height: 10vmin;
     width: 20vmin;
     pointer-events: none;
-}
+} */
 
 /* .App-header {
     background-color: #282c34;
@@ -21,6 +40,6 @@
     color: white;
 } */
 
-.App-link {
+/* .App-link {
     color: #61dafb;
-}
+} */

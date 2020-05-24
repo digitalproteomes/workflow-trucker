@@ -48,6 +48,25 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - more complex FunctionComponent examples can be found here https://fettblog.eu/typescript-react/components/
 - deployment related https://create-react-app.dev/docs/deployment/
 - routing: use [nested routing?](https://reacttraining.com/react-router/web/guides/quick-start/2nd-example-nested-routing)
+- using typed function components [link](https://fettblog.eu/typescript-react/components/)
+
+```
+  type CardProps = {
+  title: string,
+  paragraph?: string  // the paragraph is optional
+}
+
+// No need to define the defaultProps property
+export const Card: FunctionComponent<CardProps> = ({ title, paragraph = 'Hello World' }) => 
+<aside>
+  <h2>{ title }</h2>
+  <p>
+    { paragraph }
+  </p>
+</aside>
+
+```
+
 
 ## packages.json
 - check outdated packages with `npm outdated`

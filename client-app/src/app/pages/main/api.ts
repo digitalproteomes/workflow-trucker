@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Project, Sample } from './types';
+import { Project, Sample } from '../../types';
 
 class Api {
     public static readonly baseUrl = process.env.API_URL;
@@ -37,6 +37,23 @@ class Api {
             return response.data.samples;
         } catch (error) {
             return this.sampleSamples();
+        }
+    }
+
+    public static async postClinicalSampleAsync(
+        name: string,
+        projectId: number,
+        sampleId: number,
+    ): Promise<boolean> {
+        try {
+            const response = await axios.post(`/sample/clinical`, { name, projectId, sampleId });
+            // todo - i should return something based on a convention from the backend, considering the status code and maybe validation errors
+            return response.data.success;
+        } catch (error) {
+            console.log('post failed while creating a clinical sample');
+            // https://ant.design/components/notification/
+            // show a notification with the error. if not here, somewhere else
+            return false;
         }
     }
 

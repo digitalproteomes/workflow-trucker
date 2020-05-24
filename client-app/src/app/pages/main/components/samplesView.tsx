@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sample } from '../types';
+import { Sample } from '../../../types';
 import { Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 
@@ -32,6 +32,6 @@ export class SamplesView extends React.Component<Props, {}> {
             },
         ];
 
-        return <Table dataSource={this.props.samples} columns={columns} />;
+        return <Table dataSource={this.props.samples} rowKey={(row) => row.id} columns={columns} />;
     }
 }

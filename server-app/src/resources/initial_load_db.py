@@ -1,6 +1,8 @@
 import json
 from persistence import sample_DAO as sampleDAO
 from persistence import project_DAO as projectDAO
+import datetime
+from pymongo import MongoClient
 
 
 def load_json(datafile):
@@ -29,24 +31,30 @@ def insertSamples(samples):
 def insertClinicalSample(sample):
     # print("inserting clinical sample")
     new_sample = {
-        "sampleId": sample['id'],
+        "sourceSampleId": sample['id'],
         "name": sample['name'],
         "projectId": "5",
         "protocolId": "1",
-        "protocolName": "clinical_sample"
+        "protocolName": "clinical_sample",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
     }
     sampleDAO.createSample(new_sample)
 
 
 def insertIndividualSample(sample):
     # print("inserting individual sample")
+    parentSample = sampleDAO.getClinicalSampleBySourceSampleId(
+        sample['sample_ref']['sampleIdRef'])
     new_sample = {
-        "sampleId": sample['id'],
+        "sourceSampleId": 0,
         "name": sample['name'],
         "projectId": "5",
-        "parentSampleId": sample['sample_ref']['sampleIdRef'],
+        "parentSampleId": parentSample.id,
         "protocolId": "2",
         "protocolName": "single_preparation",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
 
     }
     sampleDAO.createSample(new_sample)
@@ -55,32 +63,51 @@ def insertIndividualSample(sample):
 def insertPoolingSample(sample):
     # print("inserting clinical sample")
     new_sample = {
-        "sampleId": sample['id'],
+        "sourceSampleId": 0,
         "name": sample['name'],
         "projectId": "5",
         "protocolId": "3",
         "protocolName": "pooling_preparation",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
 
     }
-    sampleDAO.createSample(new_sample)
+    parentSample = sampleDAO.createSample(new_sample)
     for i in sample['sample_ref']:
-        sampleDAO.updateParentSample(i['sampleIdRef'], sample['id'])
+        sampleDAO.updateParentSample(i['sampleIdRef'], parentSample.id)
 
 
 def insertFractinationSample(sample):
     print("inserting Fractination sample")
+    parentSample = sampleDAO.getClinicalSampleBySourceSampleId(
+        sample['sample_ref']['sampleIdRef'])
+    parentSampleId = 0
+    if (parentSample):
+        parentSampleId = parentSample.id
+    else:
+        parentSampleId = sampleDAO.getClinicalSampleBySourceSampleId(1).id
     new_sample = {
-        "sampleId": sample['id'],
+        "sourceSampleId": 0,
         "name": sample['name'],
         "projectId": "5",
-        "parentSampleId": sample['sample_ref']['sampleIdRef'],
+        "parentSampleId": parentSampleId,
         "protocolId": "4",
         "protocolName": "fractionation_preparation",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
     }
     sampleDAO.createSample(new_sample)
 
 
 if __name__ == '__main__':
+    client = MongoClient('localhost', 27017)
+
+    # to delete database, uncomment the next line
+    dblist = client.list_database_names()
+    if "WorkflowDB" in dblist:
+        print("The database exists. Deleting and recreating...")
+        client.drop_database('WorkflowDB')
+
     project_json = load_json("resources/sample_project.json")
     new_project = {
         "projectId": "5",
@@ -88,7 +115,9 @@ if __name__ == '__main__':
         "ownerName": "Patrick Pedrioli",
         "ownerORCID": "0000-0001-6719-9139",
         "description": "MMA Project",
-        "isLocked": "false"
+        "isLocked": "false",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
     }
     insertProject(new_project)
     insertSamples(project_json['sample'])

@@ -17,6 +17,7 @@ except KeyError:
 
 instance = Instance(db.WorkflowDB)
 
+
 @instance.register
 class Project(Document):
     projectId = fields.IntegerField(required=True)
@@ -35,19 +36,22 @@ class Project(Document):
 
 @instance.register
 class Sample(Document):
-    sampleId = fields.IntegerField(required=True)
+    sourceSampleId = fields.IntegerField(required=True)
     name = fields.StrField(required=True)
     projectId = fields.IntegerField(fields.ReferenceField("Project"))
-    parentSampleId = fields.IntegerField(fields.ReferenceField("Sample"))
+    parentSampleId = fields.ObjectIdField()
     protocolId = fields.IntegerField(required=True)
     protocolName = fields.StrField(required=True)
     description = fields.StrField()
-    ProcessingPerson= fields.StrField()
-    createdDate = fields.DateTimeField(validate=validate.Range(min=datetime(1900, 1, 1)))
-    updatedDate = fields.DateTimeField(validate=validate.Range(min=datetime(1900, 1, 1)))
+    ProcessingPerson = fields.StrField()
+    createdDate = fields.DateTimeField(
+        validate=validate.Range(min=datetime(1900, 1, 1)))
+    updatedDate = fields.DateTimeField(
+        validate=validate.Range(min=datetime(1900, 1, 1)))
 
     class Meta:
         collection_name = "sample"
+
 
 @instance.register
 class MSRun(Document):
@@ -58,9 +62,11 @@ class MSRun(Document):
     protocolId = fields.IntegerField(required=True)
     protocolName = fields.StrField(required=True)
     description = fields.StrField()
-    instrumentId= fields.StrField(required=True)
-    createdDate = fields.DateTimeField(validate=validate.Range(min=datetime(1900, 1, 1)))
-    updatedDate = fields.DateTimeField(validate=validate.Range(min=datetime(1900, 1, 1)))
+    instrumentId = fields.StrField(required=True)
+    createdDate = fields.DateTimeField(
+        validate=validate.Range(min=datetime(1900, 1, 1)))
+    updatedDate = fields.DateTimeField(
+        validate=validate.Range(min=datetime(1900, 1, 1)))
 
     class Meta:
         collection_name = "MSRun"

@@ -39,7 +39,7 @@ class Sample(Document):
     sourceSampleId = fields.IntegerField(required=True)
     name = fields.StrField(required=True)
     projectId = fields.IntegerField(fields.ReferenceField("Project"))
-    parentSampleId = fields.ObjectIdField()
+    parentSampleId = fields.ObjectIdField(required=False, allow_none=True)
     protocolId = fields.IntegerField(required=True)
     protocolName = fields.StrField(required=True)
     description = fields.StrField()

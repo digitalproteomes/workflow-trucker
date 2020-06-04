@@ -24,10 +24,67 @@ def getTestResponse():
     return "test response"
 
 
-@app.route('/project', methods=['GET'])
+@app.route('/project/all', methods=['GET'])
 def getAllProjects():
     projects = projectDAO.getAllProjects()
     return jsonify({'projects': projects, 'totalSize': len(projects)}), status.HTTP_200_OK
+
+
+@app.route('/project', methods=['GET'])
+def getProjectById():
+    id = request.args.get('id')
+    project = projectDAO.getProjectById(id)
+    return jsonify({'project': project}), status.HTTP_200_OK
+
+
+@app.route('/project', methods=['POST'])
+def createProject():
+    data = request.json
+    id = data.get('id')
+    name = data.get('name')
+    ownerName = data.get('ownerName')
+    ownerORCID = data.get('ownerORCID')
+    description = data.get('description')
+
+    new_project = {
+        "projectId": id,
+        "name": name,
+        "ownerName": ownerName,
+        "ownerORCID": ownerORCID,
+        "description": description,
+        "isLocked": "false",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
+    }
+
+    project = projectDAO.createProject(new_project)
+    return jsonify({'project': project}), status.HTTP_200_OK
+
+
+@app.route('/project', methods=['DELETE'])
+def deleteProject():
+    id = request.args.get('id')
+    sts = projectDAO.deleteProject(id)
+    if(sts == 0):
+        return jsonify({'project': 'null', 'message': 'Project with id does not exist.'}), status.HTTP_404_NOT_FOUND
+    else:
+        return jsonify({'project': 'null', 'message': 'success'}), status.HTTP_200_OK
+
+
+@app.route('/project', methods=['PUT'])
+def updateProject():
+    data = request.json
+    id = data.get('id')
+    name = data.get('name')
+    ownerName = data.get('ownerName')
+    ownerORCID = data.get('ownerORCID')
+    description = data.get('description')
+    project = projectDAO.updateProject(
+        id, name, ownerName, ownerORCID, description)
+    if(project == 0):
+        return jsonify({'project': 'null', 'message': 'Project with id does not exist.'}), status.HTTP_404_NOT_FOUND
+    else:
+        return jsonify({'project': project, 'message': 'success'}), status.HTTP_200_OK
 
 # samples section
 

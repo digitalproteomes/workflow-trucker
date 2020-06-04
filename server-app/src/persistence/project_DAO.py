@@ -1,13 +1,12 @@
 from .project import Project
+from bson import ObjectId
 
 
 def createProject(projectJson):
     new_project = Project(**projectJson)
     new_project.commit()
-    # project = projectJson.dump()
-    # created_project = Project.find_one({"projectId": project.projectId})
 
-    return 1
+    return Project.find_one({"projectId": new_project.projectId}).dump()
 
 
 def getAllProjects():
@@ -19,7 +18,20 @@ def getAllProjects():
 
 
 def getProjectById(id):
-    return Project.find_one({"projectId": id})
+    return Project.find_one({"projectId": int(id)}).dump()
+
+
+def updateProject(id, name, ownerName, ownerORCID, description):
+    project = Project.find_one({"projectId": int(id)})
+    if(project):
+        project.name = name
+        project.ownerName = ownerName
+        project.ownerORCID = ownerORCID
+        project.description = description
+        project.commit()
+        return Project.find_one({"projectId": int(id)}).dump()
+    else:
+        return 0
 
 
 def updateProjectStatus(id, status):
@@ -36,16 +48,13 @@ def updateProjectStatus(id, status):
 
 
 def deleteProject(id):
-    project_to_delete = Project.find_one({"projectId": id})
+    project_to_delete = Project.find_one({"projectId": int(id)})
 
     if(project_to_delete):
         deleted_count = project_to_delete.delete().deleted_count
-        if(deleted_count > 0):
-            return 'Deleted ' + str(deleted_count) + ' project(s)'
-        else:
-            return 'Could not delete'
+        return 1
     else:
-        return 'There is no project with the id: ' + str(id)
+        return 0
 
 
 if __name__ == '__main__':

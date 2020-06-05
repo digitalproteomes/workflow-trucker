@@ -34,7 +34,7 @@ def getAllProjects():
 def getProjectById():
     id = request.args.get('id')
     project = projectDAO.getProjectById(id)
-    return jsonify({'project': project}), status.HTTP_200_OK
+    return jsonify(project), status.HTTP_200_OK
 
 
 @app.route('/project', methods=['POST'])
@@ -57,8 +57,9 @@ def createProject():
         "createdDate": datetime.datetime.now()
     }
 
+    # within this method we have the error
     project = projectDAO.createProject(new_project)
-    return jsonify({'project': project}), status.HTTP_200_OK
+    return jsonify(project), status.HTTP_200_OK
 
 
 @app.route('/project', methods=['DELETE'])
@@ -66,9 +67,9 @@ def deleteProject():
     id = request.args.get('id')
     sts = projectDAO.deleteProject(id)
     if(sts == 0):
-        return jsonify({'project': 'null', 'message': 'Project with id does not exist.'}), status.HTTP_404_NOT_FOUND
+        return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
     else:
-        return jsonify({'project': 'null', 'message': 'success'}), status.HTTP_200_OK
+        return '', status.HTTP_200_OK
 
 
 @app.route('/project', methods=['PUT'])
@@ -82,9 +83,9 @@ def updateProject():
     project = projectDAO.updateProject(
         id, name, ownerName, ownerORCID, description)
     if(project == 0):
-        return jsonify({'project': 'null', 'message': 'Project with id does not exist.'}), status.HTTP_404_NOT_FOUND
+        return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
     else:
-        return jsonify({'project': project, 'message': 'success'}), status.HTTP_200_OK
+        return jsonify(project), status.HTTP_200_OK
 
 # samples section
 

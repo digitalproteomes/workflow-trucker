@@ -4,6 +4,8 @@ from persistence import project_DAO as projectDAO
 import datetime
 from pymongo import MongoClient
 
+import os
+
 
 def load_json(datafile):
     with open(datafile) as f:
@@ -11,6 +13,7 @@ def load_json(datafile):
 
 
 def insertProject(project):
+    print("inserting project")
     projectDAO.createProject(project)
 
 
@@ -29,7 +32,7 @@ def insertSamples(samples):
 
 
 def insertClinicalSample(sample):
-    # print("inserting clinical sample")
+    print("inserting clinical sample")
     new_sample = {
         "sourceSampleId": sample['id'],
         "name": sample['name'],
@@ -43,7 +46,7 @@ def insertClinicalSample(sample):
 
 
 def insertIndividualSample(sample):
-    # print("inserting individual sample")
+    print("inserting individual sample")
     parentSample = sampleDAO.getClinicalSampleBySourceSampleId(
         sample['sample_ref']['sampleIdRef'])
     new_sample = {
@@ -61,20 +64,21 @@ def insertIndividualSample(sample):
 
 
 def insertPoolingSample(sample):
-    # print("inserting clinical sample")
-    new_sample = {
-        "sourceSampleId": 0,
-        "name": sample['name'],
-        "projectId": "5",
-        "protocolId": "3",
-        "protocolName": "pooling_preparation",
-        "updatedDate": datetime.datetime.now(),
-        "createdDate": datetime.datetime.now()
+    print("not inserting pooling sample")
+    # new_sample = {
+    #     "sourceSampleId": 0,
+    #     "name": sample['name'],
+    #     "projectId": "5",
+    #     "protocolId": "3",
+    #     "protocolName": "pooling_preparation",
+    #     "updatedDate": datetime.datetime.now(),
+    #     "createdDate": datetime.datetime.now()
 
-    }
-    parentSample = sampleDAO.createSample(new_sample)
-    for i in sample['sample_ref']:
-        sampleDAO.updateParentSample(i['sampleIdRef'], parentSample.id)
+    # }
+    # parentSample = sampleDAO.createSample(new_sample)
+
+    # for i in sample['sample_ref']:
+    #     sampleDAO.updateParentSample(i['sampleIdRef'], parentSample.id)
 
 
 def insertFractinationSample(sample):
@@ -100,7 +104,15 @@ def insertFractinationSample(sample):
 
 
 if __name__ == '__main__':
-    client = MongoClient('localhost', 27017)
+    try:
+        if (os.environ['WorkflowEnvironment'] == "Docker"):
+            db = MongoClient('host.docker.internal', 27017)
+        else:
+            db = MongoClient('localhost', 27017)
+    except KeyError:
+        db = MongoClient('localhost', 27017)
+
+    client = db  # MongoClient('localhost', 27017)
 
     # to delete database, uncomment the next line
     dblist = client.list_database_names()

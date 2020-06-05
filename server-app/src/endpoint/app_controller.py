@@ -27,7 +27,7 @@ def getTestResponse():
 @app.route('/project/all', methods=['GET'])
 def getAllProjects():
     projects = projectDAO.getAllProjects()
-    return jsonify({'projects': projects, 'totalSize': len(projects)}), status.HTTP_200_OK
+    return jsonify(projects), status.HTTP_200_OK
 
 
 @app.route('/project', methods=['GET'])
@@ -93,7 +93,7 @@ def updateProject():
 @app.route('/sample', methods=['GET'])
 def getAllSamples():
     samples = sampleDAO.getAllSamples(request.args.get('projectId'))
-    return jsonify({'samples': samples, 'totalSize': len(samples)}), status.HTTP_200_OK
+    return jsonify(samples), status.HTTP_200_OK
 
 
 @app.route('/sample/clinical', methods=['GET'])
@@ -101,7 +101,7 @@ def getClinicalSamples():
     projectId = request.args.get('projectId')
     samples = sampleDAO.getSamplesByProjectAndProtocolId(
         projectId, 1)
-    return jsonify({'samples': samples, 'totalSize': len(samples)}), status.HTTP_200_OK
+    return jsonify(samples), status.HTTP_200_OK
 
 
 @app.route('/sample/individual', methods=['GET'])
@@ -109,7 +109,7 @@ def getIndividualSamples():
     projectId = request.args.get('projectId')
     samples = sampleDAO.getSamplesByProjectAndProtocolId(
         projectId, 2)
-    return jsonify({'samples': samples, 'totalSize': len(samples)}), status.HTTP_200_OK
+    return jsonify(samples), status.HTTP_200_OK
 
 
 @app.route('/sample/pooled', methods=['GET'])
@@ -117,7 +117,7 @@ def getPooledSamples():
     projectId = request.args.get('projectId')
     samples = sampleDAO.getSamplesByProjectAndProtocolId(
         projectId, 3)
-    return jsonify({'samples': samples, 'totalSize': len(samples)}), status.HTTP_200_OK
+    return jsonify(samples), status.HTTP_200_OK
 
 
 @app.route('/sample/fractionated', methods=['GET'])
@@ -125,7 +125,7 @@ def getFractionatedSamples():
     projectId = request.args.get('projectId')
     samples = sampleDAO.getSamplesByProjectAndProtocolId(
         projectId, 4)
-    return jsonify({'samples': samples, 'totalSize': len(samples)}), status.HTTP_200_OK
+    return jsonify(samples), status.HTTP_200_OK
 
 
 @app.route('/sample/fractionated/parent', methods=['GET'])
@@ -133,7 +133,7 @@ def getFractionatedSamplesByParent():
     projectId = request.args.get('projectId')
     parentId = request.args.get('parentId')
     samples = sampleDAO.getFractionatedSamples(projectId, parentId)
-    return jsonify({'samples': samples, 'totalSize': len(samples)}), status.HTTP_200_OK
+    return jsonify(samples), status.HTTP_200_OK
 
 
 @app.route('/sample/clinical/parent', methods=['GET'])
@@ -141,7 +141,7 @@ def getClinicalSamplesByParent():
     projectId = request.args.get('projectId')
     parentId = request.args.get('parentId')
     samples = sampleDAO.getPooledSamples(projectId, ObjectId(parentId))
-    return jsonify({'samples': samples, 'totalSize': len(samples)}), status.HTTP_200_OK
+    return jsonify(samples), status.HTTP_200_OK
 
 
 @app.route('/sample/protocol', methods=['GET'])
@@ -150,7 +150,7 @@ def getSamplesByProtocolId():
     protocolId = request.args.get('protocolId')
     samples = sampleDAO.getSamplesByProjectAndProtocolId(
         projectId, protocolId)
-    return jsonify({'samples': samples, 'totalSize': len(samples)}), status.HTTP_200_OK
+    return jsonify(samples), status.HTTP_200_OK
 
 
 @app.route('/sample/clinical', methods=['POST'])
@@ -171,9 +171,9 @@ def createClinicalSample():
     }
     created_sample = sampleDAO.createClinicalSample(new_sample)
     if(created_sample == 0):
-        return jsonify({'sample': 'null', 'message': 'Source sample id already exists.'}), status.HTTP_400_BAD_REQUEST
+        return 'Source sample id already exists.', status.HTTP_400_BAD_REQUEST
     else:
-        return jsonify({'sample': created_sample, 'message': 'Success'}), status.HTTP_200_OK
+        return jsonify(created_sample), status.HTTP_200_OK
 
 
 @app.route('/sample/individual', methods=['POST'])
@@ -195,11 +195,11 @@ def createIndividualSample():
     }
     created_sample = sampleDAO.createIndividualSample(new_sample)
     if(created_sample == -1):
-        return jsonify({'sample': 'null', 'message': 'Parent sample id does not exist.'}), status.HTTP_404_NOT_FOUND
+        return 'Parent sample id does not exist.', status.HTTP_404_NOT_FOUND
     elif (created_sample == 0):
-        return jsonify({'sample': 'null', 'message': 'Name already exists.'}), status.HTTP_400_BAD_REQUEST
+        return 'Name already exists.', status.HTTP_400_BAD_REQUEST
     else:
-        return jsonify({'sample': created_sample, 'message': 'Success'}), status.HTTP_200_OK
+        return jsonify(created_sample), status.HTTP_200_OK
 
 
 @app.route('/sample/pooled', methods=['POST'])
@@ -227,12 +227,12 @@ def createPooledSample():
                 failedIds.append(i)
 
     if(created_sample == 0):
-        return jsonify({'sample': 'null', 'message': 'Name already exists.'}), status.HTTP_400_BAD_REQUEST
+        return 'Name already exists.', status.HTTP_400_BAD_REQUEST
     else:
-        return jsonify({'sample': created_sample, 'message': 'Success'}), status.HTTP_200_OK
+        return jsonify(created_sample), status.HTTP_200_OK
 
 
-@app.route('/sample/fractionated', methods=['POST'])
+@ app.route('/sample/fractionated', methods=['POST'])
 def createFractionatedSamples():
     data = request.json
     projectId = data.get('projectId')
@@ -255,9 +255,9 @@ def createFractionatedSamples():
             }
             created_frac_sample = sampleDAO.createSample(new_sample)
             return_samples.append(created_frac_sample)
-        return jsonify({'samples': return_samples, 'message': 'Success'}), status.HTTP_200_OK
+        return jsonify(return_samples), status.HTTP_200_OK
     else:
-        return jsonify({'samples': 'null', 'message': 'Parent sample id does not exist'}), status.HTTP_404_NOT_FOUND
+        return 'Parent sample id does not exist', status.HTTP_404_NOT_FOUND
 
 
 @app.route('/sample/unlink', methods=['PUT'])
@@ -265,9 +265,9 @@ def removeFromPooledSample():
     data = request.json
     id = data.get('id')
     if(sampleDAO.updateParentSample(ObjectId(id), 0) == 0):
-        return jsonify({'message': 'Sample with id not found'}), status.HTTP_404_NOT_FOUND
+        return 'Sample with id not found', status.HTTP_404_NOT_FOUND
     else:
-        return jsonify({'message': 'success'}), status.HTTP_404_NOT_FOUND
+        return '', status.HTTP_200_OK
 
 
 @app.route('/sample/link', methods=['PUT'])
@@ -278,7 +278,7 @@ def addToPooledSample():
     if(sampleDAO.updateParentSample(ObjectId(id), ObjectId(parentSampleId)) == 0):
         return jsonify({'message': 'Sample with id not found'}), status.HTTP_404_NOT_FOUND
     else:
-        return jsonify({'message': 'success'}), status.HTTP_404_NOT_FOUND
+        return '', status.HTTP_200_OK
 
 
 @app.route('/sample', methods=['PUT'])
@@ -288,9 +288,9 @@ def updateSampleName():
     newName = data.get('newName')
     sample = sampleDAO.updateSampleName(id, newName)
     if(sample == 0):
-        return jsonify({'sample': 'null', 'message': 'Source with id does not exist.'}), status.HTTP_404_NOT_FOUND
+        return 'Source with id does not exist.', status.HTTP_404_NOT_FOUND
     else:
-        return jsonify({'sample': sample, 'message': 'success'}), status.HTTP_404_NOT_FOUND
+        return jsonify(sample), status.HTTP_200_OK
 
 
 @app.route('/sample', methods=['DELETE'])
@@ -298,9 +298,9 @@ def deleteSample():
     id = request.args.get('id')
     sts = sampleDAO.deleteSample(id)
     if(sts == 0):
-        return jsonify({'sample': 'null', 'message': 'Sample with id does not exist.'}), status.HTTP_404_NOT_FOUND
+        return 'Sample with id does not exist.', status.HTTP_404_NOT_FOUND
     else:
-        return jsonify({'sample': 'null', 'message': 'success'}), status.HTTP_200_OK
+        return '', status.HTTP_200_OK
 
 
 if __name__ == '__main__':

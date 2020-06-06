@@ -3,17 +3,17 @@ import { Sample } from '../../types';
 import { mockSamples } from '../../default-data/samples';
 
 export class Api {
-    public static async getClinicalSamples(projectId: number): Promise<Sample[]> {
+    public static async getSamplesAsync(projectId: number): Promise<Sample[]> {
         try {
-            return BaseApi.get(`sample/clinical?projectId=${projectId}`);
+            return BaseApi.get(`sample/individual?projectId=${projectId}`);
         } catch (err) {
             return mockSamples();
         }
     }
 
-    public static async postClinicalSampleAsync(name: string, projectId: number): Promise<Sample> {
+    public static async postSampleAsync(name: string, projectId: number): Promise<Sample> {
         try {
-            return await BaseApi.post(`/sample/clinical`, { name, projectId });
+            return await BaseApi.post(`/sample/individual`, { name, projectId });
         } catch (error) {
             return mockSamples()[0];
         }

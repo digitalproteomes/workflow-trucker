@@ -96,9 +96,7 @@ const BasicLayout: React.FC = (props) => {
                         {props.children}
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>
-                    Workflow Tracker ©2020 Created by Silvana Albert
-                </Footer>
+                <Footer style={{ textAlign: 'center' }}>Workflow Tracker ©2020 Created by Silvana Albert</Footer>
             </Layout>
         </Layout>
     );
@@ -120,19 +118,13 @@ function getSubmenu(projectId: number, name: string) {
                     <Link to={`/samples/clinical?project=${projectId}`}>Clinical</Link>
                 </Menu.Item>
                 <Menu.Item key={`${projectId}_10`}>
-                    <Link to={`/samples?project=${projectId}&type=${ProtocolTypes.Individual}`}>
-                        Individual
-                    </Link>
+                    <Link to={`/samples/individual?project=${projectId}`}>Individual</Link>
                 </Menu.Item>
                 <Menu.Item key={`${projectId}_11`}>
-                    <Link to={`/samples?project=${projectId}&type=${ProtocolTypes.Fractionation}`}>
-                        Fractionation
-                    </Link>
+                    <Link to={`/samples?project=${projectId}&type=${ProtocolTypes.Fractionation}`}>Fractionation</Link>
                 </Menu.Item>
                 <Menu.Item key={`${projectId}_12`}>
-                    <Link to={`/samples?project=${projectId}&type=${ProtocolTypes.Pooling}`}>
-                        Pooling
-                    </Link>
+                    <Link to={`/samples?project=${projectId}&type=${ProtocolTypes.Pooling}`}>Pooling</Link>
                 </Menu.Item>
             </SubMenu>
             <Menu.Item key={`${projectId}_20`} icon={<DashboardOutlined />}>

@@ -13,8 +13,6 @@ export const List: FunctionComponent<Props> = ({ samples }) => {
 
 const renderActions = () => (
     <Space size="middle">
-        <span>Fractionate</span>
-        <span>Single Prep</span>
         <span>Delete</span>
     </Space>
 );

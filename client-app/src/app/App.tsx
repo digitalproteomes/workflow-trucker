@@ -5,6 +5,7 @@ import { About } from './pages/about';
 import BasicLayout from './layouts';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { ClinicalSamples } from './pages/clinical-samples';
+import { IndividualSamples } from './pages/individual-samples';
 
 export function App() {
     return (
@@ -24,6 +25,9 @@ export function App() {
                         </Route>
                         <Route path="/samples/clinical">
                             <ClinicalSamples />
+                        </Route>
+                        <Route path="/samples/individual">
+                            <IndividualSamples />
                         </Route>
                         <Route path="/samples">
                             <SamplesPage />

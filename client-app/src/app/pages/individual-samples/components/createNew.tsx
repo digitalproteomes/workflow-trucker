@@ -13,17 +13,17 @@ export const InputForm: FunctionComponent<Props> = ({ isActiveInputForm, onCreat
     return (
         <InputModal
             visible={isActiveInputForm}
-            title="New clinical sample"
-            inputForm={clinicalInputForm}
+            title="New individual sample"
+            inputForm={inputForm}
             onCreate={onCreate}
             onCancel={onCancel}
         ></InputModal>
     );
 };
 
-function clinicalInputForm(form: FormInstance) {
+function inputForm(form: FormInstance) {
     return (
-        <Form {...formLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
+        <Form {...formLayout} name="individual-sample-input-form" initialValues={{ remember: true }} form={form}>
             <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please enter a name!' }]}>
                 <Input />
             </Form.Item>

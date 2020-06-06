@@ -1,6 +1,6 @@
 import { Sample } from '../types';
 
-export function clinicalSamples(): Sample[] {
+export function mockSamples(): Sample[] {
     return [
         {
             createdDate: '2020-06-06T13:53:35.357000+00:00',

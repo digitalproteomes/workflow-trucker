@@ -3,8 +3,8 @@ import { Button, Divider } from 'antd';
 import { Sample } from '../../types';
 import { Api } from './api';
 import { Constants } from '../../default-data/constants';
-import { ClinicalSampleInputForm } from './components/createNew';
-import { ClinicalSampleList } from './components/list';
+import { InputForm } from './components/createNew';
+import { List } from './components/list';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [samples, setSamples] = useState<Sample[]>([]);
@@ -65,9 +65,9 @@ export const ClinicalSamples: FunctionComponent = () => {
             >
                 Pooling preparation
             </Button>
-            <ClinicalSampleInputForm isActiveInputForm={isActiveInputForm} onCreate={onCreate} onCancel={onCancel} />
+            <InputForm isActiveInputForm={isActiveInputForm} onCreate={onCreate} onCancel={onCancel} />
             <Divider></Divider>
-            <ClinicalSampleList samples={samples} />
+            <List samples={samples} />
         </>
     );
 };

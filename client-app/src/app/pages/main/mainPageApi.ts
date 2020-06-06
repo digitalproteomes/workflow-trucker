@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Project, Sample } from '../../types';
-import { sampleSamples } from '../../default-data/samples';
+// import { sampleSamples } from '../../default-data/samples';
 
 class MainPageApi {
     public static readonly baseUrl = process.env.API_URL;
@@ -37,21 +37,16 @@ class MainPageApi {
             // todo - the below thingy is not typed. I am returning the samples array from the response object.
             return response.data.samples;
         } catch (error) {
-            return sampleSamples();
+            return [];
         }
     }
 
-    public static async getSamplesByProtocolIdAsync(
-        projectId: number,
-        protocolId: number,
-    ): Promise<Sample[]> {
+    public static async getSamplesByProtocolIdAsync(projectId: number, protocolId: number): Promise<Sample[]> {
         try {
-            const response = await axios.get(
-                `/sample/protocol?projectId=${projectId}&protocolId=${protocolId}`,
-            );
+            const response = await axios.get(`/sample/protocol?projectId=${projectId}&protocolId=${protocolId}`);
             return response.data.samples;
         } catch (error) {
-            return sampleSamples();
+            return [];
         }
     }
 

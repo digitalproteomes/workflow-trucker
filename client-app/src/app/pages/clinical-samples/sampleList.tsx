@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Table, Space } from 'antd';
+import { Table, Space, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { Sample } from '../../types';
 
@@ -15,43 +15,31 @@ export const SampleList: FunctionComponent<ColumnsProps> = ({ samples }) => {
         selections: [Table.SELECTION_ALL],
     };
 
-    if (samples == null) return <span>No samples to show yet</span>;
+    if (samples == null) return <Skeleton active />;
 
-    return (
-        <Table
-            rowSelection={rowSelection}
-            dataSource={samples}
-            columns={columns}
-            rowKey={(row) => row.sampleId}
-        />
-    );
+    return <Table rowSelection={rowSelection} dataSource={samples} columns={columns} rowKey={(row) => row.id} />;
 };
 
 const columns: ColumnsType<Sample> = [
     {
         title: 'Id',
-        dataIndex: 'id',
-        key: 'id',
+        dataIndex: Sample.nameof('id'),
     },
     {
         title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
+        dataIndex: Sample.nameof('name'),
     },
     {
         title: 'Source Sample Id',
-        dataIndex: 'sampleId',
-        key: 'sampleId',
+        dataIndex: Sample.nameof('sourceSampleId'),
     },
     {
         title: 'Protocol Id',
-        dataIndex: 'protocolId',
-        key: 'protocolId',
+        dataIndex: Sample.nameof('protocolId'),
     },
     {
         title: 'Protocol Name',
-        dataIndex: 'protocolName',
-        key: 'protocolName',
+        dataIndex: Sample.nameof('protocolName'),
     },
     {
         title: 'Action',

@@ -1,6 +1,9 @@
-import { observable, computed } from 'mobx';
+import { observable } from 'mobx';
 
 export class Sample {
+    @observable
+    createdDate: string = '';
+
     @observable
     id: string = '';
 
@@ -17,7 +20,12 @@ export class Sample {
     protocolName: string = '';
 
     @observable
-    sampleId: number = -1;
+    sourceSampleId: number = -1;
+
+    @observable
+    updatedDate: string = '';
+
+    public static nameof = (name: keyof Sample) => name;
 }
 
 export class Project {

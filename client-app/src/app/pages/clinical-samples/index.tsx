@@ -3,9 +3,9 @@ import { Button, Divider } from 'antd';
 import { Sample } from '../../types';
 import { Api } from './api';
 import { Constants } from '../../default-data/constants';
-import { InputModal } from './inputModal';
-import { clinicalInputForm } from './createNew';
-import { SampleList } from './sampleList';
+import { InputModal } from './components/inputModal';
+import { clinicalInputForm } from './components/createNew';
+import { SampleList } from './components/sampleList';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [samples, setSamples] = useState<Sample[]>([]);

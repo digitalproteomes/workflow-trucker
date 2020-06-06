@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Table, Space, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { Sample } from '../../types';
+import { Sample } from '../../../types';
 
 type ColumnsProps = {
     samples: Sample[];

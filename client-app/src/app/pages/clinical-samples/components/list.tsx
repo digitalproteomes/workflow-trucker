@@ -1,23 +1,15 @@
 import React, { FunctionComponent } from 'react';
-import { Table, Space, Skeleton } from 'antd';
+import { Space } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { Sample } from '../../../types';
+import { SampleList } from '../../../common/sampleList';
 
-type ColumnsProps = {
+type Props = {
     samples: Sample[];
 };
 
-export const SampleList: FunctionComponent<ColumnsProps> = ({ samples }) => {
-    const rowSelection = {
-        selectedRowKeys: [2, 3, 4],
-        // onChange: this.onSelectChange,
-        hideDefaultSelections: true,
-        selections: [Table.SELECTION_ALL],
-    };
-
-    if (samples == null) return <Skeleton active />;
-
-    return <Table rowSelection={rowSelection} dataSource={samples} columns={columns} rowKey={(row) => row.id} />;
+export const ClinicalSampleList: FunctionComponent<Props> = ({ samples }) => {
+    return <SampleList columns={columns} samples={samples} />;
 };
 
 const columns: ColumnsType<Sample> = [

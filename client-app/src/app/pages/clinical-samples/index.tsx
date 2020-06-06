@@ -3,9 +3,8 @@ import { Button, Divider } from 'antd';
 import { Sample } from '../../types';
 import { Api } from './api';
 import { Constants } from '../../default-data/constants';
-import { InputModal } from './components/inputModal';
-import { clinicalInputForm } from './components/createNew';
-import { SampleList } from './components/sampleList';
+import { ClinicalSampleInputForm } from './components/createNew';
+import { ClinicalSampleList } from './components/list';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [samples, setSamples] = useState<Sample[]>([]);
@@ -30,6 +29,22 @@ export const ClinicalSamples: FunctionComponent = () => {
         }
     }, [isRefreshNeeded]);
 
+    const onCreate = (values: any) => {
+        // todo - this any to something is scary
+        console.log('Received values of form: ', values);
+        setActiveInputFormFlag(false);
+        async function saveClinicalSample() {
+            await Api.postClinicalSampleAsync(values.name as string, Constants.projectId);
+            // assume the above is success. Even if it would be fail, that's and edgecase
+            setRefreshNeededFlag(true);
+        }
+        saveClinicalSample();
+    };
+
+    const onCancel = () => {
+        setActiveInputFormFlag(false);
+    };
+
     return (
         <>
             <Button
@@ -50,29 +65,9 @@ export const ClinicalSamples: FunctionComponent = () => {
             >
                 Pooling preparation
             </Button>
-            <InputModal
-                visible={isActiveInputForm}
-                title="New clinical sample"
-                inputForm={clinicalInputForm}
-                onCreate={(values: any) => {
-                    // todo - this any to something is scary
-                    console.log('Received values of form: ', values);
-                    setActiveInputFormFlag(false);
-
-                    async function saveClinicalSample() {
-                        await Api.postClinicalSampleAsync(values.name as string, Constants.projectId);
-
-                        // assume the above is success. Even if it would be fail, that's and edgecase
-                        setRefreshNeededFlag(true);
-                    }
-                    saveClinicalSample();
-                }}
-                onCancel={() => {
-                    setActiveInputFormFlag(false);
-                }}
-            ></InputModal>
+            <ClinicalSampleInputForm isActiveInputForm={isActiveInputForm} onCreate={onCreate} onCancel={onCancel} />
             <Divider></Divider>
-            <SampleList samples={samples} />
+            <ClinicalSampleList samples={samples} />
         </>
     );
 };

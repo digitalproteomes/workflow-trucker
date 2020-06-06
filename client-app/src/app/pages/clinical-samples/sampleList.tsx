@@ -15,6 +15,8 @@ export const SampleList: FunctionComponent<ColumnsProps> = ({ samples }) => {
         selections: [Table.SELECTION_ALL],
     };
 
+    if (samples == null) return <span>No samples to show yet</span>;
+
     return (
         <Table
             rowSelection={rowSelection}

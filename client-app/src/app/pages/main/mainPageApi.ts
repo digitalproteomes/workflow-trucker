@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Project, Sample } from '../../types';
+import { sampleSamples } from '../../default-data/samples';
 
-class Api {
+class MainPageApi {
     public static readonly baseUrl = process.env.API_URL;
 
     public static init() {
@@ -36,24 +37,7 @@ class Api {
             // todo - the below thingy is not typed. I am returning the samples array from the response object.
             return response.data.samples;
         } catch (error) {
-            return this.sampleSamples();
-        }
-    }
-
-    public static async postClinicalSampleAsync(
-        name: string,
-        projectId: number,
-        sampleId: number,
-    ): Promise<boolean> {
-        try {
-            const response = await axios.post(`/sample/clinical`, { name, projectId, sampleId });
-            // todo - i should return something based on a convention from the backend, considering the status code and maybe validation errors
-            return response.data.success;
-        } catch (error) {
-            console.log('post failed while creating a clinical sample');
-            // https://ant.design/components/notification/
-            // show a notification with the error. if not here, somewhere else
-            return false;
+            return sampleSamples();
         }
     }
 
@@ -67,7 +51,7 @@ class Api {
             );
             return response.data.samples;
         } catch (error) {
-            return this.sampleSamples();
+            return sampleSamples();
         }
     }
 
@@ -79,36 +63,7 @@ class Api {
             console.log(`on submit error: ${error}`);
         }
     }
-
-    private static sampleSamples() {
-        return [
-            {
-                id: '5eb562b8c65543aa9ac7e677',
-                name: 'PHRT_005_001_CPAC',
-                projectId: '5',
-                protocolId: 1,
-                protocolName: 'clinical_sample',
-                sampleId: 1,
-            },
-            {
-                id: '5eb562b8c65543aa9ac7e678',
-                name: 'PHRT_005_002_CPAC',
-                projectId: '5',
-                protocolId: 2,
-                protocolName: 'clinical_sample',
-                sampleId: 2,
-            },
-            {
-                id: '5eb562b8c65543aa9ac7e679',
-                name: 'PHRT_005_003_CPAC',
-                projectId: '5',
-                protocolId: 3,
-                protocolName: 'clinical_sample',
-                sampleId: 3,
-            },
-        ];
-    }
 }
 
-Api.init();
-export { Api };
+MainPageApi.init();
+export { MainPageApi };

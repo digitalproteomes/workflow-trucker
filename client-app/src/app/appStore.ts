@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 import { Project, Sample } from './types';
-import { Api } from './pages/main/api';
+import { MainPageApi } from './pages/main/mainPageApi';
 
 class Store {
     @observable
@@ -12,13 +12,7 @@ class Store {
     @action
     public async fetchSelectedProject() {
         const projectName: string = 'CPAC';
-        this.project = await Api.getProjectAsync(projectName);
-    }
-
-    @action
-    public async fetchSelectedProjectSamples() {
-        const projectId: number = 5;
-        this.samples = await Api.getSamplesAsync(projectId);
+        this.project = await MainPageApi.getProjectAsync(projectName);
     }
 
     @action
@@ -26,7 +20,7 @@ class Store {
         projectId: number,
         protocolId: number,
     ) {
-        this.samples = await Api.getSamplesByProtocolIdAsync(projectId, protocolId);
+        this.samples = await MainPageApi.getSamplesByProtocolIdAsync(projectId, protocolId);
     }
 }
 

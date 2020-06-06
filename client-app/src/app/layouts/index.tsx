@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import app_logo from './assets/logo_white.png';
-import { Layout, Menu, Breadcrumb, Avatar, Typography, Badge, Divider } from 'antd';
+import { Layout, Menu, Breadcrumb, Avatar, Typography, Divider } from 'antd';
 import {
     DashboardOutlined,
     UserOutlined,
@@ -43,28 +43,24 @@ const BasicLayout: React.FC = (props) => {
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sider
-                // todo - move the stlying out into proper css files
+                // todo - move the styling out into proper css files
                 width={250}
                 collapsible
                 collapsed={prevState.isCollapsed}
                 onCollapse={onCollapse}
             >
-                {/* <div className="logo" /> */}
-                {/* <img src={app_logo} alt="logo" className="logo" /> */}
                 <img
                     src={app_logo}
                     alt="logo"
-                    // todo - move the stlying out into proper css files
+                    // todo - move the styling out into proper css files
                     style={{
                         alignContent: 'center',
                         marginLeft: '23px',
                         paddingTop: '14px',
-                        // marginTop:
                         width: '110px',
                     }}
                 />
                 <Divider style={{ margin: 0 }} />
-                {/* <img src={app_logo} alt="logo" /> */}
                 <Menu
                     mode="inline"
                     theme="dark"

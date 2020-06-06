@@ -1,4 +1,4 @@
-import { BaseApi } from '../infrastructure/api';
+import { BaseApi } from '../../infrastructure/api';
 import { Sample } from '../../types';
 import { clinicalSamples } from '../../default-data/samples';
 
@@ -15,7 +15,6 @@ export class Api {
         try {
             return await BaseApi.post(`/sample/clinical`, { name, projectId });
         } catch (error) {
-            // todo - once the server-app is stable, this should be removed
             return clinicalSamples()[0];
         }
     }

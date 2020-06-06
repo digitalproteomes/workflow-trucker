@@ -5,10 +5,11 @@ import { Sample } from '../types';
 
 type Props = {
     samples: Sample[];
-    columns: ColumnsType<Sample>;
+    columns?: ColumnsType<Sample>;
+    renderActions?: () => JSX.Element;
 };
 
-export const SampleList: FunctionComponent<Props> = ({ samples, columns }) => {
+export const SampleList: FunctionComponent<Props> = ({ samples, columns, renderActions }) => {
     const rowSelection = {
         selectedRowKeys: [2, 3, 4],
         // onChange: this.onSelectChange,
@@ -20,5 +21,56 @@ export const SampleList: FunctionComponent<Props> = ({ samples, columns }) => {
         return <Skeleton active />;
     }
 
-    return <Table rowSelection={rowSelection} dataSource={samples} columns={columns} rowKey={(row) => row.id} />;
+    let columnsType: ColumnsType<Sample>;
+
+    if (columns) {
+        if (renderActions) {
+            columnsType = [...columns, getRenderObject(renderActions)];
+        } else {
+            columnsType = columns;
+        }
+    } else {
+        if (renderActions) {
+            columnsType = [...defaultColumns, getRenderObject(renderActions)];
+        } else {
+            columnsType = defaultColumns;
+        }
+    }
+
+    return <Table rowSelection={rowSelection} dataSource={samples} columns={columnsType} rowKey={(row) => row.id} />;
 };
+
+const defaultColumns: ColumnsType<Sample> = [
+    {
+        title: 'Id',
+        dataIndex: Sample.nameof('id'),
+    },
+    {
+        title: 'Name',
+        dataIndex: Sample.nameof('name'),
+    },
+    {
+        title: 'Source Sample Id',
+        dataIndex: Sample.nameof('sourceSampleId'),
+    },
+    {
+        title: 'Parent Sample Id',
+        dataIndex: Sample.nameof('parentSampleId'),
+    },
+    {
+        title: 'Protocol Name',
+        dataIndex: Sample.nameof('protocolName'),
+    },
+    {
+        title: 'Updated on',
+        dataIndex: Sample.nameof('updatedDate'),
+    },
+];
+
+function getRenderObject(renderActions: () => JSX.Element) {
+    return {
+        title: 'Action',
+        key: 'action',
+        render: renderActions,
+    };
+}

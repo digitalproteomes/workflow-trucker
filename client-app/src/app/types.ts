@@ -5,6 +5,8 @@ export class Sample {
 
     name: string = '';
 
+    parentSampleId: string = '';
+
     projectId: string = '';
 
     protocolId: number = -1;

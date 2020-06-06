@@ -121,7 +121,7 @@ function getSubmenu(projectId: number, name: string) {
                     <Link to={`/samples/individual?project=${projectId}`}>Individual</Link>
                 </Menu.Item>
                 <Menu.Item key={`${projectId}_11`}>
-                    <Link to={`/samples?project=${projectId}&type=${ProtocolTypes.Fractionation}`}>Fractionation</Link>
+                    <Link to={`/samples/fractionated?project=${projectId}`}>Fractionated</Link>
                 </Menu.Item>
                 <Menu.Item key={`${projectId}_12`}>
                     <Link to={`/samples?project=${projectId}&type=${ProtocolTypes.Pooling}`}>Pooling</Link>

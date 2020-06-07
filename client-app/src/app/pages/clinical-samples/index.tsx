@@ -1,8 +1,10 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Divider } from 'antd';
+import { Divider, Space } from 'antd';
 import { InputForm, ButtonCreateNew } from './components/createNew';
 import { List } from './components/list';
 import { ButtonAddToPooling } from './components/addToPooling';
+import { Sample } from '../../types';
+import { ButtonDelete } from './components/delete';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveInputForm, setActiveInputFormFlag] = useState<boolean>(false);
@@ -32,6 +34,21 @@ export const ClinicalSamples: FunctionComponent = () => {
         console.log('add to pooling');
     };
 
+    function onDeleteDone() {
+        setRefreshNeededFlag(true);
+    }
+
+    const renderActions = (record: Sample) => {
+        return (
+            <Space size="middle">
+                {/* <ButtonFractionate /> */}
+                <span>Fractionate</span>
+                <span>Single Prep</span>
+                <ButtonDelete sample={record} onDeleteDone={onDeleteDone} />
+            </Space>
+        );
+    };
+
     return (
         <>
             <ButtonCreateNew onAddNewClick={onAddNewClick} style={{ float: 'right', marginRight: 74 }} />
@@ -42,7 +59,7 @@ export const ClinicalSamples: FunctionComponent = () => {
                 onCancel={onCancel}
             />
             <Divider></Divider>
-            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} />
+            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>
     );
 };

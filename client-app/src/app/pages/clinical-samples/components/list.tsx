@@ -36,7 +36,7 @@ export const List: FunctionComponent<Props> = ({ isRefreshNeeded, onRefreshDone 
     return (
         <SampleList
             samples={samples}
-            renderActions={(_1: any, record: Sample, _2: number) => {
+            renderActions={(record: Sample) => {
                 return (
                     <Space size="middle">
                         <span>Fractionate</span>

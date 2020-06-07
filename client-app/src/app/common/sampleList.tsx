@@ -6,7 +6,7 @@ import { Sample } from '../types';
 type Props = {
     samples: Sample[] | null;
     columns?: ColumnsType<Sample>;
-    renderActions?: (value: any, record: Sample, index: number) => JSX.Element;
+    renderActions?: (record: Sample) => JSX.Element;
 };
 
 export const SampleList: FunctionComponent<Props> = ({ samples, columns, renderActions }) => {
@@ -67,10 +67,12 @@ const defaultColumns: ColumnsType<Sample> = [
     },
 ];
 
-function getRenderObject(renderActions: (value: any, record: Sample, index: number) => JSX.Element) {
+function getRenderObject(renderActions: (record: Sample) => JSX.Element) {
     return {
         title: 'Action',
         key: 'action',
-        render: renderActions,
+        render: (value: any, record: Sample, index: number) => {
+            return renderActions(record);
+        },
     };
 }

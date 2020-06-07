@@ -1,11 +1,11 @@
 import React, { useEffect, useState, FunctionComponent } from 'react';
-import { Button, Divider } from 'antd';
+import { Divider } from 'antd';
 import { Sample } from '../../types';
 import { Api } from './api';
-import { InputForm } from './components/createNew';
+import { InputForm, ButtonCreateNew } from './components/createNew';
 import { List } from './components/list';
 import { Constants } from '../../default-data/constants';
-import { ButtonCreateNew, ButtonAddToPooling } from './components/buttons';
+import { ButtonAddToPooling } from './components/addToPooling';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [samples, setSamples] = useState<Sample[] | null>(null);
@@ -46,8 +46,8 @@ export const ClinicalSamples: FunctionComponent = () => {
 
     return (
         <>
-            <ButtonCreateNew onAddNewClick={onAddNewClick} />
-            <ButtonAddToPooling onAddToPooling={onAddToPooling} />
+            <ButtonCreateNew onAddNewClick={onAddNewClick} style={{ float: 'right', marginRight: 74 }} />
+            <ButtonAddToPooling onAddToPooling={onAddToPooling} style={{ float: 'right', marginRight: 16 }} />
             <InputForm
                 isActiveInputForm={isActiveInputForm}
                 onCreateSuccessful={onCreateSuccessful}

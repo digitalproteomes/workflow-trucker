@@ -1,19 +1,42 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Form, Input, Typography } from 'antd';
+import { Form, Input, Typography, Button } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
 import { Project, Sample } from '../../../types';
 import { Api } from '../api';
 
+export { ButtonCreateNew, InputForm };
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 const { Text } = Typography;
 
-type Props = {
+type ButtonCreateNewProps = {
+    onAddNewClick: () => void;
+    style?: React.CSSProperties | undefined;
+};
+
+const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onAddNewClick, style }) => {
+    return (
+        <Button type="primary" onClick={onAddNewClick} style={style}>
+            Add new clinical sample
+        </Button>
+    );
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+type InputFormProps = {
     isActiveInputForm: boolean;
     onCreateSuccessful: (key: any) => void;
     onCancel: () => void;
 };
 
-export const InputForm: FunctionComponent<Props> = ({ isActiveInputForm, onCreateSuccessful, onCancel }) => {
+const InputForm: FunctionComponent<InputFormProps> = ({ isActiveInputForm, onCreateSuccessful, onCancel }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const onCreate = (values: any) => {

@@ -40,9 +40,9 @@ const InputForm: FunctionComponent<InputFormProps> = ({ isActiveInputForm, onCre
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const onCreate = (values: any) => {
-        async function saveClinicalSample() {
+        async function saveSample() {
             try {
-                const createdSample: Sample = await Api.postClinicalSampleAsync({ ...values });
+                const createdSample: Sample = await Api.postSampleAsync({ ...values });
 
                 onCreateSuccessful(createdSample.id);
             } catch (error) {
@@ -52,7 +52,7 @@ const InputForm: FunctionComponent<InputFormProps> = ({ isActiveInputForm, onCre
                 setErrorMessage(error.message);
             }
         }
-        saveClinicalSample();
+        saveSample();
     };
 
     return (
@@ -60,7 +60,7 @@ const InputForm: FunctionComponent<InputFormProps> = ({ isActiveInputForm, onCre
             visible={isActiveInputForm}
             title="New clinical sample"
             inputForm={(form: FormInstance) => {
-                return clinicalInputForm(form, errorMessage);
+                return inputForm(form, errorMessage);
             }}
             onCreate={onCreate}
             onCancel={onCancel}
@@ -68,7 +68,7 @@ const InputForm: FunctionComponent<InputFormProps> = ({ isActiveInputForm, onCre
     );
 };
 
-function clinicalInputForm(form: FormInstance, errorMessage: string | null) {
+function inputForm(form: FormInstance, errorMessage: string | null) {
     return (
         <Form {...formLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
             <Form.Item

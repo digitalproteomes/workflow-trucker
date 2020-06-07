@@ -14,8 +14,8 @@ type Props = {
 export const List: FunctionComponent<Props> = ({ isRefreshNeeded, onRefreshDone }) => {
     const [samples, setSamples] = useState<Sample[] | null>(null);
 
-    async function fetchClinicalSamples() {
-        setSamples(await Api.getClinicalSamples(Constants.projectId));
+    async function fetchSamples() {
+        setSamples(await Api.fetchSamples(Constants.projectId));
     }
 
     async function deleteSample(entry: Sample) {
@@ -27,7 +27,7 @@ export const List: FunctionComponent<Props> = ({ isRefreshNeeded, onRefreshDone 
         if (samples == null || isRefreshNeeded) {
             console.log('refresh was needed');
 
-            fetchClinicalSamples();
+            fetchSamples();
 
             onRefreshDone();
         }
@@ -43,7 +43,7 @@ export const List: FunctionComponent<Props> = ({ isRefreshNeeded, onRefreshDone 
                         <span>Single Prep</span>
                         <Tooltip title="Delete sample">
                             <Button
-                                type="primary"
+                                type="default"
                                 icon={<DeleteOutlined />}
                                 onClick={() => {
                                     deleteSample(record);

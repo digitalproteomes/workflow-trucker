@@ -2,10 +2,8 @@ import { BaseApi } from '../../infrastructure/api';
 import { Sample } from '../../types';
 import { mockSamples } from '../../default-data/samples';
 
-// export { FriendlyError } from '../../infrastructure/api';
-
 export class Api {
-    public static async getClinicalSamples(projectId: number): Promise<Sample[]> {
+    public static async fetchSamples(projectId: number): Promise<Sample[]> {
         try {
             return BaseApi.getAsync(`sample/clinical?projectId=${projectId}`);
         } catch (err) {
@@ -13,12 +11,8 @@ export class Api {
         }
     }
 
-    public static async postClinicalSampleAsync(payload: any): Promise<Sample> {
-        // try {
+    public static async postSampleAsync(payload: any): Promise<Sample> {
         return await BaseApi.postAsync(`/sample/clinical`, payload);
-        // } catch (error) {
-        //     throw error;
-        // }
     }
 
     public static async deleteSampleAsync(entry: Sample): Promise<void> {

@@ -11,9 +11,9 @@ export class Api {
         }
     }
 
-    public static async postClinicalSampleAsync(name: string, projectId: number): Promise<Sample> {
+    public static async postClinicalSampleAsync(payload: any): Promise<Sample> {
         try {
-            return await BaseApi.post(`/sample/clinical`, { name, projectId });
+            return await BaseApi.post(`/sample/clinical`, payload);
         } catch (error) {
             return mockSamples()[0];
         }

@@ -7,36 +7,30 @@ import { InputForm } from './components/createNew';
 import { List } from './components/list';
 
 export const ClinicalSamples: FunctionComponent = () => {
-    const [samples, setSamples] = useState<Sample[]>([]);
-
-    const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(true);
-
-    const [isActiveInputForm, setActiveInputFormFlag] = useState<boolean>(false);
+    const [samples, setSamples] = useState<Sample[] | null>(null);
 
     async function fetchClinicalSamples() {
         const projectId: number = 5;
 
         setSamples(await Api.getClinicalSamples(projectId));
-
-        setRefreshNeededFlag(false);
     }
 
     useEffect(() => {
-        if (isRefreshNeeded) {
+        if (samples == null) {
             console.log('refresh was needed');
 
             fetchClinicalSamples();
         }
-    }, [isRefreshNeeded]);
+    }, []);
+
+    const [isActiveInputForm, setActiveInputFormFlag] = useState<boolean>(false);
 
     const onCreate = (values: any) => {
-        // todo - this any to something is scary
-        console.log('Received values of form: ', values);
         setActiveInputFormFlag(false);
         async function saveClinicalSample() {
-            await Api.postClinicalSampleAsync(values.name as string, Constants.projectId);
+            await Api.postClinicalSampleAsync({ ...values });
             // assume the above is success. Even if it would be fail, that's and edgecase
-            setRefreshNeededFlag(true);
+            fetchClinicalSamples();
         }
         saveClinicalSample();
     };

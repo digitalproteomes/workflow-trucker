@@ -4,7 +4,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { Sample } from '../types';
 
 type Props = {
-    samples: Sample[];
+    samples: Sample[] | null;
     columns?: ColumnsType<Sample>;
     renderActions?: () => JSX.Element;
 };

@@ -10,26 +10,43 @@ class BaseApi {
 
     public static async get<T>(path: string): Promise<T> {
         try {
+            this.logCall(path);
+
             const response = await axios.get(`${path}`);
             return response.data;
-        } catch (error) {
-            console.log(error);
-
-            // todo - show a popup probably
-            throw error;
+        } catch (err) {
+            BaseApi.logError(err);
+            throw err;
         }
     }
 
-    // todo - not sure if the payload should be any or a specific type
     public static async post<T>(path: string, payload: any): Promise<T> {
         try {
+            this.logCall(path, payload);
+
             const response = await axios.post(`${path}`, payload);
             return response.data;
-        } catch (error) {
-            console.log(error);
+        } catch (err) {
+            BaseApi.logError(err);
+            throw err;
+        }
+    }
 
-            // todo - show a popup probably
-            throw error;
+    private static logCall(path: string, payload?: any) {
+        console.log(`call is being made to ${path}`);
+        if (payload) {
+            console.log(payload);
+        }
+    }
+
+    private static logError(err: any) {
+        // todo - show a popup probably
+
+        console.log(err);
+        if (err.response) {
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
         }
     }
 }

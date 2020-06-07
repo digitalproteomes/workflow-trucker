@@ -1,21 +1,37 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Form, Input, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
 import { Project, Sample } from '../../../types';
+import { Api } from '../api';
 
 const { Text } = Typography;
 
 type Props = {
     isActiveInputForm: boolean;
-    onCreate: (values: any) => void;
+    onCreateSuccessful: (key: any) => void;
     onCancel: () => void;
-
-    errorMessage: string | null;
 };
 
-export const InputForm: FunctionComponent<Props> = ({ isActiveInputForm, onCreate, onCancel, errorMessage }) => {
-    console.log(`error message is ${errorMessage}`);
+export const InputForm: FunctionComponent<Props> = ({ isActiveInputForm, onCreateSuccessful, onCancel }) => {
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+    const onCreate = (values: any) => {
+        async function saveClinicalSample() {
+            try {
+                const createdSample: Sample = await Api.postClinicalSampleAsync({ ...values });
+
+                onCreateSuccessful(createdSample.id);
+            } catch (error) {
+                // const err = error as FriendlyError;
+                // setCreateErrorMessage(err.message);
+
+                setErrorMessage(error.message);
+            }
+        }
+        saveClinicalSample();
+    };
+
     return (
         <InputModal
             visible={isActiveInputForm}

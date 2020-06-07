@@ -4,14 +4,14 @@ import { Sample } from '../../types';
 import { Api } from './api';
 import { InputForm } from './components/createNew';
 import { List } from './components/list';
+import { Constants } from '../../default-data/constants';
+import { ButtonCreateNew, ButtonAddToPooling } from './components/buttons';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [samples, setSamples] = useState<Sample[] | null>(null);
 
     async function fetchClinicalSamples() {
-        const projectId: number = 5;
-
-        setSamples(await Api.getClinicalSamples(projectId));
+        setSamples(await Api.getClinicalSamples(Constants.projectId));
     }
 
     useEffect(() => {
@@ -24,56 +24,34 @@ export const ClinicalSamples: FunctionComponent = () => {
 
     const [isActiveInputForm, setActiveInputFormFlag] = useState<boolean>(false);
 
-    const [createErrorMessage, setCreateErrorMessage] = useState<string | null>(null);
+    const onCreateSuccessful = (key: any) => {
+        console.log(`succesful item creation having key ${key}`);
 
-    const onCreate = (values: any) => {
-        async function saveClinicalSample() {
-            try {
-                await Api.postClinicalSampleAsync({ ...values });
+        fetchClinicalSamples();
 
-                fetchClinicalSamples();
-
-                setActiveInputFormFlag(false);
-            } catch (error) {
-                // const err = error as FriendlyError;
-                // setCreateErrorMessage(err.message);
-
-                setCreateErrorMessage(error.message);
-            }
-        }
-        saveClinicalSample();
+        setActiveInputFormFlag(false);
     };
 
     const onCancel = () => {
         setActiveInputFormFlag(false);
-        setCreateErrorMessage(null);
+    };
+
+    const onAddNewClick = () => {
+        setActiveInputFormFlag(true);
+    };
+
+    const onAddToPooling = () => {
+        console.log('add to pooling');
     };
 
     return (
         <>
-            <Button
-                type="primary"
-                onClick={() => {
-                    setActiveInputFormFlag(true);
-                }}
-                style={{ float: 'right', marginRight: 74 }}
-            >
-                Add new clinical sample
-            </Button>
-            <Button
-                type="default"
-                onClick={() => {
-                    console.log('add to pooling');
-                }}
-                style={{ float: 'right', marginRight: 16 }}
-            >
-                Pooling preparation
-            </Button>
+            <ButtonCreateNew onAddNewClick={onAddNewClick} />
+            <ButtonAddToPooling onAddToPooling={onAddToPooling} />
             <InputForm
                 isActiveInputForm={isActiveInputForm}
-                onCreate={onCreate}
+                onCreateSuccessful={onCreateSuccessful}
                 onCancel={onCancel}
-                errorMessage={createErrorMessage}
             />
             <Divider></Divider>
             <List samples={samples} />

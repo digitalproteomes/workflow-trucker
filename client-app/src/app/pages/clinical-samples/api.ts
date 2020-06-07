@@ -7,7 +7,7 @@ import { mockSamples } from '../../default-data/samples';
 export class Api {
     public static async getClinicalSamples(projectId: number): Promise<Sample[]> {
         try {
-            return BaseApi.get(`sample/clinical?projectId=${projectId}`);
+            return BaseApi.getAsync(`sample/clinical?projectId=${projectId}`);
         } catch (err) {
             return mockSamples();
         }
@@ -15,9 +15,13 @@ export class Api {
 
     public static async postClinicalSampleAsync(payload: any): Promise<Sample> {
         // try {
-        return await BaseApi.post(`/sample/clinical`, payload);
+        return await BaseApi.postAsync(`/sample/clinical`, payload);
         // } catch (error) {
         //     throw error;
         // }
+    }
+
+    public static async deleteSampleAsync(entry: Sample): Promise<void> {
+        return await BaseApi.deleteAsync(`/sample?id=${entry.id}`);
     }
 }

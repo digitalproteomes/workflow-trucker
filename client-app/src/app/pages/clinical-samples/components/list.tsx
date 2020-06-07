@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Space } from 'antd';
+import { Space, Tooltip, Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import { Sample } from '../../../types';
 import { SampleList } from '../../../common/sampleList';
 import { Api } from '../api';
@@ -17,6 +18,11 @@ export const List: FunctionComponent<Props> = ({ isRefreshNeeded, onRefreshDone 
         setSamples(await Api.getClinicalSamples(Constants.projectId));
     }
 
+    async function deleteSample(entry: Sample) {
+        await Api.deleteSampleAsync(entry);
+        setSamples(null);
+    }
+
     useEffect(() => {
         if (samples == null || isRefreshNeeded) {
             console.log('refresh was needed');
@@ -27,13 +33,26 @@ export const List: FunctionComponent<Props> = ({ isRefreshNeeded, onRefreshDone 
         }
     });
 
-    return <SampleList samples={samples} renderActions={renderActions} />;
+    return (
+        <SampleList
+            samples={samples}
+            renderActions={(_1: any, record: Sample, _2: number) => {
+                return (
+                    <Space size="middle">
+                        <span>Fractionate</span>
+                        <span>Single Prep</span>
+                        <Tooltip title="Delete sample">
+                            <Button
+                                type="primary"
+                                icon={<DeleteOutlined />}
+                                onClick={() => {
+                                    deleteSample(record);
+                                }}
+                            />
+                        </Tooltip>
+                    </Space>
+                );
+            }}
+        />
+    );
 };
-
-const renderActions = () => (
-    <Space size="middle">
-        <span>Fractionate</span>
-        <span>Single Prep</span>
-        <span>Delete</span>
-    </Space>
-);

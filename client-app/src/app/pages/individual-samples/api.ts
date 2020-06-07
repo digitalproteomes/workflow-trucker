@@ -5,7 +5,7 @@ import { mockSamples } from '../../default-data/samples';
 export class Api {
     public static async getSamplesAsync(projectId: number): Promise<Sample[]> {
         try {
-            return BaseApi.get(`sample/individual?projectId=${projectId}`);
+            return BaseApi.getAsync(`sample/individual?projectId=${projectId}`);
         } catch (err) {
             return mockSamples();
         }
@@ -13,7 +13,7 @@ export class Api {
 
     public static async postSampleAsync(name: string, projectId: number): Promise<Sample> {
         try {
-            return await BaseApi.post(`/sample/individual`, { name, projectId });
+            return await BaseApi.postAsync(`/sample/individual`, { name, projectId });
         } catch (error) {
             return mockSamples()[0];
         }

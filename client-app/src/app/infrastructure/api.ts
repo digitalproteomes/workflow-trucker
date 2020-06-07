@@ -13,7 +13,7 @@ class BaseApi {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
     }
 
-    public static async get<T>(path: string): Promise<T> {
+    public static async getAsync<T>(path: string): Promise<T> {
         try {
             this.logCall(path);
 
@@ -21,11 +21,12 @@ class BaseApi {
             return response.data;
         } catch (err) {
             BaseApi.logError(err);
+
             throw err;
         }
     }
 
-    public static async post<T>(path: string, payload: any): Promise<T> {
+    public static async postAsync<T>(path: string, payload: any): Promise<T> {
         try {
             this.logCall(path, payload);
 
@@ -33,6 +34,19 @@ class BaseApi {
             return response.data;
         } catch (err) {
             BaseApi.logError(err);
+
+            throw BaseApi.getFriendlyError(err);
+        }
+    }
+
+    public static async deleteAsync<T>(path: string): Promise<void> {
+        try {
+            this.logCall(path);
+
+            await axios.delete(`${path}`);
+        } catch (err) {
+            BaseApi.logError(err);
+
             throw BaseApi.getFriendlyError(err);
         }
     }

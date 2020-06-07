@@ -6,20 +6,43 @@ import { SampleList } from '../../../common/sampleList';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 
-type Props = {
+type ButtonDeleteProps = {
+    sample: Sample;
+
+    onDeleteDone: () => void;
+};
+
+const ButtonDelete: FunctionComponent<ButtonDeleteProps> = ({ sample, onDeleteDone }) => {
+    async function onDelete() {
+        await Api.deleteSampleAsync(sample);
+
+        onDeleteDone();
+    }
+
+    return (
+        <Tooltip title="Delete sample">
+            <Button type="default" icon={<DeleteOutlined />} onClick={onDelete} />
+        </Tooltip>
+    );
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+type ListProps = {
     isRefreshNeeded: boolean;
     onRefreshDone: () => void;
 };
 
-export const List: FunctionComponent<Props> = ({ isRefreshNeeded, onRefreshDone }) => {
+export const List: FunctionComponent<ListProps> = ({ isRefreshNeeded, onRefreshDone }) => {
     const [samples, setSamples] = useState<Sample[] | null>(null);
 
     async function fetchSamples() {
         setSamples(await Api.fetchSamples(Constants.projectId));
     }
 
-    async function deleteSample(entry: Sample) {
-        await Api.deleteSampleAsync(entry);
+    function onDeleteDone() {
         setSamples(null);
     }
 
@@ -41,15 +64,7 @@ export const List: FunctionComponent<Props> = ({ isRefreshNeeded, onRefreshDone 
                     <Space size="middle">
                         <span>Fractionate</span>
                         <span>Single Prep</span>
-                        <Tooltip title="Delete sample">
-                            <Button
-                                type="default"
-                                icon={<DeleteOutlined />}
-                                onClick={() => {
-                                    deleteSample(record);
-                                }}
-                            />
-                        </Tooltip>
+                        <ButtonDelete sample={record} onDeleteDone={onDeleteDone} />
                     </Space>
                 );
             }}

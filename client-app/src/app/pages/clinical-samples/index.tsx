@@ -2,7 +2,6 @@ import React, { useEffect, useState, FunctionComponent } from 'react';
 import { Button, Divider } from 'antd';
 import { Sample } from '../../types';
 import { Api } from './api';
-import { Constants } from '../../default-data/constants';
 import { InputForm } from './components/createNew';
 import { List } from './components/list';
 
@@ -21,7 +20,7 @@ export const ClinicalSamples: FunctionComponent = () => {
 
             fetchClinicalSamples();
         }
-    }, []);
+    });
 
     const [isActiveInputForm, setActiveInputFormFlag] = useState<boolean>(false);
 

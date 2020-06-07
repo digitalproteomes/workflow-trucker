@@ -4,7 +4,7 @@ import { Sample } from '../../../types';
 import { SampleList } from '../../../common/sampleList';
 
 type Props = {
-    samples: Sample[];
+    samples: Sample[] | null;
 };
 
 export const List: FunctionComponent<Props> = ({ samples }) => {

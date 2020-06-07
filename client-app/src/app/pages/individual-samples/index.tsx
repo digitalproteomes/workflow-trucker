@@ -7,31 +7,27 @@ import { InputForm } from './components/createNew';
 import { List } from './components/list';
 
 export const IndividualSamples: FunctionComponent = () => {
-    const [samples, setSamples] = useState<Sample[]>([]);
-
-    const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(true);
+    const [samples, setSamples] = useState<Sample[] | null>(null);
 
     const [isActiveInputForm, setActiveInputFormFlag] = useState<boolean>(false);
 
     async function fetchSamples() {
-        const projectId: number = 5;
+        if (samples == null) {
+            const projectId: number = 5;
 
-        setSamples(await Api.getSamplesAsync(projectId));
-
-        setRefreshNeededFlag(false);
+            setSamples(await Api.getSamplesAsync(projectId));
+        }
     }
 
     useEffect(() => {
-        if (isRefreshNeeded) {
-            fetchSamples();
-        }
-    }, [isRefreshNeeded]);
+        fetchSamples();
+    });
 
     const onCreate = (values: any) => {
         setActiveInputFormFlag(false);
         async function saveSample() {
             await Api.postSampleAsync(values.name as string, Constants.projectId);
-            setRefreshNeededFlag(true);
+            fetchSamples();
         }
         saveSample();
     };

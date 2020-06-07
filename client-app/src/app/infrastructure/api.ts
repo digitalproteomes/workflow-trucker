@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+export type FriendlyError = {
+    message: string;
+    status: number;
+};
+
 class BaseApi {
     public static readonly baseUrl = process.env.API_URL;
 
@@ -28,7 +33,7 @@ class BaseApi {
             return response.data;
         } catch (err) {
             BaseApi.logError(err);
-            throw err;
+            throw BaseApi.getFriendlyError(err);
         }
     }
 
@@ -48,6 +53,23 @@ class BaseApi {
             console.log(err.response.status);
             console.log(err.response.headers);
         }
+    }
+
+    private static getFriendlyError(err: any): FriendlyError {
+        if (err.response) {
+            const data = err.response.data;
+            const status = err.response.status;
+
+            return {
+                message: data,
+                status: status,
+            };
+        }
+
+        return {
+            message: 'some unfortunate error happened. Please check the logs',
+            status: 500,
+        };
     }
 }
 

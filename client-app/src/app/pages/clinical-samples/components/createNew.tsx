@@ -1,28 +1,35 @@
 import React, { FunctionComponent } from 'react';
-import { Form, Input } from 'antd';
+import { Form, Input, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
 import { Project, Sample } from '../../../types';
+
+const { Text } = Typography;
 
 type Props = {
     isActiveInputForm: boolean;
     onCreate: (values: any) => void;
     onCancel: () => void;
+
+    errorMessage: string | null;
 };
 
-export const InputForm: FunctionComponent<Props> = ({ isActiveInputForm, onCreate, onCancel }) => {
+export const InputForm: FunctionComponent<Props> = ({ isActiveInputForm, onCreate, onCancel, errorMessage }) => {
+    console.log(`error message is ${errorMessage}`);
     return (
         <InputModal
             visible={isActiveInputForm}
             title="New clinical sample"
-            inputForm={clinicalInputForm}
+            inputForm={(form: FormInstance) => {
+                return clinicalInputForm(form, errorMessage);
+            }}
             onCreate={onCreate}
             onCancel={onCancel}
-        ></InputModal>
+        />
     );
 };
 
-function clinicalInputForm(form: FormInstance) {
+function clinicalInputForm(form: FormInstance, errorMessage: string | null) {
     return (
         <Form {...formLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
             <Form.Item
@@ -40,12 +47,17 @@ function clinicalInputForm(form: FormInstance) {
                 <Input />
             </Form.Item>
             <Form.Item
-                label="Name"
+                label="Source sample id"
                 name="sourceSampleId"
                 rules={[{ required: true, message: validationMessage(Sample.nameof('sourceSampleId')) }]}
             >
                 <Input />
             </Form.Item>
+            {errorMessage == null ? null : (
+                <Form.Item label="Name" name="errorMessage">
+                    <Text type="danger">{errorMessage}</Text>
+                </Form.Item>
+            )}
         </Form>
     );
 }

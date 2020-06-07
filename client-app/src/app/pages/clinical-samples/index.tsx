@@ -24,18 +24,29 @@ export const ClinicalSamples: FunctionComponent = () => {
 
     const [isActiveInputForm, setActiveInputFormFlag] = useState<boolean>(false);
 
+    const [createErrorMessage, setCreateErrorMessage] = useState<string | null>(null);
+
     const onCreate = (values: any) => {
-        setActiveInputFormFlag(false);
         async function saveClinicalSample() {
-            await Api.postClinicalSampleAsync({ ...values });
-            // assume the above is success. Even if it would be fail, that's and edgecase
-            fetchClinicalSamples();
+            try {
+                await Api.postClinicalSampleAsync({ ...values });
+
+                fetchClinicalSamples();
+
+                setActiveInputFormFlag(false);
+            } catch (error) {
+                // const err = error as FriendlyError;
+                // setCreateErrorMessage(err.message);
+
+                setCreateErrorMessage(error.message);
+            }
         }
         saveClinicalSample();
     };
 
     const onCancel = () => {
         setActiveInputFormFlag(false);
+        setCreateErrorMessage(null);
     };
 
     return (
@@ -58,7 +69,12 @@ export const ClinicalSamples: FunctionComponent = () => {
             >
                 Pooling preparation
             </Button>
-            <InputForm isActiveInputForm={isActiveInputForm} onCreate={onCreate} onCancel={onCancel} />
+            <InputForm
+                isActiveInputForm={isActiveInputForm}
+                onCreate={onCreate}
+                onCancel={onCancel}
+                errorMessage={createErrorMessage}
+            />
             <Divider></Divider>
             <List samples={samples} />
         </>

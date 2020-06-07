@@ -1,35 +1,23 @@
-import React, { useEffect, useState, FunctionComponent } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import { Divider } from 'antd';
-import { Sample } from '../../types';
-import { Api } from './api';
 import { InputForm, ButtonCreateNew } from './components/createNew';
 import { List } from './components/list';
-import { Constants } from '../../default-data/constants';
 import { ButtonAddToPooling } from './components/addToPooling';
 
 export const ClinicalSamples: FunctionComponent = () => {
-    const [samples, setSamples] = useState<Sample[] | null>(null);
-
-    async function fetchClinicalSamples() {
-        setSamples(await Api.getClinicalSamples(Constants.projectId));
-    }
-
-    useEffect(() => {
-        if (samples == null) {
-            console.log('refresh was needed');
-
-            fetchClinicalSamples();
-        }
-    });
-
     const [isActiveInputForm, setActiveInputFormFlag] = useState<boolean>(false);
+    const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
     const onCreateSuccessful = (key: any) => {
         console.log(`succesful item creation having key ${key}`);
 
-        fetchClinicalSamples();
+        setRefreshNeededFlag(true);
 
         setActiveInputFormFlag(false);
+    };
+
+    const onRefreshDone = () => {
+        setRefreshNeededFlag(false);
     };
 
     const onCancel = () => {
@@ -54,7 +42,7 @@ export const ClinicalSamples: FunctionComponent = () => {
                 onCancel={onCancel}
             />
             <Divider></Divider>
-            <List samples={samples} />
+            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} />
         </>
     );
 };

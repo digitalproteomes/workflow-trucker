@@ -2,13 +2,13 @@ import React, { FunctionComponent, useState } from 'react';
 import { Button } from 'antd';
 
 type ButtonFractionateProps = {
-    onFractionateClick: () => void;
+    onFractionate: () => void;
     style?: React.CSSProperties | undefined;
 };
 
-const ButtonFractionate: FunctionComponent<ButtonFractionateProps> = ({ onFractionateClick, style }) => {
+export const ButtonFractionate: FunctionComponent<ButtonFractionateProps> = ({ onFractionate, style }) => {
     return (
-        <Button type="default" onClick={onFractionateClick} style={style}>
+        <Button type="default" onClick={onFractionate} style={style}>
             Fractionate
         </Button>
     );

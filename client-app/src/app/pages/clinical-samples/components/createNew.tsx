@@ -14,11 +14,11 @@ export { ButtonCreateNew, InputForm };
 const { Text } = Typography;
 
 type ButtonCreateNewProps = {
-    onAddNewClick: () => void;
+    onCreateNewClick: () => void;
     style?: React.CSSProperties | undefined;
 };
 
-const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onAddNewClick, style }) => {
+const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onCreateNewClick: onAddNewClick, style }) => {
     return (
         <Button type="primary" onClick={onAddNewClick} style={style}>
             Add new clinical sample

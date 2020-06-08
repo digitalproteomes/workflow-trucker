@@ -1,11 +1,12 @@
 from .project import Sample
 import datetime
+from bson import ObjectId
 
 PROTOCOLS = {'1': 'clinical_sample', '2': 'single_preparation',
              '3': 'pooling_preparation', '4': 'fractionation_preparation'}
 
 
-def createSample(sampleJson):
+def createClinicalSample(sampleJson):
     new_sample = Sample(**sampleJson)
 
     existing_sample_id = Sample.find_one(
@@ -15,17 +16,45 @@ def createSample(sampleJson):
     if((new_sample.sourceSampleId != 0 and existing_sample_id) or existing_sample_name):
         return 0
     else:
-        new_sample.commit()
-        new_sample.dump()
-        print("Created: " + new_sample.name)
-        return Sample.find_one({"id": new_sample.id})
+        created = new_sample.commit()
+        return Sample.find_one({"id": created.inserted_id}).dump()
 
 
-def updateParentSample(id, parentsampleid):
+def createIndividualSample(sampleJson):
+    new_sample = Sample(**sampleJson)
+
+    existing_parent_sample = Sample.find_one(
+        {"id": ObjectId(new_sample.parentSampleId)})
+    existing_sample_name = Sample.find_one({"name": new_sample.name})
+    if(existing_sample_name):
+        return 0
+    elif (existing_parent_sample):
+        created = new_sample.commit()
+        return Sample.find_one({"id": created.inserted_id}).dump()
+    else:
+        return -1
+
+
+def createSample(sampleJson):
+    new_sample = Sample(**sampleJson)
+
+    existing_sample_name = Sample.find_one({"name": new_sample.name})
+
+    if(existing_sample_name):
+        return 0
+    else:
+        created = new_sample.commit()
+        return Sample.find_one({"id": created.inserted_id}).dump()
+
+
+def updateParentSample(id, parentSampleId):
     sample = Sample.find_one({"id": id})
     if(sample):
         sample.dump()
-        sample.parentSampleId = parentsampleid
+        if(parentSampleId == 0):
+            sample.parentSampleId = None
+        else:
+            sample.parentSampleId = parentSampleId
         sample.updatedDate = datetime.datetime.now()
         sample.commit()
         updated_sample = Sample.find_one({"id": id})
@@ -35,13 +64,13 @@ def updateParentSample(id, parentsampleid):
 
 
 def updateSampleName(id, newName):
-    sample = Sample.find_one({"id": id})
+    sample = Sample.find_one({"id": ObjectId(id)})
     if(sample):
         sample.dump()
         sample.name = newName
         sample.commit()
-        updated_sample = Sample.find_one({"id": id})
-        return 1
+        updated_sample = Sample.find_one({"id":  ObjectId(id)})
+        return updated_sample.dump()
     else:
         return 0
 
@@ -65,7 +94,7 @@ def getSamplesByProjectAndProtocolId(projectId, protocolId):
 
 def getFractionatedSamples(projectId, parentId):
     samples = Sample.find({"projectId": int(projectId),
-                           "parentSampleId": int(parentId),
+                           "parentSampleId": ObjectId(parentId),
                            "protocolId": 4})
     result_samples = []
     for i in samples:
@@ -74,11 +103,11 @@ def getFractionatedSamples(projectId, parentId):
 
 
 def getPooledSamples(projectId, parentId):
-    pooledSample = Sample.find_one({"id": int(parentId)})
+    pooledSample = Sample.find_one({"id": parentId})
     samples = {}
     if (pooledSample and pooledSample.protocolId == 3):
         samples = Sample.find({"projectId": int(projectId),
-                               "parentSampleId": int(parentId)})
+                               "parentSampleId": parentId})
     result_samples = []
     for i in samples:
         result_samples.append(i.dump())
@@ -94,14 +123,14 @@ def getClinicalSampleBySourceSampleId(id):
 
 
 def unlinkSamplesByProtocol(parentId, protocolId):
-    samples = Sample.find({"parentSampleId": int(parentId),
+    samples = Sample.find({"parentSampleId": ObjectId(parentId),
                            "protocolId": protocolId})
     for i in samples:
         updateParentSample(i.id, 0)
 
 
 def deleteSample(id):
-    sampleToDelete = Sample.find_one({"id": id})
+    sampleToDelete = Sample.find_one({"id": ObjectId(id)})
 
     protocol = 0
     if (sampleToDelete):
@@ -109,6 +138,7 @@ def deleteSample(id):
 
 # - when clinical sample: automattically unlink fractionated and individual (updating parentId to 0)
 # - when pooled: automattically unlink clinical samples (updating parentId for clinical to 0)
+# TODO cascade delete fractionated samples for clinical samples!!
 
     if(protocol == 3):
         unlinkSamplesByProtocol(sampleToDelete.id, 1)
@@ -118,12 +148,9 @@ def deleteSample(id):
 
     if(sampleToDelete):
         deleted_count = sampleToDelete.delete().deleted_count
-        if(deleted_count > 0):
-            return 'Deleted ' + str(deleted_count) + ' samples(s)'
-        else:
-            return 'Could not delete'
+        return 1
     else:
-        return 'There is no sample with the id: ' + str(id)
+        return 0
 
 
 if __name__ == '__main__':

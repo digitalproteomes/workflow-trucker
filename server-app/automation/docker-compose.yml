@@ -40,4 +40,5 @@ services:
     networks:
       - backend
     depends_on:
-      - mongo
+      # - mongo
+      - mongo-express

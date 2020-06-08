@@ -1,8 +1,34 @@
-## Startup
+### Quick-start when you just need the server running for the front-end
+1. recreate the docker image
+2. [optional] - remove all the images from docker to make sure it's clean clean
+3. start the server (db + python backend)
+
+```
+docker-compose -f .\automation\docker-compose.yml down
+docker build -f automation\dockerfile -t workflow-tracker-rest-api:0.1 .
+#docker rm -f $(docker ps -a -q)
+docker-compose -f .\automation\docker-compose.yml up
+```
+
+## Not so quick startup
+
+### Quick-start when you just need the server running for the front-end
+1. recreate the docker image
+2. [optional] - remove all the images from docker to make sure it's clean clean
+3. start the server (db + python backend)
+
+```
+docker build -f automation\dockerfile -t workflow-tracker-rest-api:0.1 .
+#docker rm -f $(docker ps -a -q)
+docker-compose -f .\automation\docker-compose.yml up
+```
+
+### Not so quick-start
 
 1. Run the load_db.py file and it will automatically create the WorkflowDB and poplate it with 1 project from the sample_project.json file
 2. Turn on the server by clicking run/debug on the project_controller.py class
 3. Test in postman a simple get http://127.0.0.1:5000/project
+
 
 ## How to install python
 

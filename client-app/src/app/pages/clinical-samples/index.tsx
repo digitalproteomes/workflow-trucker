@@ -1,18 +1,20 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Divider, Space } from 'antd';
-import { InputForm, ButtonCreateNew } from './components/createNew';
+import { Divider, Space, notification } from 'antd';
+import { ClinicalInputForm, ButtonCreateNew } from './components/createNew';
 import { List } from './components/list';
 import { ButtonAddToPooling } from './components/addToPooling';
 import { Sample } from '../../types';
 import { ButtonDelete } from './components/delete';
-import { ButtonFractionate } from './components/fractionate';
+import { ButtonFractionate, FractionateInputForm } from './components/fractionate';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
 
+    const [fractionateSample, setFractionateSample] = useState<Sample | null>(null);
+
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const onCreateSuccessful = (key: any) => {
+    const onCreateNewSuccessful = (key: any) => {
         console.log(`succesful item creation having key ${key}`);
 
         setRefreshNeededFlag(true);
@@ -24,12 +26,12 @@ export const ClinicalSamples: FunctionComponent = () => {
         setRefreshNeededFlag(false);
     };
 
-    const onCancel = () => {
-        setActiveCreateNewFlag(false);
-    };
-
     const onCreateNew = () => {
         setActiveCreateNewFlag(true);
+    };
+
+    const onCreateNewCancel = () => {
+        setActiveCreateNewFlag(false);
     };
 
     const onAddToPooling = () => {
@@ -41,9 +43,21 @@ export const ClinicalSamples: FunctionComponent = () => {
     }
 
     const onFractionate = (sample: Sample) => {
-        console.log(`fractionate clicked for ${sample.id}`);
+        setFractionateSample(sample);
         // todo - activate here an input modal similar to the one create new one
         // dynamic form https://ant.design/components/form/, so rows can be created dynamically containing the fractionated values
+    };
+
+    const onFractionateCancel = () => {
+        setFractionateSample(null);
+    };
+
+    const onFractionateSuccessful = (samples: Sample[]) => {
+        samples.forEach((sample, _index, _samples) => {
+            openNotificationWithIcon(sample.name);
+        });
+
+        setFractionateSample(null);
     };
 
     const renderActions = (record: Sample) => {
@@ -64,13 +78,25 @@ export const ClinicalSamples: FunctionComponent = () => {
         <>
             <ButtonCreateNew onCreateNewClick={onCreateNew} style={{ float: 'right', marginRight: 74 }} />
             <ButtonAddToPooling onAddToPooling={onAddToPooling} style={{ float: 'right', marginRight: 16 }} />
-            <InputForm
+            <ClinicalInputForm
                 isActiveInputForm={isActiveCreateNew}
-                onCreateSuccessful={onCreateSuccessful}
-                onCancel={onCancel}
+                onCreateSuccessful={onCreateNewSuccessful}
+                onCancel={onCreateNewCancel}
+            />
+            <FractionateInputForm
+                parentSample={fractionateSample}
+                onCreateSuccessful={onFractionateSuccessful} //todo - not sure if this is reall necessary now
+                onCancel={onFractionateCancel}
             />
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>
     );
+};
+
+const openNotificationWithIcon = (sampleName: string) => {
+    notification['success']({
+        message: 'Success',
+        description: `Sample ${sampleName} created successfuly.`,
+    });
 };

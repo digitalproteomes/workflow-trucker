@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Space } from 'antd';
 import { Sample } from '../../../types';
 import { SampleList } from '../../../common/sampleList';
 import { Api } from '../api';

@@ -5,13 +5,13 @@ import { InputModal } from '../../../common/inputModal';
 import { Project, Sample } from '../../../types';
 import { Api } from '../api';
 
-export { ButtonCreateNew, InputForm };
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 const { Text } = Typography;
+
+export { ButtonCreateNew, ClinicalInputForm };
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 type ButtonCreateNewProps = {
     onCreateNewClick: () => void;
@@ -30,13 +30,13 @@ const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onCreateNewC
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-type InputFormProps = {
+type FormProps = {
     isActiveInputForm: boolean;
     onCreateSuccessful: (key: any) => void;
     onCancel: () => void;
 };
 
-const InputForm: FunctionComponent<InputFormProps> = ({ isActiveInputForm, onCreateSuccessful, onCancel }) => {
+const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, onCreateSuccessful, onCancel }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const onCreate = (values: any) => {
@@ -68,7 +68,7 @@ const InputForm: FunctionComponent<InputFormProps> = ({ isActiveInputForm, onCre
     );
 };
 
-function inputForm(form: FormInstance, errorMessage: string | null) {
+function inputForm(form: FormInstance, errorMessage: string | null): JSX.Element {
     return (
         <Form {...formLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
             <Form.Item
@@ -93,7 +93,7 @@ function inputForm(form: FormInstance, errorMessage: string | null) {
                 <Input />
             </Form.Item>
             {errorMessage == null ? null : (
-                <Form.Item label="Name" name="errorMessage">
+                <Form.Item label="Error" name="errorMessage">
                     <Text type="danger">{errorMessage}</Text>
                 </Form.Item>
             )}

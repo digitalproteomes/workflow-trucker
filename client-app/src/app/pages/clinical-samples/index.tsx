@@ -6,6 +6,7 @@ import { ButtonAddToPooling } from './components/addToPooling';
 import { Sample } from '../../types';
 import { ButtonDelete } from './components/delete';
 import { ButtonFractionate, FractionateInputForm } from './components/fractionate';
+import { ButtonSinglePrep } from './components/singlePrep';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
@@ -44,8 +45,6 @@ export const ClinicalSamples: FunctionComponent = () => {
 
     const onFractionate = (sample: Sample) => {
         setFractionateSample(sample);
-        // todo - activate here an input modal similar to the one create new one
-        // dynamic form https://ant.design/components/form/, so rows can be created dynamically containing the fractionated values
     };
 
     const onFractionateCancel = () => {
@@ -63,7 +62,11 @@ export const ClinicalSamples: FunctionComponent = () => {
     const renderActions = (record: Sample) => {
         return (
             <Space size="middle">
-                <span>Single Prep</span>
+                <ButtonSinglePrep
+                    onSinglePrep={() => {
+                        console.log('on single prep click');
+                    }}
+                />
                 <ButtonFractionate
                     onFractionate={() => {
                         onFractionate(record);
@@ -85,7 +88,7 @@ export const ClinicalSamples: FunctionComponent = () => {
             />
             <FractionateInputForm
                 parentSample={fractionateSample}
-                onCreateSuccessful={onFractionateSuccessful} //todo - not sure if this is reall necessary now
+                onCreateSuccessful={onFractionateSuccessful}
                 onCancel={onFractionateCancel}
             />
             <Divider></Divider>

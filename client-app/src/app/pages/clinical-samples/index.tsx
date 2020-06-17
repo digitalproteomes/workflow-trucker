@@ -5,7 +5,7 @@ import { List } from './components/list';
 import { ButtonAddToPooling } from './components/addToPooling';
 import { Sample } from '../../types';
 import { ButtonDelete } from './components/delete';
-import { ButtonFractionate, FractionateInputForm } from './components/fractionate';
+import { ButtonFractionate, FractionateInputForm, ButtonFractionDetails } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
 
 export const ClinicalSamples: FunctionComponent = () => {
@@ -72,6 +72,7 @@ export const ClinicalSamples: FunctionComponent = () => {
                         onFractionate(record);
                     }}
                 />
+                <ButtonFractionDetails sample={record} />
                 <ButtonDelete sample={record} onDeleteDone={onDeleteDone} />
             </Space>
         );

@@ -8,7 +8,7 @@ import { Sample } from '../../../types';
 
 const { Text } = Typography;
 
-export { ButtonFractionate, FractionateInputForm };
+export { ButtonFractionate, ButtonFractionDetails, FractionateInputForm };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,6 +23,27 @@ const ButtonFractionate: FunctionComponent<ButtonFractionateProps> = ({ onFracti
     return (
         <Button type="default" onClick={onFractionate} style={style}>
             Fractionate
+        </Button>
+    );
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+type ButtonFractionDetailsProps = {
+    sample: Sample;
+    style?: React.CSSProperties | undefined;
+};
+
+const ButtonFractionDetails: FunctionComponent<ButtonFractionDetailsProps> = ({ sample, style }) => {
+    return (
+        <Button
+            type="default"
+            style={style}
+            href={`/samples/fractionated/details?project=${sample.projectId}&parent=${sample.id}`}
+        >
+            Fractionated samples
         </Button>
     );
 };

@@ -104,6 +104,13 @@ def getClinicalSamples():
     return jsonify(samples), status.HTTP_200_OK
 
 
+@app.route('/sample/clinical/id', methods=['GET'])
+def getClinicalSampleByIds():
+    id = ObjectId(request.args.get('id'))
+    sample = sampleDAO.getSampleById(id)
+    return jsonify(sample.dump()), status.HTTP_200_OK
+
+
 @app.route('/sample/individual', methods=['GET'])
 def getIndividualSamples():
     projectId = request.args.get('projectId')
@@ -232,7 +239,7 @@ def createPooledSample():
         return jsonify(created_sample), status.HTTP_200_OK
 
 
-@ app.route('/sample/fractionated', methods=['POST'])
+@app.route('/sample/fractionated', methods=['POST'])
 def createFractionatedSamples():
     data = request.json
     projectId = data.get('projectId')

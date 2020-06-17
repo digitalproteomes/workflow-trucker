@@ -42,12 +42,12 @@ export const SampleList: FunctionComponent<Props> = ({ samples, columns, renderA
 
 const defaultColumns: ColumnsType<Sample> = [
     {
-        title: 'Id',
-        dataIndex: Sample.nameof('id'),
-    },
-    {
         title: 'Name',
         dataIndex: Sample.nameof('name'),
+    },
+    {
+        title: 'Id',
+        dataIndex: Sample.nameof('id'),
     },
     {
         title: 'Source Sample Id',

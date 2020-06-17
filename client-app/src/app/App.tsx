@@ -6,7 +6,7 @@ import BasicLayout from './layouts';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { ClinicalSamples } from './pages/clinical-samples';
 import { IndividualSamples } from './pages/individual-samples';
-import { FractionatedSamples } from './pages/fractionated-samples';
+import { FractionatedSamples, FractionatedSampleDetails } from './pages/fractionated-samples';
 
 export function App() {
     return (
@@ -30,10 +30,14 @@ export function App() {
                         <Route path="/samples/individual">
                             <IndividualSamples />
                         </Route>
+                        <Route path="/samples/fractionated/details">
+                            <FractionatedSampleDetails />
+                        </Route>
                         <Route path="/samples/fractionated">
                             <FractionatedSamples />
                         </Route>
                         <Route path="/samples">
+                            {/* what is this SamplesPage? */}
                             <SamplesPage />
                         </Route>
                         <Route path="/">

@@ -64,21 +64,24 @@ def insertIndividualSample(sample):
 
 
 def insertPoolingSample(sample):
-    print("not inserting pooling sample")
-    # new_sample = {
-    #     "sourceSampleId": 0,
-    #     "name": sample['name'],
-    #     "projectId": "5",
-    #     "protocolId": "3",
-    #     "protocolName": "pooling_preparation",
-    #     "updatedDate": datetime.datetime.now(),
-    #     "createdDate": datetime.datetime.now()
+    print("inserting pooling sample")
+    new_sample = {
+        "sourceSampleId": 0,
+        "name": sample['name'],
+        "projectId": "5",
+        "protocolId": "3",
+        "protocolName": "pooling_preparation",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
 
-    # }
-    # parentSample = sampleDAO.createSample(new_sample)
+    }
+    parentSample = sampleDAO.createSample(new_sample)
 
-    # for i in sample['sample_ref']:
-    #     sampleDAO.updateParentSample(i['sampleIdRef'], parentSample.id)
+    for i in sample['sample_ref']:
+        sample_c = sampleDAO.getClinicalSampleBySourceSampleId(
+            i['sampleIdRef']).dump()
+        if(sample_c):
+            sampleDAO.updateParentSample(sample_c['id'], parentSample['id'])
 
 
 def insertFractinationSample(sample):

@@ -38,7 +38,7 @@ const BasicLayout: React.FC = (props) => {
     const defaultProjectId = 5;
     const defaultProjectName = 'PHRT_005_CPAC';
     const otherProjectId = 6;
-    const otherProjectName = 'PHRT_005_CPAC';
+    const otherProjectName = 'PHRT_006_CPAC';
 
     return (
         <Layout style={{ minHeight: '100vh' }}>

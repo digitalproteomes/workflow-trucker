@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Button, Form, Input, Typography } from 'antd';
+import { Button, Form, Input, Typography, Tooltip } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { InputModal } from '../../../common/inputModal';
 import { FormInstance } from 'antd/lib/form';
 import { BaseApi } from '../../../infrastructure/api';
 import { Sample } from '../../../types';
+import { RightSquareOutlined, SplitCellsOutlined, EyeOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
@@ -21,9 +22,11 @@ type ButtonFractionateProps = {
 
 const ButtonFractionate: FunctionComponent<ButtonFractionateProps> = ({ onFractionate, style }) => {
     return (
-        <Button type="default" onClick={onFractionate} style={style}>
-            Fractionate
-        </Button>
+        <Tooltip title="Create fractionated samples">
+            <Button type="default" onClick={onFractionate} style={style} icon={<SplitCellsOutlined />}>
+                Fractionate
+            </Button>
+        </Tooltip>
     );
 };
 
@@ -38,13 +41,16 @@ type ButtonFractionDetailsProps = {
 
 const ButtonFractionDetails: FunctionComponent<ButtonFractionDetailsProps> = ({ sample, style }) => {
     return (
-        <Button
-            type="default"
-            style={style}
-            href={`/samples/fractionated/details?project=${sample.projectId}&parent=${sample.id}`}
-        >
-            Fractionated samples
-        </Button>
+        <Tooltip title="View fractionated samples">
+            <Button
+                type="default"
+                style={style}
+                icon={<EyeOutlined />}
+                href={`/samples/fractionated/details?project=${sample.projectId}&parent=${sample.id}`}
+            >
+                Fractions
+            </Button>
+        </Tooltip>
     );
 };
 
@@ -98,7 +104,7 @@ const FractionateInputForm: FunctionComponent<FormProps> = ({ parentSample, onCr
     return (
         <InputModal
             visible={parentSample != null}
-            title={`Fractionate sample ${'sample name goes here'}`}
+            title={`Fractionate clinical sample`}
             inputForm={(form: FormInstance) => {
                 return inputForm(form, errorMessage);
             }}

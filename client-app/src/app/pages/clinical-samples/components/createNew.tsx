@@ -4,6 +4,7 @@ import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
 import { Project, Sample } from '../../../types';
 import { Api } from '../api';
+import { PlusOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
@@ -20,8 +21,9 @@ type ButtonCreateNewProps = {
 
 const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onCreateNewClick: onAddNewClick, style }) => {
     return (
-        <Button type="primary" onClick={onAddNewClick} style={style}>
-            Add new clinical sample
+        <Button type="primary" icon={<PlusOutlined />} onClick={onAddNewClick} style={style}>
+            {' '}
+            Create new clinical sample
         </Button>
     );
 };
@@ -32,7 +34,7 @@ const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onCreateNewC
 
 type FormProps = {
     isActiveInputForm: boolean;
-    onCreateSuccessful: (key: any) => void;
+    onCreateSuccessful: (sample: Sample) => void;
     onCancel: () => void;
 };
 
@@ -44,7 +46,7 @@ const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, on
             try {
                 const createdSample: Sample = await Api.postSampleAsync({ ...values });
 
-                onCreateSuccessful(createdSample.id);
+                onCreateSuccessful(createdSample);
             } catch (error) {
                 // const err = error as FriendlyError;
                 // setCreateErrorMessage(err.message);

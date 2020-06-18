@@ -37,8 +37,8 @@ export const FractionatedSampleDetails: FunctionComponent = () => {
         <Skeleton />
     ) : (
         <>
-            <Title level={3}>{`Sample: ${parentSample?.name}`}</Title>
-            <Title level={4}>{`Project id: ${parentSample?.projectId}`}</Title>
+            <Title level={3}>{`Fractionated samples of clinical sample: ${parentSample?.name}`}</Title>
+            {/* <Title level={4}>{`Project id: ${parentSample?.projectId}`}</Title> */}
             <List samples={samples} />
         </>
     );

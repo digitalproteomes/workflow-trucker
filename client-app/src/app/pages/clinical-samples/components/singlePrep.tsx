@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Button, Form, Typography } from 'antd';
+import { Tooltip, Button, Form, Typography } from 'antd';
 import { InputModal } from '../../../common/inputModal';
 import { FormInstance } from 'antd/lib/form';
 import { BaseApi } from '../../../infrastructure/api';
 import { Sample } from '../../../types';
+import { SubnodeOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
@@ -20,9 +21,11 @@ type ButtonProps = {
 
 const ButtonSinglePrep: FunctionComponent<ButtonProps> = ({ onSinglePrep, style }) => {
     return (
-        <Button type="default" onClick={onSinglePrep} style={style}>
-            Single Prep
-        </Button>
+        <Tooltip title="Create individual samples">
+            <Button type="default" onClick={onSinglePrep} style={style} icon={<SubnodeOutlined />}>
+                Single Prep
+            </Button>
+        </Tooltip>
     );
 };
 

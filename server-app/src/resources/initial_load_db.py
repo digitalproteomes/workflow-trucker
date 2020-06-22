@@ -1,6 +1,7 @@
 import json
 from persistence import sample_DAO as sampleDAO
 from persistence import project_DAO as projectDAO
+from persistence import msrun_DAO as msrunDAO
 import datetime
 from pymongo import MongoClient
 
@@ -29,6 +30,33 @@ def insertSamples(samples):
             insertFractinationSample(i)
         else:
             print("Unkown protocol for sample: " + str(i))
+
+
+def insertMSRuns(msruns):
+
+    for i in msruns:
+        # sample_c = sampleDAO.getClinicalSampleBySourceSampleId(
+        #     i['sampleIdRef']).dump()
+        new_msrun = {
+            # "sampleId": sample['id'],
+            "name": i['name'],
+            "projectId": "5",
+            "protocolId": i['protocolId'],
+            "instrumentId": i['instrumentId'],
+            "updatedDate": datetime.datetime.now(),
+            "createdDate": datetime.datetime.now()
+        }
+        msrunDAO.createMsRun(new_msrun)
+        print("Inserted " + i['name'])
+    #  {
+#       "id": "46",
+#       "name": "sgoetze_A1902_004",
+#       "instrumentId": "MS:1002523",
+#       "protocolId": "DIA_protocol",
+#       "sample_ref": {
+#         "sampleIdRef": "040"
+#       }
+#     }
 
 
 def insertClinicalSample(sample):
@@ -136,4 +164,5 @@ if __name__ == '__main__':
     }
     insertProject(new_project)
     insertSamples(project_json['sample'])
-    sampleDAO.getSamplesByProjectAndProtocolId('5', '4')
+    # sampleDAO.getSamplesByProjectAndProtocolId('5', '4')
+    insertMSRuns(project_json['ms_run'])

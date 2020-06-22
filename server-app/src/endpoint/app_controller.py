@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
 from persistence import sample_DAO as sampleDAO
 from persistence import project_DAO as projectDAO
+from persistence import msrun_DAO as msrunDAO
 from flask_cors import CORS
 from flask_api import status
 import datetime
@@ -15,6 +16,13 @@ CORS(app)
 # silalbert@sysbc-mac-533 src % python -m endpoint.sample_controller
 
 # TODO split in separate controllers
+
+
+# msruns section
+@app.route('/msruns', methods=['GET'])
+def getAllMsRuns():
+    msruns = msrunDAO.getAllMSRuns()
+    return jsonify(msruns), status.HTTP_200_OK
 
 # project section
 

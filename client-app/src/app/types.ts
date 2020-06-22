@@ -41,3 +41,23 @@ export class Project {
 
     public static nameof = (name: keyof Project) => name;
 }
+
+export class Msrun {
+    createdDate: string = '';
+
+    id: string = '';
+
+    name: string = '';
+
+    projectId: string = '';
+
+    protocolId: string = '';
+
+    instrumentId: string = '';
+
+    sampleId: number = -1;
+
+    updatedDate: string = '';
+
+    public static nameof = (name: keyof Msrun) => name;
+}

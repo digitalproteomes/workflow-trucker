@@ -87,16 +87,16 @@ const BasicLayout: React.FC = (props) => {
                     </div>
                 </Header>
                 <Content style={{ margin: '0 16px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
+                    {/* <Breadcrumb style={{ margin: '16px 0' }}>
                         <Breadcrumb.Item>PHRT_005_CPAC</Breadcrumb.Item>
                         <Breadcrumb.Item>Samples</Breadcrumb.Item>
                         <Breadcrumb.Item>Clinical</Breadcrumb.Item>
-                    </Breadcrumb>
+                    </Breadcrumb> */}
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                         {props.children}
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Workflow Tracker ©2020 Created by Silvana Albert</Footer>
+                <Footer style={{ textAlign: 'center' }}>Workflow Tracker ©2020 Created by PHRT - CPAC</Footer>
             </Layout>
         </Layout>
     );
@@ -124,11 +124,11 @@ function getSubmenu(projectId: number, name: string) {
                     <Link to={`/samples/fractionated?project=${projectId}`}>Fractionated</Link>
                 </Menu.Item>
                 <Menu.Item key={`${projectId}_12`}>
-                    <Link to={`/samples?project=${projectId}&type=${ProtocolTypes.Pooling}`}>Pooling</Link>
+                    <Link to={`/samples/pooled?project=${projectId}`}>Pooling</Link>
                 </Menu.Item>
             </SubMenu>
             <Menu.Item key={`${projectId}_20`} icon={<DashboardOutlined />}>
-                MS Runs
+                <Link to={`/msruns`}>MS Runs</Link>
             </Menu.Item>
             <Menu.Item key={`${projectId}_30`} icon={<ReadOutlined />}>
                 Spectral Library

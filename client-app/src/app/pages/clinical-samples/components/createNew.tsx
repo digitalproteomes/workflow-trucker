@@ -4,14 +4,15 @@ import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
 import { Project, Sample } from '../../../types';
 import { Api } from '../api';
-
-export { ButtonCreateNew, InputForm };
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
+import { PlusOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
+
+export { ButtonCreateNew, ClinicalInputForm };
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 type ButtonCreateNewProps = {
     onCreateNewClick: () => void;
@@ -20,8 +21,9 @@ type ButtonCreateNewProps = {
 
 const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onCreateNewClick: onAddNewClick, style }) => {
     return (
-        <Button type="primary" onClick={onAddNewClick} style={style}>
-            Add new clinical sample
+        <Button type="primary" icon={<PlusOutlined />} onClick={onAddNewClick} style={style}>
+            {' '}
+            Create new clinical sample
         </Button>
     );
 };
@@ -30,13 +32,13 @@ const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onCreateNewC
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-type InputFormProps = {
+type FormProps = {
     isActiveInputForm: boolean;
-    onCreateSuccessful: (key: any) => void;
+    onCreateSuccessful: (sample: Sample) => void;
     onCancel: () => void;
 };
 
-const InputForm: FunctionComponent<InputFormProps> = ({ isActiveInputForm, onCreateSuccessful, onCancel }) => {
+const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, onCreateSuccessful, onCancel }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const onCreate = (values: any) => {
@@ -44,7 +46,7 @@ const InputForm: FunctionComponent<InputFormProps> = ({ isActiveInputForm, onCre
             try {
                 const createdSample: Sample = await Api.postSampleAsync({ ...values });
 
-                onCreateSuccessful(createdSample.id);
+                onCreateSuccessful(createdSample);
             } catch (error) {
                 // const err = error as FriendlyError;
                 // setCreateErrorMessage(err.message);
@@ -68,7 +70,7 @@ const InputForm: FunctionComponent<InputFormProps> = ({ isActiveInputForm, onCre
     );
 };
 
-function inputForm(form: FormInstance, errorMessage: string | null) {
+function inputForm(form: FormInstance, errorMessage: string | null): JSX.Element {
     return (
         <Form {...formLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
             <Form.Item
@@ -93,7 +95,7 @@ function inputForm(form: FormInstance, errorMessage: string | null) {
                 <Input />
             </Form.Item>
             {errorMessage == null ? null : (
-                <Form.Item label="Name" name="errorMessage">
+                <Form.Item label="Error" name="errorMessage">
                     <Text type="danger">{errorMessage}</Text>
                 </Form.Item>
             )}

@@ -63,6 +63,22 @@ def updateParentSample(id, parentSampleId):
         return 0
 
 
+def updateParentSampleScript(id, parentSampleId):
+    sample = Sample.find_one({"id": id})
+    if(sample):
+        sample.dump()
+        if(parentSampleId == 0):
+            sample.parentSampleId = None
+        else:
+            sample.parentSampleId = parentSampleId
+        sample.updatedDate = datetime.datetime.now()
+        sample.commit()
+        updated_sample = Sample.find_one({"id": id})
+        return 1
+    else:
+        return 0
+
+
 def updateSampleName(id, newName):
     sample = Sample.find_one({"id": ObjectId(id)})
     if(sample):

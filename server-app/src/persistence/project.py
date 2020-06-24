@@ -55,13 +55,13 @@ class Sample(Document):
 
 @instance.register
 class MSRun(Document):
-    runId = fields.IntegerField(required=True)
+    runId = fields.IntegerField(required=False)
     name = fields.StrField(required=True)
     projectId = fields.IntegerField(fields.ReferenceField("Project"))
-    sampleId = fields.IntegerField(fields.ReferenceField("Sample"))
-    protocolId = fields.IntegerField(required=True)
-    protocolName = fields.StrField(required=True)
-    description = fields.StrField()
+    sampleId = fields.IntegerField(required=False)
+    protocolId = fields.StrField(required=True)
+    protocolName = fields.StrField(required=False)
+    description = fields.StrField(required=False)
     instrumentId = fields.StrField(required=True)
     createdDate = fields.DateTimeField(
         validate=validate.Range(min=datetime(1900, 1, 1)))

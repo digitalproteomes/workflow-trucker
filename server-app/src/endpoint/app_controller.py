@@ -19,17 +19,81 @@ CORS(app)
 
 
 # msruns section
-@app.route('/msruns', methods=['GET'])
+@app.route('/msrun', methods=['GET'])
 def getAllMsRuns():
     msruns = msrunDAO.getAllMSRuns()
     return jsonify(msruns), status.HTTP_200_OK
 
+
+@app.route('/msrun/id', methods=['GET'])
+def getMsRunById():
+    id = ObjectId(request.args.get('id'))
+    msrun = msrunDAO.getMsRun(id)
+    return jsonify(msrun), status.HTTP_200_OK
+
+
+@app.route('/msrun/link', methods=['PUT'])
+def linkSampleToMsRun():
+    msRunId = ObjectId(request.args.get('msRunId'))
+    sampleId = ObjectId(request.args.get('sampleId'))
+
+    if(msrunDAO.addSampleToRun(msRunId, sampleId) == 0):
+        return 'Run or sample with id not found', status.HTTP_404_NOT_FOUND
+    else:
+        return 'Success', status.HTTP_200_OK
+
+
+@app.route('/msrun/unlink', methods=['PUT'])
+def unlinkSampleToMsRun():
+    msRunId = ObjectId(request.args.get('msRunId'))
+    sampleId = ObjectId(request.args.get('sampleId'))
+    if(msrunDAO.removeSampleFromRun(msRunId, sampleId) == 0):
+        return 'Run or sample with id not found', status.HTTP_404_NOT_FOUND
+    else:
+        return 'Success', status.HTTP_200_OK
+
+
+@app.route('/msrun', methods=['POST'])
+def createMSRun():
+    data = request.json
+    projectId = data.get('projectId')
+    name = data.get('name')
+    protocolId = data.get('protocolId')
+    instrumentId = data.get('instrumentId')
+    runCode = data.get('runCode')
+    sampleIds = data.get('sampleIds')
+
+    samples = []
+    for i in sampleIds:
+        if(sampleDAO.getSampleById(ObjectId(i))):
+            samples.append(i)
+
+    new_msrun = {
+        "samples": samples,
+        "name": name,
+        "projectId": projectId,
+        "protocolId": protocolId,
+        "instrumentId": instrumentId,
+        "runCode": runCode,
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
+    }
+
+    created_ms_run = msrunDAO.createMsRun(new_msrun)
+
+    return jsonify(created_ms_run), status.HTTP_200_OK
+
+
+@app.route('/msrun', methods=['DELETE'])
+def deleteRun():
+    id = request.args.get('id')
+    sts = msrunDAO.deleteMSrun(id)
+    if(sts == 0):
+        return 'MS Run with id does not exist.', status.HTTP_404_NOT_FOUND
+    else:
+        return '', status.HTTP_200_OK
+
 # project section
-
-
-@app.route('/test', methods=['GET'])
-def getTestResponse():
-    return "test response"
 
 
 @app.route('/project/all', methods=['GET'])
@@ -320,6 +384,6 @@ def deleteSample():
 
 if __name__ == '__main__':
     # please note that binding to 0.0.0.0 may be a big security issue. please research
-    app.run(debug=True, host='0.0.0.0')
+    # app.run(debug=True, host='0.0.0.0')
     # debug purposes
-    # app.run(debug=True, host='127.0.0.1')
+    app.run(debug=True, host='127.0.0.1')

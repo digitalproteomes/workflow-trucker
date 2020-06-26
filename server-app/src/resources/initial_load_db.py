@@ -35,10 +35,15 @@ def insertSamples(samples):
 def insertMSRuns(msruns):
 
     for i in msruns:
-        # sample_c = sampleDAO.getClinicalSampleBySourceSampleId(
-        #     i['sampleIdRef']).dump()
+        samples = []
+        sample_c = sampleDAO.getClinicalSampleBySourceSampleId(
+            i['sample_ref']['sampleIdRef'])
+        if sampleDAO.getClinicalSampleBySourceSampleId(
+                i['sample_ref']['sampleIdRef']):
+            mysample = sample_c.dump()
+            samples.append(sample_c['id'])
         new_msrun = {
-            # "sampleId": sample['id'],
+            "samples": samples,
             "name": i['name'],
             "projectId": "5",
             "protocolId": i['protocolId'],
@@ -48,15 +53,6 @@ def insertMSRuns(msruns):
         }
         msrunDAO.createMsRun(new_msrun)
         print("Inserted " + i['name'])
-    #  {
-#       "id": "46",
-#       "name": "sgoetze_A1902_004",
-#       "instrumentId": "MS:1002523",
-#       "protocolId": "DIA_protocol",
-#       "sample_ref": {
-#         "sampleIdRef": "040"
-#       }
-#     }
 
 
 def insertClinicalSample(sample):

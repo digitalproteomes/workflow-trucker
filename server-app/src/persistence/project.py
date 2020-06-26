@@ -58,11 +58,12 @@ class MSRun(Document):
     runId = fields.IntegerField(required=False)
     name = fields.StrField(required=True)
     projectId = fields.IntegerField(fields.ReferenceField("Project"))
-    sampleId = fields.IntegerField(required=False)
+    samples = fields.ListField(fields.ObjectIdField, required=False)
     protocolId = fields.StrField(required=True)
     protocolName = fields.StrField(required=False)
     description = fields.StrField(required=False)
     instrumentId = fields.StrField(required=True)
+    runCode = fields.StrField(required=False)
     createdDate = fields.DateTimeField(
         validate=validate.Range(min=datetime(1900, 1, 1)))
     updatedDate = fields.DateTimeField(

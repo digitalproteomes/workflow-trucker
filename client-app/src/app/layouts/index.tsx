@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import app_logo from './assets/logo_white.png';
-import { Layout, Menu, Breadcrumb, Avatar, Typography, Divider } from 'antd';
+import { Layout, Menu, Avatar, Typography, Divider } from 'antd';
 import {
     DashboardOutlined,
     UserOutlined,
@@ -16,7 +16,6 @@ import {
 } from '@ant-design/icons';
 
 import { Link } from 'react-router-dom';
-import { ProtocolTypes } from '../constants';
 import { CollapseType } from 'antd/lib/layout/Sider';
 
 const { SubMenu } = Menu;

@@ -7,7 +7,7 @@ import { Sample } from '../../types';
 import { ButtonDelete } from './components/delete';
 import { ButtonFractionate, FractionateInputForm, ButtonFractionDetails } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
-import { openNotificationWithIcon, openDeleteNotification } from '../../common/openNotificationWithIcon';
+import * as notifications from '../../common/sampleNotifications';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
@@ -17,7 +17,7 @@ export const ClinicalSamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
     const onCreateNewSuccessful = (sample: Sample) => {
-        openNotificationWithIcon(sample.name);
+        notifications.queueCreateSuccess(sample.name);
 
         setRefreshNeededFlag(true);
 
@@ -42,7 +42,7 @@ export const ClinicalSamples: FunctionComponent = () => {
 
     function onDeleteDone(sample: Sample) {
         setRefreshNeededFlag(true);
-        openDeleteNotification(sample.name);
+        notifications.queueDeleteSuccess(sample.name);
     }
 
     const onFractionate = (sample: Sample) => {
@@ -55,7 +55,7 @@ export const ClinicalSamples: FunctionComponent = () => {
 
     const onFractionateSuccessful = (samples: Sample[]) => {
         samples.forEach((sample, _index, _samples) => {
-            openNotificationWithIcon(sample.name);
+            notifications.queueCreateSuccess(sample.name);
         });
 
         setFractionateSample(null);

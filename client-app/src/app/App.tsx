@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { ProjectPage, SamplesPage } from './pages/main';
+import { ProjectPage } from './pages/main';
 import { About } from './pages/about';
 import BasicLayout from './layouts';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
@@ -13,10 +13,6 @@ import { MsRuns } from './pages/ms-runs';
 export function App() {
     return (
         <div className="App">
-            {/* <BasicLayout>
-                    <MainPage selectedProject={project}></MainPage>
-                </BasicLayout> */}
-            {/* https://reacttraining.com/react-router/web/api/BrowserRouter */}
             <BrowserRouter>
                 <BasicLayout>
                     <Switch>

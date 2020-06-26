@@ -5,7 +5,7 @@ import { InputModal } from '../../../common/inputModal';
 import { FormInstance } from 'antd/lib/form';
 import { BaseApi } from '../../../infrastructure/api';
 import { Sample } from '../../../types';
-import { RightSquareOutlined, SplitCellsOutlined, EyeOutlined } from '@ant-design/icons';
+import { SplitCellsOutlined, EyeOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 

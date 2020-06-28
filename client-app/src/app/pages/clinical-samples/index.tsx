@@ -8,11 +8,14 @@ import { ButtonDelete } from './components/delete';
 import { ButtonFractionate, FractionateInputForm, ButtonFractionDetails } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
 import * as notifications from '../../common/sampleNotifications';
+import { ButtonCreateMsRun } from './components/createMsRun';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
 
     const [fractionateSample, setFractionateSample] = useState<Sample | null>(null);
+
+    const [selectedSamples, setSelectedSamples] = useState<Sample[]>([]);
 
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
@@ -61,6 +64,10 @@ export const ClinicalSamples: FunctionComponent = () => {
         setFractionateSample(null);
     };
 
+    const onRowSelectionChange = (selectedRows: Sample[]) => {
+        setSelectedSamples(selectedRows);
+    };
+
     const renderActions = (record: Sample) => {
         return (
             <Space size="middle">
@@ -88,6 +95,7 @@ export const ClinicalSamples: FunctionComponent = () => {
     return (
         <>
             <ButtonCreateNew onCreateNewClick={onCreateNew} style={{ float: 'right', marginRight: 74 }} />
+            <ButtonCreateMsRun samples={selectedSamples} style={{ float: 'right', marginRight: 16 }} />
             <ButtonAddToPooling onAddToPooling={onAddToPooling} style={{ float: 'right', marginRight: 16 }} />
             <ClinicalInputForm
                 isActiveInputForm={isActiveCreateNew}
@@ -100,7 +108,12 @@ export const ClinicalSamples: FunctionComponent = () => {
                 onCancel={onFractionateCancel}
             />
             <Divider></Divider>
-            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
+            <List
+                isRefreshNeeded={isRefreshNeeded}
+                onRefreshDone={onRefreshDone}
+                renderActions={renderActions}
+                onRowSelectionChange={onRowSelectionChange}
+            />
         </>
     );
 };

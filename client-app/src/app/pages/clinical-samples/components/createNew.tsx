@@ -15,7 +15,7 @@ export { ButtonCreateNew, ClinicalInputForm };
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 type ButtonCreateNewProps = {
-    onCreateNewClick: () => void;
+    onCreateNewClick: () => void; // todo - instead of combininig the button and the input dialog together from outside, why not include the dialog component here in the same file? that would mean that the entry point is the button, the rest are details. Once the button is imported somewhere, all the other logic is going to be there.
     style?: React.CSSProperties | undefined;
 };
 

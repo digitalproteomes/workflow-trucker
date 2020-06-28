@@ -8,7 +8,7 @@ import { ButtonDelete } from './components/delete';
 import { ButtonFractionate, FractionateInputForm, ButtonFractionDetails } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
 import * as notifications from '../../common/sampleNotifications';
-import { ButtonCreateMsRun } from './components/createMsRun';
+import { ButtonCreateMsRun } from '../generic-components/createMsRun';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Table, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { MsRun, Sample } from '../types';
+import { MsRun } from '../types';
 
 type Props = {
     msruns: MsRun[] | null;

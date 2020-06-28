@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Table, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { Sample } from '../types';

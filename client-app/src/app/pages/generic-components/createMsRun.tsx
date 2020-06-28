@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Button, Form, Input, Typography } from 'antd';
+import { Button, Form, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { MergeCellsOutlined } from '@ant-design/icons';
-import { Sample, MsRun } from '../../../types';
-import { Api } from '../../ms-runs/api';
-import { InputModal, getFormInput } from '../../../common/inputModal';
+import { Sample, MsRun } from '../../types';
+import { Api } from '../ms-runs/api';
+import { InputModal, getFormInput } from '../../common/inputModal';
 const { Text } = Typography;
 
 type ButtonProps = {

@@ -9,6 +9,8 @@ from flask_api import status
 import datetime
 from bson import ObjectId
 
+import os
+
 app = Flask(__name__)
 CORS(app)
 
@@ -386,4 +388,14 @@ if __name__ == '__main__':
     # please note that binding to 0.0.0.0 may be a big security issue. please research
     # app.run(debug=True, host='0.0.0.0')
     # debug purposes
-    app.run(debug=True, host='127.0.0.1')
+    # app.run(debug=True, host='127.0.0.1')
+
+    try:
+        if (os.environ['WorkflowEnvironment'] == "Docker"):
+            host = '0.0.0.0'
+        else:
+            host = '127.0.0.1'
+    except KeyError:
+        host = '127.0.0.1'
+
+    app.run(debug=True, host=host)

@@ -3,8 +3,6 @@ import { Table, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { Msrun } from '../types';
 
-// todo - move this into a proper component
-
 type Props = {
     msruns: Msrun[] | null;
     columns?: ColumnsType<Msrun>;

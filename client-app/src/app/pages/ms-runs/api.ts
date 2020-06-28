@@ -5,7 +5,7 @@ import { mockMsRun } from '../../default-data/samples';
 export class Api {
     public static async getMsRunsAsync(projectId: number): Promise<Msrun[]> {
         try {
-            return BaseApi.getAsync(`msruns`);
+            return BaseApi.getAsync(`msrun`);
         } catch (err) {
             return mockMsRun();
         }
@@ -13,7 +13,7 @@ export class Api {
 
     public static async postSampleAsync(name: string, projectId: number): Promise<Msrun> {
         try {
-            return await BaseApi.postAsync(`/msruns`, { name, projectId });
+            return await BaseApi.postAsync(`/msrun`, { name, projectId });
         } catch (error) {
             return mockMsRun()[0];
         }

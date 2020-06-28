@@ -1,4 +1,4 @@
-import { Sample, Msrun } from '../types';
+import { Sample, MsRun } from '../types';
 
 export function mockSamples(): Sample[] {
     return [
@@ -38,7 +38,7 @@ export function mockSamples(): Sample[] {
     ];
 }
 
-export function mockMsRun(): Msrun[] {
+export function mockMsRun(): MsRun[] {
     return [
         {
             createdDate: '2020-06-06T13:53:35.357000+00:00',
@@ -47,7 +47,8 @@ export function mockMsRun(): Msrun[] {
             projectId: '5',
             protocolId: 'DIA_protocol',
             instrumentId: 'MS:1002523',
-            sampleId: 1,
+            runCode: 'runCode:1002523',
+            samples: ['1', '2'],
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
         },
         {
@@ -56,8 +57,9 @@ export function mockMsRun(): Msrun[] {
             name: 'mock PHRT_005_002_CPAC_MS_1',
             projectId: '5',
             protocolId: 'DIA_protocol',
-            instrumentId: 'MS:1002523',
-            sampleId: 2,
+            instrumentId: 'MS:1002524',
+            runCode: 'runCode:1002524',
+            samples: ['3', '4'],
             updatedDate: '2020-06-06T13:53:35.392000+00:00',
         },
     ];

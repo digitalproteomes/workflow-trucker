@@ -63,7 +63,7 @@ def createMSRun():
     protocolId = data.get('protocolId')
     instrumentId = data.get('instrumentId')
     runCode = data.get('runCode')
-    sampleIds = data.get('sampleIds')
+    sampleIds = data.get('samples')
 
     samples = []
     for i in sampleIds:

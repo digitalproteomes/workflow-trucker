@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { Table, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { Msrun } from '../types';
+import { MsRun, Sample } from '../types';
 
 type Props = {
-    msruns: Msrun[] | null;
-    columns?: ColumnsType<Msrun>;
-    renderActions?: (record: Msrun) => JSX.Element;
+    msruns: MsRun[] | null;
+    columns?: ColumnsType<MsRun>;
+    renderActions?: (record: MsRun) => JSX.Element;
 };
 
 export const MsrunList: FunctionComponent<Props> = ({ msruns, columns, renderActions }) => {
@@ -20,7 +20,7 @@ export const MsrunList: FunctionComponent<Props> = ({ msruns, columns, renderAct
         return <Skeleton active />;
     }
 
-    let columnsType: ColumnsType<Msrun>;
+    let columnsType: ColumnsType<MsRun>;
 
     if (columns) {
         if (renderActions) {
@@ -39,38 +39,41 @@ export const MsrunList: FunctionComponent<Props> = ({ msruns, columns, renderAct
     return <Table rowSelection={rowSelection} dataSource={msruns} columns={columnsType} rowKey={(row) => row.id} />;
 };
 
-const defaultColumns: ColumnsType<Msrun> = [
+const defaultColumns: ColumnsType<MsRun> = [
     {
         title: 'Name',
-        dataIndex: Msrun.nameof('name'),
+        dataIndex: MsRun.nameof('name'),
     },
     {
         title: 'Id',
-        dataIndex: Msrun.nameof('id'),
+        dataIndex: MsRun.nameof('id'),
     },
     {
-        title: 'Sample Id',
-        dataIndex: Msrun.nameof('sampleId'),
+        title: 'Sample Ids',
+        dataIndex: MsRun.nameof('samples'),
+        render: (_value: any, record: MsRun) => {
+            return record.samples.join(', ');
+        },
     },
     {
         title: 'Protocol Id',
-        dataIndex: Msrun.nameof('protocolId'),
+        dataIndex: MsRun.nameof('protocolId'),
     },
     {
         title: 'Instrument Id',
-        dataIndex: Msrun.nameof('instrumentId'),
+        dataIndex: MsRun.nameof('instrumentId'),
     },
     {
         title: 'Updated on',
-        dataIndex: Msrun.nameof('updatedDate'),
+        dataIndex: MsRun.nameof('updatedDate'),
     },
 ];
 
-function getRenderObject(renderActions: (record: Msrun) => JSX.Element) {
+function getRenderObject(renderActions: (record: MsRun) => JSX.Element) {
     return {
         title: 'Action',
         key: 'action',
-        render: (value: any, record: Msrun, index: number) => {
+        render: (value: any, record: MsRun, index: number) => {
             return renderActions(record);
         },
     };

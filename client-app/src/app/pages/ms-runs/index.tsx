@@ -1,11 +1,11 @@
 import React, { useEffect, useState, FunctionComponent } from 'react';
 import { Divider } from 'antd';
-import { Msrun } from '../../types';
+import { MsRun } from '../../types';
 import { Api } from './api';
 import { List } from './components/list';
 
 export const MsRuns: FunctionComponent = () => {
-    const [msruns, setMsruns] = useState<Msrun[] | null>(null);
+    const [msruns, setMsruns] = useState<MsRun[] | null>(null);
 
     async function fetchMsruns() {
         if (msruns == null) {

@@ -14,7 +14,6 @@ def load_json(datafile):
 
 
 def insertProject(project):
-    print("inserting project")
     projectDAO.createProject(project)
 
 
@@ -52,11 +51,9 @@ def insertMSRuns(msruns):
             "createdDate": datetime.datetime.now()
         }
         msrunDAO.createMsRun(new_msrun)
-        print("Inserted " + i['name'])
 
 
 def insertClinicalSample(sample):
-    print("inserting clinical sample")
     new_sample = {
         "sourceSampleId": sample['id'],
         "name": sample['name'],
@@ -70,7 +67,6 @@ def insertClinicalSample(sample):
 
 
 def insertIndividualSample(sample):
-    print("inserting individual sample")
     parentSample = sampleDAO.getClinicalSampleBySourceSampleId(
         sample['sample_ref']['sampleIdRef'])
     new_sample = {
@@ -88,7 +84,6 @@ def insertIndividualSample(sample):
 
 
 def insertPoolingSample(sample):
-    print("inserting pooling sample")
     new_sample = {
         "sourceSampleId": 0,
         "name": sample['name'],
@@ -109,7 +104,6 @@ def insertPoolingSample(sample):
 
 
 def insertFractinationSample(sample):
-    print("inserting Fractination sample")
     parentSample = sampleDAO.getClinicalSampleBySourceSampleId(
         sample['sample_ref']['sampleIdRef'])
     parentSampleId = 0
@@ -158,7 +152,14 @@ if __name__ == '__main__':
         "updatedDate": datetime.datetime.now(),
         "createdDate": datetime.datetime.now()
     }
+
+    print("insert project")
     insertProject(new_project)
+
+    print("insert samples")
     insertSamples(project_json['sample'])
+
     # sampleDAO.getSamplesByProjectAndProtocolId('5', '4')
+
+    print("insert ms runs")
     insertMSRuns(project_json['ms_run'])

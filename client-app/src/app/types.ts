@@ -42,7 +42,7 @@ export class Project {
     public static nameof = (name: keyof Project) => name;
 }
 
-export class Msrun {
+export class MsRun {
     createdDate: string = '';
 
     id: string = '';
@@ -55,9 +55,11 @@ export class Msrun {
 
     instrumentId: string = '';
 
-    sampleId: number = -1;
+    runCode: string = '';
+
+    samples: string[] = [];
 
     updatedDate: string = '';
 
-    public static nameof = (name: keyof Msrun) => name;
+    public static nameof = (name: keyof MsRun) => name;
 }

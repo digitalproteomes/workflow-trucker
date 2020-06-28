@@ -12,7 +12,6 @@ interface ProjectEditProps {
 @observer
 export class ProjectEdit extends React.Component<ProjectEditProps, any> {
     render() {
-        // todo - use the Provider / Consumer pattern instead of directly referencing the AppStore
         const { project } = AppStore;
         if (project === null) return <span>no project selected</span>;
 

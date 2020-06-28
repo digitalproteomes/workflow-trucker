@@ -14,7 +14,6 @@ type Props = {
 export const MsrunList: FunctionComponent<Props> = ({ msruns, columns, renderActions }) => {
     const rowSelection = {
         selectedRowKeys: [2, 3, 4],
-        // onChange: this.onSelectChange,
         hideDefaultSelections: true,
         selections: [Table.SELECTION_ALL],
     };

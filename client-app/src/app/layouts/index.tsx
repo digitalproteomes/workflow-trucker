@@ -51,7 +51,6 @@ const BasicLayout: React.FC = (props) => {
                 <img
                     src={app_logo}
                     alt="logo"
-                    // todo - move the styling out into proper css files
                     style={{
                         alignContent: 'center',
                         marginLeft: '23px',
@@ -86,11 +85,6 @@ const BasicLayout: React.FC = (props) => {
                     </div>
                 </Header>
                 <Content style={{ margin: '0 16px' }}>
-                    {/* <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>PHRT_005_CPAC</Breadcrumb.Item>
-                        <Breadcrumb.Item>Samples</Breadcrumb.Item>
-                        <Breadcrumb.Item>Clinical</Breadcrumb.Item>
-                    </Breadcrumb> */}
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                         {props.children}
                     </div>

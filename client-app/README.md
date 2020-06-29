@@ -44,11 +44,12 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## notes
-- Regarding TypeScript and tsconfig.json https://stackoverflow.com/a/42097465/1616493
-- more complex FunctionComponent examples can be found here https://fettblog.eu/typescript-react/components/
-- deployment related https://create-react-app.dev/docs/deployment/
-- routing: use [nested routing?](https://reacttraining.com/react-router/web/guides/quick-start/2nd-example-nested-routing)
-- using typed function components [link](https://fettblog.eu/typescript-react/components/)
+
+-   Regarding TypeScript and tsconfig.json https://stackoverflow.com/a/42097465/1616493
+-   more complex FunctionComponent examples can be found here https://fettblog.eu/typescript-react/components/
+-   deployment related https://create-react-app.dev/docs/deployment/
+-   routing: use [nested routing?](https://reacttraining.com/react-router/web/guides/quick-start/2nd-example-nested-routing)
+-   using typed function components [link](https://fettblog.eu/typescript-react/components/)
 
 ```
   type CardProps = {
@@ -57,7 +58,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 }
 
 // No need to define the defaultProps property
-export const Card: FunctionComponent<CardProps> = ({ title, paragraph = 'Hello World' }) => 
+export const Card: FunctionComponent<CardProps> = ({ title, paragraph = 'Hello World' }) =>
 <aside>
   <h2>{ title }</h2>
   <p>
@@ -67,12 +68,16 @@ export const Card: FunctionComponent<CardProps> = ({ title, paragraph = 'Hello W
 
 ```
 
-
 ## packages.json
-- check outdated packages with `npm outdated`
-- update to the latest versin with `npm install <package>@latest`
+
+-   check outdated packages with `npm outdated`
+-   update to the latest versin with `npm install <package>@latest`
 
 ## todos
-- typed css classes, so there is referencial integrity
-- use CDN for fast package downloads https://mobx.js.org/README.html
-- use nameof workaround instead of magic strings https://schneidenbach.gitbooks.io/typescript-cookbook/nameof-operator.html
+
+-   typed css classes, so there is referencial integrity
+-   use CDN for fast package downloads https://mobx.js.org/README.html
+
+### done todos
+
+-   use nameof workaround instead of magic strings https://schneidenbach.gitbooks.io/typescript-cookbook/nameof-operator.html

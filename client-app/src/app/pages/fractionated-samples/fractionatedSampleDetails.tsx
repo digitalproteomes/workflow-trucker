@@ -11,7 +11,6 @@ export const FractionatedSampleDetails: FunctionComponent = () => {
     const location = useLocation(); // todo - why is useParams not working? https://reacttraining.com/react-router/web/api/Hooks/useparams
     const searchParams = new URLSearchParams(location.search);
 
-    // todo - validation needed here
     const projectId: string = searchParams.get('project')!;
     const parentId: string = searchParams.get('parent')!;
 

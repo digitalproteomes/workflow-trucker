@@ -8,9 +8,15 @@ type ListProps = {
     isRefreshNeeded: boolean;
     onRefreshDone: () => void;
     renderActions?: (sample: Sample) => JSX.Element;
+    onRowSelectionChange?: (selectedSamples: Sample[]) => void;
 };
 
-export const List: FunctionComponent<ListProps> = ({ isRefreshNeeded, onRefreshDone, renderActions }) => {
+export const List: FunctionComponent<ListProps> = ({
+    isRefreshNeeded,
+    onRefreshDone,
+    renderActions,
+    onRowSelectionChange,
+}) => {
     const [samples, setSamples] = useState<Sample[] | null>(null);
 
     async function fetchSamples() {
@@ -27,5 +33,5 @@ export const List: FunctionComponent<ListProps> = ({ isRefreshNeeded, onRefreshD
         }
     });
 
-    return <SampleList samples={samples} renderActions={renderActions} />;
+    return <SampleList samples={samples} renderActions={renderActions} onRowSelectionChange={onRowSelectionChange} />;
 };

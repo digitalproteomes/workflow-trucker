@@ -3,14 +3,12 @@ import React from 'react';
 import { Project } from '../../types';
 import { ProjectView } from './components/projectView';
 import { ProjectEdit } from './components/projectEdit';
-import { SamplesPage } from './samplesPage';
 import { observer } from 'mobx-react';
 import { AppStore } from '../../appStore';
 
-export { SamplesPage };
-
 @observer
 export class ProjectPage extends React.Component<{}, {}> {
+    // todo - remove AppStore reference and refactor Project page to be in line with the other more stable sample pages. Rename from main page.
     async componentDidMount() {
         await AppStore.fetchSelectedProject();
     }
@@ -39,7 +37,6 @@ export class ProjectPage extends React.Component<{}, {}> {
     async onSubmit(project: Project): Promise<void> {
         try {
             // return Api.upsert(project);
-            // todo - not sure were to put the .upsert. If the fetch is within the store, the upsert should be in that same place... ?
         } catch (error) {
             // throw error;
             console.log(`on submit error: ${error}`);

@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { Space } from 'antd';
-import { Msrun } from '../../../types';
+import { MsRun } from '../../../types';
 import { MsrunList } from '../../../common/msrunList';
 
 type Props = {
-    msruns: Msrun[] | null;
+    msruns: MsRun[] | null;
 };
 
 export const List: FunctionComponent<Props> = ({ msruns }) => {

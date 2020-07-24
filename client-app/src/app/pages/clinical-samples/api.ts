@@ -5,7 +5,7 @@ import { mockSamples } from '../../default-data/samples';
 export class Api {
     public static async fetchSamples(projectId: number): Promise<Sample[]> {
         try {
-            return BaseApi.getAsync(`sample/clinical?projectId=${projectId}`);
+            return await BaseApi.getAsync(`sample/clinical?projectId=${projectId}`);
         } catch (err) {
             return mockSamples();
         }

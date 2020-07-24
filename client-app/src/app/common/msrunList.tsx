@@ -9,6 +9,7 @@ type Props = {
     renderActions?: (record: MsRun) => JSX.Element;
 };
 
+// todo - this is a 1 to 1 copy of the sampleList.tsx
 export const MsrunList: FunctionComponent<Props> = ({ msruns, columns, renderActions }) => {
     const rowSelection = {
         selectedRowKeys: [2, 3, 4],

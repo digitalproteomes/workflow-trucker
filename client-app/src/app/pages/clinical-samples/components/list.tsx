@@ -27,7 +27,7 @@ export const List: FunctionComponent<ListProps> = ({
         if (samples == null || isRefreshNeeded) {
             console.log('refresh was needed');
 
-            fetchSamples();
+            fetchSamples(); // todo - is this call getting executed in an async or sync manner?
 
             onRefreshDone();
         }

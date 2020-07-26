@@ -10,7 +10,14 @@ type ModalProps = {
     onCancel: () => void;
 };
 
-export const InputModal: FunctionComponent<ModalProps> = ({ visible, title, inputForm, onCreate, onCancel }) => {
+export const InputModal: FunctionComponent<ModalProps> = ({
+    visible,
+    title,
+    inputForm,
+    onCreate,
+    onCancel,
+    children,
+}) => {
     const [form] = Form.useForm();
 
     return (
@@ -32,6 +39,7 @@ export const InputModal: FunctionComponent<ModalProps> = ({ visible, title, inpu
             }}
         >
             {inputForm(form)}
+            {children}
         </Modal>
     );
 };

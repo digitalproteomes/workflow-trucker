@@ -2,9 +2,11 @@ import React, { FunctionComponent, useState } from 'react';
 import { Form, Input, Typography, Button } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
-import { Project, Sample } from '../../../types';
+import { Sample, GenerationData, GenerationDataKeys } from '../../../types';
 import { Api } from '../api';
 import { PlusOutlined } from '@ant-design/icons';
+import { FieldData } from 'antd/node_modules/rc-field-form/lib/interface';
+import { AutoGenerateSamples } from './autoGenerateSamples';
 
 const { Text } = Typography;
 
@@ -42,6 +44,7 @@ type FormProps = {
 
 const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, onCreateSuccessful, onCancel }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [generationData, setGenerationData] = useState<GenerationData>(new GenerationData());
 
     const onCreate = (values: any) => {
         async function saveSample() {
@@ -59,25 +62,73 @@ const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, on
         saveSample();
     };
 
+    const onFieldsChange = (fields: FieldData[]) => {
+        if (!fields || fields.length == 0) return;
+
+        const validFields: FieldData[] = fields.filter((f) => GenerationDataKeys.includes(f.name.toString()));
+
+        const newData: GenerationData = { ...generationData };
+
+        validFields.forEach((f) => {
+            // todo - transform the switch/case into a dictionary
+            switch (f.name.toString()) {
+                case GenerationData.nameof('prefixProject'):
+                    newData.prefixProject = f.value;
+                    break;
+                case GenerationData.nameof('projectId'):
+                    newData.projectId = f.value;
+                    break;
+                case GenerationData.nameof('suffixProject'):
+                    newData.suffixProject = f.value;
+                    break;
+                case GenerationData.nameof('processingPerson'):
+                    newData.processingPerson = f.value;
+                    break;
+                case GenerationData.nameof('numberOfEntries'):
+                    newData.numberOfEntries = f.value;
+                    break;
+            }
+        });
+
+        setGenerationData(newData);
+    };
+
     return (
-        <InputModal
-            visible={isActiveInputForm}
-            title="New clinical sample"
-            inputForm={(form: FormInstance) => {
-                return inputForm(form, errorMessage);
-            }}
-            onCreate={onCreate}
-            onCancel={onCancel}
-        />
+        <>
+            <InputModal
+                visible={isActiveInputForm}
+                title="New clinical sample"
+                inputForm={(form: FormInstance) => {
+                    return inputForm(form, errorMessage, onFieldsChange);
+                }}
+                onCreate={onCreate}
+                onCancel={onCancel}
+            >
+                <span>{generationData.prefixProject}</span>
+                <AutoGenerateSamples templateData={generationData}></AutoGenerateSamples>
+            </InputModal>
+        </>
     );
 };
 
-function inputForm(form: FormInstance, errorMessage: string | null): JSX.Element {
+function inputForm(
+    form: FormInstance,
+    errorMessage: string | null,
+    onFieldsChange: (newFields: FieldData[]) => void,
+): JSX.Element {
     return (
-        <Form {...formLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
-            {createFormInput('Name', Sample.nameof('name'))}
-            {createFormInput('ProjectId', Sample.nameof('projectId'))}
-            {createFormInput('Source sample id', Sample.nameof('sourceSampleId'))}
+        <Form
+            {...formLayout}
+            form={form}
+            name="clinical-sample-input-form"
+            initialValues={{ remember: true }}
+            onFieldsChange={(changedFields: FieldData[], _: FieldData[]) => onFieldsChange(changedFields)}
+        >
+            {createFormInput('Project prefix', GenerationData.nameof('prefixProject'))}
+            {createFormInput('Project id', GenerationData.nameof('projectId'))}
+            {createFormInput('Project suffix', GenerationData.nameof('suffixProject'))}
+            {createFormInput('Processing person', GenerationData.nameof('processingPerson'))}
+            {createFormInput('Number of entries', GenerationData.nameof('numberOfEntries'))}
 
             {errorMessage == null ? null : (
                 <Form.Item label="Error" name="errorMessage">
@@ -93,6 +144,10 @@ const formLayout = {
     wrapperCol: { span: 16 },
 };
 
+function validationMessage(field: string): string {
+    return `Please enter a valid ${field}!`;
+}
+
 function createFormInput<T>(label: string, propName: keyof T) {
     // todo - extract this into a common helper
     return (
@@ -104,8 +159,4 @@ function createFormInput<T>(label: string, propName: keyof T) {
             <Input />
         </Form.Item>
     );
-}
-
-function validationMessage(field: string): string {
-    return `Please enter a valid ${field}!`;
 }

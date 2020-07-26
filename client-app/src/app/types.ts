@@ -20,6 +20,24 @@ export class Sample {
     public static nameof = (name: keyof Sample) => name;
 }
 
+export class SampleNew {
+    name: string = '';
+
+    parentSampleId: string = '';
+
+    projectId: string = '';
+
+    protocolId: number = -1;
+
+    /** shown on the ui as Id, it's actually a mock placeholder for the superficial identification of the samples coming in from the hospital */
+    sourceSampleId: number = -1;
+
+    /** not sure shy this has to be on this sample. How come it is not present on the sample coming from the backend? */
+    processingPerson: string = '';
+
+    public static nameof = (name: keyof SampleNew) => name;
+}
+
 export class Project {
     id: string = '';
 
@@ -63,3 +81,17 @@ export class MsRun {
 
     public static nameof = (name: keyof MsRun) => name;
 }
+
+export class GenerationData {
+    prefixProject: string = '';
+    projectId: string = '-1';
+    suffixProject: string = '';
+
+    processingPerson: string = '';
+
+    numberOfEntries: number = 10;
+
+    public static nameof = (name: keyof GenerationData) => name;
+}
+
+export const GenerationDataKeys: string[] = Object.keys(new GenerationData());

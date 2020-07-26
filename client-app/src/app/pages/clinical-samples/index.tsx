@@ -1,6 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space } from 'antd';
-import { ClinicalInputForm, ButtonCreateNew } from './components/createNew';
+// import { ClinicalInputForm, ButtonCreateNew } from './components/createNew'; // todo - the two creation method should be combined
+import { ClinicalInputForm, ButtonCreateNew } from './components/createNewAutoGenerate';
 import { List } from './components/list';
 import { ButtonAddToPooling } from './components/addToPooling';
 import { Sample } from '../../types';

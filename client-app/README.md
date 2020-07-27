@@ -82,3 +82,13 @@ export const Card: FunctionComponent<CardProps> = ({ title, paragraph = 'Hello W
 
 -   use nameof workaround instead of magic strings https://schneidenbach.gitbooks.io/typescript-cookbook/nameof-operator.html
 -   keyof magic // https://mariusschulz.com/blog/keyof-and-lookup-types-in-typescript
+
+## Notes
+
+        /**
+         * filter by workflow tag
+         *      library generation
+         *      swat analysis
+         *      sample preparation
+         * used to filter 3 sample types and ms runs
+         */

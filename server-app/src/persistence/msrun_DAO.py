@@ -1,4 +1,4 @@
-from .project import MSRun, Sample
+from .project import MSRun, ClinicalSample
 from bson import ObjectId
 import datetime
 
@@ -10,8 +10,8 @@ def createMsRun(msrunJson):
     return MSRun.find_one({"id": new_msrun.inserted_id}).dump()
 
 
-def getAllMSRuns():
-    msruns = MSRun.find()
+def getAllMSRunsByProjectId(projectId):
+    msruns = MSRun.find({"projectId": ObjectId(projectId)})
     result_msruns = []
     for i in msruns:
         result_msruns.append(i.dump())

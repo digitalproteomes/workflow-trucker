@@ -1,4 +1,4 @@
-from .project import Sample
+from .project import ClinicalSample, IntermediateSample, MSReadySample
 import datetime
 from bson import ObjectId
 
@@ -6,45 +6,65 @@ PROTOCOLS = {'1': 'clinical_sample', '2': 'single_preparation',
              '3': 'pooling_preparation', '4': 'fractionation_preparation'}
 
 
+# def createClinicalSample(sampleJson):
+#     new_sample = Sample(**sampleJson)
+
+#     existing_sample_id = Sample.find_one(
+#         {"sourceSampleId": int(new_sample.sourceSampleId)})
+#     existing_sample_name = Sample.find_one({"name": new_sample.name})
+
+#     if((new_sample.sourceSampleId != 0 and existing_sample_id) or existing_sample_name):
+#         return 0
+#     else:
+#         created = new_sample.commit()
+#         return Sample.find_one({"id": created.inserted_id}).dump()
+
+
+# def createIndividualSample(sampleJson):
+#     new_sample = IntermediateSample(**sampleJson)
+
+#     existing_parent_sample = ClinicalSample.find_one(
+#         {"id": ObjectId(new_sample.parentSampleId)})
+#     existing_sample_name = Sample.find_one({"name": new_sample.name})
+#     if(existing_sample_name):
+#         return 0
+#     elif (existing_parent_sample):
+#         created = new_sample.commit()
+#         return Sample.find_one({"id": created.inserted_id}).dump()
+#     else:
+#         return -1
+
+
 def createClinicalSample(sampleJson):
-    new_sample = Sample(**sampleJson)
+    new_sample = ClinicalSample(**sampleJson)
 
-    existing_sample_id = Sample.find_one(
-        {"sourceSampleId": int(new_sample.sourceSampleId)})
-    existing_sample_name = Sample.find_one({"name": new_sample.name})
-
-    if((new_sample.sourceSampleId != 0 and existing_sample_id) or existing_sample_name):
-        return 0
-    else:
-        created = new_sample.commit()
-        return Sample.find_one({"id": created.inserted_id}).dump()
-
-
-def createIndividualSample(sampleJson):
-    new_sample = Sample(**sampleJson)
-
-    existing_parent_sample = Sample.find_one(
-        {"id": ObjectId(new_sample.parentSampleId)})
-    existing_sample_name = Sample.find_one({"name": new_sample.name})
-    if(existing_sample_name):
-        return 0
-    elif (existing_parent_sample):
-        created = new_sample.commit()
-        return Sample.find_one({"id": created.inserted_id}).dump()
-    else:
-        return -1
-
-
-def createSample(sampleJson):
-    new_sample = Sample(**sampleJson)
-
-    existing_sample_name = Sample.find_one({"name": new_sample.name})
+    existing_sample_name = ClinicalSample.find_one(
+        {"name": new_sample.name, "projectId": ObjectId(new_sample.projectId)})
 
     if(existing_sample_name):
         return 0
     else:
         created = new_sample.commit()
-        return Sample.find_one({"id": created.inserted_id}).dump()
+        return ClinicalSample.find_one({"id": created.inserted_id}).dump()
+
+
+def createIntermediateSample(sampleJson):
+    new_sample = IntermediateSample(**sampleJson)
+
+    existing_sample_name = IntermediateSample.find_one(
+        {"name": new_sample.name, "projectId": ObjectId(new_sample.projectId)})
+
+    if(existing_sample_name):
+        return 0
+    else:
+        created = new_sample.commit()
+        return IntermediateSample.find_one({"id": created.inserted_id}).dump()
+
+
+def createMSReadySample(sampleJson):
+    new_sample = MSReadySample(**sampleJson)
+    created = new_sample.commit()
+    return MSReadySample.find_one({"id": created.inserted_id}).dump()
 
 
 def updateParentSample(id, parentSampleId):
@@ -91,17 +111,53 @@ def updateSampleName(id, newName):
         return 0
 
 
-def getAllSamples(projectId):
-    samples = Sample.find({"projectId": int(projectId)})
+# def getAllSamples(projectId):
+#     samples = Sample.find({"projectId": int(projectId)})
+#     result_samples = []
+#     for i in samples:
+#         result_samples.append(i.dump())
+#     return result_samples
+
+
+# def getSamplesByProjectAndProtocolId(projectId, protocolId):
+#     samples = Sample.find({"projectId": int(projectId),
+#                            "protocolId": int(protocolId)})
+#     result_samples = []
+#     for i in samples:
+#         result_samples.append(i.dump())
+#     return result_samples
+
+
+def getIntermediateSamplesByProtocolAndProtocolId(protocol, projectId):
+    samples = IntermediateSample.find({"projectId": ObjectId(projectId),
+                                       "protocolName": protocol})
     result_samples = []
     for i in samples:
         result_samples.append(i.dump())
     return result_samples
 
 
-def getSamplesByProjectAndProtocolId(projectId, protocolId):
-    samples = Sample.find({"projectId": int(projectId),
-                           "protocolId": int(protocolId)})
+def getMsReadySamplesByClinicalSample(clinicalSampleId, projectId):
+    samples = MSReadySample.find({"projectId": ObjectId(projectId),
+                                  "clinicalSamples": ObjectId(clinicalSampleId)})
+    result_samples = []
+    for i in samples:
+        result_samples.append(i.dump())
+    return result_samples
+
+
+def getMsReadySampleByIntermediateSampleId(intermediateSampleId, projectId):
+    samples = MSReadySample.find({"projectId": ObjectId(projectId),
+                                  "intermediateSampleId": ObjectId(intermediateSampleId)})
+    result_samples = []
+    for i in samples:
+        result_samples.append(i.dump())
+    return result_samples
+
+
+def getAllMsReadySamples(projectId):
+    samples = MSReadySample.find({"projectId": ObjectId(projectId)
+                                  })
     result_samples = []
     for i in samples:
         result_samples.append(i.dump())
@@ -135,7 +191,7 @@ def getSampleById(id):
 
 
 def getClinicalSampleBySourceSampleId(id):
-    return Sample.find_one({"sourceSampleId": int(id)})
+    return ClinicalSample.find_one({"sourceSampleId": int(id)})
 
 
 def unlinkSamplesByProtocol(parentId, protocolId):

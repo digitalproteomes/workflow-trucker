@@ -47,3 +47,13 @@ def createClinicalSample(sampleJson):
     else:
         created = new_sample.commit()
         return ClinicalSample.find_one({"id": created.inserted_id}).dump()
+
+
+def augmentClinicalSampleNames(sampleIds):
+    augmentedSamples = []
+
+    for i in sampleIds:
+        sample = getClinicalSampleById(ObjectId(i))
+        augmentedSamples.append({i: sample['name']})
+
+    return augmentedSamples

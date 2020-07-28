@@ -51,6 +51,10 @@ def getIntermediateSamplesByProject():
     if (projectDAO.getProjectById(projectId)):
         samples = intermediateSampleDAO.getIntermediateSamplesByProject(
             projectId)
+        for s in samples:
+            augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
+                s['clinicalSamples'])
+            s['clinicalSamples'] = augmentedClinicalSamples
         return jsonify(samples), status.HTTP_200_OK
     else:
         return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
@@ -62,7 +66,11 @@ def getIntermediateSampleById():
     sample = intermediateSampleDAO.getIntermediateSampleById(id)
 
     if(sample):
-        return jsonify(sample.dump()), status.HTTP_200_OK
+        sample = sample.dump()
+        augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
+            sample['clinicalSamples'])
+        sample['clinicalSamples'] = augmentedClinicalSamples
+        return jsonify(sample), status.HTTP_200_OK
     else:
         return 'Intermediate Sample with id does not exist.', status.HTTP_404_NOT_FOUND
 
@@ -76,6 +84,10 @@ def getMsReadySamplesByProject():
 
     if (projectDAO.getProjectById(projectId)):
         samples = msReadySamplesDAO.getMsReadySamplesByProject(projectId)
+        for s in samples:
+            augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
+                s['clinicalSamples'])
+            s['clinicalSamples'] = augmentedClinicalSamples
         return jsonify(samples), status.HTTP_200_OK
     else:
         return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
@@ -87,6 +99,10 @@ def getMsReadySamplesById():
     sample = msReadySamplesDAO.getMSReadySampleById(id)
 
     if(sample):
-        return jsonify(sample.dump()), status.HTTP_200_OK
+        sample = sample.dump()
+        augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
+            sample['clinicalSamples'])
+        sample['clinicalSamples'] = augmentedClinicalSamples
+        return jsonify(sample), status.HTTP_200_OK
     else:
         return 'Ms Ready Sample with id does not exist.', status.HTTP_404_NOT_FOUND

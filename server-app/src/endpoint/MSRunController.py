@@ -3,8 +3,10 @@ from flask import Flask, jsonify, request
 from flask_api import status
 from bson import ObjectId
 
+
 from persistence import MSRunDAO
 from persistence import projectDAO
+from persistence import clinicalSampleDAO
 
 msrun_api = Blueprint('msrun_api', __name__)
 
@@ -14,6 +16,10 @@ def getMSRunsByProjectId():
     projectId = request.args.get('projectId')
     if (projectDAO.getProjectById(projectId)):
         msruns = MSRunDAO.getAllMSRunsByProjectId(projectId)
+        for s in msruns:
+            augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
+                s['clinicalSamples'])
+            s['clinicalSamples'] = augmentedClinicalSamples
         return jsonify(msruns), status.HTTP_200_OK
     else:
         return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
@@ -24,7 +30,11 @@ def getMSRunById():
     id = ObjectId(request.args.get('id'))
     msrun = MSRunDAO.getMsRun(id)
     if(msrun):
-        return jsonify(msrun.dump()), status.HTTP_200_OK
+        msrun = msrun.dump()
+        augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
+            msrun['clinicalSamples'])
+        msrun['clinicalSamples'] = augmentedClinicalSamples
+        return jsonify(msrun), status.HTTP_200_OK
     else:
         return 'MS Run with id does not exist.', status.HTTP_404_NOT_FOUND
 

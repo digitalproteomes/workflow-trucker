@@ -101,7 +101,7 @@ class MSRun(Document):
     instrumentId = fields.StrField(required=True)
     runCode = fields.StrField(required=False)
     status = fields.StrField(required=False)
-    processingPerson = fields.StrField()
+    processingPerson = fields.StrField(required=False)
     workflowTag = fields.StrField(required=False)
     createdDate = fields.DateTimeField(
         validate=validate.Range(min=datetime(1900, 1, 1)))

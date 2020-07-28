@@ -1,4 +1,4 @@
-from .project import SWATHAnalysis
+from .models import SWATHAnalysis
 from bson import ObjectId
 import datetime
 

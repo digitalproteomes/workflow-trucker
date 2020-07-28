@@ -1,9 +1,11 @@
 import json
-from persistence import sample_DAO as sampleDAO
-from persistence import project_DAO as projectDAO
-from persistence import msrun_DAO as msrunDAO
-from persistence import speclib_DAO as speclibDAO
-from persistence import swathanalysis_DAO as swathanalysisDAO
+from persistence import clinicalSampleDAO
+from persistence import projectDAO
+from persistence import MSRunDAO
+from persistence import spectralLibraryDAO
+from persistence import intermediateSampleDAO
+from persistence import swathAnalysisDAO
+from persistence import msReadySamplesDAO
 import datetime
 from pymongo import MongoClient
 import re
@@ -35,16 +37,14 @@ def insertSamples(samples, projectId):
 
 
 def insertMSRuns(msruns, projectId):
-    # all_ms_ready_samples = sampleDAO.getAllMsReadySamples(projectId)
-    # print("All: " + str(len(all_ms_ready_samples)))
     for i in msruns:
         x = re.search("^sgoetze_A1*", i['name'])
         if x:
             samples = []
-            sample_c = sampleDAO.getClinicalSampleBySourceSampleId(
+            sample_c = clinicalSampleDAO.getClinicalSampleBySourceSampleId(
                 i['sample_ref']['sampleIdRef'])
             if sample_c != None:
-                msrs = sampleDAO.getMsReadySamplesByClinicalSample(
+                msrs = msReadySamplesDAO.getMsReadySamplesByClinicalSample(
                     sample_c['id'], projectId)
 
             for msr in msrs:
@@ -63,17 +63,17 @@ def insertMSRuns(msruns, projectId):
                         "description": "Generated from Excel archive",
                         "processingPerson": "System",
                     }
-                    print(msrunDAO.createMsRun(new_msrun))
+                    print(MSRunDAO.createMsRun(new_msrun))
 
 
 def insertLibGenMSRuns(projectId):
-    frac_samples = sampleDAO.getIntermediateSamplesByProtocolAndProtocolId(
+    frac_samples = intermediateSampleDAO.getIntermediateSamplesByProjectAndProtocolId(
         "fractionation_preparation", projectId)
     name_counter = 25
     run_counter = 7
     for f in frac_samples:
         if(re.search("^MMA_library_batch-1_mix-*", f['name'])):
-            msr_sample = sampleDAO.getMsReadySampleByIntermediateSampleId(
+            msr_sample = msReadySamplesDAO.getMsReadySampleByIntermediateSampleId(
                 f['id'], projectId)
             if(len(msr_sample) > 0):
                 msr = msr_sample[0]
@@ -93,7 +93,7 @@ def insertLibGenMSRuns(projectId):
                 }
                 name_counter = name_counter+1
                 run_counter = run_counter + 1
-                print(msrunDAO.createMsRun(new_msrun))
+                print(MSRunDAO.createMsRun(new_msrun))
 
 
 def insertClinicalSample(sample, projectId):
@@ -107,7 +107,7 @@ def insertClinicalSample(sample, projectId):
         "updatedDate": datetime.datetime.now(),
         "createdDate": datetime.datetime.now()
     }
-    print(sampleDAO.createClinicalSample(new_sample))
+    print(clinicalSampleDAO.createClinicalSample(new_sample))
 
 
 def generate_MS_Ready(samples, projectId):
@@ -124,11 +124,11 @@ def generate_MS_Ready(samples, projectId):
             "createdDate": datetime.datetime.now()
 
         }
-        print(sampleDAO.createMSReadySample(new_sample))
+        print(msReadySamplesDAO.createMSReadySample(new_sample))
 
 
 def insertIndividualSample(sample, projectId):
-    clinicalSample = sampleDAO.getClinicalSampleBySourceSampleId(
+    clinicalSample = clinicalSampleDAO.getClinicalSampleBySourceSampleId(
         sample['sample_ref']['sampleIdRef'])
     new_sample = {
         "name": sample['name'],
@@ -142,13 +142,13 @@ def insertIndividualSample(sample, projectId):
         "createdDate": datetime.datetime.now()
 
     }
-    print(sampleDAO.createIntermediateSample(new_sample))
+    print(intermediateSampleDAO.createIntermediateSample(new_sample))
 
 
 def insertPoolingSample(sample, projectId):
     sample_col = []
     for i in sample['sample_ref']:
-        sample_c = sampleDAO.getClinicalSampleBySourceSampleId(
+        sample_c = clinicalSampleDAO.getClinicalSampleBySourceSampleId(
             i['sampleIdRef']).dump()
         sample_col.append(sample_c['id'])
 
@@ -164,11 +164,11 @@ def insertPoolingSample(sample, projectId):
         "createdDate": datetime.datetime.now()
 
     }
-    print(sampleDAO.createIntermediateSample(new_sample))
+    print(intermediateSampleDAO.createIntermediateSample(new_sample))
 
 
 def insertFractinationSample(sample, projectId):
-    pooledSamples = sampleDAO.getIntermediateSamplesByProtocolAndProtocolId(
+    pooledSamples = intermediateSampleDAO.getIntermediateSamplesByProjectAndProtocolId(
         "pooling_preparation", projectId)
     if sample['sample_ref']['sampleIdRef'] == "231":
         IS = pooledSamples[0]
@@ -187,11 +187,11 @@ def insertFractinationSample(sample, projectId):
         "updatedDate": datetime.datetime.now(),
         "createdDate": datetime.datetime.now()
     }
-    sampleDAO.createIntermediateSample(new_sample)
+    intermediateSampleDAO.createIntermediateSample(new_sample)
 
 
 def insertSpectralLibrary(spl, projectId):
-    ms_runs = msrunDAO.getAllMSRunsByProjectId(projectId)
+    ms_runs = MSRunDAO.getAllMSRunsByProjectId(projectId)
     ms_run_ids = []
     involved_clinical_samples = []
     for ms_run in ms_runs:
@@ -217,12 +217,12 @@ def insertSpectralLibrary(spl, projectId):
         "proteinDatabaseVersion": spl['protein_database']['version']
     }
 
-    print(speclibDAO.createSpectralLibrary(new_spl))
+    print(spectralLibraryDAO.createSpectralLibrary(new_spl))
 
 
 def insertSWATHAnalysis(swa, projectId):
-    spl = speclibDAO.getAllLibrariesForProject(projectId)
-    ms_runs = msrunDAO.getAllMSRunsByProjectId(projectId)
+    spl = spectralLibraryDAO.getAllLibrariesForProject(projectId)
+    ms_runs = MSRunDAO.getAllMSRunsByProjectId(projectId)
     ms_run_ids = []
     involved_clinical_samples = []
     for ms_run in ms_runs:
@@ -247,7 +247,7 @@ def insertSWATHAnalysis(swa, projectId):
         "description": "Generated from Excel archive"
     }
 
-    print(swathanalysisDAO.createSWATHAnalysis(new_swa))
+    print(swathAnalysisDAO.createSWATHAnalysis(new_swa))
 
 
 if __name__ == '__main__':
@@ -261,13 +261,14 @@ if __name__ == '__main__':
 
     client = db  # MongoClient('localhost', 27017)
 
-    # to delete database, uncomment the next line
+    # this deletes the database
     dblist = client.list_database_names()
     if "WorkflowDB" in dblist:
         print("The database exists. Deleting and recreating...")
         client.drop_database('WorkflowDB')
 
     project_json = load_json("resources/sample_project.json")
+
     new_project = {
         "projectId": "5",
         "name": "CPAC",
@@ -295,9 +296,9 @@ if __name__ == '__main__':
     print("___________________________________________________________")
     print("")
 
-    frac_samples = sampleDAO.getIntermediateSamplesByProtocolAndProtocolId(
+    frac_samples = intermediateSampleDAO.getIntermediateSamplesByProjectAndProtocolId(
         "fractionation_preparation", projectId)
-    sing_prep_samples = sampleDAO.getIntermediateSamplesByProtocolAndProtocolId(
+    sing_prep_samples = intermediateSampleDAO.getIntermediateSamplesByProjectAndProtocolId(
         "single_preparation", projectId)
 
     print("insert ms ready samples")

@@ -1,4 +1,4 @@
-from .project import SpectralLibrary
+from .models import SpectralLibrary
 from bson import ObjectId
 import datetime
 

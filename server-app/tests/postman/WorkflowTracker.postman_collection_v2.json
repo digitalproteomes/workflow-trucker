@@ -1,0 +1,628 @@
+{
+	"variables": [],
+	"info": {
+		"name": "WorkflowTracker",
+		"_postman_id": "816bf27a-1904-4cb2-d712-4a0ea6e9744b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "project",
+			"description": "requests related to the project entity\n",
+			"item": [
+				{
+					"name": "http://127.0.0.1:5000/project/all",
+					"request": {
+						"url": "http://127.0.0.1:5000/project/all",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/project by id",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/project?id=5f1ff4ff85e7ca57d9a667a3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"project"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f1ff4ff85e7ca57d9a667a3",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/project",
+					"request": {
+						"url": "http://127.0.0.1:5000/project",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n     \"id\": 6,\n        \"name\": \"JD Project1\",\n        \"ownerName\": \"Joana Doe\",\n        \"ownerORCID\": \"0000-0000-0000-0000\",\n        \"description\": \"Sample Project\"\n\t\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/project edit",
+					"request": {
+						"url": "http://127.0.0.1:5000/project",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n     \"id\": 5f1ff4ff85e7ca57d9a667a3,\n        \"name\": \"JD Project3\",\n        \"ownerName\": \"Joana Doe3\",\n        \"ownerORCID\": \"0000-0002-0000-0000\",\n        \"description\": \"Sample Project 32\"\n\t\n}\n"
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/project",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/project?id=5f1ff4ff85e7ca57d9a667a3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"project"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f1ff4ff85e7ca57d9a667a3",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "msruns",
+			"description": "",
+			"item": [
+				{
+					"name": "get ms run by project",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/msrun?projectId=5f1ff4ff85e7ca57d9a667a3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"msrun"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5f1ff4ff85e7ca57d9a667a3",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/msrun TODO",
+					"request": {
+						"url": "http://127.0.0.1:5000/msrun",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"instrumentId\": \"MS:1002523\",\n        \"name\": \"sil2_A1902_004\",\n        \"projectId\": \"5\",\n        \"protocolId\": \"DIA_protocol\",\n        \"runCode\": \"3464356\",\n        \"sampleIds\": [\n            \"5ef5b835771ccdf64f5f9d60\",\"5ef5b835771ccdf64f5f9d61\"\n        ]\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/msrun by id",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/msrun/id?id=5f1ff4ff85e7ca57d9a667a3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"msrun",
+								"id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f1ff4ff85e7ca57d9a667a3",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "id",
+								"value": "5ef5b4944c42af164aecabea",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/msrun",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/msrun?id=5ef5b838771ccdf64f5f9f9f",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"msrun"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5ef5b838771ccdf64f5f9f9f",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "create clinical sample"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "clinicalsamples",
+			"description": "",
+			"item": [
+				{
+					"name": "get clinical samples by project",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/clinical?projectId=5f1ff4ff85e7ca57d9a667a3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"clinical"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5f1ff4ff85e7ca57d9a667a3",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "projectId",
+								"value": "5f1ec336b30f03dae93f7339",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get across projects clinical samples",
+					"request": {
+						"url": "http://127.0.0.1:5000/sample/clinical/all",
+						"method": "GET",
+						"header": [
+							{
+								"key": "projectId",
+								"value": "5f1ec336b30f03dae93f7339",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get clinical samples by id",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/clinical/id?id=5f1ff4ff85e7ca57d9a667a4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"clinical",
+								"id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f1ff4ff85e7ca57d9a667a4",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "projectId",
+								"value": "5f1ec336b30f03dae93f7339",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "intermediatesamples",
+			"description": "",
+			"item": [
+				{
+					"name": "get intermediate samples by project",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/intermediate?projectId=5f1ff4ff85e7ca57d9a667a3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"intermediate"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5f1ff4ff85e7ca57d9a667a3",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "projectId",
+								"value": "5f1ec336b30f03dae93f7339",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get intermediate sample by id",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/intermediate/id?id=5f1ff50085e7ca57d9a6688a",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"intermediate",
+								"id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f1ff50085e7ca57d9a6688a",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "projectId",
+								"value": "5f1ec336b30f03dae93f7339",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "msreadysamples",
+			"description": "",
+			"item": [
+				{
+					"name": "get msready samples by project",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/msready?projectId=5f1ff4ff85e7ca57d9a667a3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"msready"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "5f1ff4ff85e7ca57d9a667a3",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "projectId",
+								"value": "5f1ec336b30f03dae93f7339",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get ms ready sample by id",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sample/msready/id?id=5f1ff50385e7ca57d9a669a9",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sample",
+								"msready",
+								"id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f1ff50385e7ca57d9a669a9",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "projectId",
+								"value": "5f1ec336b30f03dae93f7339",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

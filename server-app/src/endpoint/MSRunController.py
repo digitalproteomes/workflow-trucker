@@ -11,7 +11,7 @@ from persistence import clinicalSampleDAO
 msrun_api = Blueprint('msrun_api', __name__)
 
 
-@msrun_api.route('/msrun', methods=['GET'])
+@msrun_api.route('/msruns/project', methods=['GET'])
 def getMSRunsByProjectId():
     projectId = request.args.get('projectId')
     if (projectDAO.getProjectById(projectId)):
@@ -25,7 +25,7 @@ def getMSRunsByProjectId():
         return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
 
 
-@msrun_api.route('/msrun/id', methods=['GET'])
+@msrun_api.route('/msruns', methods=['GET'])
 def getMSRunById():
     id = ObjectId(request.args.get('id'))
     msrun = MSRunDAO.getMsRun(id)
@@ -39,7 +39,7 @@ def getMSRunById():
         return 'MS Run with id does not exist.', status.HTTP_404_NOT_FOUND
 
 
-@msrun_api.route('/msrun', methods=['POST'])
+@msrun_api.route('/msruns', methods=['POST'])
 def createMSRun():
     data = request.json
     projectId = data.get('projectId')
@@ -71,7 +71,7 @@ def createMSRun():
     return jsonify(created_ms_run), status.HTTP_200_OK
 
 
-@msrun_api.route('/msrun', methods=['DELETE'])
+@msrun_api.route('/msruns', methods=['DELETE'])
 def deleteRun():
     id = request.args.get('id')
     sts = MSRunDAO.deleteMSrun(id)
@@ -79,3 +79,18 @@ def deleteRun():
         return 'MS Run with id does not exist.', status.HTTP_404_NOT_FOUND
     else:
         return '', status.HTTP_200_OK
+
+
+@msrun_api.route('/msruns/clinical', methods=['GET'])
+def getMsRunsByClinicalSampleId():
+    clinicalSampleId = ObjectId(request.args.get('id'))
+    if clinicalSampleDAO.getClinicalSampleById(clinicalSampleId):
+        msruns = MSRunDAO.getMsRunsByClinicalSampleId(
+            clinicalSampleId)
+        for s in msruns:
+            augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
+                s['clinicalSamples'])
+            s['clinicalSamples'] = augmentedClinicalSamples
+        return jsonify(msruns), status.HTTP_200_OK
+    else:
+        return 'Clinical Sample with id does not exist.', status.HTTP_404_NOT_FOUND

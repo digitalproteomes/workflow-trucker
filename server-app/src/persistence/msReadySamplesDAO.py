@@ -38,3 +38,12 @@ def createMSReadySample(sampleJson):
 
 def getMSReadySampleById(id):
     return MSReadySample.find_one({"id": id})
+
+
+def getMSReadySamplesByClinicalSampleId(clinicalSampleId):
+    samples = MSReadySample.find(
+        {"clinicalSamples": ObjectId(clinicalSampleId)})
+    result_samples = []
+    for i in samples:
+        result_samples.append(i.dump())
+    return result_samples

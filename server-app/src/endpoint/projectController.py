@@ -7,13 +7,13 @@ from persistence import projectDAO
 project_api = Blueprint('project_api', __name__)
 
 
-@project_api.route('/project/all', methods=['GET'])
+@project_api.route('/projects/all', methods=['GET'])
 def getAllProjects():
     projects = projectDAO.getAllProjects()
     return jsonify(projects), status.HTTP_200_OK
 
 
-@project_api.route('/project', methods=['GET'])
+@project_api.route('/projects', methods=['GET'])
 def getProjectById():
     id = request.args.get('id')
     project = projectDAO.getProjectById(id)
@@ -23,7 +23,7 @@ def getProjectById():
         return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
 
 
-@project_api.route('/project', methods=['POST'])
+@project_api.route('/projects', methods=['POST'])
 def createProject():
     data = request.json
     id = data.get('id')
@@ -48,7 +48,7 @@ def createProject():
     return jsonify(project), status.HTTP_200_OK
 
 
-@project_api.route('/project', methods=['DELETE'])
+@project_api.route('/projects', methods=['DELETE'])
 def deleteProject():
     id = request.args.get('id')
     sts = projectDAO.deleteProject(id)
@@ -58,7 +58,7 @@ def deleteProject():
         return '', status.HTTP_200_OK
 
 
-@project_api.route('/project', methods=['PUT'])
+@project_api.route('/projects', methods=['PUT'])
 def updateProject():
     data = request.json
     id = data.get('id')

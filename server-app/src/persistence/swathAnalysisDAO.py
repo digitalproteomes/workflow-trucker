@@ -16,3 +16,11 @@ def getAllSWATH():
     for i in swas:
         result_swas.append(i.dump())
     return result_swas
+
+
+def getSWATHByProject(projectId):
+    swas = SWATHAnalysis.find({"projectId": ObjectId(projectId)})
+    result_swas = []
+    for i in swas:
+        result_swas.append(i.dump())
+    return result_swas

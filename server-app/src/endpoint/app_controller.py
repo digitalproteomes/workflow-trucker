@@ -6,6 +6,8 @@ from flask_cors import CORS
 from endpoint.sampleController import sample_api
 from endpoint.projectController import project_api
 from endpoint.MSRunController import msrun_api
+from endpoint.swathAnalysisController import swathanalysis_api
+from endpoint.spectralLibraryController import spectrallibraries_api
 
 app = Flask(__name__)
 CORS(app)
@@ -13,6 +15,8 @@ CORS(app)
 app.register_blueprint(sample_api)
 app.register_blueprint(project_api)
 app.register_blueprint(msrun_api)
+app.register_blueprint(swathanalysis_api)
+app.register_blueprint(spectrallibraries_api)
 
 # https://stackoverflow.com/a/23542795
 # silalbert@sysbc-mac-533 src % python -m endpoint.sample_controller

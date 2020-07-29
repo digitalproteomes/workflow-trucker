@@ -26,6 +26,15 @@ def getAllMSRunsByProjectAndTag(tag, projectId):
     return result_msruns
 
 
+def getMsRunsByClinicalSampleId(clinicalSampleId):
+    msruns = MSRun.find(
+        {"clinicalSamples": ObjectId(clinicalSampleId)})
+    result_msruns = []
+    for i in msruns:
+        result_msruns.append(i.dump())
+    return result_msruns
+
+
 def getMsRun(id):
     return MSRun.find_one({"id": id})
 

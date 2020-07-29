@@ -33,5 +33,14 @@ def getIntermediateSamplesByProject(projectId):
     return result_samples
 
 
+def getIntermediateSamplesByClinicalSampleId(clinicalSampleId):
+    samples = IntermediateSample.find(
+        {"clinicalSamples": ObjectId(clinicalSampleId)})
+    result_samples = []
+    for i in samples:
+        result_samples.append(i.dump())
+    return result_samples
+
+
 def getIntermediateSampleById(id):
     return IntermediateSample.find_one({"id": id})

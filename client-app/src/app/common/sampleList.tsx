@@ -7,11 +7,62 @@ import { SearchOutlined } from '@ant-design/icons';
 
 type Props = {
     samples: Sample[] | null;
-    columns?: ColumnsType<Sample>;
+    columns: ColumnsType<Sample>;
     renderActions?: (record: Sample) => JSX.Element;
     onRowSelectionChange?: (selectedRows: Sample[]) => void;
 };
 
+type IProps<T extends object> = {
+    samples: T[] | null;
+    columns: ColumnsType<T>;
+    renderActions?: (record: T) => JSX.Element;
+    onRowSelectionChange?: (selectedRows: T[]) => void;
+
+    rowKeySelector: (row: T) => string;
+};
+
+function SampleList_v2<T extends object>({
+    samples,
+    columns,
+    renderActions,
+    onRowSelectionChange,
+    rowKeySelector,
+}: IProps<T> & { children?: React.ReactNode }): React.ReactElement {
+    const onRowSelectionChangeHandler = (_selectedRowKeys: any, selectedRows: T[]) => {
+        // at the moment (antd 4.3.5) the selectedRowKeys are coming in as ReactText[]
+        if (onRowSelectionChange) onRowSelectionChange(selectedRows);
+    };
+
+    const rowSelection: TableRowSelection<T> = {
+        onChange: onRowSelectionChangeHandler,
+        selections: [Table.SELECTION_ALL],
+    };
+
+    if (samples == null) {
+        return <Skeleton active />;
+    }
+
+    let columnsType: ColumnsType<T>;
+
+    if (renderActions) {
+        columnsType = [...columns, getRenderObject(renderActions)];
+    } else {
+        columnsType = columns;
+    }
+
+    return (
+        <Table
+            rowSelection={rowSelection}
+            dataSource={samples}
+            columns={columnsType}
+            rowKey={(row) => rowKeySelector(row)}
+        />
+    );
+}
+
+/**
+ * todo - deprecated - SampleList_v2 is generic, and may be used more easily
+ */
 export const SampleList: FunctionComponent<Props> = ({ samples, columns, renderActions, onRowSelectionChange }) => {
     const onRowSelectionChangeHandler = (_selectedRowKeys: any, selectedRows: Sample[]) => {
         // at the moment (antd 4.3.5) the selectedRowKeys are coming in as ReactText[]
@@ -29,62 +80,20 @@ export const SampleList: FunctionComponent<Props> = ({ samples, columns, renderA
 
     let columnsType: ColumnsType<Sample>;
 
-    if (columns) {
-        if (renderActions) {
-            columnsType = [...columns, getRenderObject(renderActions)];
-        } else {
-            columnsType = columns;
-        }
+    if (renderActions) {
+        columnsType = [...columns, getRenderObject(renderActions)];
     } else {
-        if (renderActions) {
-            columnsType = [...defaultColumns, getRenderObject(renderActions)];
-        } else {
-            columnsType = defaultColumns;
-        }
+        columnsType = columns;
     }
 
     return <Table rowSelection={rowSelection} dataSource={samples} columns={columnsType} rowKey={(row) => row.id} />;
 };
 
-// todo - extract this into a standalone file, and convert sampleList.tsx into baseList.tsx
-const defaultColumns: ColumnsType<Sample> = [
-    {
-        title: 'Name',
-        dataIndex: Sample.nameof('name'),
-
-        ...getAllFilterProps<Sample>('name'),
-    },
-    {
-        title: 'Id',
-        dataIndex: Sample.nameof('id'),
-
-        ...getAllFilterProps<Sample>('id'),
-    },
-    {
-        title: 'Source',
-        dataIndex: Sample.nameof('sourceSampleId'),
-    },
-    {
-        title: 'Parent Sample Id',
-        dataIndex: Sample.nameof('parentSampleId'),
-    },
-    {
-        title: 'Protocol Name',
-        dataIndex: Sample.nameof('protocolName'),
-
-        ...getAllFilterProps<Sample>('protocolName'),
-    },
-    {
-        title: 'Updated on',
-        dataIndex: Sample.nameof('updatedDate'),
-    },
-];
-
-function getRenderObject(renderActions: (record: Sample) => React.ReactNode) {
+function getRenderObject<T>(renderActions: (record: T) => React.ReactNode) {
     return {
         title: 'Action',
         key: 'action',
-        render: (value: any, record: Sample, index: number) => {
+        render: (_value: any, record: T, _index: number) => {
             return renderActions(record);
         },
     };
@@ -97,7 +106,7 @@ type ColumnFilterProps<T> = {
     render: (text: string) => JSX.Element; // todo - this signature is not present in the official interface. Not sure why it works (if it works)
 };
 
-function getAllFilterProps<T>(column: keyof T): ColumnFilterProps<T> {
+export function getAllFilterProps<T>(column: keyof T): ColumnFilterProps<T> {
     return {
         filterIcon: getFilterIcon,
         filterDropdown: (filterProps: FilterDropdownProps) => getFilterDropdown<T>(column, filterProps),

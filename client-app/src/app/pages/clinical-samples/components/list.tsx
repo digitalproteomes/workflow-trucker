@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Sample } from '../../../types';
-import { SampleList } from '../../../common/sampleList';
+import { SampleList, getAllFilterProps } from '../../../common/sampleList';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
+import { ColumnsType } from 'antd/lib/table';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -33,5 +34,37 @@ export const List: FunctionComponent<ListProps> = ({
         }
     });
 
-    return <SampleList samples={samples} renderActions={renderActions} onRowSelectionChange={onRowSelectionChange} />;
+    return (
+        <SampleList
+            samples={samples}
+            columns={defaultColumns}
+            renderActions={renderActions}
+            onRowSelectionChange={onRowSelectionChange}
+        />
+    );
 };
+
+// todo - extract this into a standalone file, and convert sampleList.tsx into baseList.tsx
+const defaultColumns: ColumnsType<Sample> = [
+    // todo - avoid importing the ColumnsType by having an intermediary interface between this component and the List common component
+    {
+        title: 'Name',
+        dataIndex: Sample.nameof('name'),
+
+        ...getAllFilterProps<Sample>('name'),
+    },
+    {
+        title: 'Id',
+        dataIndex: Sample.nameof('id'),
+
+        ...getAllFilterProps<Sample>('id'),
+    },
+    {
+        title: 'Source Id',
+        dataIndex: Sample.nameof('sourceSampleId'),
+    },
+    {
+        title: 'Updated on',
+        dataIndex: Sample.nameof('updatedDate'),
+    },
+];

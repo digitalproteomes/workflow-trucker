@@ -1,3 +1,4 @@
+/** todo - deprecated - remove completely once no more references to this */
 export class Sample {
     createdDate: string = '';
 

@@ -21,6 +21,9 @@ type IProps<T extends object> = {
     rowKeySelector: (row: T) => string;
 };
 
+/**
+ * todo - this is used most probably only by complexList.tsx. Should the two get merged?
+ */
 export function SampleList_v2<T extends object>({
     samples,
     columns,

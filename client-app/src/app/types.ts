@@ -53,7 +53,7 @@ export class Project {
 
     ownerORCID: string = '';
 
-    projectId: number = -1;
+    projectId: string = '';
 
     updatedDate: string = '';
 

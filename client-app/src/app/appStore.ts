@@ -16,7 +16,7 @@ class Store {
     }
 
     @action
-    public async fetchSelectedProjectSamplesByProtocolIdAsync(projectId: number, protocolId: number) {
+    public async fetchSelectedProjectSamplesByProtocolIdAsync(projectId: string, protocolId: number) {
         this.samples = await MainPageApi.getSamplesByProtocolIdAsync(projectId, protocolId);
     }
 }

@@ -17,6 +17,7 @@ import {
 
 import { Link } from 'react-router-dom';
 import { CollapseType } from 'antd/lib/layout/Sider';
+import { Constants } from '../default-data/constants';
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider, Header } = Layout;
@@ -34,9 +35,9 @@ const BasicLayout: React.FC = (props) => {
         setState({ ...prevState, isCollapsed });
     }
 
-    const defaultProjectId = 5;
+    const defaultProjectId = Constants.projectId;
     const defaultProjectName = 'PHRT_005_CPAC';
-    const otherProjectId = 6;
+    const otherProjectId = '5f_other_project_id';
     const otherProjectName = 'PHRT_006_CPAC';
 
     return (
@@ -96,7 +97,7 @@ const BasicLayout: React.FC = (props) => {
 };
 
 export default BasicLayout;
-function getSubmenu(projectId: number, name: string) {
+function getSubmenu(projectId: string, name: string) {
     return (
         <SubMenu
             key={`${projectId}_sub1`}

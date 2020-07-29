@@ -3,15 +3,14 @@ import { Divider } from 'antd';
 import { MsRun } from '../../types';
 import { Api } from './api';
 import { List } from './components/list';
+import { Constants } from '../../default-data/constants';
 
 export const MsRuns: FunctionComponent = () => {
     const [msruns, setMsruns] = useState<MsRun[] | null>(null);
 
     async function fetchMsruns() {
         if (msruns == null) {
-            const projectId: number = 5;
-
-            setMsruns(await Api.getMsRunsAsync(projectId));
+            setMsruns(await Api.getMsRunsAsync(Constants.projectId));
         }
     }
 

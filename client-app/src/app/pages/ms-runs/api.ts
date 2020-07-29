@@ -3,7 +3,7 @@ import { MsRun } from '../../types';
 import { mockMsRun } from '../../default-data/samples';
 
 export class Api {
-    public static async getMsRunsAsync(_projectId: number): Promise<MsRun[]> {
+    public static async getMsRunsAsync(_projectId: string): Promise<MsRun[]> {
         try {
             return BaseApi.getAsync(`msrun`);
         } catch (err) {

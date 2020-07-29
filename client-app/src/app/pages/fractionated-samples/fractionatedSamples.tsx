@@ -14,9 +14,7 @@ export const FractionatedSamples: FunctionComponent = () => {
     const [isActiveInputForm, setActiveInputFormFlag] = useState<boolean>(false);
 
     async function fetchSamples() {
-        const projectId: number = 5;
-
-        setSamples(await Api.getSamplesAsync(projectId));
+        setSamples(await Api.getSamplesAsync(Constants.projectId));
 
         setRefreshNeededFlag(false);
     }

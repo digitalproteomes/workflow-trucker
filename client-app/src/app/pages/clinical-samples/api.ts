@@ -3,7 +3,7 @@ import { Sample } from '../../types';
 import { mockSamples } from '../../default-data/samples';
 
 export class Api {
-    public static async fetchSamples(projectId: number): Promise<Sample[]> {
+    public static async fetchSamples(projectId: string): Promise<Sample[]> {
         try {
             return await BaseApi.getAsync(`sample/clinical?projectId=${projectId}`);
         } catch (err) {

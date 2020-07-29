@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Sample } from '../../../types';
-import { SampleList, getAllFilterProps } from '../../../common/sampleList';
+import { SampleList_v2, getAllFilterProps } from '../../../common/sampleList';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
@@ -35,11 +35,12 @@ export const List: FunctionComponent<ListProps> = ({
     });
 
     return (
-        <SampleList
+        <SampleList_v2
             samples={samples}
             columns={defaultColumns}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
+            rowKeySelector={(sample: Sample) => sample.id}
         />
     );
 };

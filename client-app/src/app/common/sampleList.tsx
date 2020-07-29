@@ -21,7 +21,7 @@ type IProps<T extends object> = {
     rowKeySelector: (row: T) => string;
 };
 
-function SampleList_v2<T extends object>({
+export function SampleList_v2<T extends object>({
     samples,
     columns,
     renderActions,

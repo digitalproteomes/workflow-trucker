@@ -7,6 +7,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { ComplexList } from '../../../common/complexList';
 import moment from 'moment';
 import { getWorkflowTag } from '../../../common/tags';
+import { Col, Row, Divider } from 'antd';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -34,14 +35,20 @@ export const List: FunctionComponent<ListProps> = ({
                 rowExpandable: (record: ClinicalSample) => record.description != null,
                 expandedRowRender: (record: ClinicalSample) => {
                     return (
-                        <>
-                            <h3>Notes</h3>
-                            <span>{record.description}</span>
-                            <h3>Processing person</h3>
-                            <span>{record.processingPerson}</span>
-                            <h3>Workflow tag</h3>
-                            {getWorkflowTag(record.workflowTag)}
-                        </>
+                        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                            <Col className="gutter-row" span={4}>
+                                <h3>Notes</h3>
+                                <span>{record.description}</span>
+                            </Col>
+                            <Col className="gutter-row" span={2}>
+                                <h3>Processing person</h3>
+                                <span>{record.processingPerson}</span>
+                            </Col>
+                            <Col className="gutter-row" span={2}>
+                                <h3>Workflow tag</h3>
+                                {getWorkflowTag(record.workflowTag)}
+                            </Col>
+                        </Row>
                     );
                 },
             }}

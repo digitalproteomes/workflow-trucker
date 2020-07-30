@@ -14,6 +14,7 @@ type Props = {
 
 type IProps<T extends object> = {
     style?: React.CSSProperties;
+    title?: string;
 
     samples: T[] | null;
     columns: ColumnsType<T>;
@@ -29,6 +30,7 @@ type IProps<T extends object> = {
  */
 export function SampleListV2<T extends object>({
     style,
+    title,
     samples,
     columns,
     renderActions,
@@ -56,7 +58,17 @@ export function SampleListV2<T extends object>({
         columnsType = columns;
     }
 
-    return (
+    return title != null ? (
+        <Table
+            style={style}
+            title={() => <h3>{title}</h3>}
+            rowSelection={rowSelection}
+            dataSource={samples}
+            columns={columnsType}
+            rowKey={(row) => rowKeySelector(row)}
+            expandable={expandableConfig}
+        />
+    ) : (
         <Table
             style={style}
             rowSelection={rowSelection}

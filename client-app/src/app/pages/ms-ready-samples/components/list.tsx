@@ -42,6 +42,7 @@ export const List: FunctionComponent<ListProps> = ({
                         {getWorkflowTag(record.workflowTag)}
                         <SampleListV2
                             style={{ width: 'fit-content' }}
+                            title={'Clinical samples'}
                             columns={[
                                 getColumn('Name', ClinicalSampleCompact.nameof('name')),
                                 getColumn('Id', ClinicalSampleCompact.nameof('id')),

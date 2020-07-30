@@ -5,6 +5,7 @@ import { ExpandableConfig } from 'antd/lib/table/interface';
 
 type ListProps<T extends object> = {
     style?: React.CSSProperties;
+    tableTitle?: string;
 
     isRefreshNeeded: boolean;
     onRefreshDone: () => void;
@@ -27,6 +28,7 @@ type ListProps<T extends object> = {
 
 export function ComplexList<T extends object>({
     style,
+    tableTitle,
 
     isRefreshNeeded,
     onRefreshDone,
@@ -57,6 +59,7 @@ export function ComplexList<T extends object>({
     return (
         <SampleListV2
             style={style}
+            title={tableTitle}
             samples={samples}
             columns={columns}
             renderActions={renderActions}

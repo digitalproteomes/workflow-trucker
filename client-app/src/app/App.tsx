@@ -9,6 +9,7 @@ import { IndividualSamples } from './pages/individual-samples';
 import { PooledSamples } from './pages/pooled-samples';
 import { FractionatedSamples, FractionatedSampleDetails } from './pages/fractionated-samples';
 import { MsRuns } from './pages/ms-runs';
+import { IntermediateSamples } from './pages/intermediate-samples';
 
 export function App() {
     return (
@@ -24,6 +25,9 @@ export function App() {
                         </Route>
                         <Route path="/samples/clinical">
                             <ClinicalSamples />
+                        </Route>
+                        <Route path="/samples/intermediate">
+                            <IntermediateSamples />
                         </Route>
                         <Route path="/samples/individual">
                             <IndividualSamples />

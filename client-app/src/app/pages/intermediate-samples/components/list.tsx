@@ -72,7 +72,7 @@ function renderExpandedRow() {
                 {getWorkflowTag(record.workflowTag)}
             </Col>
 
-            <Col className="gutter-row" span={6}>
+            <Col className="gutter-row" span={8}>
                 {getCompactClinicalSampleList(record.name, record.clinicalSamples)}
             </Col>
         </Row>

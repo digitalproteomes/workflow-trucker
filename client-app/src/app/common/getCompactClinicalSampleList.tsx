@@ -1,13 +1,13 @@
 import React from 'react';
 import { ClinicalSampleCompact } from '../types';
-import { getColumn, SampleListV2 } from './sampleList';
-import { Button } from 'antd';
+import { getColumn } from './sampleList';
+import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 export function getCompactClinicalSampleList(name: string, samples: ClinicalSampleCompact[]) {
     return (
-        <SampleListV2
-            title={`Clinical samples of ${name}`}
-            // style={{ width: 'fit-content' }}
+        <Table
+            title={() => <h3>{`Clinical samples of ${name}`}</h3>}
+            scroll={{ y: 260 }}
             columns={[
                 getColumn('Name', ClinicalSampleCompact.nameof('name')),
                 getColumn(
@@ -23,8 +23,8 @@ export function getCompactClinicalSampleList(name: string, samples: ClinicalSamp
                     false,
                 ),
             ]}
-            rowKeySelector={(row: ClinicalSampleCompact) => row.id}
-            samples={samples}
+            rowKey={(row: ClinicalSampleCompact) => row.id}
+            dataSource={samples}
         />
     );
 }

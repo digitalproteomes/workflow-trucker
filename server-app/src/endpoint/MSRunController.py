@@ -6,7 +6,7 @@ from bson import ObjectId
 
 from persistence import MSRunDAO
 from persistence import projectDAO
-from persistence import clinicalSampleDAO
+from persistence import clinicalSampleDAO, msReadySamplesDAO
 
 msrun_api = Blueprint('msrun_api', __name__)
 
@@ -16,10 +16,13 @@ def getMSRunsByProjectId():
     projectId = request.args.get('projectId')
     if (projectDAO.getProjectById(projectId)):
         msruns = MSRunDAO.getAllMSRunsByProjectId(projectId)
-        for s in msruns:
+        for msrun in msruns:
             augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
-                s['clinicalSamples'])
-            s['clinicalSamples'] = augmentedClinicalSamples
+                msrun['clinicalSamples'])
+            msReadySampleName = msReadySamplesDAO.getMSReadySampleName(
+                msrun['msReadySampleId'])
+            msrun['clinicalSamples'] = augmentedClinicalSamples
+            msrun['msReadySampleName'] = msReadySampleName
         return jsonify(msruns), status.HTTP_200_OK
     else:
         return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
@@ -33,7 +36,10 @@ def getMSRunById():
         msrun = msrun.dump()
         augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
             msrun['clinicalSamples'])
+        msReadySampleName = msReadySamplesDAO.getMSReadySampleName(
+            msrun['msReadySampleId'])
         msrun['clinicalSamples'] = augmentedClinicalSamples
+        msrun['msReadySampleName'] = msReadySampleName
         return jsonify(msrun), status.HTTP_200_OK
     else:
         return 'MS Run with id does not exist.', status.HTTP_404_NOT_FOUND
@@ -87,10 +93,13 @@ def getMsRunsByClinicalSampleId():
     if clinicalSampleDAO.getClinicalSampleById(clinicalSampleId):
         msruns = MSRunDAO.getMsRunsByClinicalSampleId(
             clinicalSampleId)
-        for s in msruns:
+        for ms_run in msruns:
             augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
-                s['clinicalSamples'])
-            s['clinicalSamples'] = augmentedClinicalSamples
+                ms_run['clinicalSamples'])
+            msReadySampleName = msReadySamplesDAO.getMSReadySampleName(
+                ms_run['msReadySampleId'])
+            ms_run['clinicalSamples'] = augmentedClinicalSamples
+            ms_run['msReadySampleName'] = msReadySampleName
         return jsonify(msruns), status.HTTP_200_OK
     else:
         return 'Clinical Sample with id does not exist.', status.HTTP_404_NOT_FOUND

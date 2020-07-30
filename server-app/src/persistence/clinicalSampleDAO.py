@@ -54,6 +54,6 @@ def augmentClinicalSampleNames(sampleIds):
 
     for i in sampleIds:
         sample = getClinicalSampleById(ObjectId(i))
-        augmentedSamples.append({i: sample['name']})
+        augmentedSamples.append({"id": i, "name": sample['name']})
 
     return augmentedSamples

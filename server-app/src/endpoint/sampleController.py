@@ -48,7 +48,12 @@ def getIntermediateSamplesByProject():
         for s in samples:
             augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
                 s['clinicalSamples'])
+            # if('parentSamples' in s):
+            #     augmentedIntermediateSamples = intermediateSampleDAO.augmentIntermediateSampleNames(
+            #         s['parentSamples'])
+            #     s['parentSamples'] = augmentedIntermediateSamples
             s['clinicalSamples'] = augmentedClinicalSamples
+
         return jsonify(samples), status.HTTP_200_OK
     else:
         return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
@@ -57,14 +62,19 @@ def getIntermediateSamplesByProject():
 @sample_api.route('/samples/intermediate', methods=['GET'])
 def getIntermediateSampleById():
     id = ObjectId(request.args.get('id'))
-    sample = intermediateSampleDAO.getIntermediateSampleById(id)
+    s = intermediateSampleDAO.getIntermediateSampleById(id)
 
-    if(sample):
-        sample = sample.dump()
+    if(s):
+        s = s.dump()
         augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
-            sample['clinicalSamples'])
-        sample['clinicalSamples'] = augmentedClinicalSamples
-        return jsonify(sample), status.HTTP_200_OK
+            s['clinicalSamples'])
+        # if('parentSamples' in s):
+        #     augmentedIntermediateSamples = intermediateSampleDAO.augmentIntermediateSampleNames(
+        #         s['parentSamples'])
+        #     s['parentSamples'] = augmentedIntermediateSamples
+        s['clinicalSamples'] = augmentedClinicalSamples
+
+        return jsonify(s), status.HTTP_200_OK
     else:
         return 'Intermediate Sample with id does not exist.', status.HTTP_404_NOT_FOUND
 
@@ -78,7 +88,10 @@ def getIntermediateSamplesByClinicalSampleId():
         for s in samples:
             augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
                 s['clinicalSamples'])
+            # augmentedIntermediateSamples = intermediateSampleDAO.augmentIntermediateSampleNames(
+            #     s['parentSamples'])
             s['clinicalSamples'] = augmentedClinicalSamples
+            # s['parentSamples'] = augmentedIntermediateSamples
         return jsonify(samples), status.HTTP_200_OK
     else:
         return 'Clinical Sample with id does not exist.', status.HTTP_404_NOT_FOUND
@@ -96,7 +109,10 @@ def getMsReadySamplesByProject():
         for s in samples:
             augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
                 s['clinicalSamples'])
+            intermediateSampleName = intermediateSampleDAO.getIntermediateSampleName(
+                s['intermediateSampleId'])
             s['clinicalSamples'] = augmentedClinicalSamples
+            s['intermediateSampleName'] = intermediateSampleName
         return jsonify(samples), status.HTTP_200_OK
     else:
         return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
@@ -108,11 +124,14 @@ def getMsReadySamplesById():
     sample = msReadySamplesDAO.getMSReadySampleById(id)
 
     if(sample):
-        sample = sample.dump()
+        s = sample.dump()
         augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
-            sample['clinicalSamples'])
-        sample['clinicalSamples'] = augmentedClinicalSamples
-        return jsonify(sample), status.HTTP_200_OK
+            s['clinicalSamples'])
+        intermediateSampleName = intermediateSampleDAO.getIntermediateSampleName(
+            s['intermediateSampleId'])
+        s['clinicalSamples'] = augmentedClinicalSamples
+        s['intermediateSampleName'] = intermediateSampleName
+        return jsonify(s), status.HTTP_200_OK
     else:
         return 'Ms Ready Sample with id does not exist.', status.HTTP_404_NOT_FOUND
 
@@ -126,7 +145,10 @@ def getMsReadySamplesByClinicalSampleId():
         for s in samples:
             augmentedClinicalSamples = clinicalSampleDAO.augmentClinicalSampleNames(
                 s['clinicalSamples'])
+            intermediateSampleName = intermediateSampleDAO.getIntermediateSampleName(
+                s['intermediateSampleId'])
             s['clinicalSamples'] = augmentedClinicalSamples
+            s['intermediateSampleName'] = intermediateSampleName
         return jsonify(samples), status.HTTP_200_OK
     else:
         return 'Clinical Sample with id does not exist.', status.HTTP_404_NOT_FOUND

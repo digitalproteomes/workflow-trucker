@@ -47,3 +47,18 @@ def getMSReadySamplesByClinicalSampleId(clinicalSampleId):
     for i in samples:
         result_samples.append(i.dump())
     return result_samples
+
+
+def augmentMSReadySampleNames(sampleIds):
+    augmentedSamples = []
+
+    for i in sampleIds:
+        sample = getMSReadySampleById(ObjectId(i))
+        augmentedSamples.append({"id": i, "name": sample['name']})
+
+    return augmentedSamples
+
+
+def getMSReadySampleName(sampleId):
+    sample = getMSReadySampleById(ObjectId(sampleId))
+    return sample['name']

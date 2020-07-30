@@ -9,10 +9,10 @@ TagDictionary[EWorkflowTag.SamplePreparation] = { color: 'orange', icon: <SyncOu
 TagDictionary[EWorkflowTag.SwathAnalysis] = { color: 'yellow', icon: <CheckCircleOutlined spin /> };
 TagDictionary[EWorkflowTag.LibraryGeneration] = { color: 'gold', icon: <ClockCircleOutlined spin /> };
 
-export const WorkflowTagPropsDictionary: Dictionary<TagProps> = TagDictionary;
+// const WorkflowTagPropsDictionary: Dictionary<TagProps> = TagDictionary;
 
 export function getWorkflowTag(tagName: EWorkflowTag) {
-    const tagProps = WorkflowTagPropsDictionary[tagName];
+    const tagProps = TagDictionary[tagName];
     return (
         <Tag icon={tagProps.icon} color={tagProps.color}>
             {tagName}

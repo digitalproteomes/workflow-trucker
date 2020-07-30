@@ -39,6 +39,13 @@ export class SampleNew {
     public static nameof = (name: keyof SampleNew) => name;
 }
 
+export enum EWorkflowTag {
+    Invalid = 'Invalid',
+    SamplePreparation = 'Sample Preparation',
+    SwathAnalysis = 'SWATHAnalysis',
+    LibraryGeneration = 'Library Generation',
+}
+
 export class ClinicalSample {
     createdDate: string = '';
 
@@ -56,7 +63,7 @@ export class ClinicalSample {
 
     updatedDate: string = '';
 
-    workflowTag: string = '';
+    workflowTag: EWorkflowTag = EWorkflowTag.Invalid;
 
     public static nameof = (name: keyof ClinicalSample) => name;
 }
@@ -91,12 +98,6 @@ export class IntermediateSample {
     workflowTag: string = '';
 
     public static nameof = (name: keyof IntermediateSample) => name;
-}
-
-export enum EWorkflowTag {
-    SamplePreparation = 'Sample Preparation',
-    SwathAnalysis = 'SWATHAnalysis',
-    LibraryGeneration = 'Library Generation',
 }
 
 export class MSReadySample {

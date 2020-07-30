@@ -6,9 +6,7 @@ import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
 import { ComplexList } from '../../../common/complexList';
 import moment from 'moment';
-import { Tag } from 'antd';
-import { WorkflowTagPropsDictionary } from '../../../default-data/tags';
-import { TagProps } from 'antd/lib/tag';
+import { getWorkflowTag } from '../../../default-data/tags';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -35,8 +33,6 @@ export const List: FunctionComponent<ListProps> = ({
             expandableConfig={{
                 rowExpandable: (record: ClinicalSample) => record.description != null,
                 expandedRowRender: (record: ClinicalSample) => {
-                    const tagProps: TagProps = WorkflowTagPropsDictionary[record.workflowTag]; //todo - use the getTag method instead of the props dictionary
-
                     return (
                         <>
                             <h3>Notes</h3>
@@ -44,9 +40,7 @@ export const List: FunctionComponent<ListProps> = ({
                             <h3>Processing person</h3>
                             <span>{record.processingPerson}</span>
                             <h3>Workflow tag</h3>
-                            <Tag icon={tagProps.icon} color={tagProps.color}>
-                                {record.workflowTag}
-                            </Tag>
+                            {getWorkflowTag(record.workflowTag)}
                         </>
                     );
                 },

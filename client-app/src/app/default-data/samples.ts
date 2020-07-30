@@ -1,4 +1,4 @@
-import { Sample, MsRun, ClinicalSample, IntermediateSample, MSReadySample } from '../types';
+import { Sample, MsRun, ClinicalSample, IntermediateSample, MSReadySample, EWorkflowTag } from '../types';
 import { Constants } from './constants';
 
 export function mockClinicalSamples(): ClinicalSample[] {
@@ -12,7 +12,7 @@ export function mockClinicalSamples(): ClinicalSample[] {
             projectId: Constants.projectId,
             sourceSampleId: 1,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.LibraryGeneration,
         },
         {
             createdDate: '2020-06-06T13:53:35.357000+00:00',
@@ -23,7 +23,7 @@ export function mockClinicalSamples(): ClinicalSample[] {
             projectId: Constants.projectId,
             sourceSampleId: 1,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.SamplePreparation,
         },
         {
             createdDate: '2020-06-06T13:53:35.357000+00:00',
@@ -34,7 +34,7 @@ export function mockClinicalSamples(): ClinicalSample[] {
             projectId: Constants.projectId,
             sourceSampleId: 1,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.SwathAnalysis,
         },
     ];
 }

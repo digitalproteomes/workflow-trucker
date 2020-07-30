@@ -47,3 +47,13 @@ def deleteMSrun(id):
         return 1
     else:
         return 0
+
+
+def augmentMSRunNames(runIds):
+    augmentedruns = []
+
+    for i in runIds:
+        msRun = getMsRun(ObjectId(i))
+        augmentedruns.append({"id": i, "name": msRun['name']})
+
+    return augmentedruns

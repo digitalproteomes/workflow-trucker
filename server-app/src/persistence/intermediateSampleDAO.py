@@ -44,3 +44,18 @@ def getIntermediateSamplesByClinicalSampleId(clinicalSampleId):
 
 def getIntermediateSampleById(id):
     return IntermediateSample.find_one({"id": id})
+
+
+def augmentIntermediateSampleNames(sampleIds):
+    augmentedSamples = []
+
+    for i in sampleIds:
+        sample = getIntermediateSampleById(ObjectId(i))
+        augmentedSamples.append({"id": i, "name": sample['name']})
+
+    return augmentedSamples
+
+
+def getIntermediateSampleName(sampleId):
+    sample = getIntermediateSampleById(ObjectId(sampleId))
+    return sample['name']

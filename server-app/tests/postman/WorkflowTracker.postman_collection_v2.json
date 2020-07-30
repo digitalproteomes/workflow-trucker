@@ -159,7 +159,7 @@
 					"name": "get ms run by project",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/msruns/project?projectId=5f203e819908d14381425efb",
+							"raw": "http://127.0.0.1:5000/msruns/project?projectId=5f22bc192c0e471ff12d6cb4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -175,7 +175,7 @@
 							"query": [
 								{
 									"key": "projectId",
-									"value": "5f203e819908d14381425efb",
+									"value": "5f22bc192c0e471ff12d6cb4",
 									"equals": true,
 									"description": ""
 								}
@@ -219,7 +219,7 @@
 					"name": "http://127.0.0.1:5000/msrun by id",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/msruns?id=5f203e869908d1438142621d",
+							"raw": "http://127.0.0.1:5000/msruns?id=5f22bc1d2c0e471ff12d7003",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -234,7 +234,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "5f203e869908d1438142621d",
+									"value": "5f22bc1d2c0e471ff12d7003",
 									"equals": true,
 									"description": ""
 								}
@@ -264,7 +264,7 @@
 					"name": "get ms runs by clinical sample id",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/msruns/clinical?id=5f203e819908d14381425efc",
+							"raw": "http://127.0.0.1:5000/msruns/clinical?id=5f22bc192c0e471ff12d6cf4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -280,7 +280,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "5f203e819908d14381425efc",
+									"value": "5f22bc192c0e471ff12d6cf4",
 									"equals": true,
 									"description": ""
 								}
@@ -358,7 +358,7 @@
 					"name": "get clinical samples by project",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/samples/clinical/project?projectId=5f203e819908d14381425efb",
+							"raw": "http://127.0.0.1:5000/samples/clinical/project?projectId=5f22bc192c0e471ff12d6cb4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -375,7 +375,7 @@
 							"query": [
 								{
 									"key": "projectId",
-									"value": "5f203e819908d14381425efb",
+									"value": "5f22bc192c0e471ff12d6cb4",
 									"equals": true,
 									"description": ""
 								}
@@ -405,7 +405,7 @@
 					"name": "get clinical samples by id",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/samples/clinical?id=5f203e819908d14381425efc",
+							"raw": "http://127.0.0.1:5000/samples/clinical?id=5f22918d9c7f5f42c26e6419",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -421,7 +421,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "5f203e819908d14381425efc",
+									"value": "5f22918d9c7f5f42c26e6419",
 									"equals": true,
 									"description": ""
 								}
@@ -457,7 +457,7 @@
 					"name": "get intermediate samples by project",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/samples/intermediate/project?projectId=5f203e819908d14381425efb",
+							"raw": "http://127.0.0.1:5000/samples/intermediate/project?projectId=5f22bc192c0e471ff12d6cb4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -474,7 +474,7 @@
 							"query": [
 								{
 									"key": "projectId",
-									"value": "5f203e819908d14381425efb",
+									"value": "5f22bc192c0e471ff12d6cb4",
 									"equals": true,
 									"description": ""
 								}
@@ -504,7 +504,7 @@
 					"name": "get intermediate sample by id",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/samples/intermediate?id=5f203e829908d14381425fe3",
+							"raw": "http://127.0.0.1:5000/samples/intermediate?id=5f22bc1a2c0e471ff12d6ddc",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -520,7 +520,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "5f203e829908d14381425fe3",
+									"value": "5f22bc1a2c0e471ff12d6ddc",
 									"equals": true,
 									"description": ""
 								}
@@ -550,7 +550,7 @@
 					"name": "get intermediate sample by clinical sample id",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/samples/intermediate/clinical?id=5f203e819908d14381425efc",
+							"raw": "http://127.0.0.1:5000/samples/intermediate/clinical?id=5f22bc192c0e471ff12d6cf4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -567,7 +567,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "5f203e819908d14381425efc",
+									"value": "5f22bc192c0e471ff12d6cf4",
 									"equals": true,
 									"description": ""
 								}
@@ -603,7 +603,7 @@
 					"name": "get msready samples by project",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/sample/msready?projectId=5f203e819908d14381425efb",
+							"raw": "http://127.0.0.1:5000/samples/msready/project?projectId=5f22bc192c0e471ff12d6cb4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -613,13 +613,14 @@
 							],
 							"port": "5000",
 							"path": [
-								"sample",
-								"msready"
+								"samples",
+								"msready",
+								"project"
 							],
 							"query": [
 								{
 									"key": "projectId",
-									"value": "5f203e819908d14381425efb",
+									"value": "5f22bc192c0e471ff12d6cb4",
 									"equals": true,
 									"description": ""
 								}
@@ -649,7 +650,7 @@
 					"name": "get ms ready sample by id",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/sample/msready/id?id=5f203e849908d14381426100",
+							"raw": "http://127.0.0.1:5000/samples/msready?id=5f22bc1b2c0e471ff12d6eba",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -659,14 +660,13 @@
 							],
 							"port": "5000",
 							"path": [
-								"sample",
-								"msready",
-								"id"
+								"samples",
+								"msready"
 							],
 							"query": [
 								{
 									"key": "id",
-									"value": "5f203e849908d14381426100",
+									"value": "5f22bc1b2c0e471ff12d6eba",
 									"equals": true,
 									"description": ""
 								}
@@ -696,7 +696,7 @@
 					"name": "get ms ready samples by clinical sample id copy",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/samples/msready/clinical?id=5f203e819908d14381425efc",
+							"raw": "http://127.0.0.1:5000/samples/msready/clinical?id=5f22bc1a2c0e471ff12d6d7f",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -713,7 +713,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "5f203e819908d14381425efc",
+									"value": "5f22bc1a2c0e471ff12d6d7f",
 									"equals": true,
 									"description": ""
 								}
@@ -749,7 +749,7 @@
 					"name": "get spectral libraries by project",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/spectrallibraries/project?projectId=5f203e819908d14381425efb",
+							"raw": "http://127.0.0.1:5000/spectrallibraries/project?projectId=5f22bc192c0e471ff12d6cb4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -765,7 +765,7 @@
 							"query": [
 								{
 									"key": "projectId",
-									"value": "5f203e819908d14381425efb",
+									"value": "5f22bc192c0e471ff12d6cb4",
 									"equals": true,
 									"description": ""
 								}
@@ -801,7 +801,7 @@
 					"name": "get swath analysis by project",
 					"request": {
 						"url": {
-							"raw": "http://127.0.0.1:5000/swathanalyses/project?projectId=5f203e819908d14381425efb",
+							"raw": "http://127.0.0.1:5000/swathanalyses/project?projectId=5f22bc192c0e471ff12d6cb4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -817,7 +817,7 @@
 							"query": [
 								{
 									"key": "projectId",
-									"value": "5f203e819908d14381425efb",
+									"value": "5f22bc192c0e471ff12d6cb4",
 									"equals": true,
 									"description": ""
 								}

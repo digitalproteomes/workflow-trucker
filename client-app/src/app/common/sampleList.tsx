@@ -13,6 +13,8 @@ type Props = {
 };
 
 type IProps<T extends object> = {
+    style?: React.CSSProperties;
+
     samples: T[] | null;
     columns: ColumnsType<T>;
     renderActions?: (record: T) => JSX.Element;
@@ -26,6 +28,7 @@ type IProps<T extends object> = {
  * todo - this is used most probably only by complexList.tsx. Should the two get merged?
  */
 export function SampleListV2<T extends object>({
+    style,
     samples,
     columns,
     renderActions,
@@ -55,6 +58,7 @@ export function SampleListV2<T extends object>({
 
     return (
         <Table
+            style={style}
             rowSelection={rowSelection}
             dataSource={samples}
             columns={columnsType}
@@ -110,7 +114,7 @@ export function getColumn<T>(label: string, name: keyof T, render?: (record: T) 
         ...getAllFilterProps<T>(name),
     };
 
-    if (render) column.render = render;
+    if (render) column.render = (_value, record, _index) => render(record);
 
     return column;
 }

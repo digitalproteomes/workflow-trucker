@@ -6,10 +6,9 @@ import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
 import { ComplexList } from '../../../common/complexList';
 import moment from 'moment';
-import { Dictionary } from '../../../common/utils';
-import { PresetColorType } from 'antd/lib/_util/colors';
 import { Tag } from 'antd';
-import { CheckCircleOutlined, SyncOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { WorkflowTagPropsDictionary } from '../../../default-data/tags';
+import { TagProps } from 'antd/lib/tag';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -36,7 +35,7 @@ export const List: FunctionComponent<ListProps> = ({
             expandableConfig={{
                 rowExpandable: (record: ClinicalSample) => record.description != null,
                 expandedRowRender: (record: ClinicalSample) => {
-                    const tagProps: TagProps = WorkflowTagDictionary[record.workflowTag];
+                    const tagProps: TagProps = WorkflowTagPropsDictionary[record.workflowTag]; //todo - use the getTag method instead of the props dictionary
 
                     return (
                         <>
@@ -69,13 +68,3 @@ const defaultColumns: ColumnsType<ClinicalSample> = [
         <span>{moment(record.updatedDate).format('DD/MM/YY')}</span>
     )),
 ];
-
-type TagProps = {
-    color: PresetColorType;
-    icon: React.ReactNode;
-};
-
-const WorkflowTagDictionary: Dictionary<TagProps> = {};
-WorkflowTagDictionary['Sample Preparation'] = { color: 'orange', icon: <SyncOutlined /> };
-WorkflowTagDictionary['SWATHAnalysis'] = { color: 'yellow', icon: <CheckCircleOutlined spin /> };
-WorkflowTagDictionary['Library Generation'] = { color: 'gold', icon: <ClockCircleOutlined spin /> };

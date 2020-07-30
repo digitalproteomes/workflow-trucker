@@ -93,6 +93,12 @@ export class IntermediateSample {
     public static nameof = (name: keyof IntermediateSample) => name;
 }
 
+export enum EWorkflowTag {
+    SamplePreparation = 'Sample Preparation',
+    SwathAnalysis = 'SWATHAnalysis',
+    LibraryGeneration = 'Library Generation',
+}
+
 export class MSReadySample {
     clinicalSamples: ClinicalSampleCompact[] = [];
 
@@ -180,6 +186,8 @@ export class GenerationData {
 
     description: string = '';
 
+    workflowTag: string = '';
+
     numberOfEntries: number = 10;
 
     public static nameof = (name: keyof GenerationData) => name;
@@ -190,6 +198,7 @@ export class GenerationData {
         suffixProject: 'CPAC',
         processingPerson: 'Admin',
         description: 'Zurich Hospital sample',
+        workflowTag: EWorkflowTag.LibraryGeneration.toString(),
         numberOfEntries: 3,
     };
 }

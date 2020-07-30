@@ -1,13 +1,15 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Form, Input, Typography, Button, Table } from 'antd';
+import { Form, Input, Typography, Button, Table, Select } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
-import { GenerationData, GenerationDataKeys, SampleNew } from '../../../types';
+import { GenerationData, GenerationDataKeys, SampleNew, EWorkflowTag } from '../../../types';
 import { PlusOutlined } from '@ant-design/icons';
 import { FieldData } from 'rc-field-form/lib/interface';
 import { ColumnsType } from 'antd/lib/table';
+import { getWorkflowTag } from '../../../default-data/tags';
 
 const { Text } = Typography;
+const { Option } = Select;
 
 export { ButtonAutoGenerate, AutoGenerateInputForm };
 
@@ -138,8 +140,6 @@ function inputForm(
     errorMessage: string | null,
     onFieldsChange: (newFields: FieldData[]) => void,
 ): JSX.Element {
-    const placeholder: GenerationData = GenerationData.Default;
-
     return (
         <Form
             {...formLayout}
@@ -155,6 +155,11 @@ function inputForm(
             {createFormInput('Processing person', GenerationData.nameof('processingPerson'))}
             {createFormInput('Description', GenerationData.nameof('description'))}
             {createFormInput('Number of entries', GenerationData.nameof('numberOfEntries'))}
+            {createFormSelect('Workflow tags', GenerationData.nameof('workflowTag'), [
+                EWorkflowTag.LibraryGeneration,
+                EWorkflowTag.SamplePreparation,
+                EWorkflowTag.SwathAnalysis,
+            ])}
 
             {errorMessage == null ? null : (
                 <Form.Item label="Error" name="errorMessage">
@@ -183,6 +188,29 @@ function createFormInput<T>(label: string, propName: keyof T, placeholder?: stri
             rules={[{ required: required, message: validationMessage(propName.toString()) }]}
         >
             <Input placeholder={placeholder} />
+        </Form.Item>
+    );
+}
+
+function createFormSelect<T>(label: string, propName: keyof T, workflowTags: EWorkflowTag[]) {
+    // todo - extract this into a common helper
+    return (
+        <Form.Item
+            label={label}
+            name={propName.toString()}
+            rules={[{ required: false, message: validationMessage(propName.toString()) }]}
+        >
+            <Select
+                mode={'multiple'}
+                tagRender={(props) => {
+                    const { value } = props; // reference https://ant.design/components/select/#components-select-demo-custom-tag-render
+                    return getWorkflowTag(value as EWorkflowTag);
+                }}
+            >
+                {workflowTags.map((tag) => (
+                    <Option value={tag}>{tag}</Option>
+                ))}
+            </Select>
         </Form.Item>
     );
 }

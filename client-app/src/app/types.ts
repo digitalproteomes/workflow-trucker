@@ -178,15 +178,18 @@ export class GenerationData {
 
     processingPerson: string = '';
 
+    description: string = '';
+
     numberOfEntries: number = 10;
 
     public static nameof = (name: keyof GenerationData) => name;
 
     public static Default: GenerationData = {
         prefixProject: 'PHRT',
-        projectId: '561', //Constants.projectId,
+        projectId: '005', //Constants.projectId,
         suffixProject: 'CPAC',
         processingPerson: 'Admin',
+        description: 'Zurich Hospital sample',
         numberOfEntries: 3,
     };
 }

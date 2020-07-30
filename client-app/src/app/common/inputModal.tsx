@@ -23,6 +23,7 @@ export const InputModal: FunctionComponent<ModalProps> = ({
     return (
         <Modal
             visible={visible}
+            width={'30%'} // todo - the width of the input modal should be customizable
             title={title}
             okText="Create"
             cancelText="Cancel"

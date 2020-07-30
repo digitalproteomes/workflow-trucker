@@ -143,24 +143,18 @@ function inputForm(
     return (
         <Form
             {...formLayout}
+            layout={'horizontal'}
             form={form}
             name="clinical-sample-input-form"
-            initialValues={{ remember: true }}
+            initialValues={GenerationData.Default}
             onFieldsChange={(changedFields: FieldData[], _: FieldData[]) => onFieldsChange(changedFields)}
         >
-            {createFormInput('Project prefix', GenerationData.nameof('prefixProject'), placeholder.prefixProject)}
-            {createFormInput('Project id', GenerationData.nameof('projectId'), placeholder.projectId)}
-            {createFormInput('Project suffix', GenerationData.nameof('suffixProject'), placeholder.suffixProject)}
-            {createFormInput(
-                'Processing person',
-                GenerationData.nameof('processingPerson'),
-                placeholder.processingPerson,
-            )}
-            {createFormInput(
-                'Number of entries',
-                GenerationData.nameof('numberOfEntries'),
-                placeholder.numberOfEntries.toString(),
-            )}
+            {createFormInput('Project prefix', GenerationData.nameof('prefixProject'))}
+            {createFormInput('Project id', GenerationData.nameof('projectId'))}
+            {createFormInput('Project suffix', GenerationData.nameof('suffixProject'))}
+            {createFormInput('Processing person', GenerationData.nameof('processingPerson'))}
+            {createFormInput('Description', GenerationData.nameof('description'))}
+            {createFormInput('Number of entries', GenerationData.nameof('numberOfEntries'))}
 
             {errorMessage == null ? null : (
                 <Form.Item label="Error" name="errorMessage">

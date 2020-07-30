@@ -1,11 +1,14 @@
 import { BaseApi } from '../../infrastructure/api';
 import { ClinicalSample } from '../../types';
 import { mockClinicalSamples } from '../../default-data/samples';
+import { Constants } from '../../default-data/constants';
 
 export class Api {
     public static async fetchSamples(projectId: string): Promise<ClinicalSample[]> {
         try {
-            return await BaseApi.getAsync(`samples/clinical/project?projectId=${projectId}`);
+            return Constants.useServerEndpoints
+                ? await BaseApi.getAsync(`samples/clinical/project?projectId=${projectId}`)
+                : mockClinicalSamples();
         } catch (err) {
             return mockClinicalSamples();
         }

@@ -1,12 +1,14 @@
 import { BaseApi } from '../../infrastructure/api';
 import { IntermediateSample } from '../../types';
 import { mockIntermediateSamples } from '../../default-data/samples';
+import { Constants } from '../../default-data/constants';
 
 export class Api {
     public static async fetchSamples(projectId: string): Promise<IntermediateSample[]> {
         try {
-            // return await BaseApi.getAsync(`samples/intermediate/project?projectId=${projectId}`);
-            return mockIntermediateSamples();
+            return Constants.useServerEndpoints
+                ? await BaseApi.getAsync(`samples/intermediate/project?projectId=${projectId}`)
+                : mockIntermediateSamples();
         } catch (err) {
             return mockIntermediateSamples();
         }

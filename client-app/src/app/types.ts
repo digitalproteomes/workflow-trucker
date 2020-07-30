@@ -95,7 +95,7 @@ export class IntermediateSample {
 
     updatedDate: string = '';
 
-    workflowTag: string = '';
+    workflowTag: EWorkflowTag = EWorkflowTag.Invalid;
 
     public static nameof = (name: keyof IntermediateSample) => name;
 }
@@ -119,7 +119,7 @@ export class MSReadySample {
 
     updatedDate: string = '';
 
-    workflowTag: string = '';
+    workflowTag: EWorkflowTag = EWorkflowTag.Invalid;
 
     public static nameof = (name: keyof MSReadySample) => name;
 }
@@ -171,7 +171,7 @@ export class MsRun {
 
     updatedDate: string = '';
 
-    workflowTag: string = '';
+    workflowTag: EWorkflowTag = EWorkflowTag.Invalid;
 
     public static nameof = (name: keyof MsRun) => name;
 }

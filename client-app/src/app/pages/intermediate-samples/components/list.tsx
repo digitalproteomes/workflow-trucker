@@ -8,6 +8,7 @@ import { ComplexList } from '../../../common/complexList';
 import { Tag } from 'antd';
 import { PresetColorType } from 'antd/lib/_util/colors';
 import { formatDate, Dictionary } from '../../../common/utils';
+import { getWorkflowTag } from '../../../default-data/tags';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -34,16 +35,25 @@ export const List: FunctionComponent<ListProps> = ({
             expandableConfig={{
                 rowExpandable: (record: IntermediateSample) =>
                     record.clinicalSamples && record.clinicalSamples.length > 0,
+                // todo - put these details nicely into columns
                 expandedRowRender: (record: IntermediateSample) => (
-                    <SampleListV2
-                        style={{ width: 'fit-content' }}
-                        columns={[
-                            getColumn('Name', ClinicalSampleCompact.nameof('name')),
-                            getColumn('Id', ClinicalSampleCompact.nameof('id')),
-                        ]}
-                        rowKeySelector={(row: ClinicalSampleCompact) => row.id}
-                        samples={record.clinicalSamples}
-                    />
+                    <>
+                        <h3>Notes</h3>
+                        <span>{record.description}</span>
+                        <h3>Processing person</h3>
+                        <span>{record.processingPerson}</span>
+                        <h3>Workflow tag</h3>
+                        {getWorkflowTag(record.workflowTag)}
+                        <SampleListV2
+                            style={{ width: 'fit-content' }}
+                            columns={[
+                                getColumn('Name', ClinicalSampleCompact.nameof('name')),
+                                getColumn('Id', ClinicalSampleCompact.nameof('id')),
+                            ]}
+                            rowKeySelector={(row: ClinicalSampleCompact) => row.id}
+                            samples={record.clinicalSamples}
+                        />
+                    </>
                 ),
             }}
         />

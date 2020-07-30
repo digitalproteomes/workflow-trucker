@@ -1,11 +1,14 @@
 import { BaseApi } from '../../infrastructure/api';
 import { MsRun } from '../../types';
 import { mockMsRun as mockMsRuns } from '../../default-data/samples';
+import { Constants } from '../../default-data/constants';
 
 export class Api {
     public static async getMsRunsAsync(projectId: string): Promise<MsRun[]> {
         try {
-            return BaseApi.getAsync(`msruns/project?projectId=${projectId}`);
+            return Constants.useServerEndpoints
+                ? await BaseApi.getAsync(`msruns/project?projectId=${projectId}`)
+                : mockMsRuns();
         } catch (err) {
             return mockMsRuns();
         }

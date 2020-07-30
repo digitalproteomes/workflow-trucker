@@ -51,7 +51,7 @@ export function mockIntermediateSamples(): IntermediateSample[] {
             projectId: Constants.projectId,
             protocolName: 'single_preparation',
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.LibraryGeneration,
         },
         {
             clinicalSamples: [],
@@ -63,7 +63,7 @@ export function mockIntermediateSamples(): IntermediateSample[] {
             projectId: Constants.projectId,
             protocolName: 'pooling_preparation',
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.SwathAnalysis,
         },
         {
             clinicalSamples: [
@@ -84,7 +84,7 @@ export function mockIntermediateSamples(): IntermediateSample[] {
             projectId: Constants.projectId,
             protocolName: 'fractionation_preparation',
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.SamplePreparation,
         },
     ];
 }
@@ -101,7 +101,7 @@ export function mockMSReadySamples(): MSReadySample[] {
             processingPerson: 'mock Processing person',
             projectId: Constants.projectId,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.SwathAnalysis,
         },
         {
             clinicalSamples: [],
@@ -113,7 +113,7 @@ export function mockMSReadySamples(): MSReadySample[] {
             processingPerson: 'mock Processing person',
             projectId: Constants.projectId,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.LibraryGeneration,
         },
         {
             clinicalSamples: [
@@ -134,7 +134,7 @@ export function mockMSReadySamples(): MSReadySample[] {
             processingPerson: '3 mock Processing person',
             projectId: Constants.projectId,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.SamplePreparation,
         },
     ];
 }
@@ -201,7 +201,7 @@ export function mockMsRun(): MsRun[] {
             protocolId: 'DIA_protocol',
             runId: 34,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.SamplePreparation,
         },
         {
             clinicalSamples: [
@@ -225,7 +225,7 @@ export function mockMsRun(): MsRun[] {
             protocolId: 'DIA_protocol',
             runId: 45,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
-            workflowTag: 'Sample Preparation',
+            workflowTag: EWorkflowTag.SwathAnalysis,
         },
     ];
 }

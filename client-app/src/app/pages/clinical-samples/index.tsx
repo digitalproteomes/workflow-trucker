@@ -4,7 +4,7 @@ import { ClinicalInputForm, ButtonCreateNew } from './components/createNew'; // 
 import { AutoGenerateInputForm, ButtonAutoGenerate } from './components/createNewAutoGenerate';
 import { List } from './components/list';
 import { ButtonAddToPooling } from './components/addToPooling';
-import { Sample } from '../../types';
+import { ClinicalSample } from '../../types';
 import { ButtonDelete } from './components/delete';
 import { ButtonFractionate, FractionateInputForm, ButtonFractionDetails } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
@@ -17,13 +17,13 @@ export const ClinicalSamples: FunctionComponent = () => {
 
     const [isActiveAutoGenerate, setActiveAutoGenerateFlag] = useState<boolean>(false);
 
-    const [fractionateSample, setFractionateSample] = useState<Sample | null>(null);
+    const [fractionateSample, setFractionateSample] = useState<ClinicalSample | null>(null);
 
-    const [selectedSamples, setSelectedSamples] = useState<Sample[]>([]);
+    const [, setSelectedSamples] = useState<ClinicalSample[]>([]);
 
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const onCreateNewSuccessful = (sample: Sample) => {
+    const onCreateNewSuccessful = (sample: ClinicalSample) => {
         sampleNotifications.queueCreateSuccess(sample.name);
 
         setRefreshNeededFlag(true);
@@ -63,12 +63,12 @@ export const ClinicalSamples: FunctionComponent = () => {
         console.log('add to pooling');
     };
 
-    function onDeleteDone(sample: Sample) {
+    function onDeleteDone(sample: ClinicalSample) {
         setRefreshNeededFlag(true);
         sampleNotifications.queueDeleteSuccess(sample.name);
     }
 
-    const onFractionate = (sample: Sample) => {
+    const onFractionate = (sample: ClinicalSample) => {
         setFractionateSample(sample);
     };
 
@@ -76,7 +76,7 @@ export const ClinicalSamples: FunctionComponent = () => {
         setFractionateSample(null);
     };
 
-    const onFractionateSuccessful = (samples: Sample[]) => {
+    const onFractionateSuccessful = (samples: ClinicalSample[]) => {
         samples.forEach((sample, _index, _samples) => {
             sampleNotifications.queueCreateSuccess(sample.name);
         });
@@ -84,11 +84,11 @@ export const ClinicalSamples: FunctionComponent = () => {
         setFractionateSample(null);
     };
 
-    const onRowSelectionChange = (selectedRows: Sample[]) => {
+    const onRowSelectionChange = (selectedRows: ClinicalSample[]) => {
         setSelectedSamples(selectedRows);
     };
 
-    const renderActions = (record: Sample) => {
+    const renderActions = (record: ClinicalSample) => {
         return (
             <Space size="middle">
                 <ButtonSinglePrep
@@ -119,7 +119,8 @@ export const ClinicalSamples: FunctionComponent = () => {
                 onAutoGenerateClick={onAutoGenerateButtonClick}
                 style={{ float: 'right', marginRight: 16 }}
             />
-            <ButtonCreateMsRun samples={selectedSamples} style={{ float: 'right', marginRight: 16 }} />
+            {/* <ButtonCreateMsRun samples={selectedSamples} style={{ float: 'right', marginRight: 16 }} /> */}
+            <ButtonCreateMsRun samples={[]} style={{ float: 'right', marginRight: 16 }} />
             <ButtonAddToPooling onAddToPooling={onAddToPooling} style={{ float: 'right', marginRight: 16 }} />
 
             <ClinicalInputForm

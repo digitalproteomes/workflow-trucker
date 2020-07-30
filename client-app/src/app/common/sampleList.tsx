@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Table, Skeleton, Input, Space, Button } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { Sample } from '../types';
-import { TableRowSelection, FilterDropdownProps } from 'antd/lib/table/interface';
+import { TableRowSelection, FilterDropdownProps, ColumnType } from 'antd/lib/table/interface';
 import { SearchOutlined } from '@ant-design/icons';
 
 type Props = {
@@ -102,11 +102,23 @@ function getRenderObject<T>(renderActions: (record: T) => React.ReactNode) {
     };
 }
 
+export function getColumn<T>(label: string, name: keyof T, render?: (record: T) => React.ReactNode): ColumnType<T> {
+    const column: ColumnType<T> = {
+        title: label,
+        dataIndex: name.toString(),
+        ...getAllFilterProps<T>(name),
+    };
+
+    if (render) column.render = render;
+
+    return column;
+}
+
 type ColumnFilterProps<T> = {
     filterIcon: (isFiltered: boolean) => React.ReactNode;
     filterDropdown: (filterProps: FilterDropdownProps) => React.ReactNode;
     onFilter: (value: string | number | boolean, record: T) => boolean;
-    render: (text: string) => JSX.Element; // todo - this signature is not present in the official interface. Not sure why it works (if it works)
+    // render: (text: string) => JSX.Element; // todo - this signature is not present in the official interface. Not sure why it works (if it works)
 };
 
 export function getAllFilterProps<T>(column: keyof T): ColumnFilterProps<T> {
@@ -116,7 +128,7 @@ export function getAllFilterProps<T>(column: keyof T): ColumnFilterProps<T> {
         onFilter: (value: string | number | boolean, record: T) => {
             return onFilter<T>(value, column, record);
         },
-        render: renderFilteredColumnEntry,
+        // render: renderFilteredColumnEntry,
     };
 }
 
@@ -178,7 +190,7 @@ function onFilter<T>(value: string | number | boolean, column: keyof T, record: 
     return entry.includes(searchTerm);
 }
 
-function renderFilteredColumnEntry(text: string): JSX.Element {
-    // todo - here we should take from the state the search term and highlight in the word
-    return <span>{text}</span>;
-}
+// function renderFilteredColumnEntry(text: string): JSX.Element {
+//     // todo - here we should take from the state the search term and highlight in the word
+//     return <span>{text}</span>;
+// }

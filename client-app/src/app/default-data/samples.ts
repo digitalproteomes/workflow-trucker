@@ -1,5 +1,43 @@
-import { Sample, MsRun } from '../types';
+import { Sample, MsRun, ClinicalSample } from '../types';
 import { Constants } from './constants';
+
+export function mockClinicalSamples(): ClinicalSample[] {
+    return [
+        {
+            createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: 'Generated as mock',
+            id: '5edb9fdf4765770ed5b68a74',
+            name: 'mock PHRT_005_001_CPAC',
+            processingPerson: 'mock Processing person',
+            projectId: Constants.projectId,
+            sourceSampleId: 1,
+            updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            workflowTag: 'Sample Preparation',
+        },
+        {
+            createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: '2 Generated as mock',
+            id: '5edb9fdf4765770ed5b68a74',
+            name: '2 mock PHRT_005_001_CPAC',
+            processingPerson: 'mock Processing person',
+            projectId: Constants.projectId,
+            sourceSampleId: 1,
+            updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            workflowTag: 'Sample Preparation',
+        },
+        {
+            createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: 'Generated as mock',
+            id: '5edb9fdf4765770ed5b68a74',
+            name: '3 mock PHRT_005_001_CPAC',
+            processingPerson: '3 mock Processing person',
+            projectId: Constants.projectId,
+            sourceSampleId: 1,
+            updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            workflowTag: 'Sample Preparation',
+        },
+    ];
+}
 
 export function mockSamples(): Sample[] {
     return [

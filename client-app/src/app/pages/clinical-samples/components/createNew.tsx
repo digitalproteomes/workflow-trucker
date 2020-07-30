@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { Form, Input, Typography, Button } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
-import { Sample } from '../../../types';
+import { ClinicalSample } from '../../../types';
 import { Api } from '../api';
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -36,7 +36,7 @@ const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onCreateNewC
 
 type FormProps = {
     isActiveInputForm: boolean;
-    onCreateSuccessful: (sample: Sample) => void;
+    onCreateSuccessful: (sample: ClinicalSample) => void;
     onCancel: () => void;
 };
 
@@ -46,7 +46,7 @@ const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, on
     const onCreate = (values: any) => {
         async function saveSample() {
             try {
-                const createdSample: Sample = await Api.postSampleAsync({ ...values });
+                const createdSample: ClinicalSample = await Api.postSampleAsync({ ...values });
 
                 onCreateSuccessful(createdSample);
             } catch (error) {
@@ -75,9 +75,9 @@ const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, on
 function inputForm(form: FormInstance, errorMessage: string | null): JSX.Element {
     return (
         <Form {...formLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
-            {createFormInput('Name', Sample.nameof('name'))}
-            {createFormInput('ProjectId', Sample.nameof('projectId'))}
-            {createFormInput('Source sample id', Sample.nameof('sourceSampleId'))}
+            {createFormInput('Name', ClinicalSample.nameof('name'))}
+            {createFormInput('ProjectId', ClinicalSample.nameof('projectId'))}
+            {createFormInput('Source sample id', ClinicalSample.nameof('sourceSampleId'))}
 
             {errorMessage == null ? null : (
                 <Form.Item label="Error" name="errorMessage">

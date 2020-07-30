@@ -4,7 +4,7 @@ import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
 import { GenerationData, GenerationDataKeys, SampleNew } from '../../../types';
 import { PlusOutlined } from '@ant-design/icons';
-import { FieldData } from 'antd/node_modules/rc-field-form/lib/interface';
+import { FieldData } from 'rc-field-form/lib/interface';
 import { ColumnsType } from 'antd/lib/table';
 
 const { Text } = Typography;

@@ -39,6 +39,28 @@ export class SampleNew {
     public static nameof = (name: keyof SampleNew) => name;
 }
 
+export class ClinicalSample {
+    createdDate: string = '';
+
+    description: string = '';
+
+    id: string = '';
+
+    name: string = '';
+
+    processingPerson: string = '';
+
+    projectId: string = '';
+
+    sourceSampleId: number = -1;
+
+    updatedDate: string = '';
+
+    workflowTag: string = '';
+
+    public static nameof = (name: keyof ClinicalSample) => name;
+}
+
 export class Project {
     id: string = '';
 

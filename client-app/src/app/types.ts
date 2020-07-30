@@ -61,7 +61,7 @@ export class ClinicalSample {
     public static nameof = (name: keyof ClinicalSample) => name;
 }
 
-class ClinicalSampleCompact {
+export class ClinicalSampleCompact {
     id: string = '';
 
     name: string = '';

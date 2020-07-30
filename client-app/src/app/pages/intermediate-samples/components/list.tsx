@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { IntermediateSample } from '../../../types';
-import { getColumn } from '../../../common/sampleList';
+import { IntermediateSample, ClinicalSampleCompact } from '../../../types';
+import { getColumn, SampleListV2 } from '../../../common/sampleList';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
@@ -29,6 +29,20 @@ export const List: FunctionComponent<ListProps> = ({
             fetchSamples={() => Api.fetchSamples(Constants.projectId)}
             rowKeySelector={(row: IntermediateSample) => row.id}
             columns={defaultColumns}
+            expandableConfig={{
+                rowExpandable: (record: IntermediateSample) =>
+                    record.clinicalSamples && record.clinicalSamples.length > 0,
+                expandedRowRender: (record: IntermediateSample) => (
+                    <SampleListV2
+                        columns={[
+                            getColumn('Name', ClinicalSampleCompact.nameof('name')),
+                            getColumn('Id', ClinicalSampleCompact.nameof('id')),
+                        ]}
+                        rowKeySelector={(row: ClinicalSampleCompact) => row.id}
+                        samples={record.clinicalSamples}
+                    />
+                ),
+            }}
         />
     );
 };

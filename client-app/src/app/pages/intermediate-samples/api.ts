@@ -5,7 +5,8 @@ import { mockIntermediateSamples } from '../../default-data/samples';
 export class Api {
     public static async fetchSamples(projectId: string): Promise<IntermediateSample[]> {
         try {
-            return await BaseApi.getAsync(`samples/intermediate/project?projectId=${projectId}`);
+            // return await BaseApi.getAsync(`samples/intermediate/project?projectId=${projectId}`);
+            return mockIntermediateSamples();
         } catch (err) {
             return mockIntermediateSamples();
         }

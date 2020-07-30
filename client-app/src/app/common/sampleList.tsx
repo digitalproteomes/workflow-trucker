@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Table, Skeleton, Input, Space, Button } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { Sample } from '../types';
-import { TableRowSelection, FilterDropdownProps, ColumnType } from 'antd/lib/table/interface';
+import { TableRowSelection, FilterDropdownProps, ColumnType, ExpandableConfig } from 'antd/lib/table/interface';
 import { SearchOutlined } from '@ant-design/icons';
 
 type Props = {
@@ -19,6 +19,7 @@ type IProps<T extends object> = {
     onRowSelectionChange?: (selectedRows: T[]) => void;
 
     rowKeySelector: (row: T) => string;
+    expandableConfig?: ExpandableConfig<T>;
 };
 
 /**
@@ -30,16 +31,15 @@ export function SampleListV2<T extends object>({
     renderActions,
     onRowSelectionChange,
     rowKeySelector,
+    expandableConfig,
 }: IProps<T> & { children?: React.ReactNode }): React.ReactElement {
-    const onRowSelectionChangeHandler = (_selectedRowKeys: any, selectedRows: T[]) => {
-        // at the moment (antd 4.3.5) the selectedRowKeys are coming in as ReactText[]
-        if (onRowSelectionChange) onRowSelectionChange(selectedRows);
-    };
-
-    const rowSelection: TableRowSelection<T> = {
-        onChange: onRowSelectionChangeHandler,
-        selections: [Table.SELECTION_ALL],
-    };
+    const rowSelection: TableRowSelection<T> | undefined =
+        onRowSelectionChange == null
+            ? undefined
+            : {
+                  onChange: (_selectedRowKeys: any, selectedRows: T[]) => onRowSelectionChange(selectedRows),
+                  selections: [Table.SELECTION_ALL],
+              };
 
     if (samples == null) {
         return <Skeleton active />;
@@ -59,6 +59,7 @@ export function SampleListV2<T extends object>({
             dataSource={samples}
             columns={columnsType}
             rowKey={(row) => rowKeySelector(row)}
+            expandable={expandableConfig}
         />
     );
 }

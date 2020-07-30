@@ -24,7 +24,7 @@ type IProps<T extends object> = {
 /**
  * todo - this is used most probably only by complexList.tsx. Should the two get merged?
  */
-export function SampleList_v2<T extends object>({
+export function SampleListV2<T extends object>({
     samples,
     columns,
     renderActions,

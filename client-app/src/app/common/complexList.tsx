@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ColumnsType } from 'antd/lib/table';
-import { SampleList_v2 } from './sampleList';
+import { SampleListV2 } from './sampleList';
 
 type ListProps<T extends object> = {
     isRefreshNeeded: boolean;
@@ -48,7 +48,7 @@ export function ComplexList<T extends object>({
     });
 
     return (
-        <SampleList_v2
+        <SampleListV2
             samples={samples}
             columns={columns}
             renderActions={renderActions}

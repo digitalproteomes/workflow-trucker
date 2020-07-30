@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Sample } from '../../../types';
 import { getAllFilterProps } from '../../../common/sampleList';
 import { Api } from '../api';

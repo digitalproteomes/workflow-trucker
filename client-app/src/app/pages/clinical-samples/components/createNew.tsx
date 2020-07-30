@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { Form, Input, Typography, Button } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
-import { Project, Sample } from '../../../types';
+import { Sample } from '../../../types';
 import { Api } from '../api';
 import { PlusOutlined } from '@ant-design/icons';
 

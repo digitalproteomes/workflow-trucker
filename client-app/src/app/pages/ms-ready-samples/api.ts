@@ -7,7 +7,7 @@ export class Api {
     public static async fetchSamples(projectId: string): Promise<MSReadySample[]> {
         try {
             return Constants.useServerEndpoints
-                ? await BaseApi.getAsync(`samples/intermediate/project?projectId=${projectId}`)
+                ? await BaseApi.getAsync(`samples/msready/project?projectId=${projectId}`)
                 : mockMSReadySamples();
         } catch (err) {
             return mockMSReadySamples();
@@ -15,7 +15,7 @@ export class Api {
     }
 
     public static async postSampleAsync(payload: any): Promise<MSReadySample> {
-        return await BaseApi.postAsync(`/samples/intermediate`, payload);
+        return await BaseApi.postAsync(`/samples/msready`, payload);
     }
 
     public static async deleteSampleAsync(entry: MSReadySample): Promise<void> {

@@ -111,6 +111,8 @@ export class MSReadySample {
 
     intermediateSampleId: string = '';
 
+    intermediateSampleName: string = '';
+
     name: string = '';
 
     processingPerson: string = '';

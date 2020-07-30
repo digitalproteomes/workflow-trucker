@@ -63,9 +63,9 @@ const BasicLayout: React.FC = (props) => {
                 <Menu
                     mode="inline"
                     theme="dark"
-                    // defaultSelectedKeys={[`${defaultProjectId}_5`]}
+                    defaultSelectedKeys={[`${defaultProjectId}_5`]}
                     // defaultSelectedKeys={[`${defaultProjectId}_intermediate`]}
-                    defaultSelectedKeys={[`${defaultProjectId}_msready`]}
+                    // defaultSelectedKeys={[`${defaultProjectId}_msready`]}
                     defaultOpenKeys={[
                         `${defaultProjectId}_sub1`,
                         `${defaultProjectId}_sub1_1`,

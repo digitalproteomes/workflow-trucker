@@ -59,7 +59,7 @@ export const List: FunctionComponent<ListProps> = ({
 const defaultColumns: ColumnsType<MSReadySample> = [
     getColumn('Name', MSReadySample.nameof('name')),
     getColumn('Id', MSReadySample.nameof('id')),
-    getColumn('Id', MSReadySample.nameof('intermediateSampleId')),
+    getColumn('Intermediate sample', MSReadySample.nameof('intermediateSampleName')),
     getColumn('Created on', MSReadySample.nameof('createdDate'), (record: MSReadySample) => (
         <span>{formatDate(record.createdDate)}</span>
     )),

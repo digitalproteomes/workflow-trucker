@@ -6,6 +6,10 @@ import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
 import { ComplexList } from '../../../common/complexList';
 import moment from 'moment';
+import { Dictionary } from '../../../common/utils';
+import { PresetColorType } from 'antd/lib/_util/colors';
+import { Tag } from 'antd';
+import { CheckCircleOutlined, SyncOutlined, ClockCircleOutlined } from '@ant-design/icons';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -29,6 +33,25 @@ export const List: FunctionComponent<ListProps> = ({
             fetchSamples={() => Api.fetchSamples(Constants.projectId)}
             rowKeySelector={(row: ClinicalSample) => row.id}
             columns={defaultColumns}
+            expandableConfig={{
+                rowExpandable: (record: ClinicalSample) => record.description != null,
+                expandedRowRender: (record: ClinicalSample) => {
+                    const tagProps: TagProps = WorkflowTagDictionary[record.workflowTag];
+
+                    return (
+                        <>
+                            <h3>Notes</h3>
+                            <span>{record.description}</span>
+                            <h3>Processing person</h3>
+                            <span>{record.processingPerson}</span>
+                            <h3>Workflow tag</h3>
+                            <Tag icon={tagProps.icon} color={tagProps.color}>
+                                {record.workflowTag}
+                            </Tag>
+                        </>
+                    );
+                },
+            }}
         />
     );
 };
@@ -46,3 +69,13 @@ const defaultColumns: ColumnsType<ClinicalSample> = [
         <span>{moment(record.updatedDate).format('DD/MM/YY')}</span>
     )),
 ];
+
+type TagProps = {
+    color: PresetColorType;
+    icon: React.ReactNode;
+};
+
+const WorkflowTagDictionary: Dictionary<TagProps> = {};
+WorkflowTagDictionary['Sample Preparation'] = { color: 'orange', icon: <SyncOutlined /> };
+WorkflowTagDictionary['SWATHAnalysis'] = { color: 'yellow', icon: <CheckCircleOutlined spin /> };
+WorkflowTagDictionary['Library Generation'] = { color: 'gold', icon: <ClockCircleOutlined spin /> };

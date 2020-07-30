@@ -7,7 +7,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { ComplexList } from '../../../common/complexList';
 import { Tag } from 'antd';
 import { PresetColorType } from 'antd/lib/_util/colors';
-import { formatDate } from '../../../common/utils';
+import { formatDate, Dictionary } from '../../../common/utils';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -56,7 +56,6 @@ const defaultColumns: ColumnsType<IntermediateSample> = [
     getColumn('Name', IntermediateSample.nameof('name')),
     getColumn('Id', IntermediateSample.nameof('id')),
     getColumn('Protocol', IntermediateSample.nameof('protocolName'), (record: IntermediateSample) => {
-        console.log(ProtocolColorDictionary[record.protocolName], record.protocolName);
         return <Tag color={ProtocolColorDictionary[record.protocolName]}>{record.protocolName}</Tag>;
     }),
     getColumn('Created on', IntermediateSample.nameof('createdDate'), (record: IntermediateSample) => (
@@ -66,10 +65,6 @@ const defaultColumns: ColumnsType<IntermediateSample> = [
         <span>{formatDate(record.updatedDate)}</span>
     )),
 ];
-
-interface Dictionary<T> {
-    [Key: string]: T;
-}
 
 const ProtocolColorDictionary: Dictionary<PresetColorType> = {};
 ProtocolColorDictionary['single_preparation'] = 'blue';

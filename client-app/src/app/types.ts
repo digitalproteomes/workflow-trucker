@@ -171,7 +171,9 @@ export class MsRun {
 
 export class GenerationData {
     prefixProject: string = '';
+
     projectId: string = '-1';
+
     suffixProject: string = '';
 
     processingPerson: string = '';
@@ -179,6 +181,14 @@ export class GenerationData {
     numberOfEntries: number = 10;
 
     public static nameof = (name: keyof GenerationData) => name;
+
+    public static Default: GenerationData = {
+        prefixProject: 'PHRT',
+        projectId: '561', //Constants.projectId,
+        suffixProject: 'CPAC',
+        processingPerson: 'Admin',
+        numberOfEntries: 3,
+    };
 }
 
 export const GenerationDataKeys: string[] = Object.keys(new GenerationData());

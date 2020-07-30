@@ -93,6 +93,30 @@ export class IntermediateSample {
     public static nameof = (name: keyof IntermediateSample) => name;
 }
 
+export class MSReadySample {
+    clinicalSamples: ClinicalSampleCompact[] = [];
+
+    createdDate: string = '';
+
+    description: string = '';
+
+    id: string = '';
+
+    intermediateSampleId: string = '';
+
+    name: string = '';
+
+    processingPerson: string = '';
+
+    projectId: string = '';
+
+    updatedDate: string = '';
+
+    workflowTag: string = '';
+
+    public static nameof = (name: keyof MSReadySample) => name;
+}
+
 export class Project {
     id: string = '';
 

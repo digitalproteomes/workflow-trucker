@@ -10,6 +10,7 @@ import { PooledSamples } from './pages/pooled-samples';
 import { FractionatedSamples, FractionatedSampleDetails } from './pages/fractionated-samples';
 import { MsRuns } from './pages/ms-runs';
 import { IntermediateSamples } from './pages/intermediate-samples';
+import { MSReadySamples } from './pages/ms-ready-samples';
 
 export function App() {
     return (
@@ -28,6 +29,9 @@ export function App() {
                         </Route>
                         <Route path="/samples/intermediate">
                             <IntermediateSamples />
+                        </Route>
+                        <Route path="/samples/msready">
+                            <MSReadySamples />
                         </Route>
                         <Route path="/samples/individual">
                             <IndividualSamples />

@@ -5,9 +5,9 @@ import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
 import { ComplexList } from '../../../common/complexList';
-import moment from 'moment';
 import { Tag } from 'antd';
 import { PresetColorType } from 'antd/lib/_util/colors';
+import { formatDate } from '../../../common/utils';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -60,10 +60,10 @@ const defaultColumns: ColumnsType<IntermediateSample> = [
         return <Tag color={ProtocolColorDictionary[record.protocolName]}>{record.protocolName}</Tag>;
     }),
     getColumn('Created on', IntermediateSample.nameof('createdDate'), (record: IntermediateSample) => (
-        <span>{moment(record.createdDate).format('DD/MM/YY')}</span>
+        <span>{formatDate(record.createdDate)}</span>
     )),
     getColumn('Updated on', IntermediateSample.nameof('updatedDate'), (record: IntermediateSample) => (
-        <span>{moment(record.updatedDate).format('DD/MM/YY')}</span>
+        <span>{formatDate(record.updatedDate)}</span>
     )),
 ];
 

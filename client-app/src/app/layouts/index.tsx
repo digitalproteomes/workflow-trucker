@@ -64,7 +64,8 @@ const BasicLayout: React.FC = (props) => {
                     mode="inline"
                     theme="dark"
                     // defaultSelectedKeys={[`${defaultProjectId}_5`]}
-                    defaultSelectedKeys={[`${defaultProjectId}_intermediate`]}
+                    // defaultSelectedKeys={[`${defaultProjectId}_intermediate`]}
+                    defaultSelectedKeys={[`${defaultProjectId}_msready`]}
                     defaultOpenKeys={[
                         `${defaultProjectId}_sub1`,
                         `${defaultProjectId}_sub1_1`,
@@ -114,6 +115,9 @@ function getSubmenu(projectId: string, name: string) {
                 </Menu.Item>
                 <Menu.Item key={`${projectId}_intermediate`}>
                     <Link to={`/samples/intermediate?project=${projectId}`}>Intermediate</Link>
+                </Menu.Item>
+                <Menu.Item key={`${projectId}_msready`}>
+                    <Link to={`/samples/msready?project=${projectId}`}>MS Ready</Link>
                 </Menu.Item>
                 <Menu.Item key={`${projectId}_10`}>
                     <Link to={`/samples/individual?project=${projectId}`}>Individual</Link>

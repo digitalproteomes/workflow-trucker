@@ -1,4 +1,4 @@
-import { Sample, MsRun, ClinicalSample, IntermediateSample } from '../types';
+import { Sample, MsRun, ClinicalSample, IntermediateSample, MSReadySample } from '../types';
 import { Constants } from './constants';
 
 export function mockClinicalSamples(): ClinicalSample[] {
@@ -83,6 +83,56 @@ export function mockIntermediateSamples(): IntermediateSample[] {
             processingPerson: '3 mock Processing person',
             projectId: Constants.projectId,
             protocolName: 'fractionation_preparation',
+            updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            workflowTag: 'Sample Preparation',
+        },
+    ];
+}
+
+export function mockMSReadySamples(): MSReadySample[] {
+    return [
+        {
+            clinicalSamples: [],
+            createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: 'Generated as mock',
+            id: '5edb9fdf4765770ed5b68a74',
+            intermediateSampleId: '1 interim sample',
+            name: 'mock PHRT_005_001_CPAC',
+            processingPerson: 'mock Processing person',
+            projectId: Constants.projectId,
+            updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            workflowTag: 'Sample Preparation',
+        },
+        {
+            clinicalSamples: [],
+            createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: '2 Generated as mock',
+            id: '5edb9fdf4765770ed5b68a74',
+            intermediateSampleId: '2 interim sample',
+            name: '2 mock PHRT_005_001_CPAC',
+            processingPerson: 'mock Processing person',
+            projectId: Constants.projectId,
+            updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            workflowTag: 'Sample Preparation',
+        },
+        {
+            clinicalSamples: [
+                {
+                    id: '1 clinical id',
+                    name: '1 clinical name',
+                },
+                {
+                    id: '2 clinical id',
+                    name: '2 clinical name',
+                },
+            ],
+            createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: '3 Generated as mock',
+            id: '5edb9fdf4765770ed5b68a74',
+            intermediateSampleId: '3 interim sample',
+            name: '3 mock PHRT_005_001_CPAC',
+            processingPerson: '3 mock Processing person',
+            projectId: Constants.projectId,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             workflowTag: 'Sample Preparation',
         },

@@ -1,27 +1,35 @@
-import React, { useEffect, useState, FunctionComponent } from 'react';
-import { Divider } from 'antd';
+import React, { useState, FunctionComponent } from 'react';
+import { Space } from 'antd';
 import { MsRun } from '../../types';
-import { Api } from './api';
 import { List } from './components/list';
-import { Constants } from '../../default-data/constants';
 
 export const MsRuns: FunctionComponent = () => {
-    const [msruns, setMsruns] = useState<MsRun[] | null>(null);
+    const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    async function fetchMsruns() {
-        if (msruns == null) {
-            setMsruns(await Api.getMsRunsAsync(Constants.projectId));
-        }
-    }
+    const [, setSelectedSamples] = useState<MsRun[]>([]);
 
-    useEffect(() => {
-        fetchMsruns();
-    });
+    const onRefreshDone = () => {
+        setRefreshNeededFlag(false);
+    };
+
+    const onRowSelectionChange = (selectedRows: MsRun[]) => {
+        setSelectedSamples(selectedRows);
+    };
+
+    const renderActions = () => {
+        return (
+            <Space size="middle">
+                <span>Buttons go here</span>
+            </Space>
+        );
+    };
 
     return (
-        <>
-            <Divider></Divider>
-            <List msruns={msruns} />
-        </>
+        <List
+            isRefreshNeeded={isRefreshNeeded}
+            onRefreshDone={onRefreshDone}
+            renderActions={renderActions}
+            onRowSelectionChange={onRowSelectionChange}
+        />
     );
 };

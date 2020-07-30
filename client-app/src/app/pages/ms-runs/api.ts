@@ -1,13 +1,13 @@
 import { BaseApi } from '../../infrastructure/api';
 import { MsRun } from '../../types';
-import { mockMsRun } from '../../default-data/samples';
+import { mockMsRun as mockMsRuns } from '../../default-data/samples';
 
 export class Api {
-    public static async getMsRunsAsync(_projectId: string): Promise<MsRun[]> {
+    public static async getMsRunsAsync(projectId: string): Promise<MsRun[]> {
         try {
-            return BaseApi.getAsync(`msrun`);
+            return BaseApi.getAsync(`msruns/project?projectId=${projectId}`);
         } catch (err) {
-            return mockMsRun();
+            return mockMsRuns();
         }
     }
 
@@ -15,7 +15,7 @@ export class Api {
         try {
             return await BaseApi.postAsync(`/msrun`, msRun);
         } catch (error) {
-            return mockMsRun()[0];
+            return mockMsRuns()[0];
         }
     }
 }

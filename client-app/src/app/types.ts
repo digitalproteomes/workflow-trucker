@@ -140,23 +140,31 @@ export class Project {
 }
 
 export class MsRun {
+    clinicalSamples: ClinicalSampleCompact[] = [];
+
     createdDate: string = '';
+
+    description: string = '';
 
     id: string = '';
 
+    instrumentId: string = '';
+
+    msReadySampleId: string = '';
+
     name: string = '';
+
+    processingPerson: string = '';
 
     projectId: string = '';
 
     protocolId: string = '';
 
-    instrumentId: string = '';
-
-    runCode: string = '';
-
-    samples: string[] = [];
+    runId: number = -1;
 
     updatedDate: string = '';
+
+    workflowTag: string = '';
 
     public static nameof = (name: keyof MsRun) => name;
 }

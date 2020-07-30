@@ -180,26 +180,52 @@ export function mockSamples(): Sample[] {
 export function mockMsRun(): MsRun[] {
     return [
         {
+            clinicalSamples: [
+                {
+                    id: '1 clinical id',
+                    name: '1 clinical name',
+                },
+                {
+                    id: '2 clinical id',
+                    name: '2 clinical name',
+                },
+            ],
             createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: '3 Generated as mock',
             id: '5edb9fdf4765770ed5b68a74',
-            name: 'mock PHRT_005_001_CPAc_MS_1',
+            instrumentId: '3 instrument id',
+            msReadySampleId: '3 ms ready sample id',
+            name: '3 mock PHRT_005_001_CPAC',
+            processingPerson: '3 mock Processing person',
             projectId: Constants.projectId,
             protocolId: 'DIA_protocol',
-            instrumentId: 'MS:1002523',
-            runCode: 'runCode:1002523',
-            samples: ['1', '2'],
+            runId: 34,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            workflowTag: 'Sample Preparation',
         },
         {
-            createdDate: '2020-06-06T13:53:35.392000+00:00',
-            id: '5edb9fdf4765770ed5b68a75',
-            name: 'mock PHRT_005_002_CPAC_MS_1',
+            clinicalSamples: [
+                {
+                    id: '2 clinical id',
+                    name: '2 clinical name',
+                },
+                {
+                    id: '3 clinical id',
+                    name: '4 clinical name',
+                },
+            ],
+            createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: '4 Generated as mock',
+            id: '5edb9fdf4765770ed5b68a74',
+            instrumentId: '4 instrument id',
+            msReadySampleId: '4 ms ready sample id',
+            name: '4 mock PHRT_005_001_CPAC',
+            processingPerson: '3 mock Processing person',
             projectId: Constants.projectId,
             protocolId: 'DIA_protocol',
-            instrumentId: 'MS:1002524',
-            runCode: 'runCode:1002524',
-            samples: ['3', '4'],
-            updatedDate: '2020-06-06T13:53:35.392000+00:00',
+            runId: 45,
+            updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            workflowTag: 'Sample Preparation',
         },
     ];
 }

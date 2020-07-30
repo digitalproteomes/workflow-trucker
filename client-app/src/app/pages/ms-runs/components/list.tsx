@@ -1,18 +1,62 @@
 import React, { FunctionComponent } from 'react';
-import { Space } from 'antd';
-import { MsRun } from '../../../types';
-import { MsrunList } from '../../../common/msrunList';
+import { MsRun, ClinicalSampleCompact } from '../../../types';
+import { ComplexList } from '../../../common/complexList';
+import { Api } from '../api';
+import { Constants } from '../../../default-data/constants';
+import { SampleListV2, getColumn } from '../../../common/sampleList';
+import { ColumnsType } from 'antd/lib/table';
+import { formatDate } from '../../../common/utils';
 
-type Props = {
-    msruns: MsRun[] | null;
+type ListProps = {
+    isRefreshNeeded: boolean;
+    onRefreshDone: () => void;
+    renderActions?: (sample: MsRun) => JSX.Element;
+    onRowSelectionChange?: (selectedSamples: MsRun[]) => void;
 };
 
-export const List: FunctionComponent<Props> = ({ msruns }) => {
-    return <MsrunList msruns={msruns} renderActions={renderActions} />;
+export const List: FunctionComponent<ListProps> = ({
+    isRefreshNeeded,
+    onRefreshDone,
+    renderActions,
+    onRowSelectionChange,
+}) => {
+    return (
+        <ComplexList
+            isRefreshNeeded={isRefreshNeeded}
+            onRefreshDone={onRefreshDone}
+            renderActions={renderActions}
+            onRowSelectionChange={onRowSelectionChange}
+            fetchSamples={() => Api.getMsRunsAsync(Constants.projectId)}
+            rowKeySelector={(row: MsRun) => row.id}
+            columns={defaultColumns}
+            expandableConfig={{
+                rowExpandable: (record: MsRun) => record.clinicalSamples && record.clinicalSamples.length > 0,
+                expandedRowRender: (record: MsRun) => {
+                    return (
+                        <SampleListV2
+                            style={{ width: 'fit-content' }}
+                            columns={[
+                                getColumn('Name', ClinicalSampleCompact.nameof('name')),
+                                getColumn('Id', ClinicalSampleCompact.nameof('id')),
+                            ]}
+                            rowKeySelector={(row: ClinicalSampleCompact) => row.id}
+                            samples={record.clinicalSamples}
+                        />
+                    );
+                },
+            }}
+        />
+    );
 };
 
-const renderActions = () => (
-    <Space size="middle">
-        <span>Delete</span>
-    </Space>
-);
+const defaultColumns: ColumnsType<MsRun> = [
+    getColumn('Name', MsRun.nameof('name')),
+    getColumn('Id', MsRun.nameof('id')),
+    getColumn('Instrument', MsRun.nameof('instrumentId')),
+    getColumn('Created on', MsRun.nameof('createdDate'), (record: MsRun) => (
+        <span>{formatDate(record.createdDate)}</span>
+    )),
+    getColumn('Updated on', MsRun.nameof('updatedDate'), (record: MsRun) => (
+        <span>{formatDate(record.updatedDate)}</span>
+    )),
+];

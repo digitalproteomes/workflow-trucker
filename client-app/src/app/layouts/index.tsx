@@ -119,15 +119,6 @@ function getSubmenu(projectId: string, name: string) {
                 <Menu.Item key={`${projectId}_msready`}>
                     <Link to={`/samples/msready?project=${projectId}`}>MS Ready</Link>
                 </Menu.Item>
-                <Menu.Item key={`${projectId}_10`}>
-                    <Link to={`/samples/individual?project=${projectId}`}>[obsolete]Individual</Link>
-                </Menu.Item>
-                <Menu.Item key={`${projectId}_11`}>
-                    <Link to={`/samples/fractionated?project=${projectId}`}>[obsolete]Fractionated</Link>
-                </Menu.Item>
-                <Menu.Item key={`${projectId}_12`}>
-                    <Link to={`/samples/pooled?project=${projectId}`}>[obsolete]Pooling</Link>
-                </Menu.Item>
             </SubMenu>
             <Menu.Item key={`${projectId}_20`} icon={<DashboardOutlined />}>
                 <Link to={`/msruns`}>MS Runs</Link>

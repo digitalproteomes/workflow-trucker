@@ -7,6 +7,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { ComplexList } from '../../../common/complexList';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../default-data/tags';
+import { Button } from 'antd';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -60,7 +61,9 @@ export const List: FunctionComponent<ListProps> = ({
 const defaultColumns: ColumnsType<MSReadySample> = [
     getColumn('Name', MSReadySample.nameof('name')),
     getColumn('Id', MSReadySample.nameof('id')),
-    getColumn('Intermediate sample', MSReadySample.nameof('intermediateSampleName')),
+    getColumn('Intermediate sample', MSReadySample.nameof('intermediateSampleName'), (record: MSReadySample) => (
+        <Button type="link">{record.intermediateSampleName}</Button>
+    )),
     getColumn('Created on', MSReadySample.nameof('createdDate'), (record: MSReadySample) => (
         <span>{formatDate(record.createdDate)}</span>
     )),

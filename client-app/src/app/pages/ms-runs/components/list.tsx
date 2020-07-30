@@ -7,6 +7,7 @@ import { SampleListV2, getColumn } from '../../../common/sampleList';
 import { ColumnsType } from 'antd/lib/table';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../default-data/tags';
+import { Button } from 'antd';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -63,6 +64,9 @@ const defaultColumns: ColumnsType<MsRun> = [
     getColumn('Name', MsRun.nameof('name')),
     getColumn('Id', MsRun.nameof('id')),
     getColumn('Instrument', MsRun.nameof('instrumentId')),
+    getColumn('MS Ready sample', MsRun.nameof('msReadySampleName'), (record: MsRun) => (
+        <Button type="link">{record.msReadySampleName}</Button>
+    )),
     getColumn('Created on', MsRun.nameof('createdDate'), (record: MsRun) => (
         <span>{formatDate(record.createdDate)}</span>
     )),

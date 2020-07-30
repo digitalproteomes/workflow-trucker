@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { List } from './components/list';
 import { MSReadySample } from '../../types';
-import { Space } from 'antd';
+import { Space, Button } from 'antd';
 
 export const MSReadySamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -19,7 +19,9 @@ export const MSReadySamples: FunctionComponent = () => {
     const renderActions = (record: MSReadySample) => {
         return (
             <Space size="middle">
-                <span>Buttons go here</span>
+                <Button type="default" htmlType="button">
+                    Generate MS Run
+                </Button>
             </Space>
         );
     };

@@ -23,7 +23,7 @@ const ButtonSinglePrep: FunctionComponent<ButtonProps> = ({ onSinglePrep, style 
     return (
         <Tooltip title="Create individual samples">
             <Button type="default" onClick={onSinglePrep} style={style} icon={<SubnodeOutlined />}>
-                Single Prep
+                Process sample
             </Button>
         </Tooltip>
     );

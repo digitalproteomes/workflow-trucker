@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { List } from './components/list';
 import { IntermediateSample } from '../../types';
-import { Space } from 'antd';
+import { Space, Button } from 'antd';
 
 export const IntermediateSamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -18,9 +18,17 @@ export const IntermediateSamples: FunctionComponent = () => {
 
     const renderActions = (record: IntermediateSample) => {
         return (
-            <Space size="middle">
-                <span>Buttons go here</span>
-            </Space>
+            <span>
+                <Space size="middle">
+                    <Button type="default" htmlType="button">
+                        Process again
+                    </Button>
+
+                    <Button type="default" htmlType="button">
+                        Generate Ms Ready Sample
+                    </Button>
+                </Space>
+            </span>
         );
     };
 

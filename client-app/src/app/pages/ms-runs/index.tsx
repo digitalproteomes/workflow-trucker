@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Space } from 'antd';
+import { Space, Button } from 'antd';
 import { MsRun } from '../../types';
 import { List } from './components/list';
 
@@ -19,7 +19,13 @@ export const MsRuns: FunctionComponent = () => {
     const renderActions = () => {
         return (
             <Space size="middle">
-                <span>Buttons go here</span>
+                <Button type="default" htmlType="button">
+                    Add to Spectral Library
+                </Button>
+
+                <Button type="default" htmlType="button">
+                    Add to SWATH Analysis
+                </Button>
             </Space>
         );
     };

@@ -3,14 +3,12 @@ import { Divider, Space } from 'antd';
 import { ClinicalInputForm, ButtonCreateNew } from './components/createNew'; // todo - the two creation method should be combined
 import { AutoGenerateInputForm, ButtonAutoGenerate } from './components/createNewAutoGenerate';
 import { List } from './components/list';
-import { ButtonAddToPooling } from './components/addToPooling';
 import { ClinicalSample } from '../../types';
 import { ButtonDelete } from './components/delete';
-import { ButtonFractionate, FractionateInputForm, ButtonFractionDetails } from './components/fractionate';
+import { FractionateInputForm } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
 import * as sampleNotifications from '../../common/sampleNotifications';
 import * as notifications from '../../common/notificationsBase';
-import { ButtonCreateMsRun } from './components/createMsRun';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
@@ -59,18 +57,10 @@ export const ClinicalSamples: FunctionComponent = () => {
         setActiveAutoGenerateFlag(false);
     };
 
-    const onAddToPooling = () => {
-        console.log('add to pooling');
-    };
-
     function onDeleteDone(sample: ClinicalSample) {
         setRefreshNeededFlag(true);
         sampleNotifications.queueDeleteSuccess(sample.name);
     }
-
-    const onFractionate = (sample: ClinicalSample) => {
-        setFractionateSample(sample);
-    };
 
     const onFractionateCancel = () => {
         setFractionateSample(null);
@@ -96,12 +86,6 @@ export const ClinicalSamples: FunctionComponent = () => {
                         console.log('on single prep click');
                     }}
                 />
-                <ButtonFractionate
-                    onFractionate={() => {
-                        onFractionate(record);
-                    }}
-                />
-                <ButtonFractionDetails sample={record} />
                 <ButtonDelete
                     sample={record}
                     onDeleteDone={() => {
@@ -119,9 +103,6 @@ export const ClinicalSamples: FunctionComponent = () => {
                 onAutoGenerateClick={onAutoGenerateButtonClick}
                 style={{ float: 'right', marginRight: 16 }}
             />
-            {/* <ButtonCreateMsRun samples={selectedSamples} style={{ float: 'right', marginRight: 16 }} /> */}
-            <ButtonCreateMsRun samples={[]} style={{ float: 'right', marginRight: 16 }} />
-            <ButtonAddToPooling onAddToPooling={onAddToPooling} style={{ float: 'right', marginRight: 16 }} />
 
             <ClinicalInputForm
                 isActiveInputForm={isActiveCreateNew}

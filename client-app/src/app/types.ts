@@ -161,6 +161,8 @@ export class MsRun {
 
     msReadySampleId: string = '';
 
+    msReadySampleName: string = '';
+
     name: string = '';
 
     processingPerson: string = '';

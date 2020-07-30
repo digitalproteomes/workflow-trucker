@@ -14,7 +14,9 @@ export const ButtonDelete: FunctionComponent<ButtonDeleteProps> = ({ sample, onD
     }
     return (
         <Tooltip title="Delete sample">
-            <Button type="default" icon={<DeleteOutlined />} onClick={onDelete} />
+            <Button type="default" icon={<DeleteOutlined />} onClick={onDelete}>
+                Delete
+            </Button>
         </Tooltip>
     );
 };

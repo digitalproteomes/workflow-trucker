@@ -23,9 +23,9 @@ type ButtonCreateNewProps = {
 
 const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onCreateNewClick: onAddNewClick, style }) => {
     return (
-        <Button type="primary" icon={<PlusOutlined />} onClick={onAddNewClick} style={style}>
+        <Button type="default" icon={<PlusOutlined />} onClick={onAddNewClick} style={style}>
             {' '}
-            Create new clinical sample
+            Create clinical sample
         </Button>
     );
 };

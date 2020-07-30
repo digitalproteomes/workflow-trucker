@@ -8,7 +8,7 @@ import { ComplexList } from '../../../common/complexList';
 import { Tag } from 'antd';
 import { PresetColorType } from 'antd/lib/_util/colors';
 import { formatDate, Dictionary } from '../../../common/utils';
-import { getWorkflowTag } from '../../../default-data/tags';
+import { getWorkflowTag, getProtocolTag } from '../../../default-data/tags';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -36,26 +36,7 @@ export const List: FunctionComponent<ListProps> = ({
                 rowExpandable: (record: IntermediateSample) =>
                     record.clinicalSamples && record.clinicalSamples.length > 0,
                 // todo - put these details nicely into columns
-                expandedRowRender: (record: IntermediateSample) => (
-                    <>
-                        <h3>Notes</h3>
-                        <span>{record.description}</span>
-                        <h3>Processing person</h3>
-                        <span>{record.processingPerson}</span>
-                        <h3>Workflow tag</h3>
-                        {getWorkflowTag(record.workflowTag)}
-                        <SampleListV2
-                            title={'Clinical samples'}
-                            style={{ width: 'fit-content' }}
-                            columns={[
-                                getColumn('Name', ClinicalSampleCompact.nameof('name')),
-                                getColumn('Id', ClinicalSampleCompact.nameof('id')),
-                            ]}
-                            rowKeySelector={(row: ClinicalSampleCompact) => row.id}
-                            samples={record.clinicalSamples}
-                        />
-                    </>
-                ),
+                expandedRowRender: renderExpandedRow(),
             }}
         />
     );
@@ -66,9 +47,9 @@ const defaultColumns: ColumnsType<IntermediateSample> = [
     // todo - avoid importing the ColumnsType by having an intermediary interface between this component and the List common component
     getColumn('Name', IntermediateSample.nameof('name')),
     getColumn('Id', IntermediateSample.nameof('id')),
-    getColumn('Protocol', IntermediateSample.nameof('protocolName'), (record: IntermediateSample) => {
-        return <Tag color={ProtocolColorDictionary[record.protocolName]}>{record.protocolName}</Tag>;
-    }),
+    getColumn('Protocol', IntermediateSample.nameof('protocolName'), (record: IntermediateSample) =>
+        getProtocolTag(record.protocolName),
+    ),
     getColumn('Created on', IntermediateSample.nameof('createdDate'), (record: IntermediateSample) => (
         <span>{formatDate(record.createdDate)}</span>
     )),
@@ -77,7 +58,25 @@ const defaultColumns: ColumnsType<IntermediateSample> = [
     )),
 ];
 
-const ProtocolColorDictionary: Dictionary<PresetColorType> = {};
-ProtocolColorDictionary['single_preparation'] = 'blue';
-ProtocolColorDictionary['fractionation_preparation'] = 'cyan';
-ProtocolColorDictionary['pooling_preparation'] = 'purple';
+function renderExpandedRow() {
+    return (record: IntermediateSample) => (
+        <>
+            <h3>Notes</h3>
+            <span>{record.description}</span>
+            <h3>Processing person</h3>
+            <span>{record.processingPerson}</span>
+            <h3>Workflow tag</h3>
+            {getWorkflowTag(record.workflowTag)}
+            <SampleListV2
+                title={'Clinical samples'}
+                style={{ width: 'fit-content' }}
+                columns={[
+                    getColumn('Name', ClinicalSampleCompact.nameof('name')),
+                    getColumn('Id', ClinicalSampleCompact.nameof('id')),
+                ]}
+                rowKeySelector={(row: ClinicalSampleCompact) => row.id}
+                samples={record.clinicalSamples}
+            />
+        </>
+    );
+}

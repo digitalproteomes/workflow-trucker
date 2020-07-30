@@ -1,4 +1,4 @@
-import { Sample, MsRun, ClinicalSample, IntermediateSample, MSReadySample, EWorkflowTag } from '../types';
+import { Sample, MsRun, ClinicalSample, IntermediateSample, MSReadySample, EWorkflowTag, EProtocolTag } from '../types';
 import { Constants } from './constants';
 
 export function mockClinicalSamples(): ClinicalSample[] {
@@ -49,7 +49,7 @@ export function mockIntermediateSamples(): IntermediateSample[] {
             name: 'mock PHRT_005_001_CPAC',
             processingPerson: 'mock Processing person',
             projectId: Constants.projectId,
-            protocolName: 'single_preparation',
+            protocolName: EProtocolTag.Fractionation,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             workflowTag: EWorkflowTag.LibraryGeneration,
         },
@@ -61,7 +61,7 @@ export function mockIntermediateSamples(): IntermediateSample[] {
             name: '2 mock PHRT_005_001_CPAC',
             processingPerson: 'mock Processing person',
             projectId: Constants.projectId,
-            protocolName: 'pooling_preparation',
+            protocolName: EProtocolTag.Pooling,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             workflowTag: EWorkflowTag.SwathAnalysis,
         },
@@ -82,7 +82,7 @@ export function mockIntermediateSamples(): IntermediateSample[] {
             name: '3 mock PHRT_005_001_CPAC',
             processingPerson: '3 mock Processing person',
             projectId: Constants.projectId,
-            protocolName: 'fractionation_preparation',
+            protocolName: EProtocolTag.Single,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             workflowTag: EWorkflowTag.SamplePreparation,
         },

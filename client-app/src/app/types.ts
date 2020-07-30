@@ -46,6 +46,13 @@ export enum EWorkflowTag {
     LibraryGeneration = 'Library Generation',
 }
 
+export enum EProtocolTag {
+    Invalid = 'invalid tag',
+    Single = 'single_preparation',
+    Fractionation = 'fractionation_preparation',
+    Pooling = 'pooling_preparation',
+}
+
 export class ClinicalSample {
     createdDate: string = '';
 
@@ -91,7 +98,7 @@ export class IntermediateSample {
 
     projectId: string = '';
 
-    protocolName: string = '';
+    protocolName: EProtocolTag = EProtocolTag.Invalid;
 
     updatedDate: string = '';
 

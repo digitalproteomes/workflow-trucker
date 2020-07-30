@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Space } from 'antd';
 import { Sample } from '../../../types';
-import { SampleList, getAllFilterProps } from '../../../common/sampleList';
+import { SampleList } from '../../../common/sampleList';
 import { ColumnsType } from 'antd/lib/table';
 
 type Props = {
@@ -20,24 +20,22 @@ const renderActions = () => (
 
 const defaultColumns: ColumnsType<Sample> = [
     // todo - avoid importing the ColumnsType by having an intermediary interface between this component and the List common component
-    {
-        title: 'Name',
-        dataIndex: Sample.nameof('name'),
-
-        ...getAllFilterProps<Sample>('name'),
-    },
-    {
-        title: 'Id',
-        dataIndex: Sample.nameof('id'),
-
-        ...getAllFilterProps<Sample>('id'),
-    },
-    {
-        title: 'Source Id',
-        dataIndex: Sample.nameof('sourceSampleId'),
-    },
-    {
-        title: 'Updated on',
-        dataIndex: Sample.nameof('updatedDate'),
-    },
+    // {
+    //     title: 'Name',
+    //     dataIndex: Sample.nameof('name'),
+    //     ...getAllFilterProps<Sample>('name'),
+    // },
+    // {
+    //     title: 'Id',
+    //     dataIndex: Sample.nameof('id'),
+    //     ...getAllFilterProps<Sample>('id'),
+    // },
+    // {
+    //     title: 'Source Id',
+    //     dataIndex: Sample.nameof('sourceSampleId'),
+    // },
+    // {
+    //     title: 'Updated on',
+    //     dataIndex: Sample.nameof('updatedDate'),
+    // },
 ];

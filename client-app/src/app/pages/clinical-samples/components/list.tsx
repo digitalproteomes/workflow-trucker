@@ -6,7 +6,7 @@ import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
 import { ComplexList } from '../../../common/complexList';
 import moment from 'moment';
-import { getWorkflowTag } from '../../../default-data/tags';
+import { getWorkflowTag } from '../../../common/tags';
 
 type ListProps = {
     isRefreshNeeded: boolean;

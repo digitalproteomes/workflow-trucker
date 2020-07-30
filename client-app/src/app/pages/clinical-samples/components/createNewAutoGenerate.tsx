@@ -6,7 +6,7 @@ import { GenerationData, GenerationDataKeys, SampleNew, EWorkflowTag } from '../
 import { PlusOutlined } from '@ant-design/icons';
 import { FieldData } from 'rc-field-form/lib/interface';
 import { ColumnsType } from 'antd/lib/table';
-import { getWorkflowTag } from '../../../default-data/tags';
+import { getWorkflowTag } from '../../../common/tags';
 
 const { Text } = Typography;
 const { Option } = Select;

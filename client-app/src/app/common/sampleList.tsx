@@ -119,11 +119,16 @@ function getRenderObject<T>(renderActions: (record: T) => React.ReactNode) {
     };
 }
 
-export function getColumn<T>(label: string, name: keyof T, render?: (record: T) => React.ReactNode): ColumnType<T> {
+export function getColumn<T>(
+    label: string,
+    name: keyof T,
+    render?: (record: T) => React.ReactNode,
+    searchEnabled: boolean = true,
+): ColumnType<T> {
     const column: ColumnType<T> = {
         title: label,
         dataIndex: name.toString(),
-        ...getAllFilterProps<T>(name),
+        ...getAllFilterProps<T>(name, searchEnabled),
     };
 
     if (render) column.render = (_value, record, _index) => render(record);
@@ -138,15 +143,17 @@ type ColumnFilterProps<T> = {
     // render: (text: string) => JSX.Element; // todo - this signature is not present in the official interface. Not sure why it works (if it works)
 };
 
-export function getAllFilterProps<T>(column: keyof T): ColumnFilterProps<T> {
-    return {
-        filterIcon: getFilterIcon,
-        filterDropdown: (filterProps: FilterDropdownProps) => getFilterDropdown<T>(column, filterProps),
-        onFilter: (value: string | number | boolean, record: T) => {
-            return onFilter<T>(value, column, record);
-        },
-        // render: renderFilteredColumnEntry,
-    };
+export function getAllFilterProps<T>(column: keyof T, searchEnabled: boolean): ColumnFilterProps<T> | undefined {
+    return searchEnabled
+        ? {
+              filterIcon: getFilterIcon,
+              filterDropdown: (filterProps: FilterDropdownProps) => getFilterDropdown<T>(column, filterProps),
+              onFilter: (value: string | number | boolean, record: T) => {
+                  return onFilter<T>(value, column, record);
+              },
+              // render: renderFilteredColumnEntry,
+          }
+        : undefined;
 }
 
 function getFilterDropdown<T>(column: keyof T, filterProps: FilterDropdownProps) {

@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import { MSReadySample, ClinicalSampleCompact } from '../../../types';
-import { getColumn, SampleListV2 } from '../../../common/sampleList';
+import { MSReadySample } from '../../../types';
+import { getColumn } from '../../../common/sampleList';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
 import { ComplexList } from '../../../common/complexList';
 import { formatDate } from '../../../common/utils';
-import { getWorkflowTag } from '../../../default-data/tags';
-import { Button } from 'antd';
+import { getWorkflowTag } from '../../../common/tags';
+import { Button, Row, Col, Divider } from 'antd';
+import { getCompactClinicalSampleList } from '../../../common/getCompactClinicalSampleList';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -34,24 +35,22 @@ export const List: FunctionComponent<ListProps> = ({
             expandableConfig={{
                 rowExpandable: (record: MSReadySample) => record.clinicalSamples && record.clinicalSamples.length > 0,
                 expandedRowRender: (record: MSReadySample) => (
-                    <>
-                        <h3>Notes</h3>
-                        <span>{record.description}</span>
-                        <h3>Processing person</h3>
-                        <span>{record.processingPerson}</span>
-                        <h3>Workflow tag</h3>
-                        {getWorkflowTag(record.workflowTag)}
-                        <SampleListV2
-                            style={{ width: 'fit-content' }}
-                            title={'Clinical samples'}
-                            columns={[
-                                getColumn('Name', ClinicalSampleCompact.nameof('name')),
-                                getColumn('Id', ClinicalSampleCompact.nameof('id')),
-                            ]}
-                            rowKeySelector={(row: ClinicalSampleCompact) => row.id}
-                            samples={record.clinicalSamples}
-                        />
-                    </>
+                    <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                        <Col className="gutter-row" span={3}>
+                            <h3>Notes</h3>
+                            <span>{record.description}</span>
+                            <Divider />
+                            <h3>Processing person</h3>
+                            <span>{record.processingPerson}</span>
+                            <Divider />
+                            <h3>Workflow tag</h3>
+                            {getWorkflowTag(record.workflowTag)}
+                        </Col>
+
+                        <Col className="gutter-row" span={6}>
+                            {getCompactClinicalSampleList(record.name, record.clinicalSamples)}
+                        </Col>
+                    </Row>
                 ),
             }}
         />

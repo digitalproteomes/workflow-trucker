@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Dictionary } from '../common/utils';
+import { Dictionary } from './utils';
 import Tag, { TagProps } from 'antd/lib/tag';
 import { CheckCircleOutlined, SyncOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { EWorkflowTag, EProtocolTag } from '../types';
 
 const WorkflowTagProps: Dictionary<TagProps> = {};
 // WorkflowTagProps[EWorkflowTag.SamplePreparation] = { color: 'orange', icon: <SyncOutlined spin /> };
-WorkflowTagProps[EWorkflowTag.SamplePreparation] = { color: 'orange', icon: <SyncOutlined spin /> };
+WorkflowTagProps[EWorkflowTag.SamplePreparation] = { color: 'orange', icon: <SyncOutlined /> };
 WorkflowTagProps[EWorkflowTag.SwathAnalysis] = { color: 'yellow', icon: <CheckCircleOutlined /> };
 WorkflowTagProps[EWorkflowTag.LibraryGeneration] = { color: 'gold', icon: <ClockCircleOutlined /> };
 

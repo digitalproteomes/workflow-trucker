@@ -61,6 +61,38 @@ export class ClinicalSample {
     public static nameof = (name: keyof ClinicalSample) => name;
 }
 
+class ClinicalSampleCompact {
+    id: string = '';
+
+    name: string = '';
+
+    public static nameof = (name: keyof ClinicalSampleCompact) => name;
+}
+
+export class IntermediateSample {
+    clinicalSamples: ClinicalSampleCompact[] = [];
+
+    createdDate: string = '';
+
+    description: string = '';
+
+    id: string = '';
+
+    name: string = '';
+
+    processingPerson: string = '';
+
+    projectId: string = '';
+
+    protocolName: string = '';
+
+    updatedDate: string = '';
+
+    workflowTag: string = '';
+
+    public static nameof = (name: keyof IntermediateSample) => name;
+}
+
 export class Project {
     id: string = '';
 

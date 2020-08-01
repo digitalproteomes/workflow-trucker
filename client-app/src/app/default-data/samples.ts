@@ -1,4 +1,14 @@
-import { Sample, MsRun, ClinicalSample, IntermediateSample, MSReadySample, EWorkflowTag, EProtocolTag } from '../types';
+import {
+    Sample,
+    MsRun,
+    ClinicalSample,
+    IntermediateSample,
+    MSReadySample,
+    EWorkflowTag,
+    EProtocolTag,
+    SwathAnalysis,
+    SpectralLibrary,
+} from '../types';
 import { Constants } from './constants';
 
 export function mockClinicalSamples(): ClinicalSample[] {
@@ -231,6 +241,83 @@ export function mockMsRun(): MsRun[] {
             runId: 45,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             workflowTag: EWorkflowTag.SwathAnalysis,
+        },
+    ];
+}
+
+export function mockSwathAnalysis(): SwathAnalysis[] {
+    return [
+        {
+            clinicalSamples: [
+                {
+                    id: '1 clinical id',
+                    name: '1 clinical name',
+                },
+                {
+                    id: '2 clinical id',
+                    name: '2 clinical name',
+                },
+            ],
+            createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: '1 Generated as mock',
+            id: '5f2330c4723e24adcf419e96',
+            name: 'PHRT_001_005_CPAC_SWATH',
+            projectId: Constants.projectId,
+            updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            workflowTag: EWorkflowTag.SwathAnalysis,
+            msRunIds: [
+                {
+                    id: '5f2330c0723e24adcf419d57',
+                    name: 'sgoetze_A1902_004',
+                },
+                {
+                    id: '5f2330c0723e24adcf419d58',
+                    name: 'sgoetze_A1902_006',
+                },
+            ],
+            protocolId: '1',
+            protocolName: 'SWATH_protocol',
+            spectralLibraryId: '5f2330c3723e24adcf419e95',
+            swathId: '1',
+        },
+    ];
+}
+
+export function mockSpectralLibrary(): SpectralLibrary[] {
+    return [
+        {
+            clinicalSamples: [
+                {
+                    id: '1 clinical id',
+                    name: '1 clinical name',
+                },
+                {
+                    id: '2 clinical id',
+                    name: '2 clinical name',
+                },
+            ],
+            createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: '1 Generated as mock',
+            id: '5f2330c4723e24adcf419e96',
+            name: 'PHRT_001_005_CPAC_Lib',
+            projectId: Constants.projectId,
+            updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            workflowTag: EWorkflowTag.LibraryGeneration,
+            msRunIds: [
+                {
+                    id: '5f2330c0723e24adcf419d57',
+                    name: 'sgoetze_A1902_004',
+                },
+                {
+                    id: '5f2330c0723e24adcf419d58',
+                    name: 'sgoetze_A1902_006',
+                },
+            ],
+            protocolId: '1',
+            protocolName: 'SWATH_protocol',
+            proteinDatabaseOrganism: 'UP000005640',
+            proteinDatabaseVersion: 'YYMMDD',
+            libId: '1',
         },
     ];
 }

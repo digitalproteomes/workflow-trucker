@@ -124,10 +124,10 @@ function getSubmenu(projectId: string, name: string) {
                 <Link to={`/msruns`}>MS Runs</Link>
             </Menu.Item>
             <Menu.Item key={`${projectId}_30`} icon={<ReadOutlined />}>
-                Spectral Library
+                <Link to={`/spectrallibraries?project=${projectId}`}>Spectral Library</Link>
             </Menu.Item>
             <Menu.Item key={`${projectId}_40`} icon={<HeatMapOutlined />}>
-                SWATH Analysis
+                <Link to={`/swathanalyses?project=${projectId}`}>SWATH Analysis</Link>
             </Menu.Item>
         </SubMenu>
     );

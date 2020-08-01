@@ -83,6 +83,14 @@ export class ClinicalSampleCompact {
     public static nameof = (name: keyof ClinicalSampleCompact) => name;
 }
 
+export class MSRunCompact {
+    id: string = '';
+
+    name: string = '';
+
+    public static nameof = (name: keyof MSRunCompact) => name;
+}
+
 export class IntermediateSample {
     clinicalSamples: ClinicalSampleCompact[] = [];
 
@@ -185,6 +193,68 @@ export class MsRun {
     workflowTag: EWorkflowTag = EWorkflowTag.Invalid;
 
     public static nameof = (name: keyof MsRun) => name;
+}
+
+export class SwathAnalysis {
+    clinicalSamples: ClinicalSampleCompact[] = [];
+
+    createdDate: string = '';
+
+    description: string = '';
+
+    id: string = '';
+
+    name: string = '';
+
+    spectralLibraryId: string = '';
+
+    msRunIds: MSRunCompact[] = [];
+
+    swathId: string = '';
+
+    projectId: string = '';
+
+    protocolId: string = '';
+
+    protocolName: string = '';
+
+    updatedDate: string = '';
+
+    workflowTag: EWorkflowTag = EWorkflowTag.Invalid;
+
+    public static nameof = (name: keyof SwathAnalysis) => name;
+}
+
+export class SpectralLibrary {
+    clinicalSamples: ClinicalSampleCompact[] = [];
+
+    createdDate: string = '';
+
+    description: string = '';
+
+    id: string = '';
+
+    name: string = '';
+
+    proteinDatabaseOrganism = '';
+
+    proteinDatabaseVersion = '';
+
+    msRunIds: MSRunCompact[] = [];
+
+    libId: string = '';
+
+    projectId: string = '';
+
+    protocolId: string = '';
+
+    protocolName: string = '';
+
+    updatedDate: string = '';
+
+    workflowTag: EWorkflowTag = EWorkflowTag.Invalid;
+
+    public static nameof = (name: keyof SpectralLibrary) => name;
 }
 
 export class GenerationData {

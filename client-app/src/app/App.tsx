@@ -11,6 +11,8 @@ import { FractionatedSamples, FractionatedSampleDetails } from './pages/fraction
 import { MsRuns } from './pages/ms-runs';
 import { IntermediateSamples } from './pages/intermediate-samples';
 import { MSReadySamples } from './pages/ms-ready-samples';
+import { SwathAnalysisPage } from './pages/swath-analysis';
+import { SpectralLibrariesPage } from './pages/spectral-libraries';
 
 export function App() {
     return (
@@ -47,6 +49,12 @@ export function App() {
                         </Route>
                         <Route path="/msruns">
                             <MsRuns />
+                        </Route>
+                        <Route path="/swathanalyses">
+                            <SwathAnalysisPage />
+                        </Route>
+                        <Route path="/spectrallibraries">
+                            <SpectralLibrariesPage />
                         </Route>
                         <Route path="/">
                             <span>This is the landing page</span>

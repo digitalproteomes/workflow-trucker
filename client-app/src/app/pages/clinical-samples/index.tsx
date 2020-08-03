@@ -1,26 +1,29 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Divider, Space } from 'antd';
-import { ClinicalInputForm, ButtonCreateNew } from './components/createNew';
+import { Divider, Space, PageHeader, Button } from 'antd';
+import { ClinicalInputForm, ButtonCreateNew } from './components/createNew'; // todo - the two creation method should be combined
+import { AutoGenerateInputForm, ButtonAutoGenerate } from './components/createNewAutoGenerate';
 import { List } from './components/list';
-import { ButtonAddToPooling } from './components/addToPooling';
-import { Sample } from '../../types';
+import { ClinicalSample } from '../../types';
 import { ButtonDelete } from './components/delete';
-import { ButtonFractionate, FractionateInputForm, ButtonFractionDetails } from './components/fractionate';
+import { ButtonExport } from '../../common/export';
+import { FractionateInputForm } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
-import * as notifications from '../../common/sampleNotifications';
-import { ButtonCreateMsRun } from '../generic-components/createMsRun';
+import * as sampleNotifications from '../../common/sampleNotifications';
+import * as notifications from '../../common/notificationsBase';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
 
-    const [fractionateSample, setFractionateSample] = useState<Sample | null>(null);
+    const [isActiveAutoGenerate, setActiveAutoGenerateFlag] = useState<boolean>(false);
 
-    const [selectedSamples, setSelectedSamples] = useState<Sample[]>([]);
+    const [fractionateSample, setFractionateSample] = useState<ClinicalSample | null>(null);
+
+    const [, setSelectedSamples] = useState<ClinicalSample[]>([]);
 
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const onCreateNewSuccessful = (sample: Sample) => {
-        notifications.queueCreateSuccess(sample.name);
+    const onCreateNewSuccessful = (sample: ClinicalSample) => {
+        sampleNotifications.queueCreateSuccess(sample.name);
 
         setRefreshNeededFlag(true);
 
@@ -39,36 +42,48 @@ export const ClinicalSamples: FunctionComponent = () => {
         setActiveCreateNewFlag(false);
     };
 
-    const onAddToPooling = () => {
-        console.log('add to pooling');
+    const onAutoGenerateButtonClick = () => {
+        setActiveAutoGenerateFlag(true);
     };
 
-    function onDeleteDone(sample: Sample) {
+    const onAutoGenerateCancel = () => {
+        setActiveAutoGenerateFlag(false);
+    };
+
+    const onAutoGenerateSuccessful = (count: number) => {
+        notifications.queueSuccess('Success', `${count} samples created succesfully.`);
+
         setRefreshNeededFlag(true);
-        notifications.queueDeleteSuccess(sample.name);
+
+        setActiveAutoGenerateFlag(false);
+    };
+
+    function onDeleteDone(sample: ClinicalSample) {
+        setRefreshNeededFlag(true);
+        sampleNotifications.queueDeleteSuccess(sample.name);
     }
 
-    const onFractionate = (sample: Sample) => {
-        setFractionateSample(sample);
-    };
+    function onExportDone() {
+        sampleNotifications.queueExportSuccess();
+    }
 
     const onFractionateCancel = () => {
         setFractionateSample(null);
     };
 
-    const onFractionateSuccessful = (samples: Sample[]) => {
+    const onFractionateSuccessful = (samples: ClinicalSample[]) => {
         samples.forEach((sample, _index, _samples) => {
-            notifications.queueCreateSuccess(sample.name);
+            sampleNotifications.queueCreateSuccess(sample.name);
         });
 
         setFractionateSample(null);
     };
 
-    const onRowSelectionChange = (selectedRows: Sample[]) => {
+    const onRowSelectionChange = (selectedRows: ClinicalSample[]) => {
         setSelectedSamples(selectedRows);
     };
 
-    const renderActions = (record: Sample) => {
+    const renderActions = (record: ClinicalSample) => {
         return (
             <Space size="middle">
                 <ButtonSinglePrep
@@ -76,12 +91,6 @@ export const ClinicalSamples: FunctionComponent = () => {
                         console.log('on single prep click');
                     }}
                 />
-                <ButtonFractionate
-                    onFractionate={() => {
-                        onFractionate(record);
-                    }}
-                />
-                <ButtonFractionDetails sample={record} />
                 <ButtonDelete
                     sample={record}
                     onDeleteDone={() => {
@@ -94,20 +103,40 @@ export const ClinicalSamples: FunctionComponent = () => {
 
     return (
         <>
-            <ButtonCreateNew onCreateNewClick={onCreateNew} style={{ float: 'right', marginRight: 74 }} />
-            <ButtonCreateMsRun samples={selectedSamples} style={{ float: 'right', marginRight: 16 }} />
-            <ButtonAddToPooling onAddToPooling={onAddToPooling} style={{ float: 'right', marginRight: 16 }} />
-            <ClinicalInputForm
-                isActiveInputForm={isActiveCreateNew}
-                onCreateSuccessful={onCreateNewSuccessful}
-                onCancel={onCreateNewCancel}
-            />
-            <FractionateInputForm
-                parentSample={fractionateSample}
-                onCreateSuccessful={onFractionateSuccessful}
-                onCancel={onFractionateCancel}
-            />
+            <PageHeader ghost={false} title="Clinical Samples">
+                <ButtonExport
+                    onExportDone={() => {
+                        onExportDone();
+                    }}
+                />
+
+                <ButtonCreateNew onCreateNewClick={onCreateNew} style={{ float: 'right', marginRight: 10 }} />
+
+                <ButtonAutoGenerate
+                    onAutoGenerateClick={onAutoGenerateButtonClick}
+                    style={{ float: 'right', marginRight: 16 }}
+                />
+
+                <ClinicalInputForm
+                    isActiveInputForm={isActiveCreateNew}
+                    onCreateSuccessful={onCreateNewSuccessful}
+                    onCancel={onCreateNewCancel}
+                />
+
+                <AutoGenerateInputForm
+                    isActiveInputForm={isActiveAutoGenerate}
+                    onCreateSuccessful={onAutoGenerateSuccessful}
+                    onCancel={onAutoGenerateCancel}
+                />
+
+                <FractionateInputForm
+                    parentSample={fractionateSample}
+                    onCreateSuccessful={onFractionateSuccessful}
+                    onCancel={onFractionateCancel}
+                />
+            </PageHeader>
             <Divider></Divider>
+
             <List
                 isRefreshNeeded={isRefreshNeeded}
                 onRefreshDone={onRefreshDone}

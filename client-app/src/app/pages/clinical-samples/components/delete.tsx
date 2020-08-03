@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { Tooltip, Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
-import { Sample } from '../../../types';
+import { ClinicalSample } from '../../../types';
 import { Api } from '../api';
 type ButtonDeleteProps = {
-    sample: Sample;
+    sample: ClinicalSample;
     onDeleteDone: () => void;
 };
 export const ButtonDelete: FunctionComponent<ButtonDeleteProps> = ({ sample, onDeleteDone }) => {
@@ -14,7 +14,9 @@ export const ButtonDelete: FunctionComponent<ButtonDeleteProps> = ({ sample, onD
     }
     return (
         <Tooltip title="Delete sample">
-            <Button type="default" icon={<DeleteOutlined />} onClick={onDelete} />
+            <Button type="default" icon={<DeleteOutlined />} onClick={onDelete}>
+                Delete
+            </Button>
         </Tooltip>
     );
 };

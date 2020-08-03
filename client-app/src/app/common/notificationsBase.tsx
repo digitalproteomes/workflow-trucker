@@ -1,22 +1,22 @@
 import { notification } from 'antd';
 
-export function queueSuccess(message: string, description: string) {
+export function queueSuccess(title: string, description: string) {
     notification['success']({
-        message: message,
+        message: title,
         description: description,
     });
 }
 
-export function queueError(message: string, description: string) {
+export function queueError(title: string, description: string) {
     notification['error']({
-        message: message,
+        message: title,
         description: description,
     });
 }
 
-export function queueWarning(message: string, description: string) {
+export function queueWarning(title: string, description: string) {
     notification['warning']({
-        message: message,
+        message: title,
         description: description,
     });
 }

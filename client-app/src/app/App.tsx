@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { ProjectPage } from './pages/main';
-import { About } from './pages/about';
+import { AboutPage } from './pages/about';
 import BasicLayout from './layouts';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { ClinicalSamples } from './pages/clinical-samples';
@@ -9,6 +9,10 @@ import { IndividualSamples } from './pages/individual-samples';
 import { PooledSamples } from './pages/pooled-samples';
 import { FractionatedSamples, FractionatedSampleDetails } from './pages/fractionated-samples';
 import { MsRuns } from './pages/ms-runs';
+import { IntermediateSamples } from './pages/intermediate-samples';
+import { MSReadySamples } from './pages/ms-ready-samples';
+import { SwathAnalysisPage } from './pages/swath-analysis';
+import { SpectralLibrariesPage } from './pages/spectral-libraries';
 
 export function App() {
     return (
@@ -17,13 +21,19 @@ export function App() {
                 <BasicLayout>
                     <Switch>
                         <Route path="/about">
-                            <About />
+                            <AboutPage />
                         </Route>
                         <Route path="/projects">
                             <ProjectPage />
                         </Route>
                         <Route path="/samples/clinical">
                             <ClinicalSamples />
+                        </Route>
+                        <Route path="/samples/intermediate">
+                            <IntermediateSamples />
+                        </Route>
+                        <Route path="/samples/msready">
+                            <MSReadySamples />
                         </Route>
                         <Route path="/samples/individual">
                             <IndividualSamples />
@@ -40,8 +50,14 @@ export function App() {
                         <Route path="/msruns">
                             <MsRuns />
                         </Route>
+                        <Route path="/swathanalyses">
+                            <SwathAnalysisPage />
+                        </Route>
+                        <Route path="/spectrallibraries">
+                            <SpectralLibrariesPage />
+                        </Route>
                         <Route path="/">
-                            <span>This is the landing page</span>
+                            <AboutPage />
                         </Route>
                     </Switch>
                 </BasicLayout>

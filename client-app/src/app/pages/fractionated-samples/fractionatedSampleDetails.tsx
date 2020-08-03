@@ -8,35 +8,36 @@ import { Typography, Skeleton } from 'antd';
 const { Title } = Typography;
 
 export const FractionatedSampleDetails: FunctionComponent = () => {
-    const location = useLocation(); // todo - why is useParams not working? https://reacttraining.com/react-router/web/api/Hooks/useparams
-    const searchParams = new URLSearchParams(location.search);
-
-    const projectId: string = searchParams.get('project')!;
-    const parentId: string = searchParams.get('parent')!;
-
+    const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(true);
     const [samples, setSamples] = useState<Sample[]>([]);
     const [parentSample, setParentSample] = useState<Sample | null>(null);
-    const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(true);
 
-    async function fetchFractionatedSamples() {
-        setSamples(await Api.getSamplesByParentAsync(projectId, parentId));
-
-        setParentSample(await Api.getSampleAsync(parentId));
-
-        setRefreshNeededFlag(false);
-    }
+    const location = useLocation(); // todo - why is useParams not working? https://reacttraining.com/react-router/web/api/Hooks/useparams
 
     useEffect(() => {
+        async function fetchFractionatedSamples() {
+            const searchParams = new URLSearchParams(location.search);
+
+            const projectId: string = searchParams.get('project')!;
+            const parentId: string = searchParams.get('parent')!;
+
+            setSamples(await Api.getSamplesByParentAsync(projectId, parentId));
+
+            setParentSample(await Api.getSampleAsync(parentId));
+
+            setRefreshNeededFlag(false);
+        }
+
         if (isRefreshNeeded) {
             fetchFractionatedSamples();
         }
-    }, [isRefreshNeeded]);
+    }, [isRefreshNeeded, location]);
 
     return parentSample == null ? (
         <Skeleton />
     ) : (
         <>
-            <Title level={3}>{`Fractionated samples of clinical sample: ${parentSample?.name}`}</Title>
+            <Title level={3}>{`Fractionated samples of clinical sample: ${parentSample.name}`}</Title>
             {/* <Title level={4}>{`Project id: ${parentSample?.projectId}`}</Title> */}
             <List samples={samples} />
         </>

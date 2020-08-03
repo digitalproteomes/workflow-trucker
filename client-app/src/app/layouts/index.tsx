@@ -6,6 +6,7 @@ import {
     UserOutlined,
     MonitorOutlined,
     ReadOutlined,
+    CoffeeOutlined,
     BarcodeOutlined,
     HeatMapOutlined,
     NotificationOutlined,
@@ -17,6 +18,7 @@ import {
 
 import { Link } from 'react-router-dom';
 import { CollapseType } from 'antd/lib/layout/Sider';
+import { Constants } from '../default-data/constants';
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider, Header } = Layout;
@@ -34,9 +36,9 @@ const BasicLayout: React.FC = (props) => {
         setState({ ...prevState, isCollapsed });
     }
 
-    const defaultProjectId = 5;
+    const defaultProjectId = Constants.projectId;
     const defaultProjectName = 'PHRT_005_CPAC';
-    const otherProjectId = 6;
+    const otherProjectId = '5f_other_project_id';
     const otherProjectName = 'PHRT_006_CPAC';
 
     return (
@@ -63,12 +65,17 @@ const BasicLayout: React.FC = (props) => {
                     mode="inline"
                     theme="dark"
                     defaultSelectedKeys={[`${defaultProjectId}_5`]}
+                    // defaultSelectedKeys={[`${defaultProjectId}_intermediate`]}
+                    // defaultSelectedKeys={[`${defaultProjectId}_msready`]}
                     defaultOpenKeys={[
                         `${defaultProjectId}_sub1`,
                         `${defaultProjectId}_sub1_1`,
-                        `${otherProjectId}_sub1`,
+                        // `${otherProjectId}_sub1`,
                     ]}
                 >
+                    <Menu.Item key={'about'} icon={<CoffeeOutlined />}>
+                        <Link to={`/about`}>Home</Link>
+                    </Menu.Item>
                     {getSubmenu(defaultProjectId, defaultProjectName)}
                     {getSubmenu(otherProjectId, otherProjectName)}
                 </Menu>
@@ -96,7 +103,7 @@ const BasicLayout: React.FC = (props) => {
 };
 
 export default BasicLayout;
-function getSubmenu(projectId: number, name: string) {
+function getSubmenu(projectId: string, name: string) {
     return (
         <SubMenu
             key={`${projectId}_sub1`}
@@ -110,24 +117,21 @@ function getSubmenu(projectId: number, name: string) {
                 <Menu.Item key={`${projectId}_5`}>
                     <Link to={`/samples/clinical?project=${projectId}`}>Clinical</Link>
                 </Menu.Item>
-                <Menu.Item key={`${projectId}_10`}>
-                    <Link to={`/samples/individual?project=${projectId}`}>Individual</Link>
+                <Menu.Item key={`${projectId}_intermediate`}>
+                    <Link to={`/samples/intermediate?project=${projectId}`}>Intermediate</Link>
                 </Menu.Item>
-                <Menu.Item key={`${projectId}_11`}>
-                    <Link to={`/samples/fractionated?project=${projectId}`}>Fractionated</Link>
-                </Menu.Item>
-                <Menu.Item key={`${projectId}_12`}>
-                    <Link to={`/samples/pooled?project=${projectId}`}>Pooling</Link>
+                <Menu.Item key={`${projectId}_msready`}>
+                    <Link to={`/samples/msready?project=${projectId}`}>MS Ready</Link>
                 </Menu.Item>
             </SubMenu>
             <Menu.Item key={`${projectId}_20`} icon={<DashboardOutlined />}>
                 <Link to={`/msruns`}>MS Runs</Link>
             </Menu.Item>
             <Menu.Item key={`${projectId}_30`} icon={<ReadOutlined />}>
-                Spectral Library
+                <Link to={`/spectrallibraries?project=${projectId}`}>Spectral Libraries</Link>
             </Menu.Item>
             <Menu.Item key={`${projectId}_40`} icon={<HeatMapOutlined />}>
-                SWATH Analysis
+                <Link to={`/swathanalyses?project=${projectId}`}>SWATH Analyses</Link>
             </Menu.Item>
         </SubMenu>
     );

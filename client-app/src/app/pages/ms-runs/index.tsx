@@ -1,28 +1,63 @@
-import React, { useEffect, useState, FunctionComponent } from 'react';
-import { Divider } from 'antd';
+import React, { useState, FunctionComponent } from 'react';
+import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
 import { MsRun } from '../../types';
-import { Api } from './api';
 import { List } from './components/list';
+import { ButtonExport } from '../../common/export';
+import * as sampleNotifications from '../../common/sampleNotifications';
+import { UploadOutlined } from '@ant-design/icons';
 
 export const MsRuns: FunctionComponent = () => {
-    const [msruns, setMsruns] = useState<MsRun[] | null>(null);
+    const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    async function fetchMsruns() {
-        if (msruns == null) {
-            const projectId: number = 5;
+    const [, setSelectedSamples] = useState<MsRun[]>([]);
 
-            setMsruns(await Api.getMsRunsAsync(projectId));
-        }
+    const onRefreshDone = () => {
+        setRefreshNeededFlag(false);
+    };
+
+    const onRowSelectionChange = (selectedRows: MsRun[]) => {
+        setSelectedSamples(selectedRows);
+    };
+
+    const renderActions = () => {
+        return (
+            <Space size="middle">
+                <Button type="default" htmlType="button">
+                    Add to Spectral Library
+                </Button>
+
+                <Button type="default" htmlType="button">
+                    Add to SWATH Analysis
+                </Button>
+            </Space>
+        );
+    };
+
+    function onExportDone() {
+        sampleNotifications.queueExportSuccess();
     }
-
-    useEffect(() => {
-        fetchMsruns();
-    });
 
     return (
         <>
+            <PageHeader ghost={false} title="MS Runs"></PageHeader>
+
+            <ButtonExport
+                onExportDone={() => {
+                    onExportDone();
+                }}
+            />
+            <Tooltip title="Import MS ready sample names and Run codes from Mass Spec">
+                <Button type="primary" icon={<UploadOutlined />} style={{ float: 'right', marginRight: 10 }}>
+                    Import MS Runs
+                </Button>
+            </Tooltip>
             <Divider></Divider>
-            <List msruns={msruns} />
+            <List
+                isRefreshNeeded={isRefreshNeeded}
+                onRefreshDone={onRefreshDone}
+                renderActions={renderActions}
+                onRowSelectionChange={onRowSelectionChange}
+            />
         </>
     );
 };

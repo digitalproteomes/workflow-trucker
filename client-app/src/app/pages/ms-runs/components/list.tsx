@@ -1,18 +1,75 @@
 import React, { FunctionComponent } from 'react';
-import { Space } from 'antd';
 import { MsRun } from '../../../types';
-import { MsrunList } from '../../../common/msrunList';
+import { ComplexList } from '../../../common/complexList';
+import { Api } from '../api';
+import { Constants } from '../../../default-data/constants';
+import { getColumn } from '../../../common/sampleList';
+import { ColumnsType } from 'antd/lib/table';
+import { formatDate } from '../../../common/utils';
+import { getWorkflowTag } from '../../../common/tags';
+import { Button, Row, Col, Divider } from 'antd';
+import { getCompactClinicalSampleList } from '../../../common/getCompactClinicalSampleList';
 
-type Props = {
-    msruns: MsRun[] | null;
+type ListProps = {
+    isRefreshNeeded: boolean;
+    onRefreshDone: () => void;
+    renderActions?: (sample: MsRun) => JSX.Element;
+    onRowSelectionChange?: (selectedSamples: MsRun[]) => void;
 };
 
-export const List: FunctionComponent<Props> = ({ msruns }) => {
-    return <MsrunList msruns={msruns} renderActions={renderActions} />;
+export const List: FunctionComponent<ListProps> = ({
+    isRefreshNeeded,
+    onRefreshDone,
+    renderActions,
+    onRowSelectionChange,
+}) => {
+    return (
+        <ComplexList
+            isRefreshNeeded={isRefreshNeeded}
+            onRefreshDone={onRefreshDone}
+            renderActions={renderActions}
+            onRowSelectionChange={onRowSelectionChange}
+            fetchSamples={() => Api.getMsRunsAsync(Constants.projectId)}
+            rowKeySelector={(row: MsRun) => row.id}
+            columns={defaultColumns}
+            expandableConfig={{
+                rowExpandable: (record: MsRun) => record.clinicalSamples && record.clinicalSamples.length > 0,
+                expandedRowRender: (record: MsRun) => {
+                    return (
+                        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                            <Col className="gutter-row" span={3}>
+                                <h3>Notes</h3>
+                                <span>{record.description}</span>
+                                <Divider />
+                                <h3>Processing person</h3>
+                                <span>{record.processingPerson}</span>
+                                <Divider />
+                                <h3>Workflow tag</h3>
+                                {getWorkflowTag(record.workflowTag)}
+                            </Col>
+
+                            <Col className="gutter-row" span={8}>
+                                {getCompactClinicalSampleList(record.name, record.clinicalSamples)}
+                            </Col>
+                        </Row>
+                    );
+                },
+            }}
+        />
+    );
 };
 
-const renderActions = () => (
-    <Space size="middle">
-        <span>Delete</span>
-    </Space>
-);
+const defaultColumns: ColumnsType<MsRun> = [
+    getColumn('Name', MsRun.nameof('name')),
+    getColumn('Id', MsRun.nameof('id')),
+    getColumn('Instrument', MsRun.nameof('instrumentId')),
+    getColumn('MS Ready sample', MsRun.nameof('msReadySampleName'), (record: MsRun) => (
+        <Button type="link">{record.msReadySampleName}</Button>
+    )),
+    getColumn('Created on', MsRun.nameof('createdDate'), (record: MsRun) => (
+        <span>{formatDate(record.createdDate)}</span>
+    )),
+    getColumn('Updated on', MsRun.nameof('updatedDate'), (record: MsRun) => (
+        <span>{formatDate(record.updatedDate)}</span>
+    )),
+];

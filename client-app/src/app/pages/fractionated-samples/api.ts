@@ -3,7 +3,7 @@ import { Sample } from '../../types';
 import { mockSamples } from '../../default-data/samples';
 
 export class Api {
-    public static async getSamplesAsync(projectId: number): Promise<Sample[]> {
+    public static async getSamplesAsync(projectId: string): Promise<Sample[]> {
         try {
             return BaseApi.getAsync(`sample/fractionated?projectId=${projectId}`);
         } catch (err) {
@@ -27,7 +27,7 @@ export class Api {
         }
     }
 
-    public static async postSampleAsync(name: string, projectId: number): Promise<Sample> {
+    public static async postSampleAsync(name: string, projectId: string): Promise<Sample> {
         try {
             return await BaseApi.postAsync(`/sample/fractionated`, { name, projectId });
         } catch (error) {

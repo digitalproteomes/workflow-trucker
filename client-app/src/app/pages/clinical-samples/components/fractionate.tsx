@@ -4,7 +4,7 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { InputModal } from '../../../common/inputModal';
 import { FormInstance } from 'antd/lib/form';
 import { BaseApi } from '../../../infrastructure/api';
-import { Sample } from '../../../types';
+import { ClinicalSample } from '../../../types';
 import { SplitCellsOutlined, EyeOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
@@ -35,7 +35,7 @@ const ButtonFractionate: FunctionComponent<ButtonFractionateProps> = ({ onFracti
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 type ButtonFractionDetailsProps = {
-    sample: Sample;
+    sample: ClinicalSample;
     style?: React.CSSProperties | undefined;
 };
 
@@ -59,7 +59,7 @@ const ButtonFractionDetails: FunctionComponent<ButtonFractionDetailsProps> = ({ 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 class Api {
-    public static async postSampleAsync(payload: any): Promise<Sample[]> {
+    public static async postSampleAsync(payload: any): Promise<ClinicalSample[]> {
         return await BaseApi.postAsync(`/sample/fractionated`, payload);
     }
 }
@@ -69,8 +69,8 @@ class Api {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 type FormProps = {
-    parentSample: Sample | null;
-    onCreateSuccessful: (samples: Sample[]) => void;
+    parentSample: ClinicalSample | null;
+    onCreateSuccessful: (samples: ClinicalSample[]) => void;
     onCancel: () => void;
 };
 
@@ -83,7 +83,7 @@ const FractionateInputForm: FunctionComponent<FormProps> = ({ parentSample, onCr
                 const names: string[] = formData.names;
                 const samples = names.map((sampleName, _index) => ({ name: sampleName }));
 
-                const createdSamples: Sample[] = await Api.postSampleAsync({
+                const createdSamples: ClinicalSample[] = await Api.postSampleAsync({
                     projectId: parentSample!.projectId,
                     parentSampleId: parentSample!.id,
                     fractionatedSamples: samples,

@@ -10,12 +10,20 @@ type ModalProps = {
     onCancel: () => void;
 };
 
-export const InputModal: FunctionComponent<ModalProps> = ({ visible, title, inputForm, onCreate, onCancel }) => {
+export const InputModal: FunctionComponent<ModalProps> = ({
+    visible,
+    title,
+    inputForm,
+    onCreate,
+    onCancel,
+    children,
+}) => {
     const [form] = Form.useForm();
 
     return (
         <Modal
             visible={visible}
+            width={'30%'} // todo - the width of the input modal should be customizable
             title={title}
             okText="Create"
             cancelText="Cancel"
@@ -32,6 +40,7 @@ export const InputModal: FunctionComponent<ModalProps> = ({ visible, title, inpu
             }}
         >
             {inputForm(form)}
+            {children}
         </Modal>
     );
 };

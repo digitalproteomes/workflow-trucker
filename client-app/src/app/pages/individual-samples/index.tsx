@@ -13,9 +13,7 @@ export const IndividualSamples: FunctionComponent = () => {
 
     async function fetchSamples() {
         if (samples == null) {
-            const projectId: number = 5;
-
-            setSamples(await Api.getSamplesAsync(projectId));
+            setSamples(await Api.getSamplesAsync(Constants.projectId));
         }
     }
 

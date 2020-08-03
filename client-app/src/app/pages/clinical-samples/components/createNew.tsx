@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { Form, Input, Typography, Button } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
-import { Project, Sample } from '../../../types';
+import { ClinicalSample } from '../../../types';
 import { Api } from '../api';
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -23,9 +23,9 @@ type ButtonCreateNewProps = {
 
 const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onCreateNewClick: onAddNewClick, style }) => {
     return (
-        <Button type="primary" icon={<PlusOutlined />} onClick={onAddNewClick} style={style}>
+        <Button type="default" icon={<PlusOutlined />} onClick={onAddNewClick} style={style}>
             {' '}
-            Create new clinical sample
+            Create clinical sample
         </Button>
     );
 };
@@ -36,7 +36,7 @@ const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ onCreateNewC
 
 type FormProps = {
     isActiveInputForm: boolean;
-    onCreateSuccessful: (sample: Sample) => void;
+    onCreateSuccessful: (sample: ClinicalSample) => void;
     onCancel: () => void;
 };
 
@@ -46,7 +46,7 @@ const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, on
     const onCreate = (values: any) => {
         async function saveSample() {
             try {
-                const createdSample: Sample = await Api.postSampleAsync({ ...values });
+                const createdSample: ClinicalSample = await Api.postSampleAsync({ ...values });
 
                 onCreateSuccessful(createdSample);
             } catch (error) {
@@ -75,27 +75,10 @@ const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, on
 function inputForm(form: FormInstance, errorMessage: string | null): JSX.Element {
     return (
         <Form {...formLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
-            <Form.Item
-                label="Name"
-                name={Project.nameof('name')}
-                rules={[{ required: true, message: validationMessage(Sample.nameof('name')) }]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                label="Project Id"
-                name={Project.nameof('projectId')}
-                rules={[{ required: true, message: validationMessage(Sample.nameof('projectId')) }]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                label="Source sample id"
-                name="sourceSampleId"
-                rules={[{ required: true, message: validationMessage(Sample.nameof('sourceSampleId')) }]}
-            >
-                <Input />
-            </Form.Item>
+            {createFormInput('Name', ClinicalSample.nameof('name'))}
+            {createFormInput('ProjectId', ClinicalSample.nameof('projectId'))}
+            {createFormInput('Source sample id', ClinicalSample.nameof('sourceSampleId'))}
+
             {errorMessage == null ? null : (
                 <Form.Item label="Error" name="errorMessage">
                     <Text type="danger">{errorMessage}</Text>
@@ -109,6 +92,19 @@ const formLayout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
 };
+
+function createFormInput<T>(label: string, propName: keyof T) {
+    // todo - extract this into a common helper
+    return (
+        <Form.Item
+            label={label}
+            name={propName.toString()}
+            rules={[{ required: true, message: validationMessage(propName.toString()) }]}
+        >
+            <Input />
+        </Form.Item>
+    );
+}
 
 function validationMessage(field: string): string {
     return `Please enter a valid ${field}!`;

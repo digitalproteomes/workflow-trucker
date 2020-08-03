@@ -9,7 +9,9 @@ export function getCompactMSRunsList(name: string, msruns: MSRunCompact[]) {
             title={() => <h3>{`MS Runs of ${name}`}</h3>}
             scroll={{ y: 260 }}
             columns={[
-                getColumn('Name', MSRunCompact.nameof('name')),
+                getColumn('Name', MSRunCompact.nameof('id'), (record: MSRunCompact) => (
+                    <Button type="link">{record.name}</Button>
+                )),
                 getColumn(
                     '',
                     MSRunCompact.nameof('id'),

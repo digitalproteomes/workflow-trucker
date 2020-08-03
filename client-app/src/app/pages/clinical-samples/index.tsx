@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Divider, Space } from 'antd';
+import { Divider, Space, PageHeader } from 'antd';
 import { ClinicalInputForm, ButtonCreateNew } from './components/createNew'; // todo - the two creation method should be combined
 import { AutoGenerateInputForm, ButtonAutoGenerate } from './components/createNewAutoGenerate';
 import { List } from './components/list';
@@ -98,30 +98,31 @@ export const ClinicalSamples: FunctionComponent = () => {
 
     return (
         <>
-            <ButtonCreateNew onCreateNewClick={onCreateNew} style={{ float: 'right', marginRight: 74 }} />
-            <ButtonAutoGenerate
-                onAutoGenerateClick={onAutoGenerateButtonClick}
-                style={{ float: 'right', marginRight: 16 }}
-            />
+            <PageHeader ghost={false} title="Clinical Samples">
+                <ButtonCreateNew onCreateNewClick={onCreateNew} style={{ float: 'right', marginRight: 74 }} />
+                <ButtonAutoGenerate
+                    onAutoGenerateClick={onAutoGenerateButtonClick}
+                    style={{ float: 'right', marginRight: 16 }}
+                />
 
-            <ClinicalInputForm
-                isActiveInputForm={isActiveCreateNew}
-                onCreateSuccessful={onCreateNewSuccessful}
-                onCancel={onCreateNewCancel}
-            />
+                <ClinicalInputForm
+                    isActiveInputForm={isActiveCreateNew}
+                    onCreateSuccessful={onCreateNewSuccessful}
+                    onCancel={onCreateNewCancel}
+                />
 
-            <AutoGenerateInputForm
-                isActiveInputForm={isActiveAutoGenerate}
-                onCreateSuccessful={onAutoGenerateSuccessful}
-                onCancel={onAutoGenerateCancel}
-            />
+                <AutoGenerateInputForm
+                    isActiveInputForm={isActiveAutoGenerate}
+                    onCreateSuccessful={onAutoGenerateSuccessful}
+                    onCancel={onAutoGenerateCancel}
+                />
 
-            <FractionateInputForm
-                parentSample={fractionateSample}
-                onCreateSuccessful={onFractionateSuccessful}
-                onCancel={onFractionateCancel}
-            />
-
+                <FractionateInputForm
+                    parentSample={fractionateSample}
+                    onCreateSuccessful={onFractionateSuccessful}
+                    onCancel={onFractionateCancel}
+                />
+            </PageHeader>
             <Divider></Divider>
 
             <List

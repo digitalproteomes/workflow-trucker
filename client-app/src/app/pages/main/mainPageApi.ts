@@ -17,14 +17,14 @@ class MainPageApi {
         } catch (error) {
             return {
                 createdDate: 'test2020-05-08T13:46:32.067000+00:00',
-                description: 'testMMA Project',
-                id: 'test5eb562b8c65543aa9ac7e676',
+                description: 'MMA Project',
+                id: '5f2556e4a4ee2cea08d1b992',
                 isLocked: false,
-                name: 'CPACtest',
-                ownerName: 'testPatrick Pedrioli',
-                ownerORCID: 'test0000-0001-6719-9139',
+                name: 'MMA',
+                ownerName: 'Patrick Pedrioli',
+                ownerORCID: '0000-0001-6719-9139',
                 projectId: Constants.projectId,
-                updatedDate: 'test2020-05-08T13:46:32.067000+00:00',
+                updatedDate: '2020-05-08T13:46:32.067000+00:00',
             };
             // throw error;
         }

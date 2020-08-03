@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Space, Button } from 'antd';
+import { Space, Button, PageHeader, Divider } from 'antd';
 import { MsRun } from '../../types';
 import { List } from './components/list';
 
@@ -31,11 +31,15 @@ export const MsRuns: FunctionComponent = () => {
     };
 
     return (
-        <List
-            isRefreshNeeded={isRefreshNeeded}
-            onRefreshDone={onRefreshDone}
-            renderActions={renderActions}
-            onRowSelectionChange={onRowSelectionChange}
-        />
+        <>
+            <PageHeader ghost={false} title="MS Runs"></PageHeader>
+            <Divider></Divider>
+            <List
+                isRefreshNeeded={isRefreshNeeded}
+                onRefreshDone={onRefreshDone}
+                renderActions={renderActions}
+                onRowSelectionChange={onRowSelectionChange}
+            />
+        </>
     );
 };

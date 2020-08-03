@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { ProjectPage } from './pages/main';
-import { About } from './pages/about';
+import { AboutPage } from './pages/about';
 import BasicLayout from './layouts';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { ClinicalSamples } from './pages/clinical-samples';
@@ -21,7 +21,7 @@ export function App() {
                 <BasicLayout>
                     <Switch>
                         <Route path="/about">
-                            <About />
+                            <AboutPage />
                         </Route>
                         <Route path="/projects">
                             <ProjectPage />
@@ -57,7 +57,7 @@ export function App() {
                             <SpectralLibrariesPage />
                         </Route>
                         <Route path="/">
-                            <span>This is the landing page</span>
+                            <AboutPage />
                         </Route>
                     </Switch>
                 </BasicLayout>

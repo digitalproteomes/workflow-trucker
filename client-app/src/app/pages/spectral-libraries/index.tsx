@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Space, Button } from 'antd';
+import { Space, Button, PageHeader, Divider } from 'antd';
 import { SpectralLibrary } from '../../types';
 import { List } from './components/list';
 
@@ -27,11 +27,15 @@ export const SpectralLibrariesPage: FunctionComponent = () => {
     };
 
     return (
-        <List
-            isRefreshNeeded={isRefreshNeeded}
-            onRefreshDone={onRefreshDone}
-            renderActions={renderActions}
-            onRowSelectionChange={onRowSelectionChange}
-        />
+        <>
+            <PageHeader ghost={false} title="Spectral Libraries"></PageHeader>
+            <Divider></Divider>
+            <List
+                isRefreshNeeded={isRefreshNeeded}
+                onRefreshDone={onRefreshDone}
+                renderActions={renderActions}
+                onRowSelectionChange={onRowSelectionChange}
+            />
+        </>
     );
 };

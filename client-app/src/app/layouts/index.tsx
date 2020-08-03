@@ -6,6 +6,7 @@ import {
     UserOutlined,
     MonitorOutlined,
     ReadOutlined,
+    CoffeeOutlined,
     BarcodeOutlined,
     HeatMapOutlined,
     NotificationOutlined,
@@ -72,6 +73,9 @@ const BasicLayout: React.FC = (props) => {
                         // `${otherProjectId}_sub1`,
                     ]}
                 >
+                    <Menu.Item key={'about'} icon={<CoffeeOutlined />}>
+                        <Link to={`/about`}>Home</Link>
+                    </Menu.Item>
                     {getSubmenu(defaultProjectId, defaultProjectName)}
                     {getSubmenu(otherProjectId, otherProjectName)}
                 </Menu>
@@ -124,10 +128,10 @@ function getSubmenu(projectId: string, name: string) {
                 <Link to={`/msruns`}>MS Runs</Link>
             </Menu.Item>
             <Menu.Item key={`${projectId}_30`} icon={<ReadOutlined />}>
-                <Link to={`/spectrallibraries?project=${projectId}`}>Spectral Library</Link>
+                <Link to={`/spectrallibraries?project=${projectId}`}>Spectral Libraries</Link>
             </Menu.Item>
             <Menu.Item key={`${projectId}_40`} icon={<HeatMapOutlined />}>
-                <Link to={`/swathanalyses?project=${projectId}`}>SWATH Analysis</Link>
+                <Link to={`/swathanalyses?project=${projectId}`}>SWATH Analyses</Link>
             </Menu.Item>
         </SubMenu>
     );

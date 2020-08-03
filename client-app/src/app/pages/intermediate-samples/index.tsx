@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { List } from './components/list';
 import { IntermediateSample } from '../../types';
-import { Space, Button } from 'antd';
+import { Space, Button, Divider, PageHeader } from 'antd';
 
 export const IntermediateSamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -33,11 +33,15 @@ export const IntermediateSamples: FunctionComponent = () => {
     };
 
     return (
-        <List
-            isRefreshNeeded={isRefreshNeeded}
-            onRefreshDone={onRefreshDone}
-            renderActions={renderActions}
-            onRowSelectionChange={onRowSelectionChange}
-        />
+        <>
+            <PageHeader ghost={false} title="Intermediate Samples"></PageHeader>
+            <Divider></Divider>
+            <List
+                isRefreshNeeded={isRefreshNeeded}
+                onRefreshDone={onRefreshDone}
+                renderActions={renderActions}
+                onRowSelectionChange={onRowSelectionChange}
+            />
+        </>
     );
 };

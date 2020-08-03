@@ -14,12 +14,12 @@ export class ProjectView extends React.Component<ProjectViewProps, {}> {
 
         return this.props.project ? (
             <div>
-                <Descriptions title="Project details" layout="horizontal" size="small">
+                {/* <Descriptions title="Project details" layout="horizontal">
                     <Descriptions.Item label="Name">{project.name}</Descriptions.Item>
                     <Descriptions.Item label="ORCID">{project.ownerORCID}</Descriptions.Item>
                     <Descriptions.Item label="ownerName">{project.ownerName}</Descriptions.Item>
                     <Descriptions.Item label="ID">{project.id}</Descriptions.Item>
-                </Descriptions>
+                </Descriptions> */}
             </div>
         ) : (
             <span>No project loaded</span>

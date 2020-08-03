@@ -9,7 +9,9 @@ export function getCompactClinicalSampleList(name: string, samples: ClinicalSamp
             title={() => <h3>{`Clinical samples of ${name}`}</h3>}
             scroll={{ y: 260 }}
             columns={[
-                getColumn('Name', ClinicalSampleCompact.nameof('name')),
+                getColumn('Name', ClinicalSampleCompact.nameof('id'), (record: ClinicalSampleCompact) => (
+                    <Button type="link">{record.name}</Button>
+                )),
                 getColumn(
                     '',
                     ClinicalSampleCompact.nameof('id'),

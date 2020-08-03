@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { List } from './components/list';
 import { MSReadySample } from '../../types';
-import { Space, Button } from 'antd';
+import { Space, Button, PageHeader, Divider } from 'antd';
 
 export const MSReadySamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -27,11 +27,15 @@ export const MSReadySamples: FunctionComponent = () => {
     };
 
     return (
-        <List
-            isRefreshNeeded={isRefreshNeeded}
-            onRefreshDone={onRefreshDone}
-            renderActions={renderActions}
-            onRowSelectionChange={onRowSelectionChange}
-        />
+        <>
+            <PageHeader ghost={false} title="MS Ready Samples"></PageHeader>
+            <Divider></Divider>
+            <List
+                isRefreshNeeded={isRefreshNeeded}
+                onRefreshDone={onRefreshDone}
+                renderActions={renderActions}
+                onRowSelectionChange={onRowSelectionChange}
+            />
+        </>
     );
 };

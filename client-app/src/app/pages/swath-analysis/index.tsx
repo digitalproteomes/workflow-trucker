@@ -2,6 +2,8 @@ import React, { useState, FunctionComponent } from 'react';
 import { Space, Button, PageHeader, Divider } from 'antd';
 import { SwathAnalysis } from '../../types';
 import { List } from './components/list';
+import { ButtonExport } from '../../common/export';
+import * as sampleNotifications from '../../common/sampleNotifications';
 
 export const SwathAnalysisPage: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -26,9 +28,18 @@ export const SwathAnalysisPage: FunctionComponent = () => {
         );
     };
 
+    function onExportDone() {
+        sampleNotifications.queueExportSuccess();
+    }
+
     return (
         <>
             <PageHeader ghost={false} title="SWATH Analyses"></PageHeader>
+            <ButtonExport
+                onExportDone={() => {
+                    onExportDone();
+                }}
+            />
             <Divider></Divider>
             <List
                 isRefreshNeeded={isRefreshNeeded}

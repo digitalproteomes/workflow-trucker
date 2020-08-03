@@ -1,7 +1,10 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Space, Button, PageHeader, Divider } from 'antd';
+import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
 import { MsRun } from '../../types';
 import { List } from './components/list';
+import { ButtonExport } from '../../common/export';
+import * as sampleNotifications from '../../common/sampleNotifications';
+import { UploadOutlined } from '@ant-design/icons';
 
 export const MsRuns: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -30,9 +33,24 @@ export const MsRuns: FunctionComponent = () => {
         );
     };
 
+    function onExportDone() {
+        sampleNotifications.queueExportSuccess();
+    }
+
     return (
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
+
+            <ButtonExport
+                onExportDone={() => {
+                    onExportDone();
+                }}
+            />
+            <Tooltip title="Import MS ready sample names and Run codes from Mass Spec">
+                <Button type="primary" icon={<UploadOutlined />} style={{ float: 'right', marginRight: 10 }}>
+                    Import MS Runs
+                </Button>
+            </Tooltip>
             <Divider></Divider>
             <List
                 isRefreshNeeded={isRefreshNeeded}

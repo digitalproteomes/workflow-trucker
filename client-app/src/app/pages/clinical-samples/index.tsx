@@ -1,10 +1,11 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Divider, Space, PageHeader } from 'antd';
+import { Divider, Space, PageHeader, Button } from 'antd';
 import { ClinicalInputForm, ButtonCreateNew } from './components/createNew'; // todo - the two creation method should be combined
 import { AutoGenerateInputForm, ButtonAutoGenerate } from './components/createNewAutoGenerate';
 import { List } from './components/list';
 import { ClinicalSample } from '../../types';
 import { ButtonDelete } from './components/delete';
+import { ButtonExport } from '../../common/export';
 import { FractionateInputForm } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
 import * as sampleNotifications from '../../common/sampleNotifications';
@@ -62,6 +63,10 @@ export const ClinicalSamples: FunctionComponent = () => {
         sampleNotifications.queueDeleteSuccess(sample.name);
     }
 
+    function onExportDone() {
+        sampleNotifications.queueExportSuccess();
+    }
+
     const onFractionateCancel = () => {
         setFractionateSample(null);
     };
@@ -99,7 +104,14 @@ export const ClinicalSamples: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="Clinical Samples">
-                <ButtonCreateNew onCreateNewClick={onCreateNew} style={{ float: 'right', marginRight: 74 }} />
+                <ButtonExport
+                    onExportDone={() => {
+                        onExportDone();
+                    }}
+                />
+
+                <ButtonCreateNew onCreateNewClick={onCreateNew} style={{ float: 'right', marginRight: 10 }} />
+
                 <ButtonAutoGenerate
                     onAutoGenerateClick={onAutoGenerateButtonClick}
                     style={{ float: 'right', marginRight: 16 }}

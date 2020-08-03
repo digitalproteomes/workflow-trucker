@@ -131,7 +131,7 @@ const AutoGenerateInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm
 
 const columns: ColumnsType<SampleNew> = [
     { title: 'Name', dataIndex: SampleNew.nameof('name') },
-    { title: 'Source sample id', dataIndex: SampleNew.nameof('sourceSampleId') },
+    { title: 'Source sample id (editable)', dataIndex: SampleNew.nameof('sourceSampleId') },
     { title: 'Processing person', dataIndex: SampleNew.nameof('processingPerson') },
 ];
 

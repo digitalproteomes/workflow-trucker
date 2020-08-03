@@ -44,10 +44,10 @@ export const List: FunctionComponent<ListProps> = ({
                                 <h3>Processing person</h3>
                                 <span>{record.processingPerson}</span>
                             </Col>
-                            <Col className="gutter-row" span={2}>
+                            {/* <Col className="gutter-row" span={2}>
                                 <h3>Workflow tag</h3>
                                 {getWorkflowTag(record.workflowTag)}
-                            </Col>
+                            </Col> */}
                         </Row>
                     );
                 },

@@ -1,4 +1,4 @@
 export class Constants {
-    public static projectId: string = '5f2556e4a4ee2cea08d1b992';
+    public static projectId: string = '5f2be29f8b08f9a788b31fd0';
     public static useServerEndpoints: boolean = true;
 }

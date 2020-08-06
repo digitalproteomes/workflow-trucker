@@ -1333,7 +1333,7 @@
     },
     {
       "id": "1001",
-      "name": "PHRT_005_1001_CPAC_individual",
+      "name": "PHRT_005_1001_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "1"
@@ -1341,7 +1341,7 @@
     },
     {
       "id": "1002",
-      "name": "PHRT_005_1002_CPAC_individual",
+      "name": "PHRT_005_1002_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "2"
@@ -1349,7 +1349,7 @@
     },
     {
       "id": "1003",
-      "name": "PHRT_005_1003_CPAC_individual",
+      "name": "PHRT_005_1003_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "3"
@@ -1357,7 +1357,7 @@
     },
     {
       "id": "1004",
-      "name": "PHRT_005_1004_CPAC_individual",
+      "name": "PHRT_005_1004_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "4"
@@ -1365,7 +1365,7 @@
     },
     {
       "id": "1005",
-      "name": "PHRT_005_1005_CPAC_individual",
+      "name": "PHRT_005_1005_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "5"
@@ -1373,7 +1373,7 @@
     },
     {
       "id": "1006",
-      "name": "PHRT_005_1006_CPAC_individual",
+      "name": "PHRT_005_1006_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "6"
@@ -1381,7 +1381,7 @@
     },
     {
       "id": "1007",
-      "name": "PHRT_005_1007_CPAC_individual",
+      "name": "PHRT_005_1007_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "7"
@@ -1389,7 +1389,7 @@
     },
     {
       "id": "1008",
-      "name": "PHRT_005_1008_CPAC_individual",
+      "name": "PHRT_005_1008_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "8"
@@ -1397,7 +1397,7 @@
     },
     {
       "id": "1009",
-      "name": "PHRT_005_1009_CPAC_individual",
+      "name": "PHRT_005_1009_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "9"
@@ -1405,7 +1405,7 @@
     },
     {
       "id": "1010",
-      "name": "PHRT_005_1010_CPAC_individual",
+      "name": "PHRT_005_1010_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "10"
@@ -1413,7 +1413,7 @@
     },
     {
       "id": "1011",
-      "name": "PHRT_005_1011_CPAC_individual",
+      "name": "PHRT_005_1011_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "11"
@@ -1421,7 +1421,7 @@
     },
     {
       "id": "1012",
-      "name": "PHRT_005_1012_CPAC_individual",
+      "name": "PHRT_005_1012_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "12"
@@ -1429,7 +1429,7 @@
     },
     {
       "id": "1013",
-      "name": "PHRT_005_1013_CPAC_individual",
+      "name": "PHRT_005_1013_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "13"
@@ -1437,7 +1437,7 @@
     },
     {
       "id": "1014",
-      "name": "PHRT_005_1014_CPAC_individual",
+      "name": "PHRT_005_1014_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "14"
@@ -1445,7 +1445,7 @@
     },
     {
       "id": "1015",
-      "name": "PHRT_005_1015_CPAC_individual",
+      "name": "PHRT_005_1015_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "15"
@@ -1453,7 +1453,7 @@
     },
     {
       "id": "1016",
-      "name": "PHRT_005_1016_CPAC_individual",
+      "name": "PHRT_005_1016_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "16"
@@ -1461,7 +1461,7 @@
     },
     {
       "id": "1017",
-      "name": "PHRT_005_1017_CPAC_individual",
+      "name": "PHRT_005_1017_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "17"
@@ -1469,7 +1469,7 @@
     },
     {
       "id": "1018",
-      "name": "PHRT_005_1018_CPAC_individual",
+      "name": "PHRT_005_1018_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "18"
@@ -1477,7 +1477,7 @@
     },
     {
       "id": "1019",
-      "name": "PHRT_005_1019_CPAC_individual",
+      "name": "PHRT_005_1019_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "19"
@@ -1485,7 +1485,7 @@
     },
     {
       "id": "1020",
-      "name": "PHRT_005_1020_CPAC_individual",
+      "name": "PHRT_005_1020_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "20"
@@ -1493,7 +1493,7 @@
     },
     {
       "id": "1021",
-      "name": "PHRT_005_1021_CPAC_individual",
+      "name": "PHRT_005_1021_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "21"
@@ -1501,7 +1501,7 @@
     },
     {
       "id": "1022",
-      "name": "PHRT_005_1022_CPAC_individual",
+      "name": "PHRT_005_1022_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "22"
@@ -1509,7 +1509,7 @@
     },
     {
       "id": "1023",
-      "name": "PHRT_005_1023_CPAC_individual",
+      "name": "PHRT_005_1023_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "23"
@@ -1517,7 +1517,7 @@
     },
     {
       "id": "1024",
-      "name": "PHRT_005_1024_CPAC_individual",
+      "name": "PHRT_005_1024_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "24"
@@ -1525,7 +1525,7 @@
     },
     {
       "id": "1025",
-      "name": "PHRT_005_1025_CPAC_individual",
+      "name": "PHRT_005_1025_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "25"
@@ -1533,7 +1533,7 @@
     },
     {
       "id": "1026",
-      "name": "PHRT_005_1026_CPAC_individual",
+      "name": "PHRT_005_1026_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "26"
@@ -1541,7 +1541,7 @@
     },
     {
       "id": "1027",
-      "name": "PHRT_005_1027_CPAC_individual",
+      "name": "PHRT_005_1027_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "27"
@@ -1549,7 +1549,7 @@
     },
     {
       "id": "1028",
-      "name": "PHRT_005_1028_CPAC_individual",
+      "name": "PHRT_005_1028_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "28"
@@ -1557,7 +1557,7 @@
     },
     {
       "id": "1029",
-      "name": "PHRT_005_1029_CPAC_individual",
+      "name": "PHRT_005_1029_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "29"
@@ -1565,7 +1565,7 @@
     },
     {
       "id": "1030",
-      "name": "PHRT_005_1030_CPAC_individual",
+      "name": "PHRT_005_1030_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "30"
@@ -1573,7 +1573,7 @@
     },
     {
       "id": "1031",
-      "name": "PHRT_005_1031_CPAC_individual",
+      "name": "PHRT_005_1031_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "31"
@@ -1581,7 +1581,7 @@
     },
     {
       "id": "1032",
-      "name": "PHRT_005_1032_CPAC_individual",
+      "name": "PHRT_005_1032_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "32"
@@ -1589,7 +1589,7 @@
     },
     {
       "id": "1033",
-      "name": "PHRT_005_1033_CPAC_individual",
+      "name": "PHRT_005_1033_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "33"
@@ -1597,7 +1597,7 @@
     },
     {
       "id": "1034",
-      "name": "PHRT_005_1034_CPAC_individual",
+      "name": "PHRT_005_1034_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "34"
@@ -1605,7 +1605,7 @@
     },
     {
       "id": "1035",
-      "name": "PHRT_005_1035_CPAC_individual",
+      "name": "PHRT_005_1035_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "35"
@@ -1613,7 +1613,7 @@
     },
     {
       "id": "1036",
-      "name": "PHRT_005_1036_CPAC_individual",
+      "name": "PHRT_005_1036_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "36"
@@ -1621,7 +1621,7 @@
     },
     {
       "id": "1037",
-      "name": "PHRT_005_1037_CPAC_individual",
+      "name": "PHRT_005_1037_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "37"
@@ -1629,7 +1629,7 @@
     },
     {
       "id": "1038",
-      "name": "PHRT_005_1038_CPAC_individual",
+      "name": "PHRT_005_1038_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "38"
@@ -1637,7 +1637,7 @@
     },
     {
       "id": "1039",
-      "name": "PHRT_005_1039_CPAC_individual",
+      "name": "PHRT_005_1039_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "39"
@@ -1645,7 +1645,7 @@
     },
     {
       "id": "1040",
-      "name": "PHRT_005_1040_CPAC_individual",
+      "name": "PHRT_005_1040_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "40"
@@ -1653,7 +1653,7 @@
     },
     {
       "id": "1041",
-      "name": "PHRT_005_1041_CPAC_individual",
+      "name": "PHRT_005_1041_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "41"
@@ -1661,7 +1661,7 @@
     },
     {
       "id": "1042",
-      "name": "PHRT_005_1042_CPAC_individual",
+      "name": "PHRT_005_1042_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "42"
@@ -1669,7 +1669,7 @@
     },
     {
       "id": "1043",
-      "name": "PHRT_005_1043_CPAC_individual",
+      "name": "PHRT_005_1043_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "43"
@@ -1677,7 +1677,7 @@
     },
     {
       "id": "1044",
-      "name": "PHRT_005_1044_CPAC_individual",
+      "name": "PHRT_005_1044_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "44"
@@ -1685,7 +1685,7 @@
     },
     {
       "id": "1045",
-      "name": "PHRT_005_1045_CPAC_individual",
+      "name": "PHRT_005_1045_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "45"
@@ -1693,7 +1693,7 @@
     },
     {
       "id": "1046",
-      "name": "PHRT_005_1046_CPAC_individual",
+      "name": "PHRT_005_1046_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "46"
@@ -1701,7 +1701,7 @@
     },
     {
       "id": "1047",
-      "name": "PHRT_005_1047_CPAC_individual",
+      "name": "PHRT_005_1047_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "47"
@@ -1709,7 +1709,7 @@
     },
     {
       "id": "1048",
-      "name": "PHRT_005_1048_CPAC_individual",
+      "name": "PHRT_005_1048_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "48"
@@ -1717,7 +1717,7 @@
     },
     {
       "id": "1049",
-      "name": "PHRT_005_1049_CPAC_individual",
+      "name": "PHRT_005_1049_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "49"
@@ -1725,7 +1725,7 @@
     },
     {
       "id": "1050",
-      "name": "PHRT_005_1050_CPAC_individual",
+      "name": "PHRT_005_1050_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "50"
@@ -1733,7 +1733,7 @@
     },
     {
       "id": "1051",
-      "name": "PHRT_005_1051_CPAC_individual",
+      "name": "PHRT_005_1051_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "51"
@@ -1741,7 +1741,7 @@
     },
     {
       "id": "1052",
-      "name": "PHRT_005_1052_CPAC_individual",
+      "name": "PHRT_005_1052_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "52"
@@ -1749,7 +1749,7 @@
     },
     {
       "id": "1053",
-      "name": "PHRT_005_1053_CPAC_individual",
+      "name": "PHRT_005_1053_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "53"
@@ -1757,7 +1757,7 @@
     },
     {
       "id": "1054",
-      "name": "PHRT_005_1054_CPAC_individual",
+      "name": "PHRT_005_1054_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "54"
@@ -1765,7 +1765,7 @@
     },
     {
       "id": "1055",
-      "name": "PHRT_005_1055_CPAC_individual",
+      "name": "PHRT_005_1055_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "55"
@@ -1773,7 +1773,7 @@
     },
     {
       "id": "1056",
-      "name": "PHRT_005_1056_CPAC_individual",
+      "name": "PHRT_005_1056_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "56"
@@ -1781,7 +1781,7 @@
     },
     {
       "id": "1057",
-      "name": "PHRT_005_1057_CPAC_individual",
+      "name": "PHRT_005_1057_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "57"
@@ -1789,7 +1789,7 @@
     },
     {
       "id": "1058",
-      "name": "PHRT_005_1058_CPAC_individual",
+      "name": "PHRT_005_1058_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "58"
@@ -1797,7 +1797,7 @@
     },
     {
       "id": "1059",
-      "name": "PHRT_005_1059_CPAC_individual",
+      "name": "PHRT_005_1059_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "59"
@@ -1805,7 +1805,7 @@
     },
     {
       "id": "1060",
-      "name": "PHRT_005_1060_CPAC_individual",
+      "name": "PHRT_005_1060_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "60"
@@ -1813,7 +1813,7 @@
     },
     {
       "id": "1061",
-      "name": "PHRT_005_1061_CPAC_individual",
+      "name": "PHRT_005_1061_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "61"
@@ -1821,7 +1821,7 @@
     },
     {
       "id": "1062",
-      "name": "PHRT_005_1062_CPAC_individual",
+      "name": "PHRT_005_1062_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "62"
@@ -1829,7 +1829,7 @@
     },
     {
       "id": "1063",
-      "name": "PHRT_005_1063_CPAC_individual",
+      "name": "PHRT_005_1063_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "63"
@@ -1837,7 +1837,7 @@
     },
     {
       "id": "1064",
-      "name": "PHRT_005_1064_CPAC_individual",
+      "name": "PHRT_005_1064_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "64"
@@ -1845,7 +1845,7 @@
     },
     {
       "id": "1065",
-      "name": "PHRT_005_1065_CPAC_individual",
+      "name": "PHRT_005_1065_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "65"
@@ -1853,7 +1853,7 @@
     },
     {
       "id": "1066",
-      "name": "PHRT_005_1066_CPAC_individual",
+      "name": "PHRT_005_1066_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "66"
@@ -1861,7 +1861,7 @@
     },
     {
       "id": "1067",
-      "name": "PHRT_005_1067_CPAC_individual",
+      "name": "PHRT_005_1067_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "67"
@@ -1869,7 +1869,7 @@
     },
     {
       "id": "1068",
-      "name": "PHRT_005_1068_CPAC_individual",
+      "name": "PHRT_005_1068_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "68"
@@ -1877,7 +1877,7 @@
     },
     {
       "id": "1069",
-      "name": "PHRT_005_1069_CPAC_individual",
+      "name": "PHRT_005_1069_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "69"
@@ -1885,7 +1885,7 @@
     },
     {
       "id": "1070",
-      "name": "PHRT_005_1070_CPAC_individual",
+      "name": "PHRT_005_1070_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "70"
@@ -1893,7 +1893,7 @@
     },
     {
       "id": "1071",
-      "name": "PHRT_005_1071_CPAC_individual",
+      "name": "PHRT_005_1071_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "71"
@@ -1901,7 +1901,7 @@
     },
     {
       "id": "1072",
-      "name": "PHRT_005_1072_CPAC_individual",
+      "name": "PHRT_005_1072_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "72"
@@ -1909,7 +1909,7 @@
     },
     {
       "id": "1073",
-      "name": "PHRT_005_1073_CPAC_individual",
+      "name": "PHRT_005_1073_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "73"
@@ -1917,7 +1917,7 @@
     },
     {
       "id": "1074",
-      "name": "PHRT_005_1074_CPAC_individual",
+      "name": "PHRT_005_1074_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "74"
@@ -1925,7 +1925,7 @@
     },
     {
       "id": "1075",
-      "name": "PHRT_005_1075_CPAC_individual",
+      "name": "PHRT_005_1075_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "75"
@@ -1933,7 +1933,7 @@
     },
     {
       "id": "1076",
-      "name": "PHRT_005_1076_CPAC_individual",
+      "name": "PHRT_005_1076_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "76"
@@ -1941,7 +1941,7 @@
     },
     {
       "id": "1077",
-      "name": "PHRT_005_1077_CPAC_individual",
+      "name": "PHRT_005_1077_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "77"
@@ -1949,7 +1949,7 @@
     },
     {
       "id": "1078",
-      "name": "PHRT_005_1078_CPAC_individual",
+      "name": "PHRT_005_1078_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "78"
@@ -1957,7 +1957,7 @@
     },
     {
       "id": "1079",
-      "name": "PHRT_005_1079_CPAC_individual",
+      "name": "PHRT_005_1079_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "79"
@@ -1965,7 +1965,7 @@
     },
     {
       "id": "1080",
-      "name": "PHRT_005_1080_CPAC_individual",
+      "name": "PHRT_005_1080_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "80"
@@ -1973,7 +1973,7 @@
     },
     {
       "id": "1081",
-      "name": "PHRT_005_1081_CPAC_individual",
+      "name": "PHRT_005_1081_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "81"
@@ -1981,7 +1981,7 @@
     },
     {
       "id": "1082",
-      "name": "PHRT_005_1082_CPAC_individual",
+      "name": "PHRT_005_1082_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "82"
@@ -1989,7 +1989,7 @@
     },
     {
       "id": "1083",
-      "name": "PHRT_005_1083_CPAC_individual",
+      "name": "PHRT_005_1083_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "83"
@@ -1997,7 +1997,7 @@
     },
     {
       "id": "1084",
-      "name": "PHRT_005_1084_CPAC_individual",
+      "name": "PHRT_005_1084_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "84"
@@ -2005,7 +2005,7 @@
     },
     {
       "id": "1085",
-      "name": "PHRT_005_1085_CPAC_individual",
+      "name": "PHRT_005_1085_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "85"
@@ -2013,7 +2013,7 @@
     },
     {
       "id": "1086",
-      "name": "PHRT_005_1086_CPAC_individual",
+      "name": "PHRT_005_1086_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "86"
@@ -2021,7 +2021,7 @@
     },
     {
       "id": "1087",
-      "name": "PHRT_005_1087_CPAC_individual",
+      "name": "PHRT_005_1087_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "87"
@@ -2029,7 +2029,7 @@
     },
     {
       "id": "1088",
-      "name": "PHRT_005_1088_CPAC_individual",
+      "name": "PHRT_005_1088_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "88"
@@ -2037,7 +2037,7 @@
     },
     {
       "id": "1089",
-      "name": "PHRT_005_1089_CPAC_individual",
+      "name": "PHRT_005_1089_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "89"
@@ -2045,7 +2045,7 @@
     },
     {
       "id": "1090",
-      "name": "PHRT_005_1090_CPAC_individual",
+      "name": "PHRT_005_1090_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "90"
@@ -2053,7 +2053,7 @@
     },
     {
       "id": "1091",
-      "name": "PHRT_005_1091_CPAC_individual",
+      "name": "PHRT_005_1091_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "91"
@@ -2061,7 +2061,7 @@
     },
     {
       "id": "1092",
-      "name": "PHRT_005_1092_CPAC_individual",
+      "name": "PHRT_005_1092_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "92"
@@ -2069,7 +2069,7 @@
     },
     {
       "id": "1093",
-      "name": "PHRT_005_1093_CPAC_individual",
+      "name": "PHRT_005_1093_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "93"
@@ -2077,7 +2077,7 @@
     },
     {
       "id": "1094",
-      "name": "PHRT_005_1094_CPAC_individual",
+      "name": "PHRT_005_1094_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "94"
@@ -2085,7 +2085,7 @@
     },
     {
       "id": "1095",
-      "name": "PHRT_005_1095_CPAC_individual",
+      "name": "PHRT_005_1095_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "95"
@@ -2093,7 +2093,7 @@
     },
     {
       "id": "1096",
-      "name": "PHRT_005_1096_CPAC_individual",
+      "name": "PHRT_005_1096_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "96"
@@ -2101,7 +2101,7 @@
     },
     {
       "id": "1097",
-      "name": "PHRT_005_1097_CPAC_individual",
+      "name": "PHRT_005_1097_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "97"
@@ -2109,7 +2109,7 @@
     },
     {
       "id": "1098",
-      "name": "PHRT_005_1098_CPAC_individual",
+      "name": "PHRT_005_1098_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "98"
@@ -2117,7 +2117,7 @@
     },
     {
       "id": "1099",
-      "name": "PHRT_005_1099_CPAC_individual",
+      "name": "PHRT_005_1099_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "99"
@@ -2125,7 +2125,7 @@
     },
     {
       "id": "1100",
-      "name": "PHRT_005_1100_CPAC_individual",
+      "name": "PHRT_005_1100_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "100"
@@ -2133,7 +2133,7 @@
     },
     {
       "id": "1101",
-      "name": "PHRT_005_1101_CPAC_individual",
+      "name": "PHRT_005_1101_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "101"
@@ -2141,7 +2141,7 @@
     },
     {
       "id": "1102",
-      "name": "PHRT_005_1102_CPAC_individual",
+      "name": "PHRT_005_1102_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "102"
@@ -2149,7 +2149,7 @@
     },
     {
       "id": "1103",
-      "name": "PHRT_005_1103_CPAC_individual",
+      "name": "PHRT_005_1103_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "103"
@@ -2157,7 +2157,7 @@
     },
     {
       "id": "1104",
-      "name": "PHRT_005_1104_CPAC_individual",
+      "name": "PHRT_005_1104_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "104"
@@ -2165,7 +2165,7 @@
     },
     {
       "id": "1105",
-      "name": "PHRT_005_1105_CPAC_individual",
+      "name": "PHRT_005_1105_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "105"
@@ -2173,7 +2173,7 @@
     },
     {
       "id": "1106",
-      "name": "PHRT_005_1106_CPAC_individual",
+      "name": "PHRT_005_1106_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "106"
@@ -2181,7 +2181,7 @@
     },
     {
       "id": "1107",
-      "name": "PHRT_005_1107_CPAC_individual",
+      "name": "PHRT_005_1107_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "107"
@@ -2189,7 +2189,7 @@
     },
     {
       "id": "1108",
-      "name": "PHRT_005_1108_CPAC_individual",
+      "name": "PHRT_005_1108_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "108"
@@ -2197,7 +2197,7 @@
     },
     {
       "id": "1109",
-      "name": "PHRT_005_1109_CPAC_individual",
+      "name": "PHRT_005_1109_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "109"
@@ -2205,7 +2205,7 @@
     },
     {
       "id": "1110",
-      "name": "PHRT_005_1110_CPAC_individual",
+      "name": "PHRT_005_1110_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "110"
@@ -2213,7 +2213,7 @@
     },
     {
       "id": "1111",
-      "name": "PHRT_005_1111_CPAC_individual",
+      "name": "PHRT_005_1111_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "111"
@@ -2221,7 +2221,7 @@
     },
     {
       "id": "1112",
-      "name": "PHRT_005_1112_CPAC_individual",
+      "name": "PHRT_005_1112_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "112"
@@ -2229,7 +2229,7 @@
     },
     {
       "id": "1113",
-      "name": "PHRT_005_1113_CPAC_individual",
+      "name": "PHRT_005_1113_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "113"
@@ -2237,7 +2237,7 @@
     },
     {
       "id": "1114",
-      "name": "PHRT_005_1114_CPAC_individual",
+      "name": "PHRT_005_1114_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "114"
@@ -2245,7 +2245,7 @@
     },
     {
       "id": "1115",
-      "name": "PHRT_005_1115_CPAC_individual",
+      "name": "PHRT_005_1115_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "115"
@@ -2253,7 +2253,7 @@
     },
     {
       "id": "1116",
-      "name": "PHRT_005_1116_CPAC_individual",
+      "name": "PHRT_005_1116_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "116"
@@ -2261,7 +2261,7 @@
     },
     {
       "id": "1117",
-      "name": "PHRT_005_1117_CPAC_individual",
+      "name": "PHRT_005_1117_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "117"
@@ -2269,7 +2269,7 @@
     },
     {
       "id": "1118",
-      "name": "PHRT_005_1118_CPAC_individual",
+      "name": "PHRT_005_1118_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "118"
@@ -2277,7 +2277,7 @@
     },
     {
       "id": "1119",
-      "name": "PHRT_005_1119_CPAC_individual",
+      "name": "PHRT_005_1119_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "119"
@@ -2285,7 +2285,7 @@
     },
     {
       "id": "1120",
-      "name": "PHRT_005_1120_CPAC_individual",
+      "name": "PHRT_005_1120_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "120"
@@ -2293,7 +2293,7 @@
     },
     {
       "id": "1121",
-      "name": "PHRT_005_1121_CPAC_individual",
+      "name": "PHRT_005_1121_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "121"
@@ -2301,7 +2301,7 @@
     },
     {
       "id": "1122",
-      "name": "PHRT_005_1122_CPAC_individual",
+      "name": "PHRT_005_1122_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "122"
@@ -2309,7 +2309,7 @@
     },
     {
       "id": "1123",
-      "name": "PHRT_005_1123_CPAC_individual",
+      "name": "PHRT_005_1123_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "123"
@@ -2317,7 +2317,7 @@
     },
     {
       "id": "1124",
-      "name": "PHRT_005_1124_CPAC_individual",
+      "name": "PHRT_005_1124_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "124"
@@ -2325,7 +2325,7 @@
     },
     {
       "id": "1125",
-      "name": "PHRT_005_1125_CPAC_individual",
+      "name": "PHRT_005_1125_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "125"
@@ -2333,7 +2333,7 @@
     },
     {
       "id": "1126",
-      "name": "PHRT_005_1126_CPAC_individual",
+      "name": "PHRT_005_1126_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "126"
@@ -2341,7 +2341,7 @@
     },
     {
       "id": "1127",
-      "name": "PHRT_005_1127_CPAC_individual",
+      "name": "PHRT_005_1127_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "127"
@@ -2349,7 +2349,7 @@
     },
     {
       "id": "1128",
-      "name": "PHRT_005_1128_CPAC_individual",
+      "name": "PHRT_005_1128_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "128"
@@ -2357,7 +2357,7 @@
     },
     {
       "id": "1129",
-      "name": "PHRT_005_1129_CPAC_individual",
+      "name": "PHRT_005_1129_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "129"
@@ -2365,7 +2365,7 @@
     },
     {
       "id": "1130",
-      "name": "PHRT_005_1130_CPAC_individual",
+      "name": "PHRT_005_1130_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "130"
@@ -2373,7 +2373,7 @@
     },
     {
       "id": "1131",
-      "name": "PHRT_005_1131_CPAC_individual",
+      "name": "PHRT_005_1131_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "131"
@@ -2381,7 +2381,7 @@
     },
     {
       "id": "1132",
-      "name": "PHRT_005_1132_CPAC_individual",
+      "name": "PHRT_005_1132_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "132"
@@ -2389,7 +2389,7 @@
     },
     {
       "id": "1133",
-      "name": "PHRT_005_1133_CPAC_individual",
+      "name": "PHRT_005_1133_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "133"
@@ -2397,7 +2397,7 @@
     },
     {
       "id": "1134",
-      "name": "PHRT_005_1134_CPAC_individual",
+      "name": "PHRT_005_1134_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "134"
@@ -2405,7 +2405,7 @@
     },
     {
       "id": "1135",
-      "name": "PHRT_005_1135_CPAC_individual",
+      "name": "PHRT_005_1135_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "135"
@@ -2413,7 +2413,7 @@
     },
     {
       "id": "1136",
-      "name": "PHRT_005_1136_CPAC_individual",
+      "name": "PHRT_005_1136_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "136"
@@ -2421,7 +2421,7 @@
     },
     {
       "id": "1137",
-      "name": "PHRT_005_1137_CPAC_individual",
+      "name": "PHRT_005_1137_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "137"
@@ -2429,7 +2429,7 @@
     },
     {
       "id": "1138",
-      "name": "PHRT_005_1138_CPAC_individual",
+      "name": "PHRT_005_1138_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "138"
@@ -2437,7 +2437,7 @@
     },
     {
       "id": "1139",
-      "name": "PHRT_005_1139_CPAC_individual",
+      "name": "PHRT_005_1139_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "139"
@@ -2445,7 +2445,7 @@
     },
     {
       "id": "1140",
-      "name": "PHRT_005_1140_CPAC_individual",
+      "name": "PHRT_005_1140_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "140"
@@ -2453,7 +2453,7 @@
     },
     {
       "id": "1141",
-      "name": "PHRT_005_1141_CPAC_individual",
+      "name": "PHRT_005_1141_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "141"
@@ -2461,7 +2461,7 @@
     },
     {
       "id": "1142",
-      "name": "PHRT_005_1142_CPAC_individual",
+      "name": "PHRT_005_1142_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "142"
@@ -2469,7 +2469,7 @@
     },
     {
       "id": "1143",
-      "name": "PHRT_005_1143_CPAC_individual",
+      "name": "PHRT_005_1143_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "143"
@@ -2477,7 +2477,7 @@
     },
     {
       "id": "1144",
-      "name": "PHRT_005_1144_CPAC_individual",
+      "name": "PHRT_005_1144_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "144"
@@ -2485,7 +2485,7 @@
     },
     {
       "id": "1145",
-      "name": "PHRT_005_1145_CPAC_individual",
+      "name": "PHRT_005_1145_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "145"
@@ -2493,7 +2493,7 @@
     },
     {
       "id": "1146",
-      "name": "PHRT_005_1146_CPAC_individual",
+      "name": "PHRT_005_1146_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "146"
@@ -2501,7 +2501,7 @@
     },
     {
       "id": "1147",
-      "name": "PHRT_005_1147_CPAC_individual",
+      "name": "PHRT_005_1147_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "147"
@@ -2509,7 +2509,7 @@
     },
     {
       "id": "1148",
-      "name": "PHRT_005_1148_CPAC_individual",
+      "name": "PHRT_005_1148_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "148"
@@ -2517,7 +2517,7 @@
     },
     {
       "id": "1149",
-      "name": "PHRT_005_1149_CPAC_individual",
+      "name": "PHRT_005_1149_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "149"
@@ -2525,7 +2525,7 @@
     },
     {
       "id": "1150",
-      "name": "PHRT_005_1150_CPAC_individual",
+      "name": "PHRT_005_1150_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "150"
@@ -2533,7 +2533,7 @@
     },
     {
       "id": "1151",
-      "name": "PHRT_005_1151_CPAC_individual",
+      "name": "PHRT_005_1151_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "151"
@@ -2541,7 +2541,7 @@
     },
     {
       "id": "1152",
-      "name": "PHRT_005_1152_CPAC_individual",
+      "name": "PHRT_005_1152_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "152"
@@ -2549,7 +2549,7 @@
     },
     {
       "id": "1153",
-      "name": "PHRT_005_1153_CPAC_individual",
+      "name": "PHRT_005_1153_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "153"
@@ -2557,7 +2557,7 @@
     },
     {
       "id": "1154",
-      "name": "PHRT_005_1154_CPAC_individual",
+      "name": "PHRT_005_1154_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "154"
@@ -2565,7 +2565,7 @@
     },
     {
       "id": "1155",
-      "name": "PHRT_005_1155_CPAC_individual",
+      "name": "PHRT_005_1155_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "155"
@@ -2573,7 +2573,7 @@
     },
     {
       "id": "1156",
-      "name": "PHRT_005_1156_CPAC_individual",
+      "name": "PHRT_005_1156_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "156"
@@ -2581,7 +2581,7 @@
     },
     {
       "id": "1157",
-      "name": "PHRT_005_1157_CPAC_individual",
+      "name": "PHRT_005_1157_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "157"
@@ -2589,7 +2589,7 @@
     },
     {
       "id": "1158",
-      "name": "PHRT_005_1158_CPAC_individual",
+      "name": "PHRT_005_1158_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "158"
@@ -2597,7 +2597,7 @@
     },
     {
       "id": "1159",
-      "name": "PHRT_005_1159_CPAC_individual",
+      "name": "PHRT_005_1159_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "159"
@@ -2605,7 +2605,7 @@
     },
     {
       "id": "1160",
-      "name": "PHRT_005_1160_CPAC_individual",
+      "name": "PHRT_005_1160_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "160"
@@ -2613,7 +2613,7 @@
     },
     {
       "id": "1161",
-      "name": "PHRT_005_1161_CPAC_individual",
+      "name": "PHRT_005_1161_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "161"
@@ -2621,7 +2621,7 @@
     },
     {
       "id": "1162",
-      "name": "PHRT_005_1162_CPAC_individual",
+      "name": "PHRT_005_1162_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "162"
@@ -2629,7 +2629,7 @@
     },
     {
       "id": "1163",
-      "name": "PHRT_005_1163_CPAC_individual",
+      "name": "PHRT_005_1163_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "163"
@@ -2637,7 +2637,7 @@
     },
     {
       "id": "1164",
-      "name": "PHRT_005_1164_CPAC_individual",
+      "name": "PHRT_005_1164_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "164"
@@ -2645,7 +2645,7 @@
     },
     {
       "id": "1165",
-      "name": "PHRT_005_1165_CPAC_individual",
+      "name": "PHRT_005_1165_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "165"
@@ -2653,7 +2653,7 @@
     },
     {
       "id": "1166",
-      "name": "PHRT_005_1166_CPAC_individual",
+      "name": "PHRT_005_1166_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "166"
@@ -2661,7 +2661,7 @@
     },
     {
       "id": "1167",
-      "name": "PHRT_005_1167_CPAC_individual",
+      "name": "PHRT_005_1167_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "167"
@@ -2669,7 +2669,7 @@
     },
     {
       "id": "1168",
-      "name": "PHRT_005_1168_CPAC_individual",
+      "name": "PHRT_005_1168_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "168"
@@ -2677,7 +2677,7 @@
     },
     {
       "id": "1169",
-      "name": "PHRT_005_1169_CPAC_individual",
+      "name": "PHRT_005_1169_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "169"
@@ -2685,7 +2685,7 @@
     },
     {
       "id": "1170",
-      "name": "PHRT_005_1170_CPAC_individual",
+      "name": "PHRT_005_1170_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "170"
@@ -2693,7 +2693,7 @@
     },
     {
       "id": "1171",
-      "name": "PHRT_005_1171_CPAC_individual",
+      "name": "PHRT_005_1171_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "171"
@@ -2701,7 +2701,7 @@
     },
     {
       "id": "1172",
-      "name": "PHRT_005_1172_CPAC_individual",
+      "name": "PHRT_005_1172_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "172"
@@ -2709,7 +2709,7 @@
     },
     {
       "id": "1173",
-      "name": "PHRT_005_1173_CPAC_individual",
+      "name": "PHRT_005_1173_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "173"
@@ -2717,7 +2717,7 @@
     },
     {
       "id": "1174",
-      "name": "PHRT_005_1174_CPAC_individual",
+      "name": "PHRT_005_1174_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "174"
@@ -2725,7 +2725,7 @@
     },
     {
       "id": "1175",
-      "name": "PHRT_005_1175_CPAC_individual",
+      "name": "PHRT_005_1175_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "175"
@@ -2733,7 +2733,7 @@
     },
     {
       "id": "1176",
-      "name": "PHRT_005_1176_CPAC_individual",
+      "name": "PHRT_005_1176_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "176"
@@ -2741,7 +2741,7 @@
     },
     {
       "id": "1177",
-      "name": "PHRT_005_1177_CPAC_individual",
+      "name": "PHRT_005_1177_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "177"
@@ -2749,7 +2749,7 @@
     },
     {
       "id": "1178",
-      "name": "PHRT_005_1178_CPAC_individual",
+      "name": "PHRT_005_1178_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "178"
@@ -2757,7 +2757,7 @@
     },
     {
       "id": "1179",
-      "name": "PHRT_005_1179_CPAC_individual",
+      "name": "PHRT_005_1179_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "179"
@@ -2765,7 +2765,7 @@
     },
     {
       "id": "1180",
-      "name": "PHRT_005_1180_CPAC_individual",
+      "name": "PHRT_005_1180_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "180"
@@ -2773,7 +2773,7 @@
     },
     {
       "id": "1181",
-      "name": "PHRT_005_1181_CPAC_individual",
+      "name": "PHRT_005_1181_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "181"
@@ -2781,7 +2781,7 @@
     },
     {
       "id": "1182",
-      "name": "PHRT_005_1182_CPAC_individual",
+      "name": "PHRT_005_1182_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "182"
@@ -2789,7 +2789,7 @@
     },
     {
       "id": "1183",
-      "name": "PHRT_005_1183_CPAC_individual",
+      "name": "PHRT_005_1183_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "183"
@@ -2797,7 +2797,7 @@
     },
     {
       "id": "1184",
-      "name": "PHRT_005_1184_CPAC_individual",
+      "name": "PHRT_005_1184_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "184"
@@ -2805,7 +2805,7 @@
     },
     {
       "id": "1185",
-      "name": "PHRT_005_1185_CPAC_individual",
+      "name": "PHRT_005_1185_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "185"
@@ -2813,7 +2813,7 @@
     },
     {
       "id": "1186",
-      "name": "PHRT_005_1186_CPAC_individual",
+      "name": "PHRT_005_1186_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "186"
@@ -2821,7 +2821,7 @@
     },
     {
       "id": "1187",
-      "name": "PHRT_005_1187_CPAC_individual",
+      "name": "PHRT_005_1187_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "187"
@@ -2829,7 +2829,7 @@
     },
     {
       "id": "1188",
-      "name": "PHRT_005_1188_CPAC_individual",
+      "name": "PHRT_005_1188_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "188"
@@ -2837,7 +2837,7 @@
     },
     {
       "id": "1189",
-      "name": "PHRT_005_1189_CPAC_individual",
+      "name": "PHRT_005_1189_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "189"
@@ -2845,7 +2845,7 @@
     },
     {
       "id": "1190",
-      "name": "PHRT_005_1190_CPAC_individual",
+      "name": "PHRT_005_1190_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "190"
@@ -2853,7 +2853,7 @@
     },
     {
       "id": "1191",
-      "name": "PHRT_005_1191_CPAC_individual",
+      "name": "PHRT_005_1191_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "191"
@@ -2861,7 +2861,7 @@
     },
     {
       "id": "1192",
-      "name": "PHRT_005_1192_CPAC_individual",
+      "name": "PHRT_005_1192_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "192"
@@ -2869,7 +2869,7 @@
     },
     {
       "id": "1193",
-      "name": "PHRT_005_1193_CPAC_individual",
+      "name": "PHRT_005_1193_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "193"
@@ -2877,7 +2877,7 @@
     },
     {
       "id": "1194",
-      "name": "PHRT_005_1194_CPAC_individual",
+      "name": "PHRT_005_1194_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "194"
@@ -2885,7 +2885,7 @@
     },
     {
       "id": "1195",
-      "name": "PHRT_005_1195_CPAC_individual",
+      "name": "PHRT_005_1195_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "195"
@@ -2893,7 +2893,7 @@
     },
     {
       "id": "1196",
-      "name": "PHRT_005_1196_CPAC_individual",
+      "name": "PHRT_005_1196_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "196"
@@ -2901,7 +2901,7 @@
     },
     {
       "id": "1197",
-      "name": "PHRT_005_1197_CPAC_individual",
+      "name": "PHRT_005_1197_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "197"
@@ -2909,7 +2909,7 @@
     },
     {
       "id": "1198",
-      "name": "PHRT_005_1198_CPAC_individual",
+      "name": "PHRT_005_1198_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "198"
@@ -2917,7 +2917,7 @@
     },
     {
       "id": "1199",
-      "name": "PHRT_005_1199_CPAC_individual",
+      "name": "PHRT_005_1199_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "199"
@@ -2925,7 +2925,7 @@
     },
     {
       "id": "1200",
-      "name": "PHRT_005_1200_CPAC_individual",
+      "name": "PHRT_005_1200_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "200"
@@ -2933,7 +2933,7 @@
     },
     {
       "id": "1201",
-      "name": "PHRT_005_1201_CPAC_individual",
+      "name": "PHRT_005_1201_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "201"
@@ -2941,7 +2941,7 @@
     },
     {
       "id": "1202",
-      "name": "PHRT_005_1202_CPAC_individual",
+      "name": "PHRT_005_1202_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "202"
@@ -2949,7 +2949,7 @@
     },
     {
       "id": "1203",
-      "name": "PHRT_005_1203_CPAC_individual",
+      "name": "PHRT_005_1203_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "203"
@@ -2957,7 +2957,7 @@
     },
     {
       "id": "1204",
-      "name": "PHRT_005_1204_CPAC_individual",
+      "name": "PHRT_005_1204_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "204"
@@ -2965,7 +2965,7 @@
     },
     {
       "id": "1205",
-      "name": "PHRT_005_1205_CPAC_individual",
+      "name": "PHRT_005_1205_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "205"
@@ -2973,7 +2973,7 @@
     },
     {
       "id": "1206",
-      "name": "PHRT_005_1206_CPAC_individual",
+      "name": "PHRT_005_1206_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "206"
@@ -2981,7 +2981,7 @@
     },
     {
       "id": "1207",
-      "name": "PHRT_005_1207_CPAC_individual",
+      "name": "PHRT_005_1207_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "207"
@@ -2989,7 +2989,7 @@
     },
     {
       "id": "1208",
-      "name": "PHRT_005_1208_CPAC_individual",
+      "name": "PHRT_005_1208_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "208"
@@ -2997,7 +2997,7 @@
     },
     {
       "id": "1209",
-      "name": "PHRT_005_1209_CPAC_individual",
+      "name": "PHRT_005_1209_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "209"
@@ -3005,7 +3005,7 @@
     },
     {
       "id": "1210",
-      "name": "PHRT_005_1210_CPAC_individual",
+      "name": "PHRT_005_1210_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "210"
@@ -3013,7 +3013,7 @@
     },
     {
       "id": "1211",
-      "name": "PHRT_005_1211_CPAC_individual",
+      "name": "PHRT_005_1211_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "211"
@@ -3021,7 +3021,7 @@
     },
     {
       "id": "1212",
-      "name": "PHRT_005_1212_CPAC_individual",
+      "name": "PHRT_005_1212_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "212"
@@ -3029,7 +3029,7 @@
     },
     {
       "id": "1213",
-      "name": "PHRT_005_1213_CPAC_individual",
+      "name": "PHRT_005_1213_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "213"
@@ -3037,7 +3037,7 @@
     },
     {
       "id": "1214",
-      "name": "PHRT_005_1214_CPAC_individual",
+      "name": "PHRT_005_1214_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "214"
@@ -3045,7 +3045,7 @@
     },
     {
       "id": "1215",
-      "name": "PHRT_005_1215_CPAC_individual",
+      "name": "PHRT_005_1215_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "215"
@@ -3053,7 +3053,7 @@
     },
     {
       "id": "1216",
-      "name": "PHRT_005_1216_CPAC_individual",
+      "name": "PHRT_005_1216_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "216"
@@ -3061,7 +3061,7 @@
     },
     {
       "id": "1217",
-      "name": "PHRT_005_1217_CPAC_individual",
+      "name": "PHRT_005_1217_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "217"
@@ -3069,7 +3069,7 @@
     },
     {
       "id": "1218",
-      "name": "PHRT_005_1218_CPAC_individual",
+      "name": "PHRT_005_1218_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "218"
@@ -3077,7 +3077,7 @@
     },
     {
       "id": "1219",
-      "name": "PHRT_005_1219_CPAC_individual",
+      "name": "PHRT_005_1219_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "219"
@@ -3085,7 +3085,7 @@
     },
     {
       "id": "1220",
-      "name": "PHRT_005_1220_CPAC_individual",
+      "name": "PHRT_005_1220_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "220"
@@ -3093,7 +3093,7 @@
     },
     {
       "id": "1221",
-      "name": "PHRT_005_1221_CPAC_individual",
+      "name": "PHRT_005_1221_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "221"
@@ -3101,7 +3101,7 @@
     },
     {
       "id": "1222",
-      "name": "PHRT_005_1222_CPAC_individual",
+      "name": "PHRT_005_1222_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "222"
@@ -3109,7 +3109,7 @@
     },
     {
       "id": "1223",
-      "name": "PHRT_005_1223_CPAC_individual",
+      "name": "PHRT_005_1223_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "223"
@@ -3117,7 +3117,7 @@
     },
     {
       "id": "1224",
-      "name": "PHRT_005_1224_CPAC_individual",
+      "name": "PHRT_005_1224_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "224"
@@ -3125,7 +3125,7 @@
     },
     {
       "id": "1225",
-      "name": "PHRT_005_1225_CPAC_individual",
+      "name": "PHRT_005_1225_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "225"
@@ -3133,7 +3133,7 @@
     },
     {
       "id": "1226",
-      "name": "PHRT_005_1226_CPAC_individual",
+      "name": "PHRT_005_1226_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "226"
@@ -3141,7 +3141,7 @@
     },
     {
       "id": "1227",
-      "name": "PHRT_005_1227_CPAC_individual",
+      "name": "PHRT_005_1227_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "227"
@@ -3149,7 +3149,7 @@
     },
     {
       "id": "1228",
-      "name": "PHRT_005_1228_CPAC_individual",
+      "name": "PHRT_005_1228_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "228"
@@ -3157,7 +3157,7 @@
     },
     {
       "id": "1229",
-      "name": "PHRT_005_1229_CPAC_individual",
+      "name": "PHRT_005_1229_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "229"
@@ -3165,7 +3165,7 @@
     },
     {
       "id": "1230",
-      "name": "PHRT_005_1230_CPAC_individual",
+      "name": "PHRT_005_1230_CPAC",
       "protocolId": "2",
       "sample_ref": {
         "sampleIdRef": "230"
@@ -3174,7 +3174,7 @@
 
     {
       "id": "1231",
-      "name": "PHRT_005_b7-b9_mix1_CPAC_derived_1",
+      "name": "PHRT_005_b7-b9_mix1_CPAC",
       "protocolId": "4",
       "sample_ref": {
         "sampleIdRef": "231"
@@ -3182,7 +3182,7 @@
     },
     {
       "id": "1232",
-      "name": "PHRT_005_b7-b9_mix1_CPAC_derived_2",
+      "name": "PHRT_005_b7-b9_mix1_CPAC",
       "protocolId": "4",
       "sample_ref": {
         "sampleIdRef": "231"
@@ -3190,7 +3190,7 @@
     },
     {
       "id": "1233",
-      "name": "PHRT_005_b7-b9_mix1_CPAC_derived_3",
+      "name": "PHRT_005_b7-b9_mix1_CPAC",
       "protocolId": "4",
       "sample_ref": {
         "sampleIdRef": "231"
@@ -3198,7 +3198,7 @@
     },
     {
       "id": "1234",
-      "name": "PHRT_005_b7-b9_mix2_CPAC_derived_1",
+      "name": "PHRT_005_b7-b9_mix2_CPAC",
       "protocolId": "4",
       "sample_ref": {
         "sampleIdRef": "232"
@@ -3206,7 +3206,7 @@
     },
     {
       "id": "1235",
-      "name": "PHRT_005_b7-b9_mix2_CPAC_derived_2",
+      "name": "PHRT_005_b7-b9_mix2_CPAC",
       "protocolId": "4",
       "sample_ref": {
         "sampleIdRef": "232"
@@ -3214,7 +3214,7 @@
     },
     {
       "id": "1236",
-      "name": "PHRT_005_b7-b9_mix2_CPAC_derived_3",
+      "name": "PHRT_005_b7-b9_mix2_CPAC",
       "protocolId": "4",
       "sample_ref": {
         "sampleIdRef": "232"

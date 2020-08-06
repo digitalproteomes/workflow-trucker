@@ -23,9 +23,11 @@ def insertProject(project):
 
 
 def insertSamples(samples, projectId):
+    counter = 1
     for i in samples:
         if i['protocolId'] == '1':
-            insertClinicalSample(i, projectId)
+            insertClinicalSample(i, projectId, counter)
+            counter = counter + 1
         elif i['protocolId'] == '2':
             insertIndividualSample(i, projectId)
         elif i['protocolId'] == '3':
@@ -41,8 +43,8 @@ def insertMSRuns(msruns, projectId):
         x = re.search("^sgoetze_A1*", i['name'])
         if x:
             samples = []
-            sample_c = clinicalSampleDAO.getClinicalSampleBySourceSampleId(
-                i['sample_ref']['sampleIdRef'])
+            sample_c = clinicalSampleDAO.getClinicalSampleByClinicalSampleCode(
+                str(int(i['sample_ref']['sampleIdRef'])))
             if sample_c != None:
                 msrs = msReadySamplesDAO.getMsReadySamplesByClinicalSample(
                     sample_c['id'], projectId)
@@ -96,10 +98,11 @@ def insertLibGenMSRuns(projectId):
                 print(MSRunDAO.createMsRun(new_msrun))
 
 
-def insertClinicalSample(sample, projectId):
+def insertClinicalSample(sample, projectId, counter):
     new_sample = {
-        "sourceSampleId": sample['id'],
+        "clinicalSampleCode": str(int(sample['id'])),
         "name": sample['name'],
+        "sampleCounter": counter,
         "projectId": projectId,
         "processingPerson": "System",
         "description": "Imported from Excel archive",
@@ -128,7 +131,7 @@ def generate_MS_Ready(samples, projectId):
 
 
 def insertIndividualSample(sample, projectId):
-    clinicalSample = clinicalSampleDAO.getClinicalSampleBySourceSampleId(
+    clinicalSample = clinicalSampleDAO.getClinicalSampleByClinicalSampleCode(
         sample['sample_ref']['sampleIdRef'])
     new_sample = {
         "name":  "IS_" + str(sample['name']),
@@ -148,8 +151,8 @@ def insertIndividualSample(sample, projectId):
 def insertPoolingSample(sample, projectId):
     sample_col = []
     for i in sample['sample_ref']:
-        sample_c = clinicalSampleDAO.getClinicalSampleBySourceSampleId(
-            i['sampleIdRef']).dump()
+        sample_c = clinicalSampleDAO.getClinicalSampleByClinicalSampleCode(
+            str(int(i['sampleIdRef']))).dump()
         sample_col.append(sample_c['id'])
 
     new_sample = {

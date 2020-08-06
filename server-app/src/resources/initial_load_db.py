@@ -72,7 +72,7 @@ def insertLibGenMSRuns(projectId):
     name_counter = 25
     run_counter = 7
     for f in frac_samples:
-        if(re.search("^MMA_library_batch-1_mix-*", f['name'])):
+        if(re.search("^IS_MMA_library_batch-1_mix-*", f['name'])):
             msr_sample = msReadySamplesDAO.getMsReadySampleByIntermediateSampleId(
                 f['id'], projectId)
             if(len(msr_sample) > 0):
@@ -131,7 +131,7 @@ def insertIndividualSample(sample, projectId):
     clinicalSample = clinicalSampleDAO.getClinicalSampleBySourceSampleId(
         sample['sample_ref']['sampleIdRef'])
     new_sample = {
-        "name": sample['name'],
+        "name":  "IS_" + str(sample['name']),
         "projectId": projectId,
         "clinicalSamples": [clinicalSample['id']],
         "workflowTag": "Sample Preparation",
@@ -153,7 +153,7 @@ def insertPoolingSample(sample, projectId):
         sample_col.append(sample_c['id'])
 
     new_sample = {
-        "name": sample['name'],
+        "name": "IS_" + str(sample['name']),
         "projectId": projectId,
         "clinicalSamples": sample_col,
         "workflowTag": "Sample Preparation",
@@ -176,7 +176,7 @@ def insertFractinationSample(sample, projectId):
         IS = pooledSamples[1]
 
     new_sample = {
-        "name": sample['name'],
+        "name": "IS_" + str(sample['name']),
         "projectId": projectId,
         "clinicalSamples": IS['clinicalSamples'],
         "parentSamples": [IS['id']],

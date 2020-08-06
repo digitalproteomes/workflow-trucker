@@ -1,5 +1,6 @@
 from .models import ClinicalSample
 import datetime
+import pymongo
 from bson import ObjectId
 
 
@@ -19,8 +20,8 @@ def getAllClinicalSamples():
     return result_samples
 
 
-def getClinicalSampleBySourceSampleId(id):
-    return ClinicalSample.find_one({"sourceSampleId": int(id)})
+def getClinicalSampleByClinicalSampleCode(id):
+    return ClinicalSample.find_one({"clinicalSampleCode": id})
 
 
 def getClinicalSampleById(id):
@@ -57,3 +58,9 @@ def augmentClinicalSampleNames(sampleIds):
         augmentedSamples.append({"id": i, "name": sample['name']})
 
     return augmentedSamples
+
+
+def getMaxCounter(projectId):
+    sample = ClinicalSample.find_one({"projectId": ObjectId(projectId)}, sort=[
+        ("sampleCounter", pymongo.DESCENDING)])
+    return sample

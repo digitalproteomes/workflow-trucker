@@ -36,7 +36,8 @@ class Project(Document):
 
 @instance.register
 class ClinicalSample(Document):
-    sourceSampleId = fields.IntegerField(required=True)
+    clinicalSampleCode = fields.StringField(required=True)
+    sampleCounter = fields.IntegerField(required=True)
     name = fields.StrField(required=True)
     projectId = fields.ObjectIdField(required=True)
     workflowTag = fields.StrField(required=False)

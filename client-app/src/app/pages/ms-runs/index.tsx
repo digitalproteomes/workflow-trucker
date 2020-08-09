@@ -47,8 +47,18 @@ export const MsRuns: FunctionComponent = () => {
                 }}
             />
             <Tooltip title="Import MS ready sample names and Run codes from Mass Spec">
-                <Button type="primary" icon={<UploadOutlined />} style={{ float: 'right', marginRight: 10 }}>
+                <Button type="default" icon={<UploadOutlined />} style={{ float: 'right', marginRight: 10 }}>
                     Import MS Runs
+                </Button>
+            </Tooltip>
+            <Tooltip title="Bulk Generate SWATH Analysis">
+                <Button type="primary" style={{ float: 'right', marginRight: 10 }}>
+                    Generate SWATH Analysis
+                </Button>
+            </Tooltip>
+            <Tooltip title="Bulk Generate Spectral Library">
+                <Button type="primary" style={{ float: 'right', marginRight: 10 }}>
+                    Generate Spectral Library
                 </Button>
             </Tooltip>
             <Divider></Divider>

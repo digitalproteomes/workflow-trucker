@@ -9,6 +9,8 @@ type ProjectViewProps = {
 @observer
 export class ProjectView extends React.Component<ProjectViewProps, {}> {
     public render() {
+        // const project: Project = this.props.project;
+
         return this.props.project ? (
             <div>
                 {/* <Descriptions title="Project details" layout="horizontal">

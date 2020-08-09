@@ -107,7 +107,7 @@ export const AutoGenerateInputForm: FunctionComponent<FormProps> = ({
 
 const columns: ColumnsType<SampleNew> = [
     { title: 'Name', dataIndex: SampleNew.nameof('name') },
-    { title: 'Clinical sample code (editable)', dataIndex: SampleNew.nameof('sourceSampleId') },
+    { title: 'Clinical sample code (editable)', dataIndex: SampleNew.nameof('clinicalSampleCode') },
     { title: 'Processing person', dataIndex: SampleNew.nameof('processingPerson') },
 ];
 
@@ -164,7 +164,7 @@ function autoGenerateSamples(templateData: GenerationData): SampleNew[] {
             name: `${prefixProject}_${projectId}_${id}_${suffixProject}`,
             parentSampleId: 'parent_sample_id',
             protocolId: -1,
-            sourceSampleId: id,
+            clinicalSampleCode: id,
             processingPerson: processingPerson,
         };
 

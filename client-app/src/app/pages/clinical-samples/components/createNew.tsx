@@ -57,7 +57,7 @@ function inputForm(form: FormInstance, errorMessage: string | null): JSX.Element
         <Form {...formLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
             {createFormInput('Name', ClinicalSample.nameof('name'))}
             {createFormInput('ProjectId', ClinicalSample.nameof('projectId'))}
-            {createFormInput('Source sample id', ClinicalSample.nameof('sourceSampleId'))}
+            {createFormInput('Clinical sample code', ClinicalSample.nameof('clinicalSampleCode'))}
 
             {errorMessage == null ? null : (
                 <Form.Item label="Error" name="errorMessage">

@@ -14,7 +14,7 @@ export class Sample {
 
     protocolName: string = '';
 
-    sourceSampleId: number = -1;
+    clinicalSampleCode: number = -1;
 
     updatedDate: string = '';
 
@@ -31,7 +31,7 @@ export class SampleNew {
     protocolId: number = -1;
 
     /** shown on the ui as Id, it's actually a mock placeholder for the superficial identification of the samples coming in from the hospital */
-    sourceSampleId: number = -1;
+    clinicalSampleCode: number = -1;
 
     /** not sure shy this has to be on this sample. How come it is not present on the sample coming from the backend? */
     processingPerson: string = '';
@@ -66,7 +66,7 @@ export class ClinicalSample {
 
     projectId: string = '';
 
-    sourceSampleId: number = -1;
+    clinicalSampleCode: number = -1;
 
     updatedDate: string = '';
 

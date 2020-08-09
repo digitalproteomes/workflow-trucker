@@ -54,7 +54,7 @@ export const List: FunctionComponent<ListProps> = ({
 const defaultColumns: ColumnsType<ClinicalSample> = [
     getColumn('Name', ClinicalSample.nameof('name')),
     getColumn('Id', ClinicalSample.nameof('id')),
-    getColumn('Source id', ClinicalSample.nameof('sourceSampleId')),
+    getColumn('Source id', ClinicalSample.nameof('clinicalSampleCode')),
     getColumn('Created on', ClinicalSample.nameof('createdDate'), (record: ClinicalSample) => (
         <span>{moment(record.createdDate).format('DD/MM/YY')}</span>
     )),

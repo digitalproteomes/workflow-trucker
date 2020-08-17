@@ -28,7 +28,7 @@ export function mockClinicalSamples(): ClinicalSample[] {
         {
             createdDate: '2020-06-06T13:53:35.357000+00:00',
             description: '2 Generated as mock',
-            id: '5edb9fdf4765770ed5b68a74',
+            id: '5edb9fdf4765770ed5b68a75',
             name: '2 mock PHRT_005_001_CPAC',
             processingPerson: 'mock Processing person',
             projectId: Constants.projectId,
@@ -39,7 +39,7 @@ export function mockClinicalSamples(): ClinicalSample[] {
         {
             createdDate: '2020-06-06T13:53:35.357000+00:00',
             description: 'Generated as mock',
-            id: '5edb9fdf4765770ed5b68a74',
+            id: '5edb9fdf4765770ed5b68a76',
             name: '3 mock PHRT_005_001_CPAC',
             processingPerson: '3 mock Processing person',
             projectId: Constants.projectId,

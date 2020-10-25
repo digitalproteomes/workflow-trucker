@@ -41,6 +41,7 @@ class ClinicalSample(Document):
     name = fields.StrField(required=True)
     projectId = fields.ObjectIdField(required=True)
     workflowTag = fields.StrField(required=False)
+    quality = fields.StrField(required=False)
     description = fields.StrField()
     processingPerson = fields.StrField()
     createdDate = fields.DateTimeField(
@@ -79,8 +80,12 @@ class MSReadySample(Document):
     intermediateSampleId = fields.ObjectIdField(required=True)
     msReadySampleName = fields.StrField(required=False)
     workflowTag = fields.StrField(required=False)
+    quality = fields.StrField(required=False)
+    peptideNo = fields.IntegerField(required=True)
     description = fields.StrField()
+    concentration = fields.StrField(required=False)
     processingPerson = fields.StrField()
+    currentLocation = fields.StrField()
     createdDate = fields.DateTimeField(
         validate=validate.Range(min=datetime(1900, 1, 1)))
     updatedDate = fields.DateTimeField(
@@ -156,3 +161,21 @@ class SWATHAnalysis(Document):
 
     class Meta:
         collection_name = "SWATHAnalysis"
+
+
+@instance.register
+class Artefact(Document):
+    name = fields.StrField(required=True)
+    # projectId = fields.ObjectIdField(required=True)
+    # SOP
+    sopFileName = fields.StrField(required=False)
+    encodedFileId = fields.ObjectIdField(required=False)
+    # artefactClass = fields.StrField(required=False)
+    # processingPerson = fields.StrField()
+    # createdDate = fields.DateTimeField(
+    #     validate=validate.Range(min=datetime(1900, 1, 1)))
+    # updatedDate = fields.DateTimeField(
+    #     validate=validate.Range(min=datetime(1900, 1, 1)))
+
+    class Meta:
+        collection_name = "Artefacts"

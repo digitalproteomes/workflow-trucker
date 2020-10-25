@@ -96,7 +96,7 @@ const BasicLayout: React.FC = (props) => {
                         {props.children}
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Workflow Tracker ©2020 Created by PHRT - CPAC</Footer>
+                <Footer style={{ textAlign: 'center' }}>Workflow Trucker ©2020 Created by PHRT - CPAC</Footer>
             </Layout>
         </Layout>
     );

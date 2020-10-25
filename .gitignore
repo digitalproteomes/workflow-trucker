@@ -81,3 +81,7 @@ ENV/
 # excel files
 *.xlsx
 client-app/src/app/.DS_Store
+
+*/.DS_Store
+client-app/src/app/layouts/.DS_Store
+client-app/src/app/layouts/assets/.DS_Store

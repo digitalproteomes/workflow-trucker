@@ -1,8 +1,33 @@
 import React from 'react';
-import { PageHeader, Button, Descriptions, Divider, Timeline, Space } from 'antd';
+import { PageHeader, Divider, Timeline, Upload, Space, message, Button } from 'antd';
+import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
 import diagram from '../../layouts/assets/WFT_Flow_Landscape.png';
-
+import { UploadProps } from 'antd/lib/upload';
+// const { Dragger } = Upload;
 export function AboutPage() {
+    const props: UploadProps = {
+        name: 'file',
+        multiple: false,
+        method: 'POST',
+        action: 'http://localhost:5000/file-upload',
+        // headers: {
+        //     'Content-Type': 'multipart/form-data',
+        // },
+        onChange(info: any) {
+            const { status } = info.file;
+            console.log('info', info);
+
+            if (status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully.`);
+            } else if (status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
+
     return (
         <div className="site-page-header-ghost-wrapper">
             <PageHeader ghost={false} title="Welcome to the Workflow Tracker">
@@ -19,6 +44,17 @@ export function AboutPage() {
                     </Timeline>
                 </Space>
             </PageHeader>
+            {/* <Dragger {...props}>
+                <p className="ant-upload-drag-icon">
+                    <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                <p className="ant-upload-hint">Support for a single or bulk upload.</p>
+            </Dragger> */}
+            <Upload {...props}>
+                <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload>
+            ,
             <img
                 src={diagram}
                 alt="Flow diagram"

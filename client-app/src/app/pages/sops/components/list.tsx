@@ -1,0 +1,60 @@
+import React, { FunctionComponent } from 'react';
+import { SOP } from '../../../types';
+import { ComplexList } from '../../../common/complexList';
+import { Api } from '../api';
+import { Constants } from '../../../default-data/constants';
+import { getColumn } from '../../../common/sampleList';
+import { ColumnsType } from 'antd/lib/table';
+import { formatDate } from '../../../common/utils';
+import { Button, Row, Col, Divider } from 'antd';
+
+type ListProps = {
+    isRefreshNeeded: boolean;
+    onRefreshDone: () => void;
+    renderActions?: (sample: SOP) => JSX.Element;
+    onRowSelectionChange?: (selectedSamples: SOP[]) => void;
+};
+
+export const List: FunctionComponent<ListProps> = ({
+    isRefreshNeeded,
+    onRefreshDone,
+    renderActions,
+    onRowSelectionChange,
+}) => {
+    return (
+        <ComplexList
+            isRefreshNeeded={isRefreshNeeded}
+            onRefreshDone={onRefreshDone}
+            renderActions={renderActions}
+            onRowSelectionChange={onRowSelectionChange}
+            fetchSamples={() => Api.getSOPsAsync(Constants.projectId)}
+            rowKeySelector={(row: SOP) => row.id}
+            columns={defaultColumns}
+            expandableConfig={{
+                expandedRowRender: (record: SOP) => {
+                    return (
+                        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                            <Col className="gutter-row" span={3}>
+                                <h3>Notes</h3>
+                                <span>{record.description}</span>
+                                <Divider />
+                                <h3>Processing person</h3>
+                                <span>{record.processingPerson}</span>
+                                <Divider />
+                            </Col>
+                        </Row>
+                    );
+                },
+            }}
+        />
+    );
+};
+
+const defaultColumns: ColumnsType<SOP> = [
+    // todo - avoid importing the ColumnsType by having an intermediary interface between this component and the List common component
+    getColumn('Name', SOP.nameof('name')),
+    getColumn('Id', SOP.nameof('id')),
+    getColumn('Sop File Name', SOP.nameof('sopFileName')),
+    getColumn('Created on', SOP.nameof('createdDate'), (record: SOP) => <span>{formatDate(record.createdDate)}</span>),
+    getColumn('Updated on', SOP.nameof('updatedDate'), (record: SOP) => <span>{formatDate(record.updatedDate)}</span>),
+];

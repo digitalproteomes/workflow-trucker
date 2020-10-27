@@ -14,6 +14,7 @@ import {
     QuestionCircleOutlined,
     SearchOutlined,
     ExperimentOutlined,
+    UnorderedListOutlined,
 } from '@ant-design/icons';
 
 import { Link } from 'react-router-dom';
@@ -132,6 +133,9 @@ function getSubmenu(projectId: string, name: string) {
             </Menu.Item>
             <Menu.Item key={`${projectId}_40`} icon={<HeatMapOutlined />}>
                 <Link to={`/swathanalyses?project=${projectId}`}>SWATH Analyses</Link>
+            </Menu.Item>
+            <Menu.Item key={`${projectId}_50`} icon={<UnorderedListOutlined />}>
+                <Link to={`/sops?project=${projectId}`}>SOPs</Link>
             </Menu.Item>
         </SubMenu>
     );

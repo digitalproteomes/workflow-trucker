@@ -257,6 +257,29 @@ export class SpectralLibrary {
     public static nameof = (name: keyof SpectralLibrary) => name;
 }
 
+export class SOP {
+
+    createdDate: string = '';
+
+    description: string = '';
+
+    id: string = '';
+
+    name: string = '';
+
+    sopFileName = '';
+
+    encodedFileId = '';
+
+    // projectId: string = '';
+
+    processingPerson: string = '';
+ 
+    updatedDate: string = '';
+
+    public static nameof = (name: keyof SOP) => name;
+}
+
 export class GenerationData {
     prefixProject: string = '';
 

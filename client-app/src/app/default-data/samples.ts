@@ -8,6 +8,7 @@ import {
     EProtocolTag,
     SwathAnalysis,
     SpectralLibrary,
+    SOP
 } from '../types';
 import { Constants } from './constants';
 
@@ -318,6 +319,22 @@ export function mockSpectralLibrary(): SpectralLibrary[] {
             proteinDatabaseOrganism: 'UP000005640',
             proteinDatabaseVersion: 'YYMMDD',
             libId: '1',
+        },
+    ];
+}
+
+export function mockSOP(): SOP[] {
+    return [
+        {
+            createdDate: '2020-06-06T13:53:35.357000+00:00',
+            description: '1 Generated as mock',
+            id: '5f2330c4723e24adcf419e96',
+            name: 'PHRT_SOP',
+            processingPerson: 'System',
+            // projectId: Constants.projectId,
+            updatedDate: '2020-06-06T13:53:35.357000+00:00',
+            encodedFileId: '5f2330c4723e24adcf419e96',
+            sopFileName: 'SOP file'
         },
     ];
 }

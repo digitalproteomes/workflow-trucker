@@ -13,6 +13,7 @@ import { IntermediateSamples } from './pages/intermediate-samples';
 import { MSReadySamples } from './pages/ms-ready-samples';
 import { SwathAnalysisPage } from './pages/swath-analysis';
 import { SpectralLibrariesPage } from './pages/spectral-libraries';
+import { SOPPage } from './pages/sops';
 
 export function App() {
     return (
@@ -55,6 +56,9 @@ export function App() {
                         </Route>
                         <Route path="/spectrallibraries">
                             <SpectralLibrariesPage />
+                        </Route>
+                        <Route path="/sops">
+                            <SOPPage />
                         </Route>
                         <Route path="/">
                             <AboutPage />

@@ -258,7 +258,6 @@ export class SpectralLibrary {
 }
 
 export class SOP {
-
     createdDate: string = '';
 
     description: string = '';
@@ -274,11 +273,23 @@ export class SOP {
     // projectId: string = '';
 
     processingPerson: string = '';
- 
+
     updatedDate: string = '';
 
     public static nameof = (name: keyof SOP) => name;
+
+    public static Default: SOP = {
+        createdDate: '',
+        description: '',
+        encodedFileId: '',
+        id: '',
+        name: '',
+        processingPerson: '',
+        sopFileName: '',
+        updatedDate: '',
+    };
 }
+export const SOPDataKeys: string[] = Object.keys(new SOP());
 
 export class GenerationData {
     prefixProject: string = '';

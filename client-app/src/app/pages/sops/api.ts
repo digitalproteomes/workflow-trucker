@@ -2,6 +2,7 @@ import { BaseApi } from '../../infrastructure/api';
 import { SOP } from '../../types';
 import { mockSOP } from '../../default-data/samples';
 import { Constants } from '../../default-data/constants';
+import { RcFile } from 'antd/lib/upload';
 
 export class Api {
     public static async getSOPsAsync(projectId: string): Promise<SOP[]> {
@@ -14,9 +15,13 @@ export class Api {
         }
     }
 
-    public static async postAsync(sop: SOP): Promise<SOP> {
+    public static async postAsync(sop: any, file: RcFile): Promise<SOP> {
         try {
-            return await BaseApi.postAsync(`/sops`, SOP);
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('sop_data', sop);
+            
+            return await BaseApi.postAsync(`/file-upload`, formData);
         } catch (error) {
             return mockSOP()[0];
         }

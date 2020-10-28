@@ -7,10 +7,10 @@ export type FriendlyError = {
 };
 
 class BaseApi {
-    public static readonly baseUrl = process.env.API_URL;
+    public static readonly baseUrl = process.env.REACT_APP_API_URL;
 
     public static init() {
-        axios.defaults.baseURL = 'http://localhost:5000'; //Api.baseUrl;
+        axios.defaults.baseURL = BaseApi.baseUrl;
         axios.defaults.headers.post['Content-Type'] = 'application/json';
     }
 

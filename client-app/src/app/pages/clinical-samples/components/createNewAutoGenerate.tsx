@@ -27,7 +27,6 @@ type ButtonCreateNewProps = {
 const ButtonAutoGenerate: FunctionComponent<ButtonCreateNewProps> = ({ onAutoGenerateClick: onAddNewClick, style }) => {
     return (
         <Button type="primary" icon={<PlusOutlined />} onClick={onAddNewClick} style={style}>
-            {' '}
             Bulk create clinical samples
         </Button>
     );

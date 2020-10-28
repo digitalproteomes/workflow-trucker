@@ -1,9 +1,12 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Space, Button, PageHeader, message, Upload, Divider } from 'antd';
+import { Tooltip, Space, Button, PageHeader, message, Upload, Divider } from 'antd';
 import { SOP } from '../../types';
-import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
+import { InboxOutlined, UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 import { List } from './components/list';
+import { Api } from './api';
+import { ButtonDownload } from './components/download';
 import { ButtonExport } from '../../common/export';
+// import { ButtonDelete } from './components/delete';
 import { UploadProps } from 'antd/lib/upload';
 import * as sampleNotifications from '../../common/sampleNotifications';
 
@@ -25,17 +28,23 @@ export const SOPPage: FunctionComponent = () => {
             }
             if (status === 'done') {
                 message.success(`${info.file.name} file uploaded successfully.`);
+                onCreateNew();
             } else if (status === 'error') {
                 message.error(`${info.file.name} file upload failed.`);
             }
         },
     };
+
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
     const [, setSOP] = useState<SOP[]>([]);
 
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
+    };
+
+    const onCreateNew = () => {
+        setRefreshNeededFlag(true);
     };
 
     const onRowSelectionChange = (selectedRows: SOP[]) => {
@@ -46,12 +55,16 @@ export const SOPPage: FunctionComponent = () => {
         sampleNotifications.queueExportSuccess();
     }
 
-    const renderActions = () => {
+    const renderActions = (record: SOP) => {
         return (
             <Space size="middle">
-                <Button type="default" htmlType="button">
-                    Delete
-                </Button>
+                <ButtonDownload sop={record} />
+                {/* <ButtonDelete
+                    sample={record}
+                    onDeleteDone={() => {
+                        onDeleteDone(record);
+                    }}
+                /> */}
             </Space>
         );
     };

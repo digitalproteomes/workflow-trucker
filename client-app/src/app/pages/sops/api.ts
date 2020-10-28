@@ -7,12 +7,17 @@ export class Api {
     public static async getSOPsAsync(projectId: string): Promise<SOP[]> {
         try {
             return Constants.useServerEndpoints
-                ? await BaseApi.getAsync(`sops/project?projectId=${projectId}`)
+                ? await BaseApi.getAsync(`/sops/project?projectId=${projectId}`)
                 : mockSOP();
         } catch (err) {
             return mockSOP();
         }
     }
+
+    public static getDownloadLink(artefactName: string) {
+        return `${BaseApi.baseUrl}/download/artefact?artefactName=${artefactName}`;
+    } 
+
 
     public static async postAsync(sop: SOP): Promise<SOP> {
         try {

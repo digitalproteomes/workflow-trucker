@@ -62,6 +62,7 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
             setFile(null);
         } catch (error) {
             // todo - set the error message?
+            // todo - in case the upload fails, nothing is shown on the UI at the moment
         } finally {
             setIsUploadingFlag(false);
             onUploadSuccessful();
@@ -90,12 +91,15 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
                 }
             }
         });
+
+        setSopData(newData);
     };
 
     return (
         <InputModal
             visible={isActiveUploadForm}
             title="Upload SOP"
+            isLoading={isUploading}
             inputForm={(form: FormInstance) => {
                 return inputForm(form, null, onFieldsChange);
             }}
@@ -107,17 +111,6 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
             <Upload {...props}>
                 <Button icon={<UploadOutlined />}>Select File</Button>
             </Upload>
-
-            {/* todo - the button below is replaced by the onCreate callback in the inputModal. the loading feature should get migrated?
-             <Button
-                type="primary"
-                onClick={handleUpload}
-                disabled={file === null}
-                loading={isUploading}
-                style={{ marginTop: 16 }}
-            >
-                {isUploading ? 'Uploading' : 'Start Upload'}
-            </Button> */}
         </InputModal>
     );
 };

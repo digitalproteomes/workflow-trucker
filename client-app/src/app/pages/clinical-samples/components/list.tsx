@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { ClinicalSample, Sample } from '../../../types';
+import { ClinicalSample } from '../../../types';
 import { getColumn } from '../../../common/listBase';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
 import { CommonList } from '../../../common/list';
 import moment from 'moment';
-import { getWorkflowTag } from '../../../common/tags';
-import { Col, Row, Divider } from 'antd';
+import { Col, Row } from 'antd';
 
 type ListProps = {
     isRefreshNeeded: boolean;

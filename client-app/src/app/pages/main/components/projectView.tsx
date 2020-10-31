@@ -1,6 +1,5 @@
 import React from 'react';
 import { Project } from '../../../types';
-import { Descriptions } from 'antd';
 import { observer } from 'mobx-react';
 
 type ProjectViewProps = {
@@ -10,8 +9,6 @@ type ProjectViewProps = {
 @observer
 export class ProjectView extends React.Component<ProjectViewProps, {}> {
     public render() {
-        const project: Project = this.props.project;
-
         return this.props.project ? (
             <div>
                 {/* <Descriptions title="Project details" layout="horizontal">

@@ -1,18 +1,14 @@
 import React from 'react';
 import { PageHeader, Divider, Timeline, Upload, Space, message, Button } from 'antd';
-import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
 import diagram from '../../layouts/assets/WFT_Flow_Landscape.png';
 import { UploadProps } from 'antd/lib/upload';
-// const { Dragger } = Upload;
 export function AboutPage() {
     const props: UploadProps = {
         name: 'file',
         multiple: false,
         method: 'POST',
         action: 'http://localhost:5000/file-upload',
-        // headers: {
-        //     'Content-Type': 'multipart/form-data',
-        // },
         onChange(info: any) {
             const { status } = info.file;
             console.log('info', info);
@@ -44,13 +40,6 @@ export function AboutPage() {
                     </Timeline>
                 </Space>
             </PageHeader>
-            {/* <Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
-                </p>
-                <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-            </Dragger> */}
             <Upload {...props}>
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
             </Upload>

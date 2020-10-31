@@ -5,6 +5,7 @@ import { FormInstance } from 'antd/lib/form';
 type ModalProps = {
     visible: boolean;
     title: string;
+    isLoading?: boolean;
     inputForm: (form: FormInstance) => JSX.Element;
     onCreate: (values: any) => void;
     onCancel: () => void;
@@ -13,6 +14,7 @@ type ModalProps = {
 export const InputModal: FunctionComponent<ModalProps> = ({
     visible,
     title,
+    isLoading,
     inputForm,
     onCreate,
     onCancel,
@@ -25,6 +27,7 @@ export const InputModal: FunctionComponent<ModalProps> = ({
             visible={visible}
             width={'30%'} // todo - the width of the input modal should be customizable
             title={title}
+            confirmLoading={isLoading}
             okText="Create"
             cancelText="Cancel"
             onCancel={onCancel}

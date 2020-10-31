@@ -13,7 +13,7 @@ from endpoint.spectralLibraryController import spectrallibraries_api
 
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 # app.config[MONGO_URI] = 'mongodb://localhost:27017/WorkflowDB'
 # instance = PyMongo(app)
 
@@ -23,6 +23,8 @@ app.register_blueprint(msrun_api)
 app.register_blueprint(swathanalysis_api)
 app.register_blueprint(spectrallibraries_api)
 app.register_blueprint(sop_api)
+
+CORS(app)
 
 
 # https://stackoverflow.com/a/23542795

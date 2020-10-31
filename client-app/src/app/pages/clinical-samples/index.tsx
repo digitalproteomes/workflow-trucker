@@ -1,7 +1,9 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Divider, Space, PageHeader, Button } from 'antd';
-import { ClinicalInputForm, ButtonCreateNew } from './components/createNew'; // todo - the two creation method should be combined
-import { AutoGenerateInputForm, ButtonAutoGenerate } from './components/createNewAutoGenerate';
+import { Divider, Space, PageHeader } from 'antd';
+import { ClinicalInputForm } from './components/createNew'; // todo - the two creation method should be combined
+import { ButtonCreateNew } from './components/createNewButton';
+import { AutoGenerateInputForm } from './components/autoGenerate';
+import { ButtonAutoGenerate } from './components/autoGenerateButton';
 import { List } from './components/list';
 import { ClinicalSample } from '../../types';
 import { ButtonDelete } from './components/delete';

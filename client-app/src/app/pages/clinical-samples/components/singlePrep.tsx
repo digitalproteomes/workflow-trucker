@@ -8,8 +8,6 @@ import { SubnodeOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
-export { ButtonSinglePrep, SinglePrepInputForm };
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,7 +17,8 @@ type ButtonProps = {
     style?: React.CSSProperties | undefined;
 };
 
-const ButtonSinglePrep: FunctionComponent<ButtonProps> = ({ onSinglePrep, style }) => {
+// deprecated - todo - delete ButtonSinglePrep
+export const ButtonSinglePrep: FunctionComponent<ButtonProps> = ({ onSinglePrep, style }) => {
     return (
         <Tooltip title="Create individual samples">
             <Button type="default" onClick={onSinglePrep} style={style} icon={<SubnodeOutlined />}>
@@ -49,7 +48,8 @@ type FormProps = {
     onCancel: () => void;
 };
 
-const SinglePrepInputForm: FunctionComponent<FormProps> = ({ parentSample, onCreateSuccessful, onCancel }) => {
+// deprecated - todo - delete SinglePrepInputForm
+export const SinglePrepInputForm: FunctionComponent<FormProps> = ({ parentSample, onCreateSuccessful, onCancel }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const onCreate = (formData: any) => {

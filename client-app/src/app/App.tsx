@@ -5,14 +5,12 @@ import { AboutPage } from './pages/about';
 import BasicLayout from './layouts';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { ClinicalSamples } from './pages/clinical-samples';
-import { IndividualSamples } from './pages/individual-samples';
-import { PooledSamples } from './pages/pooled-samples';
-import { FractionatedSamples, FractionatedSampleDetails } from './pages/fractionated-samples';
 import { MsRuns } from './pages/ms-runs';
 import { IntermediateSamples } from './pages/intermediate-samples';
 import { MSReadySamples } from './pages/ms-ready-samples';
 import { SwathAnalysisPage } from './pages/swath-analysis';
 import { SpectralLibrariesPage } from './pages/spectral-libraries';
+import { SOPPage } from './pages/sops';
 
 export function App() {
     return (
@@ -35,18 +33,6 @@ export function App() {
                         <Route path="/samples/msready">
                             <MSReadySamples />
                         </Route>
-                        <Route path="/samples/individual">
-                            <IndividualSamples />
-                        </Route>
-                        <Route path="/samples/fractionated/details">
-                            <FractionatedSampleDetails />
-                        </Route>
-                        <Route path="/samples/fractionated">
-                            <FractionatedSamples />
-                        </Route>
-                        <Route path="/samples/pooled">
-                            <PooledSamples />
-                        </Route>
                         <Route path="/msruns">
                             <MsRuns />
                         </Route>
@@ -55,6 +41,9 @@ export function App() {
                         </Route>
                         <Route path="/spectrallibraries">
                             <SpectralLibrariesPage />
+                        </Route>
+                        <Route path="/sops">
+                            <SOPPage />
                         </Route>
                         <Route path="/">
                             <AboutPage />

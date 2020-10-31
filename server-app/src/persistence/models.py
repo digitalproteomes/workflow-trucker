@@ -81,7 +81,7 @@ class MSReadySample(Document):
     msReadySampleName = fields.StrField(required=False)
     workflowTag = fields.StrField(required=False)
     quality = fields.StrField(required=False)
-    peptideNo = fields.IntegerField(required=True)
+    peptideNo = fields.IntegerField(required=False)
     description = fields.StrField()
     concentration = fields.StrField(required=False)
     processingPerson = fields.StrField()
@@ -171,11 +171,12 @@ class Artefact(Document):
     sopFileName = fields.StrField(required=False)
     encodedFileId = fields.ObjectIdField(required=False)
     # artefactClass = fields.StrField(required=False)
-    # processingPerson = fields.StrField()
-    # createdDate = fields.DateTimeField(
-    #     validate=validate.Range(min=datetime(1900, 1, 1)))
-    # updatedDate = fields.DateTimeField(
-    #     validate=validate.Range(min=datetime(1900, 1, 1)))
+    description = fields.StrField(required=False)
+    processingPerson = fields.StrField()
+    createdDate = fields.DateTimeField(
+        validate=validate.Range(min=datetime(1900, 1, 1)))
+    updatedDate = fields.DateTimeField(
+        validate=validate.Range(min=datetime(1900, 1, 1)))
 
     class Meta:
         collection_name = "Artefacts"

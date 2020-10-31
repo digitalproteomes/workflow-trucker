@@ -1,6 +1,6 @@
 import React from 'react';
 import { ClinicalSampleCompact } from '../types';
-import { getColumn } from './sampleList';
+import { getColumn } from './listBase';
 import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 export function getCompactClinicalSampleList(name: string, samples: ClinicalSampleCompact[]) {

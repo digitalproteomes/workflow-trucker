@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { IntermediateSample } from '../../../types';
-import { getColumn } from '../../../common/sampleList';
+import { getColumn } from '../../../common/listBase';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
-import { ComplexList } from '../../../common/complexList';
+import { CommonList } from '../../../common/list';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag, getProtocolTag } from '../../../common/tags';
 import { getCompactClinicalSampleList } from '../../../common/getCompactClinicalSampleList';
@@ -24,27 +24,24 @@ export const List: FunctionComponent<ListProps> = ({
     onRowSelectionChange,
 }) => {
     return (
-        <ComplexList
+        <CommonList<IntermediateSample>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
-            fetchSamples={() => Api.fetchSamples(Constants.projectId)}
+            fetchEntries={() => Api.fetchSamples(Constants.projectId)}
             rowKeySelector={(row: IntermediateSample) => row.id}
             columns={defaultColumns}
             expandableConfig={{
                 rowExpandable: (record: IntermediateSample) =>
                     record.clinicalSamples && record.clinicalSamples.length > 0,
-                // todo - put these details nicely into columns
                 expandedRowRender: renderExpandedRow(),
             }}
         />
     );
 };
 
-// todo - extract this into a standalone file, and convert sampleList.tsx into baseList.tsx
 const defaultColumns: ColumnsType<IntermediateSample> = [
-    // todo - avoid importing the ColumnsType by having an intermediary interface between this component and the List common component
     getColumn('Name', IntermediateSample.nameof('name')),
     getColumn('Id', IntermediateSample.nameof('id')),
     getColumn('Protocol', IntermediateSample.nameof('protocolName'), (record: IntermediateSample) =>

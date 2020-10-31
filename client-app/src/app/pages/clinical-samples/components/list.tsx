@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { ClinicalSample } from '../../../types';
-import { getColumn } from '../../../common/sampleList';
+import { getColumn } from '../../../common/listBase';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
-import { ComplexList } from '../../../common/complexList';
+import { CommonList } from '../../../common/list';
 import moment from 'moment';
-import { getWorkflowTag } from '../../../common/tags';
-import { Col, Row, Divider } from 'antd';
+import { Col, Row } from 'antd';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -23,12 +22,12 @@ export const List: FunctionComponent<ListProps> = ({
     onRowSelectionChange,
 }) => {
     return (
-        <ComplexList
+        <CommonList<ClinicalSample>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
-            fetchSamples={() => Api.fetchSamples(Constants.projectId)}
+            fetchEntries={() => Api.fetchSamples(Constants.projectId)}
             rowKeySelector={(row: ClinicalSample) => row.id}
             columns={defaultColumns}
             expandableConfig={{
@@ -44,10 +43,6 @@ export const List: FunctionComponent<ListProps> = ({
                                 <h3>Processing person</h3>
                                 <span>{record.processingPerson}</span>
                             </Col>
-                            {/* <Col className="gutter-row" span={2}>
-                                <h3>Workflow tag</h3>
-                                {getWorkflowTag(record.workflowTag)}
-                            </Col> */}
                         </Row>
                     );
                 },
@@ -56,9 +51,7 @@ export const List: FunctionComponent<ListProps> = ({
     );
 };
 
-// todo - extract this into a standalone file, and convert sampleList.tsx into baseList.tsx
 const defaultColumns: ColumnsType<ClinicalSample> = [
-    // todo - avoid importing the ColumnsType by having an intermediary interface between this component and the List common component
     getColumn('Name', ClinicalSample.nameof('name')),
     getColumn('Id', ClinicalSample.nameof('id')),
     getColumn('Source id', ClinicalSample.nameof('sourceSampleId')),

@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { SpectralLibrary } from '../../../types';
-import { ComplexList } from '../../../common/complexList';
+import { CommonList } from '../../../common/list';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
-import { getColumn } from '../../../common/sampleList';
+import { getColumn } from '../../../common/listBase';
 import { ColumnsType } from 'antd/lib/table';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
@@ -25,42 +25,18 @@ export const List: FunctionComponent<ListProps> = ({
     onRowSelectionChange,
 }) => {
     return (
-        <ComplexList
+        <CommonList<SpectralLibrary>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
-            fetchSamples={() => Api.getSpectralLibraryAsync(Constants.projectId)}
+            fetchEntries={() => Api.getSpectralLibraryAsync(Constants.projectId)}
             rowKeySelector={(row: SpectralLibrary) => row.id}
             columns={defaultColumns}
             expandableConfig={{
                 rowExpandable: (record: SpectralLibrary) => record.clinicalSamples && record.clinicalSamples.length > 0,
                 expandedRowRender: (record: SpectralLibrary) => {
-                    return (
-                        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                            <Col className="gutter-row" span={3}>
-                                <h3>Notes</h3>
-                                <span>{record.description}</span>
-                                <Divider />
-                                <h3>Protein Database Organism</h3>
-                                <span>{record.proteinDatabaseOrganism}</span>
-                                <Divider />
-                                <h3>Protein Database Version</h3>
-                                <span>{record.proteinDatabaseVersion}</span>
-                                <Divider />
-                                <h3>Workflow tag</h3>
-                                {getWorkflowTag(record.workflowTag)}
-                            </Col>
-
-                            <Col className="gutter-row" span={8}>
-                                {getCompactClinicalSampleList(record.name, record.clinicalSamples)}
-                            </Col>
-
-                            <Col className="gutter-row" span={8}>
-                                {getCompactMSRunsList(record.name, record.msRunIds)}
-                            </Col>
-                        </Row>
-                    );
+                    return renderExpandedRow(record);
                 },
             }}
         />
@@ -79,3 +55,31 @@ const defaultColumns: ColumnsType<SpectralLibrary> = [
         <span>{formatDate(record.updatedDate)}</span>
     )),
 ];
+
+function renderExpandedRow(record: SpectralLibrary) {
+    return (
+        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col className="gutter-row" span={3}>
+                <h3>Notes</h3>
+                <span>{record.description}</span>
+                <Divider />
+                <h3>Protein Database Organism</h3>
+                <span>{record.proteinDatabaseOrganism}</span>
+                <Divider />
+                <h3>Protein Database Version</h3>
+                <span>{record.proteinDatabaseVersion}</span>
+                <Divider />
+                <h3>Workflow tag</h3>
+                {getWorkflowTag(record.workflowTag)}
+            </Col>
+
+            <Col className="gutter-row" span={8}>
+                {getCompactClinicalSampleList(record.name, record.clinicalSamples)}
+            </Col>
+
+            <Col className="gutter-row" span={8}>
+                {getCompactMSRunsList(record.name, record.msRunIds)}
+            </Col>
+        </Row>
+    );
+}

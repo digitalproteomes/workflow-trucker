@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ColumnsType } from 'antd/lib/table';
-import { SampleListV2 } from './sampleList';
+import { SampleListV2 } from './listBase';
 import { ExpandableConfig } from 'antd/lib/table/interface';
 
 type ListProps<T extends object> = {
@@ -26,7 +26,7 @@ type ListProps<T extends object> = {
     onRowSelectionChange,
 }) => {*/
 
-export function ComplexList<T extends object>({
+export function SampleList<T extends object>({
     style,
     tableTitle,
 

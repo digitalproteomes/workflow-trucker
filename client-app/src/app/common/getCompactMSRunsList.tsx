@@ -1,6 +1,6 @@
 import React from 'react';
 import { MSRunCompact } from '../types';
-import { getColumn } from './sampleList';
+import { getColumn } from './listBase';
 import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 export function getCompactMSRunsList(name: string, msruns: MSRunCompact[]) {

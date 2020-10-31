@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { MSReadySample } from '../../../types';
-import { getColumn } from '../../../common/sampleList';
+import { getColumn } from '../../../common/listBase';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
-import { ComplexList } from '../../../common/complexList';
+import { SampleList } from '../../../common/list';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
 import { Button, Row, Col, Divider } from 'antd';
@@ -24,7 +24,7 @@ export const List: FunctionComponent<ListProps> = ({
     onRowSelectionChange,
 }) => {
     return (
-        <ComplexList
+        <SampleList
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}

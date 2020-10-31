@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { SpectralLibrary } from '../../../types';
-import { ComplexList } from '../../../common/complexList';
+import { SampleList } from '../../../common/list';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
-import { getColumn } from '../../../common/sampleList';
+import { getColumn } from '../../../common/listBase';
 import { ColumnsType } from 'antd/lib/table';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
@@ -25,7 +25,7 @@ export const List: FunctionComponent<ListProps> = ({
     onRowSelectionChange,
 }) => {
     return (
-        <ComplexList
+        <SampleList
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}

@@ -44,10 +44,6 @@ export const List: FunctionComponent<ListProps> = ({
                                 <h3>Processing person</h3>
                                 <span>{record.processingPerson}</span>
                             </Col>
-                            {/* <Col className="gutter-row" span={2}>
-                                <h3>Workflow tag</h3>
-                                {getWorkflowTag(record.workflowTag)}
-                            </Col> */}
                         </Row>
                     );
                 },
@@ -56,9 +52,7 @@ export const List: FunctionComponent<ListProps> = ({
     );
 };
 
-// todo - extract this into a standalone file, and convert sampleList.tsx into baseList.tsx
 const defaultColumns: ColumnsType<ClinicalSample> = [
-    // todo - avoid importing the ColumnsType by having an intermediary interface between this component and the List common component
     getColumn('Name', ClinicalSample.nameof('name')),
     getColumn('Id', ClinicalSample.nameof('id')),
     getColumn('Source id', ClinicalSample.nameof('sourceSampleId')),

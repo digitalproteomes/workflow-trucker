@@ -6,7 +6,7 @@ import { Constants } from '../../../default-data/constants';
 import { getColumn } from '../../../common/sampleList';
 import { ColumnsType } from 'antd/lib/table';
 import { formatDate } from '../../../common/utils';
-import { Button, Row, Col, Divider } from 'antd';
+import { Row, Col, Divider } from 'antd';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -51,7 +51,6 @@ export const List: FunctionComponent<ListProps> = ({
 };
 
 const defaultColumns: ColumnsType<SOP> = [
-    // todo - avoid importing the ColumnsType by having an intermediary interface between this component and the List common component
     getColumn('Name', SOP.nameof('name')),
     getColumn('Id', SOP.nameof('id')),
     getColumn('Sop File Name', SOP.nameof('sopFileName')),

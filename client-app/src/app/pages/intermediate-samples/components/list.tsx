@@ -35,16 +35,13 @@ export const List: FunctionComponent<ListProps> = ({
             expandableConfig={{
                 rowExpandable: (record: IntermediateSample) =>
                     record.clinicalSamples && record.clinicalSamples.length > 0,
-                // todo - put these details nicely into columns
                 expandedRowRender: renderExpandedRow(),
             }}
         />
     );
 };
 
-// todo - extract this into a standalone file, and convert sampleList.tsx into baseList.tsx
 const defaultColumns: ColumnsType<IntermediateSample> = [
-    // todo - avoid importing the ColumnsType by having an intermediary interface between this component and the List common component
     getColumn('Name', IntermediateSample.nameof('name')),
     getColumn('Id', IntermediateSample.nameof('id')),
     getColumn('Protocol', IntermediateSample.nameof('protocolName'), (record: IntermediateSample) =>

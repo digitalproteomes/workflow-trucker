@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { SwathAnalysis } from '../../../types';
-import { SampleList } from '../../../common/list';
+import { CommonList } from '../../../common/list';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { getColumn } from '../../../common/listBase';
@@ -25,12 +25,12 @@ export const List: FunctionComponent<ListProps> = ({
     onRowSelectionChange,
 }) => {
     return (
-        <SampleList
+        <CommonList<SwathAnalysis>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
-            fetchSamples={() => Api.getSwathAnalysisAsync(Constants.projectId)}
+            fetchEntries={() => Api.getSwathAnalysisAsync(Constants.projectId)}
             rowKeySelector={(row: SwathAnalysis) => row.id}
             columns={defaultColumns}
             expandableConfig={{

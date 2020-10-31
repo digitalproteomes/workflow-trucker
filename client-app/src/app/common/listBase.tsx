@@ -4,11 +4,11 @@ import { ColumnsType } from 'antd/lib/table';
 import { TableRowSelection, ColumnType, ExpandableConfig } from 'antd/lib/table/interface';
 import { getAllFilterProps } from './listBaseFiltering';
 
-type IProps<T extends object> = {
+type Props<T extends object> = {
     style?: React.CSSProperties;
     title?: string;
 
-    samples: T[] | null;
+    entries: T[] | null;
     columns: ColumnsType<T>;
     renderActions?: (record: T) => JSX.Element;
     onRowSelectionChange?: (selectedRows: T[]) => void;
@@ -17,19 +17,16 @@ type IProps<T extends object> = {
     expandableConfig?: ExpandableConfig<T>;
 };
 
-/**
- * todo - this is used most probably only by complexList.tsx. Should the two get merged?
- */
-export function SampleListV2<T extends object>({
+export function ListBase<T extends object>({
     style,
     title,
-    samples,
+    entries,
     columns,
     renderActions,
     onRowSelectionChange,
     rowKeySelector,
     expandableConfig,
-}: IProps<T> & { children?: React.ReactNode }): React.ReactElement {
+}: Props<T> & { children?: React.ReactNode }): React.ReactElement {
     const rowSelection: TableRowSelection<T> | undefined =
         onRowSelectionChange == null
             ? undefined
@@ -38,7 +35,7 @@ export function SampleListV2<T extends object>({
                   selections: [Table.SELECTION_ALL],
               };
 
-    if (samples == null) {
+    if (entries == null) {
         return <Skeleton active />;
     }
 
@@ -55,7 +52,7 @@ export function SampleListV2<T extends object>({
             style={style}
             title={() => <h3>{title}</h3>}
             rowSelection={rowSelection}
-            dataSource={samples}
+            dataSource={entries}
             columns={columnsType}
             rowKey={(row) => rowKeySelector(row)}
             expandable={expandableConfig}
@@ -64,7 +61,7 @@ export function SampleListV2<T extends object>({
         <Table
             style={style}
             rowSelection={rowSelection}
-            dataSource={samples}
+            dataSource={entries}
             columns={columnsType}
             rowKey={(row) => rowKeySelector(row)}
             expandable={expandableConfig}

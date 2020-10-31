@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { ColumnsType } from 'antd/lib/table';
-import { SampleListV2 } from './listBase';
+import { ListBase } from './listBase';
 import { ExpandableConfig } from 'antd/lib/table/interface';
 
-type ListProps<T extends object> = {
+type Props<T extends object> = {
     style?: React.CSSProperties;
     tableTitle?: string;
 
@@ -12,7 +12,7 @@ type ListProps<T extends object> = {
     renderActions?: (sample: T) => JSX.Element;
     onRowSelectionChange?: (selectedSamples: T[]) => void;
 
-    fetchSamples: () => Promise<T[]>;
+    fetchEntries: () => Promise<T[]>;
     rowKeySelector: (row: T) => string;
     columns: ColumnsType<T>;
     expandableConfig?: ExpandableConfig<T>;
@@ -26,7 +26,7 @@ type ListProps<T extends object> = {
     onRowSelectionChange,
 }) => {*/
 
-export function SampleList<T extends object>({
+export function CommonList<T extends object>({
     style,
     tableTitle,
 
@@ -35,32 +35,32 @@ export function SampleList<T extends object>({
     renderActions,
     onRowSelectionChange,
 
-    fetchSamples,
+    fetchEntries,
     rowKeySelector,
     columns,
     expandableConfig,
-}: ListProps<T> & { children?: React.ReactNode }): React.ReactElement {
-    const [samples, setSamples] = useState<T[] | null>(null);
+}: Props<T> & { children?: React.ReactNode }): React.ReactElement {
+    const [entries, setEntries] = useState<T[] | null>(null);
 
-    async function executeSampleFetch() {
-        setSamples(await fetchSamples());
+    async function executeFetch() {
+        setEntries(await fetchEntries());
     }
 
     useEffect(() => {
-        if (samples == null || isRefreshNeeded) {
+        if (entries == null || isRefreshNeeded) {
             console.log('refresh was needed');
 
-            executeSampleFetch(); // todo - is this call getting executed in an async or sync manner?
+            executeFetch(); // todo - is this call getting executed in an async or sync manner?
 
             onRefreshDone();
         }
     });
 
     return (
-        <SampleListV2
+        <ListBase
             style={style}
             title={tableTitle}
-            samples={samples}
+            entries={entries}
             columns={columns}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}

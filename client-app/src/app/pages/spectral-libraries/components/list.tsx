@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { SpectralLibrary } from '../../../types';
-import { SampleList } from '../../../common/list';
+import { CommonList } from '../../../common/list';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { getColumn } from '../../../common/listBase';
@@ -25,12 +25,12 @@ export const List: FunctionComponent<ListProps> = ({
     onRowSelectionChange,
 }) => {
     return (
-        <SampleList
+        <CommonList<SpectralLibrary>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
-            fetchSamples={() => Api.getSpectralLibraryAsync(Constants.projectId)}
+            fetchEntries={() => Api.getSpectralLibraryAsync(Constants.projectId)}
             rowKeySelector={(row: SpectralLibrary) => row.id}
             columns={defaultColumns}
             expandableConfig={{

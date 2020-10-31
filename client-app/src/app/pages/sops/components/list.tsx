@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { SOP } from '../../../types';
-import { SampleList } from '../../../common/list';
+import { CommonList } from '../../../common/list';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { getColumn } from '../../../common/listBase';
@@ -22,12 +22,12 @@ export const List: FunctionComponent<ListProps> = ({
     onRowSelectionChange,
 }) => {
     return (
-        <SampleList
+        <CommonList<SOP>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
-            fetchSamples={() => Api.getSOPsAsync(Constants.projectId)}
+            fetchEntries={() => Api.getSOPsAsync(Constants.projectId)}
             rowKeySelector={(row: SOP) => row.id}
             columns={defaultColumns}
             expandableConfig={{

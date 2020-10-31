@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { MsRun } from '../../../types';
-import { SampleList } from '../../../common/list';
+import { CommonList } from '../../../common/list';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { getColumn } from '../../../common/listBase';
@@ -24,12 +24,12 @@ export const List: FunctionComponent<ListProps> = ({
     onRowSelectionChange,
 }) => {
     return (
-        <SampleList
+        <CommonList<MsRun>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
-            fetchSamples={() => Api.getMsRunsAsync(Constants.projectId)}
+            fetchEntries={() => Api.getMsRunsAsync(Constants.projectId)}
             rowKeySelector={(row: MsRun) => row.id}
             columns={defaultColumns}
             expandableConfig={{

@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { ClinicalSample } from '../../../types';
+import { ClinicalSample, Sample } from '../../../types';
 import { getColumn } from '../../../common/listBase';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
-import { SampleList } from '../../../common/list';
+import { CommonList } from '../../../common/list';
 import moment from 'moment';
 import { getWorkflowTag } from '../../../common/tags';
 import { Col, Row, Divider } from 'antd';
@@ -23,12 +23,12 @@ export const List: FunctionComponent<ListProps> = ({
     onRowSelectionChange,
 }) => {
     return (
-        <SampleList
+        <CommonList<ClinicalSample>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
-            fetchSamples={() => Api.fetchSamples(Constants.projectId)}
+            fetchEntries={() => Api.fetchSamples(Constants.projectId)}
             rowKeySelector={(row: ClinicalSample) => row.id}
             columns={defaultColumns}
             expandableConfig={{

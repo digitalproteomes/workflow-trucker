@@ -79,7 +79,7 @@ function getRenderObject<T>(renderActions: (record: T) => React.ReactNode) {
     };
 }
 
-export function getColumn<T>(
+export function getColumn<T>( // todo - move to tableColumnHelpers.tsx
     label: string,
     name: keyof T,
     render?: (record: T) => React.ReactNode,

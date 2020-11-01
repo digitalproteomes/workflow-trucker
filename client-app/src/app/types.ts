@@ -31,10 +31,16 @@ export class SampleNew {
     protocolId: number = -1;
 
     /** shown on the ui as Id, it's actually a mock placeholder for the superficial identification of the samples coming in from the hospital */
-    clinicalSampleCode: number = -1;
+    clinicalSampleCode: string = '';
 
     /** not sure shy this has to be on this sample. How come it is not present on the sample coming from the backend? */
     processingPerson: string = '';
+
+    sampleCounter: number = -1;
+
+    description: string = '';
+
+    workflowTag: string = '';
 
     public static nameof = (name: keyof SampleNew) => name;
 }

@@ -1,5 +1,5 @@
 import { BaseApi } from '../../infrastructure/api';
-import { ClinicalSample } from '../../types';
+import { ClinicalSample, SampleNew } from '../../types';
 import { mockClinicalSamples } from '../../default-data/samples';
 import { Constants } from '../../default-data/constants';
 
@@ -15,7 +15,12 @@ export class Api {
     }
 
     public static async postSampleAsync(payload: any): Promise<ClinicalSample> {
+        //todo - not sure if BE has an endpoint for creating individual clinical samples
         return await BaseApi.postAsync(`/samples/clinical`, payload);
+    }
+
+    public static async postAutoGeneraedSamplesAsync(payload: SampleNew[]): Promise<ClinicalSample[]> {
+        return await BaseApi.postAsync(`/samples/clinical`, { samples: payload });
     }
 
     public static async deleteSampleAsync(entry: ClinicalSample): Promise<void> {

@@ -103,7 +103,7 @@ const FractionateInputForm: FunctionComponent<FormProps> = ({ parentSample, onCr
 
     return (
         <InputModal
-            visible={parentSample != null}
+            isVisible={parentSample != null}
             title={`Fractionate clinical sample`}
             inputForm={(form: FormInstance) => {
                 return inputForm(form, errorMessage);

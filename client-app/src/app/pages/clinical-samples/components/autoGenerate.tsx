@@ -108,8 +108,8 @@ export const AutoGenerateInputForm: FunctionComponent<FormProps> = ({
     return (
         <>
             <InputModal
-                visible={isActiveInputForm}
-                loading={isLoadingAnimation}
+                isVisible={isActiveInputForm}
+                isLoading={isLoadingAnimation}
                 title="New clinical sample"
                 inputForm={(form: FormInstance) => {
                     return inputForm(form, errorMessage, onFieldsChange);

@@ -97,7 +97,7 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
 
     return (
         <InputModal
-            visible={isActiveUploadForm}
+            isVisible={isActiveUploadForm}
             title="Upload SOP"
             isLoading={isUploading}
             inputForm={(form: FormInstance) => {

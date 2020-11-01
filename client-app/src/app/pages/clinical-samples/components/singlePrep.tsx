@@ -77,7 +77,7 @@ export const SinglePrepInputForm: FunctionComponent<FormProps> = ({ parentSample
 
     return (
         <InputModal
-            visible={parentSample != null}
+            isVisible={parentSample != null}
             title={`Create individual sample`}
             inputForm={(form: FormInstance) => {
                 return inputForm(form, errorMessage);

@@ -41,7 +41,7 @@ const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, on
 
     return (
         <InputModal
-            visible={isActiveInputForm}
+            isVisible={isActiveInputForm}
             title="New clinical sample"
             inputForm={(form: FormInstance) => {
                 return inputForm(form, errorMessage);

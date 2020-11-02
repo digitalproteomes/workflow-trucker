@@ -136,14 +136,29 @@ def upload_file():
         # If the file is found in the database then the save
         # was successful else an error occurred while saving.
         if GRID_FS.find_one(file_id) is not None:
+            # data = request.json
+            processingPerson = "System"
+            description = "current SOP"
+            artefactClass = "sampleSOP"
+            name = filename + '_artefact'
+            projectId = '5f9ff70b37d99401a5ee5de0'
+            # if data.get('sop_data'):
+            #     fields = data.get('sop_data')
+            #     processingPerson = fields.get('processingPerson')
+            #     description = fields.get('description')
+            #     artefactClass = fields.get('artefactClass')
+            #     name = fields.get('name')
+            #     projectId = fields.get('projectId')
             new_artefact = {
-                "name": filename + '_artefact',
+                "name": name,
                 "sopFileName": filename,
                 "encodedFileId": file_id,
                 "updatedDate": datetime.datetime.now(),
                 "createdDate": datetime.datetime.now(),
-                "processingPerson": "System",
-                "description": "current SOP"
+                "processingPerson": processingPerson,
+                "description": description,
+                "projectId": projectId,
+                "artefactClass": artefactClass
             }
             created_artf = artefactDAO.createArtefact(
                 new_artefact)

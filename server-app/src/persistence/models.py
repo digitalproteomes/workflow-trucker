@@ -166,11 +166,11 @@ class SWATHAnalysis(Document):
 @instance.register
 class Artefact(Document):
     name = fields.StrField(required=True)
-    # projectId = fields.ObjectIdField(required=True)
+    projectId = fields.ObjectIdField(required=False)
     # SOP
     sopFileName = fields.StrField(required=False)
     encodedFileId = fields.ObjectIdField(required=False)
-    # artefactClass = fields.StrField(required=False)
+    artefactClass = fields.StrField(required=False)
     description = fields.StrField(required=False)
     processingPerson = fields.StrField()
     createdDate = fields.DateTimeField(

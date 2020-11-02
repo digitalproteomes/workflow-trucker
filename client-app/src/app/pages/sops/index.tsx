@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Button, PageHeader, message, Upload, Divider } from 'antd';
 import { SOP } from '../../types';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
 import { List } from './components/list';
 import { ButtonDownload } from './components/download';
 import { ButtonExport } from '../../common/export';
@@ -60,7 +60,7 @@ export const SOPPage: FunctionComponent = () => {
 
     const onUploadSuccessful = () => {
         notifications.queueSuccess('Success', 'Selected file was uploaded successfully');
-
+        setRefreshNeededFlag(true);
         setActiveUploadFlag(false);
     };
 
@@ -72,36 +72,31 @@ export const SOPPage: FunctionComponent = () => {
         return (
             <Space size="middle">
                 <ButtonDownload sop={record} />
-                {/* <ButtonDelete
-                    sample={record}
-                    onDeleteDone={() => {
-                        onDeleteDone(record);
-                    }}
-                /> */}
             </Space>
         );
     };
 
     return (
         <>
-            <Upload {...props}>
-                <Button icon={<UploadOutlined />}>Click to Upload</Button>
-            </Upload>
-            <Button
-                icon={<UploadOutlined />}
-                onClick={() => {
-                    setActiveUploadFlag(true);
-                }}
-            >
-                Click to Upload Dialog
-            </Button>
             <Divider />
             <PageHeader ghost={false} title="Standard Operation Procedures"></PageHeader>
-            <ButtonExport
-                onExportDone={() => {
-                    onExportDone();
-                }}
-            />
+            <Space style={{ float: 'right' }} direction="horizontal">
+                <Button
+                    type="primary"
+                    icon={<PlusOutlined />}
+                    onClick={() => {
+                        setActiveUploadFlag(true);
+                    }}
+                >
+                    Create new SOP
+                </Button>
+
+                <ButtonExport
+                    onExportDone={() => {
+                        onExportDone();
+                    }}
+                />
+            </Space>
             <Divider />
             <List
                 isRefreshNeeded={isRefreshNeeded}

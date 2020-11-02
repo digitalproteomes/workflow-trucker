@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Form, Input, Button, Upload, Typography } from 'antd';
+import { Form, Input, Button, Upload, Typography, Menu, Dropdown } from 'antd';
 import { FormInstance } from 'antd/lib/form';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, DownOutlined } from '@ant-design/icons';
 import { Api } from '../api';
 import { UploadProps } from 'antd/lib/upload';
 import { FieldData } from 'rc-field-form/lib/interface';
+import { Constants } from '../../../default-data/constants';
 
 import { RcFile } from 'antd/lib/upload/interface';
 import { InputModal } from '../../../common/inputModal';
@@ -48,7 +49,7 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
         },
     };
 
-    const handleUpload = () => {
+    const handleUpload = async () => {
         if (file === null) {
             // todo - set error message
             return;
@@ -57,7 +58,7 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
         setIsUploadingFlag(true);
 
         try {
-            Api.postAsync({}, file);
+            await Api.postAsync(sopData, file, Constants.projectId);
 
             setFile(null);
         } catch (error) {
@@ -109,7 +110,9 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
             onCancel={onCancel}
         >
             <Upload {...props}>
-                <Button icon={<UploadOutlined />}>Select File</Button>
+                <Button icon={<UploadOutlined />} style={{ float: 'right' }}>
+                    Attach SOP
+                </Button>
             </Upload>
         </InputModal>
     );
@@ -131,6 +134,8 @@ function inputForm(
         >
             {createFormInput('Name', SOP.nameof('name'))}
             {createFormInput('Description', SOP.nameof('description'))}
+            {createFormInput('Processing person', SOP.nameof('processingPerson'))}
+            {createDropdownFormInput('SOP Class', SOP.nameof('artefactClass'))}
 
             {errorMessage == null ? null : (
                 <Form.Item label="Error" name="errorMessage">
@@ -147,7 +152,7 @@ const formLayout = {
 };
 
 function createFormInput<T>(label: string, propName: keyof T, placeholder?: string, required: boolean = false) {
-    // todo - extract this into a common helper
+    // todo - use the common helper already extracted
     return (
         <Form.Item
             label={label}
@@ -159,6 +164,26 @@ function createFormInput<T>(label: string, propName: keyof T, placeholder?: stri
     );
 }
 
+const menu = (
+    <Menu>
+        <Menu.Item key="sampleSOP">Standard Procedure Sample Preparation</Menu.Item>
+        <Menu.Item key="msRunSOP">Standard Procedure Mass Spectrometry</Menu.Item>
+        <Menu.Item key="dataSOP">Standard Procedure Data Analysis</Menu.Item>
+    </Menu>
+);
+
+function createDropdownFormInput<T>(label: string, propName: keyof T, placeholder?: string, required: boolean = false) {
+    return (
+        // todo - implement the dropdown properly
+        <Form.Item label={label} name={propName.toString()}>
+            <Dropdown overlay={menu} trigger={['click']}>
+                <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+                    SOP Class <DownOutlined />
+                </a>
+            </Dropdown>
+        </Form.Item>
+    );
+}
 function validationMessage(field: string): string {
     return `Please enter a valid ${field}!`;
 }

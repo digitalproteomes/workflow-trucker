@@ -1,18 +1,20 @@
 ### Quick-start when you just need the server running for the front-end
+
 1. recreate the docker image
 2. [optional] - remove all the images from docker to make sure it's clean clean
 3. start the server (db + python backend)
 
 ```
 docker-compose -f .\automation\docker-compose.yml down
-docker build -f automation\dockerfile -t workflow-tracker-rest-api:0.1 .
+docker build -f automation/dockerfile -t workflow-tracker-rest-api:0.1 .
 #docker rm -f $(docker ps -a -q)
-docker-compose -f .\automation\docker-compose.yml up
+docker-compose -f ./automation/docker-compose.yml up
 ```
 
 ## Not so quick startup
 
 ### Quick-start when you just need the server running for the front-end
+
 1. recreate the docker image
 2. [optional] - remove all the images from docker to make sure it's clean clean
 3. start the server (db + python backend)
@@ -28,7 +30,6 @@ docker-compose -f .\automation\docker-compose.yml up
 1. Run the load_db.py file and it will automatically create the WorkflowDB and poplate it with 1 project from the sample_project.json file
 2. Turn on the server by clicking run/debug on the project_controller.py class
 3. Test in postman a simple get http://127.0.0.1:5000/project
-
 
 ## How to install python
 
@@ -71,7 +72,6 @@ and set the correct global version using pyenv
   - `docker run -it --entrypoint /bin/bash workflow-tracker-rest-api:0.1`
   - `docker run -it workflow-tracker-rest-api:0.1 bin/bash`
 
-
 ## Docker nice to have commands
 
 - stop all `docker stop $(docker ps -a -q)`
@@ -88,7 +88,6 @@ and set the correct global version using pyenv
 - stop the entire app
   - `CTRL+C`
   - `workflow-tracker\server-app\automation> docker-compose down`
-  
 - initialize db `workflow-tracker\server-app\src> ..\env\python3.7\Scripts\python.exe -m resources.initial_load_db`
 - instantite endpoints `workflow-tracker\server-app\src> ..\env\python3.7\Scripts\python.exe -m endpoint.app_controller`
 

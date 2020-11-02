@@ -278,6 +278,8 @@ export class SOP {
 
     // projectId: string = '';
 
+    artefactClass = ''
+
     processingPerson: string = '';
 
     updatedDate: string = '';
@@ -288,6 +290,7 @@ export class SOP {
         createdDate: '',
         description: '',
         encodedFileId: '',
+        artefactClass: '',
         id: '',
         name: '',
         processingPerson: '',

@@ -331,6 +331,7 @@ export function mockSOP(): SOP[] {
             id: '5f2330c4723e24adcf419e96',
             name: 'PHRT_SOP',
             processingPerson: 'System',
+            artefactClass: "sampleSOP",
             // projectId: Constants.projectId,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             encodedFileId: '5f2330c4723e24adcf419e96',

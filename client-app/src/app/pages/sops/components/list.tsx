@@ -54,6 +54,9 @@ const defaultColumns: ColumnsType<SOP> = [
     getColumn('Name', SOP.nameof('name')),
     getColumn('Id', SOP.nameof('id')),
     getColumn('Sop File Name', SOP.nameof('sopFileName')),
+    getColumn('Revision', SOP.nameof('revision')),
+    getColumn('Owner', SOP.nameof('owner')),
+    getColumn('SOP Type', SOP.nameof('artefactClass')),
     getColumn('Created on', SOP.nameof('createdDate'), (record: SOP) => <span>{formatDate(record.createdDate)}</span>),
     getColumn('Updated on', SOP.nameof('updatedDate'), (record: SOP) => <span>{formatDate(record.updatedDate)}</span>),
 ];

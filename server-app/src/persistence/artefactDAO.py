@@ -11,7 +11,16 @@ def createArtefact(splJson):
 
 
 def getAllArtefacts(projectId):
-    spls = Artefact.find()
+    spls = Artefact.find({"projectId": ObjectId(projectId)})
+    result_spls = []
+    for i in spls:
+        result_spls.append(i.dump())
+    return result_spls
+
+
+def getArtefactsByType(projectId, artefactClass):
+    spls = Artefact.find({"projectId": ObjectId(
+        projectId), "artefactClass": artefactClass})
     result_spls = []
     for i in spls:
         result_spls.append(i.dump())

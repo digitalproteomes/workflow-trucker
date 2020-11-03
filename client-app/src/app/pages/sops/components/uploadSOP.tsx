@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Form, Input, Button, Upload, Typography } from 'antd';
+import { Form, Button, Upload, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
-import { UploadOutlined, DownOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
 import { Api } from '../api';
 import { UploadProps } from 'antd/lib/upload';
 import { FieldData } from 'rc-field-form/lib/interface';
@@ -11,6 +11,7 @@ import { createFormInput, createSOPFormSelect } from '../../../common/inputModal
 import { RcFile } from 'antd/lib/upload/interface';
 import { InputModal } from '../../../common/inputModal';
 import { SOP, SOPDataKeys, ESOPType } from '../../../types';
+import { defaultFormLayout } from '../../../common/inputModalSize';
 const { Text } = Typography;
 
 export { ButtonUploadSOP, FormUploadSOP };
@@ -137,7 +138,7 @@ function inputForm(
 ): JSX.Element {
     return (
         <Form
-            {...formLayout}
+            {...defaultFormLayout}
             layout={'horizontal'}
             form={form}
             name="clinical-sample-input-form"
@@ -163,13 +164,4 @@ function inputForm(
             )}
         </Form>
     );
-}
-
-const formLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
-
-function validationMessage(field: string): string {
-    return `Please enter a valid ${field}!`;
 }

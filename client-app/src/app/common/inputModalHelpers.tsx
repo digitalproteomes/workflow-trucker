@@ -22,7 +22,7 @@ export function validationMessage(field: string): string {
 }
 
 export function createFormSelect<T>(label: string, propName: keyof T, workflowTags: EWorkflowTag[]) {
-    // todo - extract this into a common helper
+    // todo - extract this into a common helper, now this is specialized on Workflow Tags
     return (
         <Form.Item
             label={label}

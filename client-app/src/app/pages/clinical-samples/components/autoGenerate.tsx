@@ -33,6 +33,7 @@ export const AutoGenerateInputForm: FunctionComponent<FormProps> = ({
 
         async function saveSamples() {
             try {
+                // todo - move this really specific api call into an api module of its own, right here along the autoGenerate related components
                 await Api.postAutoGeneraedSamplesAsync(samples);
                 onCreateSuccessful(samples.length);
             } catch (error) {

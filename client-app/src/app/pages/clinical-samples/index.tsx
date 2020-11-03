@@ -12,11 +12,13 @@ import { FractionateInputForm } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
 import * as sampleNotifications from '../../common/sampleNotifications';
 import * as notifications from '../../common/notificationsBase';
+import { ProcessSampleForm } from './components/processSample';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
     const [isActiveAutoGenerate, setActiveAutoGenerateFlag] = useState<boolean>(false);
     const [fractionateSample, setFractionateSample] = useState<ClinicalSample | null>(null);
+    const [sampleToProcess, setSampleToProcess] = useState<ClinicalSample | null>(null);
     const [, setSelectedSamples] = useState<ClinicalSample[]>([]);
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
@@ -55,6 +57,7 @@ export const ClinicalSamples: FunctionComponent = () => {
                 <ButtonSinglePrep
                     onSinglePrep={() => {
                         console.log('on single prep click');
+                        setSampleToProcess(record);
                     }}
                 />
                 <ButtonDelete
@@ -99,6 +102,17 @@ export const ClinicalSamples: FunctionComponent = () => {
                     parentSample={fractionateSample}
                     onCreateSuccessful={onFractionateSuccessful}
                     onCancel={onFractionateCancel}
+                />
+
+                <ProcessSampleForm
+                    originalSample={sampleToProcess}
+                    onCancel={() => {
+                        setSampleToProcess(null);
+                    }}
+                    onCreateSuccessful={() => {
+                        sampleNotifications.queueCreateSuccess('Intermediary sample created succesfully');
+                        setSampleToProcess(null);
+                    }}
                 />
             </PageHeader>
             <Divider></Divider>

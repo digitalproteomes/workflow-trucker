@@ -5,14 +5,9 @@ import { InputModal } from '../../../common/inputModal';
 import { ClinicalSample } from '../../../types';
 import { Api } from '../api';
 import { createFormInput } from '../../../common/inputModalHelpers';
+import { defaultFormLayout } from '../../../common/inputModalSize';
 
 const { Text } = Typography;
-
-export { ClinicalInputForm };
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 type FormProps = {
     isActiveInputForm: boolean;
@@ -20,7 +15,11 @@ type FormProps = {
     onCancel: () => void;
 };
 
-const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, onCreateSuccessful, onCancel }) => {
+export const ClinicalInputForm: FunctionComponent<FormProps> = ({
+    isActiveInputForm,
+    onCreateSuccessful,
+    onCancel,
+}) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const onCreate = (values: any) => {
@@ -30,9 +29,6 @@ const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, on
 
                 onCreateSuccessful(createdSample);
             } catch (error) {
-                // const err = error as FriendlyError;
-                // setCreateErrorMessage(err.message);
-
                 setErrorMessage(error.message);
             }
         }
@@ -54,7 +50,7 @@ const ClinicalInputForm: FunctionComponent<FormProps> = ({ isActiveInputForm, on
 
 function inputForm(form: FormInstance, errorMessage: string | null): JSX.Element {
     return (
-        <Form {...formLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
+        <Form {...defaultFormLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
             {createFormInput('Name', ClinicalSample.nameof('name'))}
             {createFormInput('ProjectId', ClinicalSample.nameof('projectId'))}
             {createFormInput('Clinical sample code', ClinicalSample.nameof('clinicalSampleCode'))}
@@ -67,8 +63,3 @@ function inputForm(form: FormInstance, errorMessage: string | null): JSX.Element
         </Form>
     );
 }
-
-const formLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};

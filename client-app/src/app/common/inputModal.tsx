@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Form, Modal, Input } from 'antd';
+import { Form, Modal } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 
 type ModalProps = {
@@ -50,17 +50,3 @@ export const InputModal: FunctionComponent<ModalProps> = ({
         </Modal>
     );
 };
-
-export function getFormInput<T>(fieldName: keyof T, label: string) {
-    const field: string = fieldName.toString();
-
-    return (
-        <Form.Item label={label} name={field} rules={[{ required: true, message: validationMessage(label) }]}>
-            <Input />
-        </Form.Item>
-    );
-}
-
-function validationMessage<T>(label: string): string {
-    return `Please enter a valid ${label}!`;
-}

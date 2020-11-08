@@ -76,10 +76,15 @@ function createFormSelectInput(label: string, propName: keyof ClinicalSample, so
             name={propName.toString()}
             rules={[{ required: false, message: validationMessage(propName.toString()) }]}
         >
-            <Select>
-                {sops.map((sop) => (
-                    <Option value={''}>{sop.name}</Option>
-                ))}
+            <Select showSearch filterOption={true} optionFilterProp={'children'}>
+                {sops
+                    .sort((a, b) => {
+                        // todo - is this the best string filtering approach? empty string?
+                        return a.name[0] > b.name[0] ? 1 : a.name[0] == b.name[0] ? 0 : -1;
+                    })
+                    .map((sop) => (
+                        <Option value={''}>{sop.name}</Option>
+                    ))}
             </Select>
         </Form.Item>
     );

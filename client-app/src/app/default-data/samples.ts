@@ -335,7 +335,9 @@ export function mockSOP(): SOP[] {
             // projectId: Constants.projectId,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             encodedFileId: '5f2330c4723e24adcf419e96',
-            sopFileName: 'SOP file'
+            sopFileName: 'SOP file',
+            owner: 'Admin',
+            revision: '1.00'
         },
     ];
 }

@@ -172,6 +172,8 @@ class Artefact(Document):
     encodedFileId = fields.ObjectIdField(required=False)
     artefactClass = fields.StrField(required=False)
     description = fields.StrField(required=False)
+    owner = fields.StrField(required=False)
+    revision = fields.StrField(required=False)
     processingPerson = fields.StrField()
     createdDate = fields.DateTimeField(
         validate=validate.Range(min=datetime(1900, 1, 1)))

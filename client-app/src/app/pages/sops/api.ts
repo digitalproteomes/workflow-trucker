@@ -25,7 +25,7 @@ export class Api {
             // todo - figure out where should we set the sop project id
             sop.projectId = projectId;
             formData.append('file', file);
-            formData.append('sop_data', sop);
+            formData.append('sop_data', JSON.stringify(sop));
             console.log('sop data in api', sop);
             console.log('sop form data in api', formData)
 
@@ -33,5 +33,9 @@ export class Api {
         } catch (error) {
             return mockSOP()[0];
         }
+    }
+
+    public static async deleteAsync(entry: SOP): Promise<void> {
+        return await BaseApi.deleteAsync(`/sops?id=${entry.id}`);
     }
 }

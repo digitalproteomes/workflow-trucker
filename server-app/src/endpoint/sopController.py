@@ -3,7 +3,9 @@ from flask import Blueprint
 from flask import Flask, jsonify, request, render_template
 from flask_api import status
 import os
+import json
 import datetime
+from bson import ObjectId
 
 
 from pymongo import MongoClient
@@ -82,6 +84,17 @@ def getAllSOPs():
         return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
 
 
+@sop_api.route('/sops/project/type',  methods=['GET'])
+def getSOPsByType():
+    projectId = request.args.get('projectId')
+    artefactClass = request.args.get('sopType')
+    if (projectDAO.getProjectById(projectId)):
+        sops = artefactDAO.getArtefactsByType(projectId, artefactClass)
+        return jsonify(sops), status.HTTP_200_OK
+    else:
+        return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
+
+
 @sop_api.route('/download/artefact',  methods=['GET'])
 def downloadArtefact():
     artefactName = request.args.get('artefactName')
@@ -94,6 +107,16 @@ def downloadArtefact():
         artefact.sopFileName)
     return response
 
+
+@sop_api.route('/sops', methods=['DELETE'])
+def deleteSOP():
+    id = request.args.get('id')
+    # artefact = artefactDAO.getArtefactByFilename(artefactName)
+    sts = artefactDAO.deleteSOP(id)
+    if(sts == 0):
+        return 'SOP with id does not exist.', status.HTTP_404_NOT_FOUND
+    else:
+        return '', status.HTTP_200_OK
 
 # @sop_api.route("/file/render")
 # def render():
@@ -136,33 +159,38 @@ def upload_file():
         # If the file is found in the database then the save
         # was successful else an error occurred while saving.
         if GRID_FS.find_one(file_id) is not None:
-            # data = request.json
-            processingPerson = "System"
-            description = "current SOP"
-            artefactClass = "sampleSOP"
-            name = filename + '_artefact'
-            projectId = '5f9ff70b37d99401a5ee5de0'
-            # if data.get('sop_data'):
-            #     fields = data.get('sop_data')
-            #     processingPerson = fields.get('processingPerson')
-            #     description = fields.get('description')
-            #     artefactClass = fields.get('artefactClass')
-            #     name = fields.get('name')
-            #     projectId = fields.get('projectId')
-            new_artefact = {
-                "name": name,
-                "sopFileName": filename,
-                "encodedFileId": file_id,
-                "updatedDate": datetime.datetime.now(),
-                "createdDate": datetime.datetime.now(),
-                "processingPerson": processingPerson,
-                "description": description,
-                "projectId": projectId,
-                "artefactClass": artefactClass
-            }
-            created_artf = artefactDAO.createArtefact(
-                new_artefact)
-            return jsonify(created_artf), status.HTTP_200_OK
+            # print("request" + request)
+            data = request.form
+            if data['sop_data'] != None:
+                print(str(data['sop_data']))
+                fields = json.loads(data['sop_data'])
+                processingPerson = fields['processingPerson']
+                description = fields['description']
+                artefactClass = fields.get('artefactClass')
+                name = fields['name']
+                projectId = fields.get('projectId')
+                owner = fields.get('owner')
+                revision = fields.get('revision')
+                new_artefact = {
+                    "name": name,
+                    "sopFileName": filename,
+                    "encodedFileId": file_id,
+                    "updatedDate": datetime.datetime.now(),
+                    "createdDate": datetime.datetime.now(),
+                    "processingPerson": processingPerson,
+                    "description": description,
+                    "projectId": projectId,
+                    "owner": owner,
+                    "revision": revision,
+                    "artefactClass": artefactClass
+                }
+                created_artf = artefactDAO.createArtefact(
+                    new_artefact)
+                return jsonify(created_artf), status.HTTP_200_OK
+            else:
+                resp = jsonify({'message': 'Error with fields'})
+                resp.status_code = 400
+                return resp
         else:
             # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             resp = jsonify({'message': 'File already exists'})

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Select } from 'antd';
-import { getWorkflowTag } from './tags';
-import { EWorkflowTag } from '../types';
+import { getSOPType, getWorkflowTag } from './tags';
+import { ESOPType, EWorkflowTag } from '../types';
 
 const { Option } = Select;
 
@@ -38,6 +38,28 @@ export function createFormSelect<T>(label: string, propName: keyof T, workflowTa
             >
                 {workflowTags.map((tag) => (
                     <Option value={tag}>{tag}</Option>
+                ))}
+            </Select>
+        </Form.Item>
+    );
+}
+
+export function createSOPFormSelect<T>(label: string, propName: keyof T, sopTypes: ESOPType[]) {
+    // todo - extract this into a common helper.
+    return (
+        <Form.Item
+            label={label}
+            name={propName.toString()}
+            rules={[{ required: false, message: validationMessage(propName.toString()) }]}
+        >
+            <Select
+                tagRender={(props) => {
+                    const { value } = props; // reference https://ant.design/components/select/#components-select-demo-custom-tag-render
+                    return getSOPType(value as ESOPType);
+                }}
+            >
+                {sopTypes.map((type) => (
+                    <Option value={type}>{type}</Option>
                 ))}
             </Select>
         </Form.Item>

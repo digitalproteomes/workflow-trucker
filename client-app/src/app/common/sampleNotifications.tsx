@@ -1,7 +1,7 @@
 import * as notifications from './notificationsBase';
 
 export const queueCreateSuccess = (sampleName: string) => {
-    notifications.queueSuccess('Success', `Sample ${sampleName} created successfuly.`);
+    notifications.queueSuccess('Success', `Entry ${sampleName} created successfuly.`);
 };
 
 export const queueExportSuccess = () => {
@@ -9,5 +9,5 @@ export const queueExportSuccess = () => {
 };
 
 export const queueDeleteSuccess = (sampleName: string) => {
-    notifications.queueSuccess('Success', `Sample ${sampleName} was deleted.`);
+    notifications.queueSuccess('Success', `Entry ${sampleName} was deleted.`);
 };

@@ -34,7 +34,10 @@ export const List: FunctionComponent<ListProps> = ({
                 expandedRowRender: (record: SOP) => {
                     return (
                         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                            <Col className="gutter-row" span={3}>
+                            <Col className="gutter-row" span={10}>
+                                <h3>SOP File Name</h3>
+                                <span>{record.sopFileName}</span>
+                                <Divider />
                                 <h3>Notes</h3>
                                 <span>{record.description}</span>
                                 <Divider />
@@ -53,7 +56,10 @@ export const List: FunctionComponent<ListProps> = ({
 const defaultColumns: ColumnsType<SOP> = [
     getColumn('Name', SOP.nameof('name')),
     getColumn('Id', SOP.nameof('id')),
-    getColumn('Sop File Name', SOP.nameof('sopFileName')),
+    // getColumn('Sop File Name', SOP.nameof('sopFileName')),
+    getColumn('Revision', SOP.nameof('revision')),
+    getColumn('Owner', SOP.nameof('owner')),
+    getColumn('SOP Type', SOP.nameof('artefactClass')),
     getColumn('Created on', SOP.nameof('createdDate'), (record: SOP) => <span>{formatDate(record.createdDate)}</span>),
     getColumn('Updated on', SOP.nameof('updatedDate'), (record: SOP) => <span>{formatDate(record.updatedDate)}</span>),
 ];

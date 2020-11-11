@@ -1,42 +1,17 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Space, Button, PageHeader, message, Upload, Divider } from 'antd';
+import { Space, Button, PageHeader, Divider } from 'antd';
 import { SOP } from '../../types';
-import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { List } from './components/list';
 import { ButtonDownload } from './components/download';
 import { ButtonExport } from '../../common/export';
-// import { ButtonDelete } from './components/delete';
-import { UploadProps } from 'antd/lib/upload';
 import * as sampleNotifications from '../../common/sampleNotifications';
 import * as notifications from '../../common/notificationsBase';
+import { ButtonDeleteSOP } from './components/delete';
 
 import { FormUploadSOP } from './components/uploadSOP';
 
 export const SOPPage: FunctionComponent = () => {
-    const props: UploadProps = {
-        name: 'file',
-        multiple: false,
-        method: 'POST',
-        action: 'http://localhost:5000/file-upload',
-        // headers: {
-        //     'Content-Type': 'multipart/form-data',
-        // },
-        onChange(info: any) {
-            const { status } = info.file;
-            console.log('info', info);
-
-            if (status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
-            if (status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully.`);
-                onCreateNew();
-            } else if (status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-            }
-        },
-    };
-
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
     const [, setSOP] = useState<SOP[]>([]);
@@ -46,16 +21,17 @@ export const SOPPage: FunctionComponent = () => {
         setRefreshNeededFlag(false);
     };
 
-    const onCreateNew = () => {
-        setRefreshNeededFlag(true);
-    };
-
     const onRowSelectionChange = (selectedRows: SOP[]) => {
         setSOP(selectedRows);
     };
 
     function onExportDone() {
         sampleNotifications.queueExportSuccess();
+    }
+
+    function onDeleteDone(sop: SOP) {
+        setRefreshNeededFlag(true);
+        sampleNotifications.queueDeleteSuccess(sop.name);
     }
 
     const onUploadSuccessful = () => {
@@ -72,6 +48,12 @@ export const SOPPage: FunctionComponent = () => {
         return (
             <Space size="middle">
                 <ButtonDownload sop={record} />
+                <ButtonDeleteSOP
+                    sop={record}
+                    onDeleteDone={() => {
+                        onDeleteDone(record);
+                    }}
+                />
             </Space>
         );
     };

@@ -1,15 +1,17 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Form, Input, Button, Upload, Typography, Menu, Dropdown } from 'antd';
+import { Form, Button, Upload, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
-import { UploadOutlined, DownOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
 import { Api } from '../api';
 import { UploadProps } from 'antd/lib/upload';
 import { FieldData } from 'rc-field-form/lib/interface';
 import { Constants } from '../../../default-data/constants';
+import { createFormInput, createSOPFormSelect } from '../../../common/inputModalHelpers';
 
 import { RcFile } from 'antd/lib/upload/interface';
 import { InputModal } from '../../../common/inputModal';
-import { SOP, SOPDataKeys } from '../../../types';
+import { SOP, SOPDataKeys, ESOPType } from '../../../types';
+import { defaultFormLayout } from '../../../common/inputModalSize';
 const { Text } = Typography;
 
 export { ButtonUploadSOP, FormUploadSOP };
@@ -88,7 +90,18 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
                     case SOP.nameof('description'):
                         newData.description = f.value;
                         break;
-                    // todo - set the other fields as well
+                    case SOP.nameof('artefactClass'):
+                        newData.artefactClass = f.value;
+                        break;
+                    case SOP.nameof('processingPerson'):
+                        newData.processingPerson = f.value;
+                        break;
+                    case SOP.nameof('owner'):
+                        newData.owner = f.value;
+                        break;
+                    case SOP.nameof('revision'):
+                        newData.revision = f.value;
+                        break;
                 }
             }
         });
@@ -125,7 +138,7 @@ function inputForm(
 ): JSX.Element {
     return (
         <Form
-            {...formLayout}
+            {...defaultFormLayout}
             layout={'horizontal'}
             form={form}
             name="clinical-sample-input-form"
@@ -135,7 +148,14 @@ function inputForm(
             {createFormInput('Name', SOP.nameof('name'))}
             {createFormInput('Description', SOP.nameof('description'))}
             {createFormInput('Processing person', SOP.nameof('processingPerson'))}
-            {createDropdownFormInput('SOP Class', SOP.nameof('artefactClass'))}
+            {createFormInput('Author', SOP.nameof('owner'))}
+            {createFormInput('Revision', SOP.nameof('revision'))}
+
+            {createSOPFormSelect('SOP Type', SOP.nameof('artefactClass'), [
+                ESOPType.sampleSOP,
+                ESOPType.msRunSOP,
+                ESOPType.dataSOP,
+            ])}
 
             {errorMessage == null ? null : (
                 <Form.Item label="Error" name="errorMessage">
@@ -144,46 +164,4 @@ function inputForm(
             )}
         </Form>
     );
-}
-
-const formLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
-
-function createFormInput<T>(label: string, propName: keyof T, placeholder?: string, required: boolean = false) {
-    // todo - use the common helper already extracted
-    return (
-        <Form.Item
-            label={label}
-            name={propName.toString()}
-            rules={[{ required: required, message: validationMessage(propName.toString()) }]}
-        >
-            <Input placeholder={placeholder} />
-        </Form.Item>
-    );
-}
-
-const menu = (
-    <Menu>
-        <Menu.Item key="sampleSOP">Standard Procedure Sample Preparation</Menu.Item>
-        <Menu.Item key="msRunSOP">Standard Procedure Mass Spectrometry</Menu.Item>
-        <Menu.Item key="dataSOP">Standard Procedure Data Analysis</Menu.Item>
-    </Menu>
-);
-
-function createDropdownFormInput<T>(label: string, propName: keyof T, placeholder?: string, required: boolean = false) {
-    return (
-        // todo - implement the dropdown properly
-        <Form.Item label={label} name={propName.toString()}>
-            <Dropdown overlay={menu} trigger={['click']}>
-                <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-                    SOP Class <DownOutlined />
-                </a>
-            </Dropdown>
-        </Form.Item>
-    );
-}
-function validationMessage(field: string): string {
-    return `Please enter a valid ${field}!`;
 }

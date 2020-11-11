@@ -52,6 +52,13 @@ export enum EWorkflowTag {
     LibraryGeneration = 'Library Generation',
 }
 
+
+export enum ESOPType {
+    sampleSOP = 'Standard Procedure Sample Preparation',
+    msRunSOP = 'Standard Procedure Mass Spectrometry',
+    dataSOP = 'Standard Procedure Data Analysis'
+}
+
 export enum EProtocolTag {
     Invalid = 'invalid tag',
     Single = 'single_preparation',
@@ -282,6 +289,10 @@ export class SOP {
 
     processingPerson: string = '';
 
+    owner =  '';
+
+    revision =  '';
+
     updatedDate: string = '';
 
     public static nameof = (name: keyof SOP) => name;
@@ -294,6 +305,8 @@ export class SOP {
         id: '',
         name: '',
         processingPerson: '',
+        owner: '',
+        revision: '',
         sopFileName: '',
         updatedDate: '',
     };

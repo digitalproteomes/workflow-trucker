@@ -12,52 +12,18 @@ import { FractionateInputForm } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
 import * as sampleNotifications from '../../common/sampleNotifications';
 import * as notifications from '../../common/notificationsBase';
+import { ProcessSampleForm } from './components/processSample';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
-
     const [isActiveAutoGenerate, setActiveAutoGenerateFlag] = useState<boolean>(false);
-
     const [fractionateSample, setFractionateSample] = useState<ClinicalSample | null>(null);
-
+    const [sampleToProcess, setSampleToProcess] = useState<ClinicalSample | null>(null);
     const [, setSelectedSamples] = useState<ClinicalSample[]>([]);
-
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
-
-    const onCreateNewSuccessful = (sample: ClinicalSample) => {
-        sampleNotifications.queueCreateSuccess(sample.name);
-
-        setRefreshNeededFlag(true);
-
-        setActiveCreateNewFlag(false);
-    };
 
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
-    };
-
-    const onCreateNew = () => {
-        setActiveCreateNewFlag(true);
-    };
-
-    const onCreateNewCancel = () => {
-        setActiveCreateNewFlag(false);
-    };
-
-    const onAutoGenerateButtonClick = () => {
-        setActiveAutoGenerateFlag(true);
-    };
-
-    const onAutoGenerateCancel = () => {
-        setActiveAutoGenerateFlag(false);
-    };
-
-    const onAutoGenerateSuccessful = (count: number) => {
-        notifications.queueSuccess('Success', `${count} samples created succesfully.`);
-
-        setRefreshNeededFlag(true);
-
-        setActiveAutoGenerateFlag(false);
     };
 
     function onDeleteDone(sample: ClinicalSample) {
@@ -69,21 +35,21 @@ export const ClinicalSamples: FunctionComponent = () => {
         sampleNotifications.queueExportSuccess();
     }
 
-    const onFractionateCancel = () => {
-        setFractionateSample(null);
-    };
-
-    const onFractionateSuccessful = (samples: ClinicalSample[]) => {
-        samples.forEach((sample, _index, _samples) => {
-            sampleNotifications.queueCreateSuccess(sample.name);
-        });
-
-        setFractionateSample(null);
-    };
-
     const onRowSelectionChange = (selectedRows: ClinicalSample[]) => {
         setSelectedSamples(selectedRows);
     };
+
+    const { onCreateNew, onCreateNewSuccessful, onCreateNewCancel } = linkCreateNew(
+        setRefreshNeededFlag,
+        setActiveCreateNewFlag,
+    );
+
+    const { onAutoGenerateButtonClick, onAutoGenerateSuccessful, onAutoGenerateCancel } = linkAutoGenerate(
+        setActiveAutoGenerateFlag,
+        setRefreshNeededFlag,
+    );
+
+    const { onFractionateSuccessful, onFractionateCancel } = linkFractionate(setFractionateSample);
 
     const renderActions = (record: ClinicalSample) => {
         return (
@@ -91,6 +57,7 @@ export const ClinicalSamples: FunctionComponent = () => {
                 <ButtonSinglePrep
                     onSinglePrep={() => {
                         console.log('on single prep click');
+                        setSampleToProcess(record);
                     }}
                 />
                 <ButtonDelete
@@ -136,6 +103,17 @@ export const ClinicalSamples: FunctionComponent = () => {
                     onCreateSuccessful={onFractionateSuccessful}
                     onCancel={onFractionateCancel}
                 />
+
+                <ProcessSampleForm
+                    originalSample={sampleToProcess}
+                    onCancel={() => {
+                        setSampleToProcess(null);
+                    }}
+                    onCreateSuccessful={() => {
+                        sampleNotifications.queueCreateSuccess('Intermediary sample created succesfully');
+                        setSampleToProcess(null);
+                    }}
+                />
             </PageHeader>
             <Divider></Divider>
 
@@ -148,3 +126,63 @@ export const ClinicalSamples: FunctionComponent = () => {
         </>
     );
 };
+
+// todo - analyze if the method groupings based on functionality is feasible. Maybe these could be moved out into separate files into their own modules?
+function linkCreateNew(
+    setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>,
+    setActiveCreateNewFlag: React.Dispatch<React.SetStateAction<boolean>>,
+) {
+    const onCreateNewSuccessful = (sample: ClinicalSample) => {
+        sampleNotifications.queueCreateSuccess(sample.name);
+
+        setRefreshNeededFlag(true);
+
+        setActiveCreateNewFlag(false);
+    };
+
+    const onCreateNew = () => {
+        setActiveCreateNewFlag(true);
+    };
+
+    const onCreateNewCancel = () => {
+        setActiveCreateNewFlag(false);
+    };
+    return { onCreateNew, onCreateNewSuccessful, onCreateNewCancel };
+}
+
+function linkAutoGenerate(
+    setActiveAutoGenerateFlag: React.Dispatch<React.SetStateAction<boolean>>,
+    setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>,
+) {
+    const onAutoGenerateButtonClick = () => {
+        setActiveAutoGenerateFlag(true);
+    };
+
+    const onAutoGenerateCancel = () => {
+        setActiveAutoGenerateFlag(false);
+    };
+
+    const onAutoGenerateSuccessful = (count: number) => {
+        notifications.queueSuccess('Success', `${count} samples created succesfully.`);
+
+        setRefreshNeededFlag(true);
+
+        setActiveAutoGenerateFlag(false);
+    };
+    return { onAutoGenerateButtonClick, onAutoGenerateSuccessful, onAutoGenerateCancel };
+}
+
+function linkFractionate(setFractionateSample: React.Dispatch<React.SetStateAction<ClinicalSample | null>>) {
+    const onFractionateCancel = () => {
+        setFractionateSample(null);
+    };
+
+    const onFractionateSuccessful = (samples: ClinicalSample[]) => {
+        samples.forEach((sample, _index, _samples) => {
+            sampleNotifications.queueCreateSuccess(sample.name);
+        });
+
+        setFractionateSample(null);
+    };
+    return { onFractionateSuccessful, onFractionateCancel };
+}

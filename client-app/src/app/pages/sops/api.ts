@@ -34,4 +34,8 @@ export class Api {
             return mockSOP()[0];
         }
     }
+
+    public static async deleteAsync(entry: SOP): Promise<void> {
+        return await BaseApi.deleteAsync(`/sops?id=${entry.id}`);
+    }
 }

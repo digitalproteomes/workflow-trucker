@@ -8,7 +8,7 @@
 docker-compose -f .\automation\docker-compose.yml down
 docker build -f automation/dockerfile -t workflow-tracker-rest-api:0.1 .
 #docker rm -f $(docker ps -a -q)
-docker-compose -f ./automation/docker-compose.yml up
+docker-compose -f .\automation\docker-compose.yml up
 ```
 
 ## Not so quick startup

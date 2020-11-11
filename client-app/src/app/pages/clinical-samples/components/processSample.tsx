@@ -4,7 +4,7 @@ import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
 import { ClinicalSample, SOP } from '../../../types';
 import { defaultFormLayout } from '../../../common/inputModalSize';
-import { validationMessage } from '../../../common/inputModalHelpers';
+import { validationMessage, createFormInput } from '../../../common/inputModalHelpers';
 import { BaseApi } from '../../../infrastructure/api';
 
 const { Text } = Typography;
@@ -44,7 +44,7 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
     return (
         <InputModal
             isVisible={isActiveInputForm}
-            title="Process sample to intermediate sample"
+            title="Process sample (generates an intermediate sample)"
             inputForm={(form: FormInstance) => inputForm(form, sops, errorMessage)}
             onCreate={onCreate}
             onCancel={() => {
@@ -58,8 +58,9 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
 function inputForm(form: FormInstance, sops: SOP[], errorMessage: string | null): JSX.Element {
     return (
         <Form {...defaultFormLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
-            {createFormSelectInput('Name', ClinicalSample.nameof('name'), sops)}
-
+            {createFormSelectInput('SOP Name', ClinicalSample.nameof('name'), sops)}
+            {createFormInput('Description', ClinicalSample.nameof('description'))}
+            {createFormInput('Processing person', ClinicalSample.nameof('processingPerson'))}
             {errorMessage == null ? null : (
                 <Form.Item label="Error" name="errorMessage">
                     <Text type="danger">{errorMessage}</Text>
@@ -93,7 +94,9 @@ function createFormSelectInput(label: string, propName: keyof ClinicalSample, so
 class Api {
     public static async getSOPsAsync(projectId: string): Promise<SOP[]> {
         try {
-            return await BaseApi.getAsync(`/sops/project?projectId=${projectId}`);
+            return await BaseApi.getAsync(
+                `/sops/project/type?projectId=${projectId}&sopType=Standard Procedure Sample Preparation`,
+            );
         } catch (err) {
             return [];
         }

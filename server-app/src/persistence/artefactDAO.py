@@ -27,5 +27,15 @@ def getArtefactsByType(projectId, artefactClass):
     return result_spls
 
 
+def deleteSOP(id):
+    sopToDelete = Artefact.find_one({"id": ObjectId(id)})
+
+    if(sopToDelete):
+        deleted_count = sopToDelete.delete().deleted_count
+        return deleted_count
+    else:
+        return 0
+
+
 def getArtefactByFilename(artefactName):
     return Artefact.find_one({"sopFileName": artefactName})

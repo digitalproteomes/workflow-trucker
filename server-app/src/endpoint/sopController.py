@@ -5,6 +5,7 @@ from flask_api import status
 import os
 import json
 import datetime
+from bson import ObjectId
 
 
 from pymongo import MongoClient
@@ -106,6 +107,16 @@ def downloadArtefact():
         artefact.sopFileName)
     return response
 
+
+@sop_api.route('/sops', methods=['DELETE'])
+def deleteSOP():
+    id = request.args.get('id')
+    # artefact = artefactDAO.getArtefactByFilename(artefactName)
+    sts = artefactDAO.deleteSOP(id)
+    if(sts == 0):
+        return 'SOP with id does not exist.', status.HTTP_404_NOT_FOUND
+    else:
+        return '', status.HTTP_200_OK
 
 # @sop_api.route("/file/render")
 # def render():

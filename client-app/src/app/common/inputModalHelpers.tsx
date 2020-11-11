@@ -22,7 +22,7 @@ export function validationMessage(field: string): string {
 }
 
 export function createFormSelect<T>(label: string, propName: keyof T, workflowTags: EWorkflowTag[]) {
-    // todo - extract this into a common helper, now this is specialized on Workflow Tags
+    // todo - extract this into a common helper
     return (
         <Form.Item
             label={label}
@@ -45,7 +45,7 @@ export function createFormSelect<T>(label: string, propName: keyof T, workflowTa
 }
 
 export function createSOPFormSelect<T>(label: string, propName: keyof T, sopTypes: ESOPType[]) {
-    // todo - extract this into a common helper
+    // todo - extract this into a common helper.
     return (
         <Form.Item
             label={label}
@@ -53,7 +53,6 @@ export function createSOPFormSelect<T>(label: string, propName: keyof T, sopType
             rules={[{ required: false, message: validationMessage(propName.toString()) }]}
         >
             <Select
-                placeholder="Select the SOP type"
                 tagRender={(props) => {
                     const { value } = props; // reference https://ant.design/components/select/#components-select-demo-custom-tag-render
                     return getSOPType(value as ESOPType);

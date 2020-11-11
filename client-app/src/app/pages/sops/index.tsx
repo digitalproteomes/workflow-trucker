@@ -7,6 +7,7 @@ import { ButtonDownload } from './components/download';
 import { ButtonExport } from '../../common/export';
 import * as sampleNotifications from '../../common/sampleNotifications';
 import * as notifications from '../../common/notificationsBase';
+import { ButtonDeleteSOP } from './components/delete';
 
 import { FormUploadSOP } from './components/uploadSOP';
 
@@ -28,6 +29,11 @@ export const SOPPage: FunctionComponent = () => {
         sampleNotifications.queueExportSuccess();
     }
 
+    function onDeleteDone(sop: SOP) {
+        setRefreshNeededFlag(true);
+        sampleNotifications.queueDeleteSuccess(sop.name);
+    }
+
     const onUploadSuccessful = () => {
         notifications.queueSuccess('Success', 'Selected file was uploaded successfully');
         setRefreshNeededFlag(true);
@@ -42,6 +48,12 @@ export const SOPPage: FunctionComponent = () => {
         return (
             <Space size="middle">
                 <ButtonDownload sop={record} />
+                <ButtonDeleteSOP
+                    sop={record}
+                    onDeleteDone={() => {
+                        onDeleteDone(record);
+                    }}
+                />
             </Space>
         );
     };

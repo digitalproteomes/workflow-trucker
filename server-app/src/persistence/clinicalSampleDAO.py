@@ -28,6 +28,10 @@ def getClinicalSampleById(id):
     return ClinicalSample.find_one({"id": id})
 
 
+def getClinicalSampleByName(name):
+    return ClinicalSample.find_one({"name": name})
+
+
 def deleteSample(id):
     sampleToDelete = Sample.find_one({"id": ObjectId(id)})
     if(sampleToDelete):

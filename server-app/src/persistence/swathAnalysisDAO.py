@@ -24,3 +24,11 @@ def getSWATHByProject(projectId):
     for i in swas:
         result_swas.append(i.dump())
     return result_swas
+
+
+def getSWATHForMSRun(msRunId):
+    swas = SWATHAnalysis.find({"msRunIds": ObjectId(msRunId)})
+    result_swas = []
+    for i in swas:
+        result_swas.append(i.dump())
+    return result_swas

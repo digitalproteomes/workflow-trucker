@@ -47,7 +47,7 @@ def insertMSRuns(msruns, projectId):
                 str(int(i['sample_ref']['sampleIdRef'])))
             if sample_c != None:
                 msrs = msReadySamplesDAO.getMsReadySamplesByClinicalSample(
-                    sample_c['id'], projectId)
+                    sample_c['id'])
 
             for msr in msrs:
                 if len(msr['clinicalSamples']) == 1:
@@ -59,6 +59,7 @@ def insertMSRuns(msruns, projectId):
                         "projectId": projectId,
                         "protocolId": i['protocolId'],
                         "instrumentId": i['instrumentId'],
+                        "sopFileName": "PHRT_Mass_Spectrometry_SOP",
                         "updatedDate": datetime.datetime.now(),
                         "createdDate": datetime.datetime.now(),
                         "workflowTag": "Sample Preparation",
@@ -76,7 +77,7 @@ def insertLibGenMSRuns(projectId):
     for f in frac_samples:
         if(re.search("^IS_MMA_library_batch-1_mix-*", f['name'])):
             msr_sample = msReadySamplesDAO.getMsReadySampleByIntermediateSampleId(
-                f['id'], projectId)
+                f['id'])
             if(len(msr_sample) > 0):
                 msr = msr_sample[0]
                 new_msrun = {
@@ -139,6 +140,7 @@ def insertIndividualSample(sample, projectId):
         "clinicalSamples": [clinicalSample['id']],
         "workflowTag": "Sample Preparation",
         "protocolName": "single_preparation",
+        "sopFileName": "PHRT_Sample_Preparation_SOP",
         "description": "Imported from Excel archive",
         "processingPerson": "System",
         "updatedDate": datetime.datetime.now(),
@@ -162,6 +164,7 @@ def insertPoolingSample(sample, projectId):
         "workflowTag": "Sample Preparation",
         "protocolName": "pooling_preparation",
         "description": "Imported from Excel archive",
+        "sopFileName": "PHRT_Sample_Preparation_SOP",
         "processingPerson": "System",
         "updatedDate": datetime.datetime.now(),
         "createdDate": datetime.datetime.now()
@@ -185,6 +188,7 @@ def insertFractinationSample(sample, projectId):
         "parentSamples": [IS['id']],
         "workflowTag": "Sample Preparation",
         "protocolName": "fractionation_preparation",
+        "sopFileName": "PHRT_Sample_Preparation_SOP",
         "description": "Imported from Excel archive",
         "processingPerson": "System",
         "updatedDate": datetime.datetime.now(),
@@ -214,6 +218,8 @@ def insertSpectralLibrary(spl, projectId):
         "protocolName": spl['protocolId'],
         "updatedDate": datetime.datetime.now(),
         "createdDate": datetime.datetime.now(),
+        "specLibFilename": "PHRT_005_Spec_Lib.tsv",
+        "sopFileName": "PHRT_Data_Analysis_SOP",
         "workflowTag": "Library Generation",
         "description": "Generated from Excel archive",
         "proteinDatabaseOrganism": spl['protein_database']['organism'],
@@ -244,6 +250,8 @@ def insertSWATHAnalysis(swa, projectId):
         "projectId": projectId,
         "protocolId": "1",
         "protocolName": swa['protocolId'],
+        "sopFileName": "PHRT_Data_Analysis_SOP",
+        "proteinMatrixFileName": "PHRT_005_Protein_Matrix.tsv",
         "updatedDate": datetime.datetime.now(),
         "createdDate": datetime.datetime.now(),
         "workflowTag": "SWATHAnalysis",
@@ -340,5 +348,7 @@ if __name__ == '__main__':
 
     print("insert SWATH Analysis")
     insertSWATHAnalysis(project_json['swath_analysis'], projectId)
+
+    print("Project Id: " + str(projectId))
 
     print("Everything inserted sucessfully")

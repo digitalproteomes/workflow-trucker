@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const EditableList: FunctionComponent<Props> = ({ clinicalSamples, updateClinicalSamples }) => {
-    const EditableContext = React.createContext<any>(null); // todo - what should be the edited type
+    const EditableContext = React.createContext<any>(null); // TODO: what should be the edited type
 
     const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
         const [form] = Form.useForm();

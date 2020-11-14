@@ -53,7 +53,7 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
 
     const handleUpload = async () => {
         if (file === null) {
-            // todo - set error message
+            // TODO: set error message
             return;
         }
 
@@ -64,8 +64,8 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
 
             setFile(null);
         } catch (error) {
-            // todo - set the error message?
-            // todo - in case the upload fails, nothing is shown on the UI at the moment
+            // TODO: set the error message?
+            // TODO: in case the upload fails, nothing is shown on the UI at the moment
         } finally {
             setIsUploadingFlag(false);
             onUploadSuccessful();
@@ -80,9 +80,9 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
         const newData: SOP = { ...sopData };
 
         validFields.forEach((f) => {
-            // todo - continue instead of if
+            // TODO: continue instead of if
             if (f.value) {
-                // todo - transform the switch/case into a dictionary
+                // TODO: transform the switch/case into a dictionary
                 switch (f.name.toString()) {
                     case SOP.nameof('name'):
                         newData.name = f.value;

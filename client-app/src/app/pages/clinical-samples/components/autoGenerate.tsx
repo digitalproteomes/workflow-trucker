@@ -33,7 +33,7 @@ export const AutoGenerateInputForm: FunctionComponent<FormProps> = ({
 
         async function saveSamples() {
             try {
-                // todo - move this really specific api call into an api module of its own, right here along the autoGenerate related components
+                // TODO: move this really specific api call into an api module of its own, right here along the autoGenerate related components
                 await Api.postAutoGeneraedSamplesAsync(samples);
                 onCreateSuccessful(samples.length);
             } catch (error) {
@@ -51,7 +51,7 @@ export const AutoGenerateInputForm: FunctionComponent<FormProps> = ({
 
     const onCancelModalHandler = () => {
         console.log('oncancelmodalhandler');
-        // todo - this can be removed once live
+        // TODO: this can be removed once live
         setTimeout(() => {}, 3000);
 
         onCancel();
@@ -64,12 +64,12 @@ export const AutoGenerateInputForm: FunctionComponent<FormProps> = ({
 
         const template: GenerationData = { ...templateData };
 
-        // todo - when getting back the data from the fields edited, why not use the form context exemplified in the editable table component
+        // TODO: when getting back the data from the fields edited, why not use the form context exemplified in the editable table component
 
         validFields.forEach((f) => {
-            // todo - continue instead of if
+            // TODO: continue instead of if
             if (f.value) {
-                // todo - transform the switch/case into a dictionary
+                // TODO: transform the switch/case into a dictionary
                 switch (f.name.toString()) {
                     case GenerationData.nameof('prefixProject'):
                         template.prefixProject = f.value;
@@ -171,14 +171,14 @@ function autoGenerateSamples(templateData: GenerationData): SampleNew[] {
         const id = index + 1;
 
         samples[index] = {
-            projectId: Constants.projectId, // todo - the project id should come from the template data (the unique project id from the db)
+            projectId: Constants.projectId, // TODO: the project id should come from the template data (the unique project id from the db)
             name: `${prefixProject}_${projectId}_${id}_${suffixProject}`,
             parentSampleId: 'parent_sample_id',
             protocolId: -1,
-            clinicalSampleCode: `${id}`, // todo - the clinical sample code - how come this is not a number? on the clinical sample this is a number!
+            clinicalSampleCode: `${id}`, // TODO: the clinical sample code - how come this is not a number? on the clinical sample this is a number!
             processingPerson: templateData.processingPerson,
             description: templateData.description,
-            sampleCounter: id, // todo - the sampleCounter should be removed from the frontend. It is completely wrong to have it here
+            sampleCounter: id, // TODO: the sampleCounter should be removed from the frontend. It is completely wrong to have it here
             workflowTag: EWorkflowTag.SamplePreparation,
         };
 

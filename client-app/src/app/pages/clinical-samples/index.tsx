@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
-import { ClinicalInputForm } from './components/createNew'; // todo - the two creation method should be combined
+import { ClinicalInputForm } from './components/createNew'; // TODO: the two creation method should be combined
 import { ButtonCreateNew } from './components/createNewButton';
 import { AutoGenerateInputForm } from './components/autoGenerate';
 import { ButtonAutoGenerate } from './components/autoGenerateButton';
@@ -127,7 +127,7 @@ export const ClinicalSamples: FunctionComponent = () => {
     );
 };
 
-// todo - analyze if the method groupings based on functionality is feasible. Maybe these could be moved out into separate files into their own modules?
+// TODO: analyze if the method groupings based on functionality is feasible. Maybe these could be moved out into separate files into their own modules?
 function linkCreateNew(
     setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>,
     setActiveCreateNewFlag: React.Dispatch<React.SetStateAction<boolean>>,

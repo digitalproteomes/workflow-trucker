@@ -7,7 +7,7 @@ export type ColumnFilterProps<T> = {
     filterIcon: (isFiltered: boolean) => React.ReactNode;
     filterDropdown: (filterProps: FilterDropdownProps) => React.ReactNode;
     onFilter: (value: string | number | boolean, record: T) => boolean;
-    // render: (text: string) => JSX.Element; // todo - this signature is not present in the official interface. Not sure why it works (if it works)
+    // render: (text: string) => JSX.Element; // TODO: this signature is not present in the official interface. Not sure why it works (if it works)
 };
 
 export function getAllFilterProps<T>(column: keyof T, searchEnabled: boolean): ColumnFilterProps<T> | undefined {

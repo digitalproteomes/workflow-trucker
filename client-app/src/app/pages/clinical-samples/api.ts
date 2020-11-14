@@ -15,7 +15,7 @@ export class Api {
     }
 
     public static async postSampleAsync(payload: any): Promise<ClinicalSample> {
-        //todo - not sure if BE has an endpoint for creating individual clinical samples
+        //TODO: not sure if BE has an endpoint for creating individual clinical samples
         return await BaseApi.postAsync(`/samples/clinical`, payload);
     }
 

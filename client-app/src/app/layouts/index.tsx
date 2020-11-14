@@ -45,7 +45,7 @@ const BasicLayout: React.FC = (props) => {
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sider
-                // todo - move the styling out into proper css files
+                // TODO: move the styling out into proper css files
                 width={250}
                 collapsible
                 collapsed={prevState.isCollapsed}

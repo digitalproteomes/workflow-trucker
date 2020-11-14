@@ -18,7 +18,7 @@ type Props<T extends object> = {
     expandableConfig?: ExpandableConfig<T>;
 };
 
-// todo - analyze the difference between the FunctionComponent signature and the generic component signature
+// TODO: analyze the difference between the FunctionComponent signature and the generic component signature
 /* export const List: FunctionComponent<ListProps> = ({
     isRefreshNeeded,
     onRefreshDone,
@@ -50,7 +50,7 @@ export function CommonList<T extends object>({
         if (entries == null || isRefreshNeeded) {
             console.log('refresh was needed');
 
-            executeFetch(); // todo - is this call getting executed in an async or sync manner?
+            executeFetch(); // TODO: is this call getting executed in an async or sync manner?
 
             onRefreshDone();
         }

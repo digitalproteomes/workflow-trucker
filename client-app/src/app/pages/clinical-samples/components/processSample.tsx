@@ -33,13 +33,13 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
     });
 
     const onCreate = (values: any) => {
-        // todo - parse the values coming from the form, create the object and do whatever
-        // todo - todo in case of exception when calling the api, use the setErrorMessage
+        // TODO: parse the values coming from the form, create the object and do whatever
+        // TODO: todo in case of exception when calling the api, use the setErrorMessage
         onCreateSuccessful();
         setSops(null);
     };
 
-    if (isActiveInputForm == null || sops == null) return <></>; // todo - can this breaking condition be moved up high at the beginning?
+    if (isActiveInputForm == null || sops == null) return <></>; // TODO: can this breaking condition be moved up high at the beginning?
 
     return (
         <InputModal
@@ -80,7 +80,7 @@ function createFormSelectInput(label: string, propName: keyof ClinicalSample, so
             <Select showSearch filterOption={true} optionFilterProp={'children'}>
                 {sops
                     .sort((a, b) => {
-                        // todo - is this the best string filtering approach? empty string?
+                        // TODO: is this the best string filtering approach? empty string?
                         return a.name[0] > b.name[0] ? 1 : a.name[0] == b.name[0] ? 0 : -1;
                     })
                     .map((sop) => (

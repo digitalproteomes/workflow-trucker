@@ -8,7 +8,7 @@ import { AppStore } from '../../appStore';
 
 @observer
 export class ProjectPage extends React.Component<{}, {}> {
-    // todo - remove AppStore reference and refactor Project page to be in line with the other more stable sample pages. Rename from main page.
+    // TODO: remove AppStore reference and refactor Project page to be in line with the other more stable sample pages. Rename from main page.
     async componentDidMount() {
         await AppStore.fetchSelectedProject();
     }

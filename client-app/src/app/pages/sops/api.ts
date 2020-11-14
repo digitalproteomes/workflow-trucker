@@ -22,12 +22,12 @@ export class Api {
     public static async postAsync(sop: any, file: RcFile, projectId: string): Promise<SOP> {
         try {
             const formData = new FormData();
-            // todo - figure out where should we set the sop project id
+            // TODO: figure out where should we set the sop project id
             sop.projectId = projectId;
             formData.append('file', file);
             formData.append('sop_data', JSON.stringify(sop));
             console.log('sop data in api', sop);
-            console.log('sop form data in api', formData)
+            console.log('sop form data in api', formData);
 
             return await BaseApi.postAsync(`/file-upload`, formData);
         } catch (error) {

@@ -17,7 +17,7 @@ type ButtonProps = {
     style?: React.CSSProperties | undefined;
 };
 
-// deprecated - todo - delete ButtonSinglePrep
+// deprecated - TODO: delete ButtonSinglePrep
 export const ButtonSinglePrep: FunctionComponent<ButtonProps> = ({ onSinglePrep, style }) => {
     return (
         <Tooltip title="Create individual samples">
@@ -48,7 +48,7 @@ type FormProps = {
     onCancel: () => void;
 };
 
-// deprecated - todo - delete SinglePrepInputForm
+// deprecated - TODO: delete SinglePrepInputForm
 export const SinglePrepInputForm: FunctionComponent<FormProps> = ({ parentSample, onCreateSuccessful, onCancel }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 

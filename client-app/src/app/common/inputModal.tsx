@@ -25,7 +25,7 @@ export const InputModal: FunctionComponent<ModalProps> = ({
     return (
         <Modal
             visible={isVisible}
-            width={'30%'} // todo - the width of the input modal should be customizable
+            width={'30%'} // TODO: the width of the input modal should be customizable
             title={title}
             okText="Create"
             okButtonProps={{ loading: isLoading }}
@@ -40,7 +40,7 @@ export const InputModal: FunctionComponent<ModalProps> = ({
                     .catch((info) => {
                         console.log('Validation Failed:', info);
 
-                        // todo - instead of onCancel, we should call onCreate(failed);
+                        // TODO: instead of onCancel, we should call onCreate(failed);
                         onCancel();
                     });
             }}

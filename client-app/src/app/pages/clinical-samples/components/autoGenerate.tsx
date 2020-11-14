@@ -5,10 +5,10 @@ import { InputModal } from '../../../common/inputModal';
 import { GenerationData, GenerationDataKeys, SampleNew, EWorkflowTag } from '../../../types';
 import { FieldData } from 'rc-field-form/lib/interface';
 import { createFormInput, createFormSelect } from '../../../common/inputModalHelpers';
-import { defaultFormLayout } from '../../../common/inputModalSize';
 import { EditableList } from './autoGenerateResultList';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
+import { FormLayoutConstants } from '../../../common/constants';
 
 const { Text } = Typography;
 
@@ -134,7 +134,7 @@ function inputForm(
 ): JSX.Element {
     return (
         <Form
-            {...defaultFormLayout}
+            {...FormLayoutConstants.defaultFormLayout}
             layout={'horizontal'}
             form={form}
             name="clinical-sample-input-form"

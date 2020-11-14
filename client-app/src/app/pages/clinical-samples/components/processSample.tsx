@@ -3,9 +3,9 @@ import { Form, Select, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { InputModal } from '../../../common/inputModal';
 import { ClinicalSample, SOP } from '../../../types';
-import { defaultFormLayout } from '../../../common/inputModalSize';
 import { validationMessage, createFormInput } from '../../../common/inputModalHelpers';
 import { BaseApi } from '../../../infrastructure/api';
+import { FormLayoutConstants } from '../../../common/constants';
 
 const { Text } = Typography;
 const { Option, OptGroup } = Select;
@@ -57,7 +57,12 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
 
 function inputForm(form: FormInstance, sops: SOP[], errorMessage: string | null): JSX.Element {
     return (
-        <Form {...defaultFormLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
+        <Form
+            {...FormLayoutConstants.defaultFormLayout}
+            name="clinical-sample-input-form"
+            initialValues={{ remember: true }}
+            form={form}
+        >
             {createFormSelectInput('SOP Name', ClinicalSample.nameof('name'), sops)}
             {createFormInput('Description', ClinicalSample.nameof('description'))}
             {createFormInput('Processing person', ClinicalSample.nameof('processingPerson'))}

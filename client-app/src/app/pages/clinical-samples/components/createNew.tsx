@@ -5,7 +5,7 @@ import { InputModal } from '../../../common/inputModal';
 import { ClinicalSample } from '../../../types';
 import { Api } from '../api';
 import { createFormInput } from '../../../common/inputModalHelpers';
-import { defaultFormLayout } from '../../../common/inputModalSize';
+import { FormLayoutConstants } from '../../../common/constants';
 
 const { Text } = Typography;
 
@@ -50,7 +50,12 @@ export const ClinicalInputForm: FunctionComponent<FormProps> = ({
 
 function inputForm(form: FormInstance, errorMessage: string | null): JSX.Element {
     return (
-        <Form {...defaultFormLayout} name="clinical-sample-input-form" initialValues={{ remember: true }} form={form}>
+        <Form
+            {...FormLayoutConstants.defaultFormLayout}
+            name="clinical-sample-input-form"
+            initialValues={{ remember: true }}
+            form={form}
+        >
             {createFormInput('Name', ClinicalSample.nameof('name'))}
             {createFormInput('ProjectId', ClinicalSample.nameof('projectId'))}
             {createFormInput('Clinical sample code', ClinicalSample.nameof('clinicalSampleCode'))}

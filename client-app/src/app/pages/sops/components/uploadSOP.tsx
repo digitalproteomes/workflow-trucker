@@ -11,7 +11,7 @@ import { createFormInput, createSOPFormSelect } from '../../../common/inputModal
 import { RcFile } from 'antd/lib/upload/interface';
 import { InputModal } from '../../../common/inputModal';
 import { SOP, SOPDataKeys, ESOPType } from '../../../types';
-import { defaultFormLayout } from '../../../common/inputModalSize';
+import { FormLayoutConstants } from '../../../common/constants';
 const { Text } = Typography;
 
 export { ButtonUploadSOP, FormUploadSOP };
@@ -138,7 +138,7 @@ function inputForm(
 ): JSX.Element {
     return (
         <Form
-            {...defaultFormLayout}
+            {...FormLayoutConstants.defaultFormLayout}
             layout={'horizontal'}
             form={form}
             name="clinical-sample-input-form"

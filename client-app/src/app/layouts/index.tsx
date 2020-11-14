@@ -44,13 +44,7 @@ const BasicLayout: React.FC = (props) => {
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider
-                // TODO: move the styling out into proper css files
-                width={250}
-                collapsible
-                collapsed={prevState.isCollapsed}
-                onCollapse={onCollapse}
-            >
+            <Sider width={250} collapsible collapsed={prevState.isCollapsed} onCollapse={onCollapse}>
                 <img
                     src={app_logo}
                     alt="logo"

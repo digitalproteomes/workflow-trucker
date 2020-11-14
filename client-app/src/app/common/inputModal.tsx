@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Form, Modal } from 'antd';
 import { FormInstance } from 'antd/lib/form';
+import { Notifications } from './notifications';
 
 type ModalProps = {
     isVisible: boolean;
@@ -25,7 +26,7 @@ export const InputModal: FunctionComponent<ModalProps> = ({
     return (
         <Modal
             visible={isVisible}
-            width={'30%'} // TODO: the width of the input modal should be customizable
+            width={'30%'}
             title={title}
             okText="Create"
             okButtonProps={{ loading: isLoading }}
@@ -38,10 +39,8 @@ export const InputModal: FunctionComponent<ModalProps> = ({
                         onCreate(values);
                     })
                     .catch((info) => {
-                        console.log('Validation Failed:', info);
-
-                        // TODO: instead of onCancel, we should call onCreate(failed);
-                        onCancel();
+                        console.log('Warning message shown. Validation failed:', info);
+                        Notifications.queueWarning('Validation', 'Field validation failed. Please check the values.');
                     });
             }}
         >

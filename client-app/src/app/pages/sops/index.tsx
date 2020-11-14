@@ -5,11 +5,11 @@ import { PlusOutlined } from '@ant-design/icons';
 import { List } from './components/list';
 import { ButtonDownload } from './components/download';
 import { ButtonExport } from '../../common/export';
-import * as sampleNotifications from '../../common/sampleNotifications';
-import * as notifications from '../../common/notificationsBase';
+import { SampleNotifications } from '../../common/notifications';
 import { ButtonDeleteSOP } from './components/delete';
 
 import { FormUploadSOP } from './components/uploadSOP';
+import { Notifications } from '../../common/notifications';
 
 export const SOPPage: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -26,16 +26,16 @@ export const SOPPage: FunctionComponent = () => {
     };
 
     function onExportDone() {
-        sampleNotifications.queueExportSuccess();
+        SampleNotifications.queueExportSuccess();
     }
 
     function onDeleteDone(sop: SOP) {
         setRefreshNeededFlag(true);
-        sampleNotifications.queueDeleteSuccess(sop.name);
+        SampleNotifications.queueDeleteSuccess(sop.name);
     }
 
     const onUploadSuccessful = () => {
-        notifications.queueSuccess('Success', 'Selected file was uploaded successfully');
+        Notifications.queueSuccess('Success', 'Selected file was uploaded successfully');
         setRefreshNeededFlag(true);
         setActiveUploadFlag(false);
     };

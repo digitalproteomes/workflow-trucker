@@ -3,7 +3,7 @@ import { Space, Button, PageHeader, Divider } from 'antd';
 import { SwathAnalysis } from '../../types';
 import { List } from './components/list';
 import { ButtonExport } from '../../common/export';
-import * as sampleNotifications from '../../common/sampleNotifications';
+import { SampleNotifications } from '../../common/notifications';
 
 export const SwathAnalysisPage: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -29,7 +29,7 @@ export const SwathAnalysisPage: FunctionComponent = () => {
     };
 
     function onExportDone() {
-        sampleNotifications.queueExportSuccess();
+        SampleNotifications.queueExportSuccess();
     }
 
     return (

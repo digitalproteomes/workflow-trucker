@@ -8,7 +8,7 @@ import { BaseApi } from '../../../infrastructure/api';
 import { FormLayoutConstants } from '../../../common/constants';
 
 const { Text } = Typography;
-const { Option, OptGroup } = Select;
+const { Option } = Select;
 
 type FormProps = {
     originalSample: ClinicalSample | null;
@@ -17,7 +17,7 @@ type FormProps = {
 };
 
 export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample, onCreateSuccessful, onCancel }) => {
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [errorMessage] = useState<string | null>(null);
     const [sops, setSops] = useState<SOP[] | null>(null);
 
     const isActiveInputForm: boolean = originalSample != null;
@@ -86,7 +86,7 @@ function createFormSelectInput(label: string, propName: keyof ClinicalSample, so
                 {sops
                     .sort((a, b) => {
                         // TODO: is this the best string filtering approach? empty string?
-                        return a.name[0] > b.name[0] ? 1 : a.name[0] == b.name[0] ? 0 : -1;
+                        return a.name[0] > b.name[0] ? 1 : a.name[0] === b.name[0] ? 0 : -1;
                     })
                     .map((sop) => (
                         <Option value={''}>{sop.name}</Option>

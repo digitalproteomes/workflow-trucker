@@ -3,8 +3,8 @@ import { List } from './components/list';
 import { MSReadySample } from '../../types';
 import { Space, Button, Tooltip, PageHeader, Divider } from 'antd';
 import { ButtonExport } from '../../common/export';
-import * as sampleNotifications from '../../common/sampleNotifications';
 import { DownloadOutlined } from '@ant-design/icons';
+import { SampleNotifications } from '../../common/notifications';
 
 export const MSReadySamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -30,7 +30,7 @@ export const MSReadySamples: FunctionComponent = () => {
     };
 
     function onExportDone() {
-        sampleNotifications.queueExportSuccess();
+        SampleNotifications.queueExportSuccess();
     }
 
     return (

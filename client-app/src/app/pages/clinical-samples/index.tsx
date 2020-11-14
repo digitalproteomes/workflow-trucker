@@ -10,9 +10,8 @@ import { ButtonDelete } from './components/delete';
 import { ButtonExport } from '../../common/export';
 import { FractionateInputForm } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
-import * as sampleNotifications from '../../common/sampleNotifications';
-import * as notifications from '../../common/notificationsBase';
 import { ProcessSampleForm } from './components/processSample';
+import { Notifications, SampleNotifications } from '../../common/notifications';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
@@ -28,11 +27,11 @@ export const ClinicalSamples: FunctionComponent = () => {
 
     function onDeleteDone(sample: ClinicalSample) {
         setRefreshNeededFlag(true);
-        sampleNotifications.queueDeleteSuccess(sample.name);
+        SampleNotifications.queueDeleteSuccess(sample.name);
     }
 
     function onExportDone() {
-        sampleNotifications.queueExportSuccess();
+        SampleNotifications.queueExportSuccess();
     }
 
     const onRowSelectionChange = (selectedRows: ClinicalSample[]) => {
@@ -110,7 +109,7 @@ export const ClinicalSamples: FunctionComponent = () => {
                         setSampleToProcess(null);
                     }}
                     onCreateSuccessful={() => {
-                        sampleNotifications.queueCreateSuccess('Intermediary sample created succesfully');
+                        SampleNotifications.queueCreateSuccess('Intermediary sample created succesfully');
                         setSampleToProcess(null);
                     }}
                 />
@@ -133,7 +132,7 @@ function linkCreateNew(
     setActiveCreateNewFlag: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
     const onCreateNewSuccessful = (sample: ClinicalSample) => {
-        sampleNotifications.queueCreateSuccess(sample.name);
+        SampleNotifications.queueCreateSuccess(sample.name);
 
         setRefreshNeededFlag(true);
 
@@ -163,7 +162,7 @@ function linkAutoGenerate(
     };
 
     const onAutoGenerateSuccessful = (count: number) => {
-        notifications.queueSuccess('Success', `${count} samples created succesfully.`);
+        Notifications.queueSuccess('Success', `${count} samples created succesfully.`);
 
         setRefreshNeededFlag(true);
 
@@ -179,7 +178,7 @@ function linkFractionate(setFractionateSample: React.Dispatch<React.SetStateActi
 
     const onFractionateSuccessful = (samples: ClinicalSample[]) => {
         samples.forEach((sample, _index, _samples) => {
-            sampleNotifications.queueCreateSuccess(sample.name);
+            SampleNotifications.queueCreateSuccess(sample.name);
         });
 
         setFractionateSample(null);

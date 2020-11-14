@@ -22,7 +22,7 @@ export class Api {
     public static async postAsync(sop: any, file: RcFile, projectId: string): Promise<SOP> {
         try {
             const formData = new FormData();
-            // TODO: figure out where should we set the sop project id
+            // wait: figure out where should we set the sop project id
             sop.projectId = projectId;
             formData.append('file', file);
             formData.append('sop_data', JSON.stringify(sop));

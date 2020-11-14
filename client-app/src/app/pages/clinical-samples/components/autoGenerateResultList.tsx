@@ -11,11 +11,12 @@ type Props = {
 };
 
 export const EditableList: FunctionComponent<Props> = ({ clinicalSamples, updateClinicalSamples }) => {
-    const EditableContext = React.createContext<any>(null); // TODO: what should be the edited type
+    const EditableContext = React.createContext<any>(null);
 
     const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
         const [form] = Form.useForm();
         return (
+            // todo - important - this is something important for the form input fix (not sure how the context provider influences the story)
             <Form form={form} component={false}>
                 <EditableContext.Provider value={form}>
                     <tr {...props} />
@@ -45,6 +46,7 @@ export const EditableList: FunctionComponent<Props> = ({ clinicalSamples, update
 
         const toggleEdit = () => {
             setEditing(!editing);
+            // todo - important - this is something important for the form input fix
             form.setFieldsValue({ [dataIndex]: record[dataIndex] });
         };
 
@@ -53,6 +55,7 @@ export const EditableList: FunctionComponent<Props> = ({ clinicalSamples, update
                 const values = await form.validateFields();
 
                 toggleEdit();
+                // todo - important - this is something important for the form input fix
                 handleSave({ ...record, ...values });
             } catch (errInfo) {
                 console.log('Save failed:', errInfo);

@@ -1,3 +1,5 @@
+import { Constants } from './default-data/constants';
+
 /** TODO: deprecated - remove completely once no more references to this */
 export class Sample {
     createdDate: string = '';
@@ -173,6 +175,18 @@ export class Project {
     updatedDate: string = '';
 
     public static nameof = (name: keyof Project) => name;
+
+    public static default: Project = {
+        id: Constants.projectId,
+        createdDate: '',
+        description: '',
+        isLocked: false,
+        name: '',
+        ownerName: '',
+        ownerORCID: '',
+        projectId: Constants.projectId,
+        updatedDate: '',
+    };
 }
 
 export class MsRun {

@@ -53,7 +53,7 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
 
     const handleUpload = async () => {
         if (file === null) {
-            // TODO: set error message
+            // wait: set error message
             return;
         }
 
@@ -64,8 +64,7 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
 
             setFile(null);
         } catch (error) {
-            // TODO: set the error message?
-            // TODO: in case the upload fails, nothing is shown on the UI at the moment
+            // wait: set the error message? in case the upload fails, nothing is shown on the UI at the moment
         } finally {
             setIsUploadingFlag(false);
             onUploadSuccessful();

@@ -7,7 +7,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { CommonList } from '../../../common/list';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag, getProtocolTag } from '../../../common/tags';
-import { getCompactClinicalSampleList } from '../../../common/getCompactClinicalSampleList';
+import { getCompactClinicalSampleList } from '../../../common/clinical-samples/listCompactClinicalSamples';
 import { Row, Col, Divider } from 'antd';
 
 type ListProps = {

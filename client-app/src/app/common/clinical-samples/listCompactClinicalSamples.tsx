@@ -1,9 +1,9 @@
 import React from 'react';
-import { ClinicalSampleCompact } from '../types';
-import { getColumn } from './columnHelpers';
+import { ClinicalSampleCompact } from '../../types';
+import { getColumn } from '../columnHelpers';
 import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
-// TODO - why is the clinical sample list in the common folder?
+
 export function getCompactClinicalSampleList(name: string, samples: ClinicalSampleCompact[]) {
     return (
         <Table

@@ -3,7 +3,7 @@ import { SpectralLibrary } from '../../../types';
 import { CommonList } from '../../../common/list';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
-import { getColumn } from '../../../common/listBase';
+import { getColumn } from '../../../common/columnHelpers';
 import { ColumnsType } from 'antd/lib/table';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';

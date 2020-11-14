@@ -9,7 +9,7 @@ import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
 import { Row, Col, Divider } from 'antd';
 import { getCompactClinicalSampleList } from '../../../common/clinical-samples/listCompactClinicalSamples';
-import { getCompactMSRunsList } from '../../../common/getCompactMSRunsList';
+import { getCompactMSRunsList } from '../../../common/ms-runs/listCompactMsRuns';
 
 type ListProps = {
     isRefreshNeeded: boolean;

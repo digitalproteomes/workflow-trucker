@@ -1,9 +1,9 @@
 import React from 'react';
-import { MSRunCompact } from '../types';
-import { getColumn } from './columnHelpers';
+import { MSRunCompact } from '../../types';
+import { getColumn } from '../columnHelpers';
 import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
-// TODO - why is the MSRunList in the common folder?
+
 export function getCompactMSRunsList(name: string, msruns: MSRunCompact[]) {
     return (
         <Table

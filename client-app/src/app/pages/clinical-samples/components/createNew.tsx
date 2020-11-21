@@ -1,13 +1,8 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Form, Typography } from 'antd';
-import { FormInstance } from 'antd/lib/form';
-import { InputModal } from '../../../common/inputModal';
 import { ClinicalSample } from '../../../types';
 import { Api } from '../api';
 import { createFormInput } from '../../../common/inputModalHelpers';
-import { FormLayoutConstants } from '../../../common/constants';
-
-const { Text } = Typography;
+import { InputModal_v2 } from '../../../common/inputModal';
 
 type FormProps = {
     isActiveInputForm: boolean;
@@ -22,49 +17,32 @@ export const ClinicalInputForm: FunctionComponent<FormProps> = ({
 }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const onCreate = (values: any) => {
+    const onCreate = (sample: ClinicalSample) => {
         async function saveSample() {
             try {
-                const createdSample: ClinicalSample = await Api.postSampleAsync({ ...values });
-
+                const createdSample: ClinicalSample = await Api.postSampleAsync(sample);
                 onCreateSuccessful(createdSample);
             } catch (error) {
                 setErrorMessage(error.message);
             }
         }
-        saveSample();
+        return saveSample();
     };
 
+    const inputs: JSX.Element[] = [
+        createFormInput('Name', ClinicalSample.nameof('name'), '', true),
+        createFormInput('ProjectId', ClinicalSample.nameof('projectId'), '', true),
+        createFormInput('Clinical sample code', ClinicalSample.nameof('clinicalSampleCode'), '', true),
+    ];
+
     return (
-        <InputModal
+        <InputModal_v2
+            errorMessage={errorMessage}
+            inputs={inputs}
             isVisible={isActiveInputForm}
-            title="New clinical sample"
-            inputForm={(form: FormInstance) => {
-                return inputForm(form, errorMessage);
-            }}
-            onCreate={onCreate}
             onCancel={onCancel}
+            title={'New clinical sample'}
+            onCreate={onCreate}
         />
     );
 };
-
-function inputForm(form: FormInstance, errorMessage: string | null): JSX.Element {
-    return (
-        <Form
-            {...FormLayoutConstants.defaultFormLayout}
-            name="clinical-sample-input-form"
-            initialValues={{ remember: true }}
-            form={form}
-        >
-            {createFormInput('Name', ClinicalSample.nameof('name'))}
-            {createFormInput('ProjectId', ClinicalSample.nameof('projectId'))}
-            {createFormInput('Clinical sample code', ClinicalSample.nameof('clinicalSampleCode'))}
-
-            {errorMessage == null ? null : (
-                <Form.Item label="Error" name="errorMessage">
-                    <Text type="danger">{errorMessage}</Text>
-                </Form.Item>
-            )}
-        </Form>
-    );
-}

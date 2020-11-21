@@ -5,7 +5,12 @@ import { ESOPType, EWorkflowTag } from '../types';
 
 const { Option } = Select;
 
-export function createFormInput<T>(label: string, propName: keyof T, placeholder?: string, required: boolean = false) {
+export function createFormInput<T>(
+    label: string,
+    propName: keyof T,
+    placeholder: string | undefined = undefined,
+    required: boolean = false,
+) {
     return (
         <Form.Item
             label={label}

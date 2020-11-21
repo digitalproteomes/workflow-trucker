@@ -18,6 +18,7 @@ type FormProps = {
     onCancel: () => void;
 };
 
+// todo - easy - move the auto generation related files into their own folder
 export const AutoGenerateInputForm: FunctionComponent<FormProps> = ({
     isActiveInputForm,
     onCreateSuccessful,

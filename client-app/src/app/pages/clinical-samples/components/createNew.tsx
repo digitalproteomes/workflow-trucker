@@ -3,6 +3,7 @@ import { ClinicalSample } from '../../../types';
 import { Api } from '../api';
 import { createFormInput } from '../../../common/inputModalHelpers';
 import { InputModal_v2 } from '../../../common/inputModal';
+import { Store } from 'antd/lib/form/interface';
 
 type FormProps = {
     isActiveInputForm: boolean;
@@ -17,9 +18,10 @@ export const ClinicalInputForm: FunctionComponent<FormProps> = ({
 }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const onCreate = (sample: ClinicalSample) => {
+    const onCreate = (data: Store) => {
         async function saveSample() {
             try {
+                const sample: ClinicalSample = data as ClinicalSample;
                 const createdSample: ClinicalSample = await Api.postSampleAsync(sample);
                 onCreateSuccessful(createdSample);
             } catch (error) {

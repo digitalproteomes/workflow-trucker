@@ -4,7 +4,6 @@ import { FormInstance } from 'antd/lib/form';
 import { Notifications } from './notifications';
 import { Store } from 'antd/lib/form/interface';
 import { FormLayoutConstants } from './constants';
-import { ClinicalSample } from '../types';
 
 const { Text } = Typography;
 
@@ -60,14 +59,13 @@ type ModalProps_v2 = {
     title: string;
     inputs: JSX.Element[];
     errorMessage: string | null;
-    onCreate: (sample: ClinicalSample) => Promise<void>;
+    onCreate: (entry: Store) => Promise<void>;
     onCancel: () => void;
     placeholder?: any;
     onValuesChange?: (values: Store) => void;
 };
 
 export const InputModal_v2: FunctionComponent<ModalProps_v2> = ({
-    //todo - remove the clinical sample dependency
     isVisible,
     title,
     inputs,
@@ -81,7 +79,7 @@ export const InputModal_v2: FunctionComponent<ModalProps_v2> = ({
     const [form] = Form.useForm();
     const [isSaving, setSavingFlag] = useState<boolean>(false);
 
-    const onCreateWrapper = async (sample: ClinicalSample) => {
+    const onCreateWrapper = async (sample: Store) => {
         setSavingFlag(true);
         console.log('set saving flag', true);
 

@@ -10,7 +10,7 @@ type Props = {
     onListChanged: (newSamples: SampleNew[]) => void;
 };
 
-export const EditableList: FunctionComponent<Props> = ({ entries, onListChanged: onListChanged }) => {
+export const EditableList: FunctionComponent<Props> = ({ entries, onListChanged }) => {
     const EditableContext = React.createContext<any>(null);
 
     const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
@@ -46,7 +46,6 @@ export const EditableList: FunctionComponent<Props> = ({ entries, onListChanged:
 
         const toggleEdit = () => {
             setEditing(!editing);
-            // todo - important - this is something important for the form input fix
             form.setFieldsValue({ [dataIndex]: record[dataIndex] });
         };
 
@@ -55,7 +54,7 @@ export const EditableList: FunctionComponent<Props> = ({ entries, onListChanged:
                 const values = await form.validateFields();
 
                 toggleEdit();
-                // todo - important - this is something important for the form input fix
+
                 handleSave({ ...record, ...values });
             } catch (errInfo) {
                 console.log('Save failed:', errInfo);

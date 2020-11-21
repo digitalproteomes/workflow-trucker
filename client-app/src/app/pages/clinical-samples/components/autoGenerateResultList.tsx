@@ -6,11 +6,11 @@ import { getEditableColumn } from '../../../common/columnHelpers';
 import { ClinicalSample, SampleNew } from '../../../types';
 
 type Props = {
-    clinicalSamples: SampleNew[];
-    updateClinicalSamples: (newSamples: SampleNew[]) => void;
+    entries: SampleNew[];
+    onListChanged: (newSamples: SampleNew[]) => void;
 };
 
-export const EditableList: FunctionComponent<Props> = ({ clinicalSamples, updateClinicalSamples }) => {
+export const EditableList: FunctionComponent<Props> = ({ entries, onListChanged: onListChanged }) => {
     const EditableContext = React.createContext<any>(null);
 
     const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
@@ -89,7 +89,7 @@ export const EditableList: FunctionComponent<Props> = ({ clinicalSamples, update
     };
 
     const handleSave = (row: SampleNew) => {
-        const newData: SampleNew[] = [...clinicalSamples];
+        const newData: SampleNew[] = [...entries];
         const index = newData.findIndex((item) => row.name === item.name);
         const item = newData[index];
         newData.splice(index, 1, {
@@ -97,7 +97,7 @@ export const EditableList: FunctionComponent<Props> = ({ clinicalSamples, update
             ...row,
         });
 
-        updateClinicalSamples(newData);
+        onListChanged(newData);
     };
 
     const columns: ColumnsType<SampleNew> = [
@@ -116,7 +116,7 @@ export const EditableList: FunctionComponent<Props> = ({ clinicalSamples, update
             }}
             rowClassName={() => 'editable-row'}
             bordered
-            dataSource={clinicalSamples}
+            dataSource={entries}
             columns={columns}
         />
     );

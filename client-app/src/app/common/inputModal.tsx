@@ -62,6 +62,8 @@ type ModalProps_v2 = {
     errorMessage: string | null;
     onCreate: (sample: ClinicalSample) => Promise<void>;
     onCancel: () => void;
+    placeholder?: any;
+    onValuesChange?: (values: Store) => void;
 };
 
 export const InputModal_v2: FunctionComponent<ModalProps_v2> = ({
@@ -72,6 +74,8 @@ export const InputModal_v2: FunctionComponent<ModalProps_v2> = ({
     errorMessage,
     onCreate,
     onCancel,
+    placeholder,
+    onValuesChange,
     children,
 }) => {
     const [form] = Form.useForm();
@@ -79,10 +83,12 @@ export const InputModal_v2: FunctionComponent<ModalProps_v2> = ({
 
     const onCreateWrapper = async (sample: ClinicalSample) => {
         setSavingFlag(true);
+        console.log('set saving flag', true);
 
         await onCreate(sample);
 
         setSavingFlag(false);
+        console.log('set saving flag', false);
     };
 
     return (
@@ -98,7 +104,7 @@ export const InputModal_v2: FunctionComponent<ModalProps_v2> = ({
                 form.submit();
             }}
         >
-            {getInputForm(title, form, inputs, errorMessage, onCreateWrapper)}
+            {getInputForm(title, form, inputs, errorMessage, onCreateWrapper, placeholder, onValuesChange)}
             {children}
         </Modal>
     );
@@ -110,12 +116,17 @@ function getInputForm<T>(
     inputFields: JSX.Element[],
     errorMessage: string | null,
     onCreate: (sample: T) => Promise<void>,
+    placeholder?: any,
+    onValuesChange?: (values: T) => void,
 ): JSX.Element {
     return (
         <Form
             {...FormLayoutConstants.defaultFormLayout}
             name={name}
-            initialValues={{ remember: true }}
+            initialValues={placeholder}
+            onValuesChange={(_: Store, values: Store) => {
+                if (onValuesChange != null) onValuesChange(values as T);
+            }}
             form={form}
             onFinish={async (values: Store) => {
                 console.log('on finish values', values as T);

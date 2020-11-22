@@ -1,15 +1,13 @@
 import React, { useState, FunctionComponent } from 'react';
-import { List } from './components/list';
 import { IntermediateSample } from '../../types';
 import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
 import { ButtonExport } from '../../common/export';
 import { PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { SampleNotifications } from '../../common/notifications';
-import { ButtonFractionate, FractionateInputForm } from './components/fractionate';
+import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
 
 export const IntermediateSamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
-    const [fractionateSample, setFractionateSample] = useState<IntermediateSample | null>(null);
 
     const [, setSelectedSamples] = useState<IntermediateSample[]>([]);
 
@@ -25,17 +23,11 @@ export const IntermediateSamples: FunctionComponent = () => {
         SampleNotifications.queueExportSuccess();
     }
 
-    const { onFractionateSuccessful, onFractionateCancel } = linkFractionate(setFractionateSample);
-
     const renderActions = (record: IntermediateSample) => {
         return (
             <span>
                 <Space size="middle">
-                    <ButtonFractionate
-                        onFractionate={() => {
-                            setFractionateSample(record);
-                        }}
-                    />
+                    <ButtonFractionate sample={record} />
 
                     <Button type="default" htmlType="button">
                         Generate Ms Ready Sample
@@ -75,27 +67,6 @@ export const IntermediateSamples: FunctionComponent = () => {
                 renderActions={renderActions}
                 onRowSelectionChange={onRowSelectionChange}
             />
-
-            <FractionateInputForm
-                parentSample={fractionateSample}
-                onCreateSuccessful={onFractionateSuccessful}
-                onCancel={onFractionateCancel}
-            />
         </>
     );
-
-    function linkFractionate(setFractionateSample: React.Dispatch<React.SetStateAction<IntermediateSample | null>>) {
-        const onFractionateCancel = () => {
-            setFractionateSample(null);
-        };
-
-        const onFractionateSuccessful = (samples: IntermediateSample[]) => {
-            samples.forEach((sample, _index, _samples) => {
-                SampleNotifications.queueCreateSuccess(sample.name);
-            });
-
-            setFractionateSample(null);
-        };
-        return { onFractionateSuccessful, onFractionateCancel };
-    }
 };

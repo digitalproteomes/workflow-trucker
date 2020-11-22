@@ -1,23 +1,23 @@
 import React, { FunctionComponent } from 'react';
 import { IntermediateSample } from '../../../types';
 import { getColumn } from '../../../common/columnHelpers';
-import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
 import { CommonList } from '../../../common/list';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag, getProtocolTag } from '../../../common/tags';
 import { Row, Col, Divider } from 'antd';
-import { ListCompactClinicalSamples } from '../../../functional-building-blocks/clinical-samples';
+import { ListCompactClinicalSamples } from '../../clinical-samples';
+import { Api } from '../api';
 
-type ListProps = {
+type Props = {
     isRefreshNeeded: boolean;
     onRefreshDone: () => void;
     renderActions?: (sample: IntermediateSample) => JSX.Element;
     onRowSelectionChange?: (selectedSamples: IntermediateSample[]) => void;
 };
 
-export const List: FunctionComponent<ListProps> = ({
+export const List: FunctionComponent<Props> = ({
     isRefreshNeeded,
     onRefreshDone,
     renderActions,

@@ -1,7 +1,7 @@
+import { Constants } from '../../default-data/constants';
+import { mockIntermediateSamples } from '../../default-data/samples';
 import { BaseApi } from '../../infrastructure/api';
 import { IntermediateSample } from '../../types';
-import { mockIntermediateSamples } from '../../default-data/samples';
-import { Constants } from '../../default-data/constants';
 
 export class Api {
     public static async fetchSamples(projectId: string): Promise<IntermediateSample[]> {
@@ -16,6 +16,10 @@ export class Api {
 
     public static async postSampleAsync(payload: any): Promise<IntermediateSample> {
         return await BaseApi.postAsync(`/samples/intermediate`, payload);
+    }
+
+    public static async postFractionatedAsync(payload: any): Promise<IntermediateSample[]> {
+        return await BaseApi.postAsync(`/sample/fractionated`, payload);
     }
 
     public static async deleteSampleAsync(entry: IntermediateSample): Promise<void> {

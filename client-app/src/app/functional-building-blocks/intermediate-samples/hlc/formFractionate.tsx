@@ -1,77 +1,18 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Button, Form, Input, Tooltip } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { InputModal } from '../../../common/inputModal';
-import { BaseApi } from '../../../infrastructure/api';
 import { IntermediateSample } from '../../../types';
-import { SplitCellsOutlined, EyeOutlined } from '@ant-design/icons';
 import { Store } from 'antd/lib/form/interface';
+import { Api } from '../api';
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-type ButtonFractionateProps = {
-    onFractionate: () => void;
-    style?: React.CSSProperties | undefined;
-};
-
-export const ButtonFractionate: FunctionComponent<ButtonFractionateProps> = ({ onFractionate, style }) => {
-    return (
-        <Tooltip title="Create fractionated samples">
-            <Button type="default" onClick={onFractionate} style={style} icon={<SplitCellsOutlined />}>
-                Fractionate
-            </Button>
-        </Tooltip>
-    );
-};
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-type ButtonFractionDetailsProps = {
-    sample: IntermediateSample;
-    style?: React.CSSProperties | undefined;
-};
-
-// wait - do we need a button to view the fractionation details? (because at the moment this is not used)
-export const ButtonFractionDetails: FunctionComponent<ButtonFractionDetailsProps> = ({ sample, style }) => {
-    return (
-        <Tooltip title="View fractionated samples">
-            <Button
-                type="default"
-                style={style}
-                icon={<EyeOutlined />}
-                href={`/samples/fractionated/details?project=${sample.projectId}&parent=${sample.id}`}
-            >
-                Fractions
-            </Button>
-        </Tooltip>
-    );
-};
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-class Api {
-    public static async postSampleAsync(payload: any): Promise<IntermediateSample[]> {
-        return await BaseApi.postAsync(`/sample/fractionated`, payload);
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-type FormProps = {
+type Props = {
     parentSample: IntermediateSample | null;
     onCreateSuccessful: (samples: IntermediateSample[]) => void;
     onCancel: () => void;
 };
 
-export const FractionateInputForm: FunctionComponent<FormProps> = ({ parentSample, onCreateSuccessful, onCancel }) => {
+export const FormFractionate: FunctionComponent<Props> = ({ parentSample, onCreateSuccessful, onCancel }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     async function onCreate(formData: Store) {
@@ -81,7 +22,7 @@ export const FractionateInputForm: FunctionComponent<FormProps> = ({ parentSampl
 
             // wait - is the result an array of clinical samples, or an array of intermediate samples
             // wait - do we really need this array of results?
-            const createdSamples: IntermediateSample[] = await Api.postSampleAsync({
+            const createdSamples: IntermediateSample[] = await Api.postFractionatedAsync({
                 projectId: parentSample!.projectId,
                 parentSampleId: parentSample!.id,
                 fractionatedSamples: samples,

@@ -1,10 +1,15 @@
-import React from 'react';
-import { MSRunCompact } from '../../types';
-import { getColumn } from '../columnHelpers';
+import React, { FunctionComponent } from 'react';
+import { MSRunCompact } from '../../../../types';
+import { getColumn } from '../../../../common/columnHelpers';
 import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 
-export function getCompactMSRunsList(name: string, msruns: MSRunCompact[]) {
+type Props = {
+    name: string;
+    msruns: MSRunCompact[];
+};
+
+export const ListCompactMsRuns: FunctionComponent<Props> = ({ name, msruns }) => {
     return (
         <Table
             title={() => <h3>{`MS Runs of ${name}`}</h3>}
@@ -30,4 +35,4 @@ export function getCompactMSRunsList(name: string, msruns: MSRunCompact[]) {
             dataSource={msruns}
         />
     );
-}
+};

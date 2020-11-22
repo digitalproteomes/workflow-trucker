@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useState } from 'react';
-import { ClinicalSample } from '../../../types';
+import { ClinicalSample } from '../../../../../types';
 import { Api } from '../api';
-import { createFormInput } from '../../../common/inputModalHelpers';
-import { InputModal } from '../../../common/inputModal';
+import { createFormInput } from '../../../../../common/inputModalHelpers';
+import { InputModal } from '../../../../../common/inputModal';
 import { Store } from 'antd/lib/form/interface';
 
 type FormProps = {

@@ -1,18 +1,16 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
-import { ClinicalInputForm } from './components/createNew'; // TODO: the two creation methods should be combined
-import { ButtonCreateNew } from './components/createNewButton';
+import { ButtonCreateNew } from './components/clinical-sample/createNewButton';
 import { AutoGenerateInputForm } from './components/autoGenerate';
 import { ButtonAutoGenerate } from './components/autoGenerateButton';
-import { List } from './components/list';
+import { List } from './components/clinical-sample/list';
 import { ClinicalSample } from '../../types';
-import { ButtonDelete } from './components/delete';
+import { ButtonDelete } from './components/clinical-sample/delete';
 import { ButtonExport } from '../../common/export';
 import { ProcessSampleForm } from './components/processSample';
 import { Notifications, SampleNotifications } from '../../common/notifications';
 
 export const ClinicalSamples: FunctionComponent = () => {
-    const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
     const [isActiveAutoGenerate, setActiveAutoGenerateFlag] = useState<boolean>(false);
     const [sampleToProcess, setSampleToProcess] = useState<ClinicalSample | null>(null);
     const [, setSelectedSamples] = useState<ClinicalSample[]>([]);
@@ -34,11 +32,6 @@ export const ClinicalSamples: FunctionComponent = () => {
     const onRowSelectionChange = (selectedRows: ClinicalSample[]) => {
         setSelectedSamples(selectedRows);
     };
-
-    const { onCreateNew, onCreateNewSuccessful, onCreateNewCancel } = linkCreateNew(
-        setRefreshNeededFlag,
-        setActiveCreateNewFlag,
-    );
 
     const { onAutoGenerateButtonClick, onAutoGenerateSuccessful, onAutoGenerateCancel } = linkAutoGenerate(
         setActiveAutoGenerateFlag,
@@ -67,17 +60,14 @@ export const ClinicalSamples: FunctionComponent = () => {
                     }}
                 />
 
-                <ButtonCreateNew onCreateNewClick={onCreateNew} style={{ float: 'right', marginRight: 10 }} />
+                <ButtonCreateNew
+                    setRefreshNeededFlag={setRefreshNeededFlag}
+                    style={{ float: 'right', marginRight: 10 }}
+                />
 
                 <ButtonAutoGenerate
                     onAutoGenerateClick={onAutoGenerateButtonClick}
                     style={{ float: 'right', marginRight: 16 }}
-                />
-
-                <ClinicalInputForm
-                    isActiveInputForm={isActiveCreateNew}
-                    onCreateSuccessful={onCreateNewSuccessful}
-                    onCancel={onCreateNewCancel}
                 />
 
                 <AutoGenerateInputForm
@@ -110,28 +100,6 @@ export const ClinicalSamples: FunctionComponent = () => {
 };
 
 // TODO: analyze if the method groupings based on functionality is feasible. Maybe these could be moved out into separate files into their own modules?
-function linkCreateNew(
-    setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>,
-    setActiveCreateNewFlag: React.Dispatch<React.SetStateAction<boolean>>,
-) {
-    const onCreateNewSuccessful = (sample: ClinicalSample) => {
-        SampleNotifications.queueCreateSuccess(sample.name);
-
-        setRefreshNeededFlag(true);
-
-        setActiveCreateNewFlag(false);
-    };
-
-    const onCreateNew = () => {
-        setActiveCreateNewFlag(true);
-    };
-
-    const onCreateNewCancel = () => {
-        setActiveCreateNewFlag(false);
-    };
-    return { onCreateNew, onCreateNewSuccessful, onCreateNewCancel };
-}
-
 function linkAutoGenerate(
     setActiveAutoGenerateFlag: React.Dispatch<React.SetStateAction<boolean>>,
     setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>,

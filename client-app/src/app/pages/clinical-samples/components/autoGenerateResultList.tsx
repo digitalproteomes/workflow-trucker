@@ -16,7 +16,6 @@ export const EditableList: FunctionComponent<Props> = ({ entries, onListChanged 
     const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
         const [form] = Form.useForm();
         return (
-            // todo - important - this is something important for the form input fix (not sure how the context provider influences the story)
             <Form form={form} component={false}>
                 <EditableContext.Provider value={form}>
                     <tr {...props} />

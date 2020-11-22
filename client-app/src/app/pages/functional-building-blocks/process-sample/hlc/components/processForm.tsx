@@ -1,11 +1,10 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Form, Select } from 'antd';
-import { InputModal } from '../../../common/inputModal';
-import { ClinicalSample, SOP } from '../../../types';
-import { validationMessage, createFormInput } from '../../../common/inputModalHelpers';
+import { InputModal } from '../../../../../common/inputModal';
+import { ClinicalSample, SOP } from '../../../../../types';
+import { validationMessage, createFormInput } from '../../../../../common/inputModalHelpers';
 import { Store } from 'antd/lib/form/interface';
-import { Api } from './processSampleApi';
-
+import { Api } from '../../api';
 const { Option } = Select;
 
 type FormProps = {
@@ -20,7 +19,9 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
 
     const isActiveInputForm: boolean = originalSample != null;
     async function executeFetch() {
-        setSops(await Api.getSOPsAsync(originalSample!.projectId));
+        const receivedSops = await Api.getSOPsAsync(originalSample!.projectId);
+        setSops(receivedSops);
+        console.log('received sops', receivedSops);
     }
 
     useEffect(() => {
@@ -37,7 +38,6 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
         // async function saveSample() {
         //     try {
         //         const createdSample: SampleType = await Api.postSampleAsync(sample);
-
         //         onCreateSuccessful(createdSample);
         //     } catch (error) {
         //         setErrorMessage(error.message);
@@ -68,6 +68,7 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
     );
 };
 
+// wait - if the createFormSelectInput is implemented 2-3 times, extract it into a helper
 function createFormSelectInput(label: string, propName: keyof ClinicalSample, sops: SOP[]) {
     return (
         <Form.Item
@@ -82,7 +83,7 @@ function createFormSelectInput(label: string, propName: keyof ClinicalSample, so
                         return a.name[0] > b.name[0] ? 1 : a.name[0] === b.name[0] ? 0 : -1;
                     })
                     .map((sop) => (
-                        <Option value={sop.id}>{sop.name}</Option>
+                        <Option value={sop.artefactClass}>{sop.name}</Option>
                     ))}
             </Select>
         </Form.Item>

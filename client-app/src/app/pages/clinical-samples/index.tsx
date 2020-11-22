@@ -2,13 +2,12 @@ import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
 import { ClinicalSample } from '../../types';
 import { ButtonExport } from '../../common/export';
-import { ProcessSampleForm } from './components/processSample';
+import { ButtonProcessSample } from '../functional-building-blocks/process-sample/';
 import { SampleNotifications } from '../../common/notifications';
 import { List, ButtonCreateNew, ButtonDelete } from '../functional-building-blocks/clinical-samples/';
 import { ButtonAutoGenerate } from '../functional-building-blocks/auto-generate/';
 
 export const ClinicalSamples: FunctionComponent = () => {
-    const [sampleToProcess, setSampleToProcess] = useState<ClinicalSample | null>(null);
     const [, setSelectedSamples] = useState<ClinicalSample[]>([]);
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
@@ -38,6 +37,7 @@ export const ClinicalSamples: FunctionComponent = () => {
                         onDeleteDone(record);
                     }}
                 />
+                <ButtonProcessSample sample={record} />
             </Space>
         );
     };
@@ -59,17 +59,6 @@ export const ClinicalSamples: FunctionComponent = () => {
                 <ButtonAutoGenerate
                     setRefreshNeededFlag={setRefreshNeededFlag}
                     style={{ float: 'right', marginRight: 16 }}
-                />
-
-                <ProcessSampleForm
-                    originalSample={sampleToProcess}
-                    onCancel={() => {
-                        setSampleToProcess(null);
-                    }}
-                    onCreateSuccessful={() => {
-                        SampleNotifications.queueCreateSuccess('Intermediary sample created succesfully');
-                        setSampleToProcess(null);
-                    }}
                 />
             </PageHeader>
             <Divider></Divider>

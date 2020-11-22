@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
-import { ClinicalInputForm } from './components/createNew'; // TODO: the two creation method should be combined
+import { ClinicalInputForm } from './components/createNew'; // TODO: the two creation methods should be combined
 import { ButtonCreateNew } from './components/createNewButton';
 import { AutoGenerateInputForm } from './components/autoGenerate';
 import { ButtonAutoGenerate } from './components/autoGenerateButton';
@@ -8,7 +8,6 @@ import { List } from './components/list';
 import { ClinicalSample } from '../../types';
 import { ButtonDelete } from './components/delete';
 import { ButtonExport } from '../../common/export';
-import { FractionateInputForm } from './components/fractionate';
 import { ButtonSinglePrep } from './components/singlePrep';
 import { ProcessSampleForm } from './components/processSample';
 import { Notifications, SampleNotifications } from '../../common/notifications';
@@ -16,7 +15,6 @@ import { Notifications, SampleNotifications } from '../../common/notifications';
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveCreateNew, setActiveCreateNewFlag] = useState<boolean>(false);
     const [isActiveAutoGenerate, setActiveAutoGenerateFlag] = useState<boolean>(false);
-    const [fractionateSample, setFractionateSample] = useState<ClinicalSample | null>(null);
     const [sampleToProcess, setSampleToProcess] = useState<ClinicalSample | null>(null);
     const [, setSelectedSamples] = useState<ClinicalSample[]>([]);
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -47,8 +45,6 @@ export const ClinicalSamples: FunctionComponent = () => {
         setActiveAutoGenerateFlag,
         setRefreshNeededFlag,
     );
-
-    const { onFractionateSuccessful, onFractionateCancel } = linkFractionate(setFractionateSample);
 
     const renderActions = (record: ClinicalSample) => {
         return (
@@ -95,12 +91,6 @@ export const ClinicalSamples: FunctionComponent = () => {
                     isActiveInputForm={isActiveAutoGenerate}
                     onCreateSuccessful={onAutoGenerateSuccessful}
                     onCancel={onAutoGenerateCancel}
-                />
-
-                <FractionateInputForm
-                    parentSample={fractionateSample}
-                    onCreateSuccessful={onFractionateSuccessful}
-                    onCancel={onFractionateCancel}
                 />
 
                 <ProcessSampleForm
@@ -169,19 +159,4 @@ function linkAutoGenerate(
         setActiveAutoGenerateFlag(false);
     };
     return { onAutoGenerateButtonClick, onAutoGenerateSuccessful, onAutoGenerateCancel };
-}
-
-function linkFractionate(setFractionateSample: React.Dispatch<React.SetStateAction<ClinicalSample | null>>) {
-    const onFractionateCancel = () => {
-        setFractionateSample(null);
-    };
-
-    const onFractionateSuccessful = (samples: ClinicalSample[]) => {
-        samples.forEach((sample, _index, _samples) => {
-            SampleNotifications.queueCreateSuccess(sample.name);
-        });
-
-        setFractionateSample(null);
-    };
-    return { onFractionateSuccessful, onFractionateCancel };
 }

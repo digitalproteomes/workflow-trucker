@@ -1,13 +1,11 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Form, Select, Typography } from 'antd';
-import { FormInstance } from 'antd/lib/form';
-import { InputModal } from '../../../common/inputModal';
+import { Form, Select } from 'antd';
+import { InputModal_v2 } from '../../../common/inputModal';
 import { ClinicalSample, SOP } from '../../../types';
 import { validationMessage, createFormInput } from '../../../common/inputModalHelpers';
-import { BaseApi } from '../../../infrastructure/api';
-import { FormLayoutConstants } from '../../../common/constants';
+import { Store } from 'antd/lib/form/interface';
+import { Api } from './processSampleApi';
 
-const { Text } = Typography;
 const { Option } = Select;
 
 type FormProps = {
@@ -21,7 +19,6 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
     const [sops, setSops] = useState<SOP[] | null>(null);
 
     const isActiveInputForm: boolean = originalSample != null;
-
     async function executeFetch() {
         setSops(await Api.getSOPsAsync(originalSample!.projectId));
     }
@@ -32,21 +29,37 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
         }
     });
 
-    const onCreate = (values: any) => {
-        // TODO: parse the values coming from the form, create the object and do whatever
-        // TODO: todo in case of exception when calling the api, use the setErrorMessage
+    if (isActiveInputForm == null || sops == null) return <></>;
+
+    const onCreate = (data: Store) => {
+        // wait - replace the SampleType with the proper sample type (maybe a new one has to be created)
+        // const sample: SampleType = data as SampleType;
+        // async function saveSample() {
+        //     try {
+        //         const createdSample: SampleType = await Api.postSampleAsync(sample);
+
+        //         onCreateSuccessful(createdSample);
+        //     } catch (error) {
+        //         setErrorMessage(error.message);
+        //     }
+        // }
         onCreateSuccessful();
         setSops(null);
     };
 
-    if (isActiveInputForm == null || sops == null) return <></>; // TODO: can this breaking condition be moved up high at the beginning?
+    const inputs: JSX.Element[] = [
+        createFormSelectInput('SOP Name', ClinicalSample.nameof('name'), sops),
+        createFormInput('Description', ClinicalSample.nameof('description')),
+        createFormInput('Processing person', ClinicalSample.nameof('processingPerson')),
+    ];
 
     return (
-        <InputModal
+        <InputModal_v2
             isVisible={isActiveInputForm}
             title="Process sample (generates an intermediate sample)"
-            inputForm={(form: FormInstance) => inputForm(form, sops, errorMessage)}
-            onCreate={onCreate}
+            inputs={inputs}
+            errorMessage={errorMessage}
+            onCreate={async (data: Store) => onCreate(data)}
             onCancel={() => {
                 onCancel();
                 setSops(null);
@@ -54,26 +67,6 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
         />
     );
 };
-
-function inputForm(form: FormInstance, sops: SOP[], errorMessage: string | null): JSX.Element {
-    return (
-        <Form
-            {...FormLayoutConstants.defaultFormLayout}
-            name="clinical-sample-input-form"
-            initialValues={{ remember: true }}
-            form={form}
-        >
-            {createFormSelectInput('SOP Name', ClinicalSample.nameof('name'), sops)}
-            {createFormInput('Description', ClinicalSample.nameof('description'))}
-            {createFormInput('Processing person', ClinicalSample.nameof('processingPerson'))}
-            {errorMessage == null ? null : (
-                <Form.Item label="Error" name="errorMessage">
-                    <Text type="danger">{errorMessage}</Text>
-                </Form.Item>
-            )}
-        </Form>
-    );
-}
 
 function createFormSelectInput(label: string, propName: keyof ClinicalSample, sops: SOP[]) {
     return (
@@ -85,25 +78,13 @@ function createFormSelectInput(label: string, propName: keyof ClinicalSample, so
             <Select showSearch filterOption={true} optionFilterProp={'children'}>
                 {sops
                     .sort((a, b) => {
-                        // TODO: is this the best string filtering approach? empty string?
+                        // wait: is this the best string filtering approach? is empty string?
                         return a.name[0] > b.name[0] ? 1 : a.name[0] === b.name[0] ? 0 : -1;
                     })
                     .map((sop) => (
-                        <Option value={''}>{sop.name}</Option>
+                        <Option value={sop.id}>{sop.name}</Option>
                     ))}
             </Select>
         </Form.Item>
     );
-}
-
-class Api {
-    public static async getSOPsAsync(projectId: string): Promise<SOP[]> {
-        try {
-            return await BaseApi.getAsync(
-                `/sops/project/type?projectId=${projectId}&sopType=Standard Procedure Sample Preparation`,
-            );
-        } catch (err) {
-            return [];
-        }
-    }
 }

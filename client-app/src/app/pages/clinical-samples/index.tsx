@@ -1,15 +1,13 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
-import { AutoGenerateInputForm } from './components/autoGenerate';
-import { ButtonAutoGenerate } from './components/autoGenerateButton';
 import { ClinicalSample } from '../../types';
 import { ButtonExport } from '../../common/export';
 import { ProcessSampleForm } from './components/processSample';
-import { Notifications, SampleNotifications } from '../../common/notifications';
+import { SampleNotifications } from '../../common/notifications';
 import { List, ButtonCreateNew, ButtonDelete } from '../functional-building-blocks/clinical-samples/';
+import { ButtonAutoGenerate } from '../functional-building-blocks/auto-generate/';
 
 export const ClinicalSamples: FunctionComponent = () => {
-    const [isActiveAutoGenerate, setActiveAutoGenerateFlag] = useState<boolean>(false);
     const [sampleToProcess, setSampleToProcess] = useState<ClinicalSample | null>(null);
     const [, setSelectedSamples] = useState<ClinicalSample[]>([]);
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -30,11 +28,6 @@ export const ClinicalSamples: FunctionComponent = () => {
     const onRowSelectionChange = (selectedRows: ClinicalSample[]) => {
         setSelectedSamples(selectedRows);
     };
-
-    const { onAutoGenerateButtonClick, onAutoGenerateSuccessful, onAutoGenerateCancel } = linkAutoGenerate(
-        setActiveAutoGenerateFlag,
-        setRefreshNeededFlag,
-    );
 
     const renderActions = (record: ClinicalSample) => {
         return (
@@ -64,14 +57,8 @@ export const ClinicalSamples: FunctionComponent = () => {
                 />
 
                 <ButtonAutoGenerate
-                    onAutoGenerateClick={onAutoGenerateButtonClick}
+                    setRefreshNeededFlag={setRefreshNeededFlag}
                     style={{ float: 'right', marginRight: 16 }}
-                />
-
-                <AutoGenerateInputForm
-                    isActiveInputForm={isActiveAutoGenerate}
-                    onCreateSuccessful={onAutoGenerateSuccessful}
-                    onCancel={onAutoGenerateCancel}
                 />
 
                 <ProcessSampleForm
@@ -96,26 +83,3 @@ export const ClinicalSamples: FunctionComponent = () => {
         </>
     );
 };
-
-// TODO: analyze if the method groupings based on functionality is feasible. Maybe these could be moved out into separate files into their own modules?
-function linkAutoGenerate(
-    setActiveAutoGenerateFlag: React.Dispatch<React.SetStateAction<boolean>>,
-    setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>,
-) {
-    const onAutoGenerateButtonClick = () => {
-        setActiveAutoGenerateFlag(true);
-    };
-
-    const onAutoGenerateCancel = () => {
-        setActiveAutoGenerateFlag(false);
-    };
-
-    const onAutoGenerateSuccessful = (count: number) => {
-        Notifications.queueSuccess('Success', `${count} samples created succesfully.`);
-
-        setRefreshNeededFlag(true);
-
-        setActiveAutoGenerateFlag(false);
-    };
-    return { onAutoGenerateButtonClick, onAutoGenerateSuccessful, onAutoGenerateCancel };
-}

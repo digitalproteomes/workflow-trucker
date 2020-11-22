@@ -2,8 +2,8 @@ import React, { FunctionComponent, useState } from 'react';
 import { InputModal } from '../../../common/inputModal';
 import { GenerationData, SampleNew, EWorkflowTag } from '../../../types';
 import { createFormInput, createFormSelect } from '../../../common/inputModalHelpers';
-import { EditableList } from './autoGenerateResultList';
-import { Api } from './autoGenerateApi';
+import { EditableList } from './hlc/components/autoGenerateResultList';
+import { Api } from './api';
 import { Constants } from '../../../default-data/constants';
 import { Store } from 'antd/lib/form/interface';
 

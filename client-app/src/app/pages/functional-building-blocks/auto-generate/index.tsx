@@ -1,3 +1,3 @@
-import { ButtonAutoGenerate } from './hlc/autoGenerateButton';
+import { ButtonAutoGenerate } from './hlc/buttonAutoGenerate';
 
 export { ButtonAutoGenerate };

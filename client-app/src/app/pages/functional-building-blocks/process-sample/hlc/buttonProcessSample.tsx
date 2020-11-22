@@ -3,7 +3,7 @@ import { Button, Tooltip } from 'antd';
 import { DeliveredProcedureOutlined } from '@ant-design/icons';
 import { ClinicalSample } from '../../../../types';
 import { SampleNotifications } from '../../../../common/notifications';
-import { ProcessSampleForm } from './components/processForm';
+import { ProcessSampleForm } from './components/formProcess';
 
 type ButtonProps = {
     sample: ClinicalSample;

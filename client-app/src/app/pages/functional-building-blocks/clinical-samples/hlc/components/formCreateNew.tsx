@@ -5,17 +5,13 @@ import { createFormInput } from '../../../../../common/inputModalHelpers';
 import { InputModal } from '../../../../../common/inputModal';
 import { Store } from 'antd/lib/form/interface';
 
-type FormProps = {
+type Props = {
     isActiveInputForm: boolean;
     onCreateSuccessful: (sample: ClinicalSample) => void;
     onCancel: () => void;
 };
 
-export const ClinicalInputForm: FunctionComponent<FormProps> = ({
-    isActiveInputForm,
-    onCreateSuccessful,
-    onCancel,
-}) => {
+export const ClinicalInputForm: FunctionComponent<Props> = ({ isActiveInputForm, onCreateSuccessful, onCancel }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const onCreate = (data: Store) => {

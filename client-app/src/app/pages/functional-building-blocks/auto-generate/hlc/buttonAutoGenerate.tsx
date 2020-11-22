@@ -4,12 +4,12 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Notifications } from '../../../../common/notifications';
 import { AutoGenerateInputForm } from './components/autoGenerate';
 
-type ButtonCreateNewProps = {
+type Props = {
     setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>;
     style?: React.CSSProperties | undefined;
 };
 
-export const ButtonAutoGenerate: FunctionComponent<ButtonCreateNewProps> = ({ setRefreshNeededFlag, style }) => {
+export const ButtonAutoGenerate: FunctionComponent<Props> = ({ setRefreshNeededFlag, style }) => {
     const [isActiveAutoGenerate, setActiveAutoGenerateFlag] = useState<boolean>(false);
 
     const { onAutoGenerateButtonClick, onAutoGenerateSuccessful, onAutoGenerateCancel } = linkAutoGenerate(

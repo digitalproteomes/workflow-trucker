@@ -3,11 +3,10 @@ import { Input, Space, Button } from 'antd';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
 import { SearchOutlined } from '@ant-design/icons';
 
-export type ColumnFilterProps<T> = {
+type ColumnFilterProps<T> = {
     filterIcon: (isFiltered: boolean) => React.ReactNode;
     filterDropdown: (filterProps: FilterDropdownProps) => React.ReactNode;
     onFilter: (value: string | number | boolean, record: T) => boolean;
-    // render: (text: string) => JSX.Element; // todo - this signature is not present in the official interface. Not sure why it works (if it works)
 };
 
 export function getAllFilterProps<T>(column: keyof T, searchEnabled: boolean): ColumnFilterProps<T> | undefined {

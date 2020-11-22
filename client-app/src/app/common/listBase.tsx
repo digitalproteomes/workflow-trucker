@@ -1,8 +1,7 @@
 import React from 'react';
 import { Table, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { TableRowSelection, ColumnType, ExpandableConfig } from 'antd/lib/table/interface';
-import { getAllFilterProps } from './listBaseFiltering';
+import { TableRowSelection, ExpandableConfig } from 'antd/lib/table/interface';
 
 type Props<T extends object> = {
     style?: React.CSSProperties;
@@ -77,21 +76,4 @@ function getRenderObject<T>(renderActions: (record: T) => React.ReactNode) {
             return renderActions(record);
         },
     };
-}
-
-export function getColumn<T>( // todo - move to tableColumnHelpers.tsx
-    label: string,
-    name: keyof T,
-    render?: (record: T) => React.ReactNode,
-    searchEnabled: boolean = true,
-): ColumnType<T> {
-    const column: ColumnType<T> = {
-        title: label,
-        dataIndex: name.toString(),
-        ...getAllFilterProps<T>(name, searchEnabled),
-    };
-
-    if (render) column.render = (_value, record, _index) => render(record);
-
-    return column;
 }

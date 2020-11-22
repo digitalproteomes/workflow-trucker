@@ -3,7 +3,7 @@ import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
 import { MsRun } from '../../types';
 import { List } from './components/list';
 import { ButtonExport } from '../../common/export';
-import * as sampleNotifications from '../../common/sampleNotifications';
+import { SampleNotifications } from '../../common/notifications';
 import { UploadOutlined } from '@ant-design/icons';
 
 export const MsRuns: FunctionComponent = () => {
@@ -34,7 +34,7 @@ export const MsRuns: FunctionComponent = () => {
     };
 
     function onExportDone() {
-        sampleNotifications.queueExportSuccess();
+        SampleNotifications.queueExportSuccess();
     }
 
     return (

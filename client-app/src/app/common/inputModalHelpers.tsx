@@ -5,7 +5,12 @@ import { ESOPType, EWorkflowTag } from '../types';
 
 const { Option } = Select;
 
-export function createFormInput<T>(label: string, propName: keyof T, placeholder?: string, required: boolean = false) {
+export function createFormInput<T>(
+    label: string,
+    propName: keyof T,
+    placeholder: string | undefined = undefined,
+    required: boolean = false,
+) {
     return (
         <Form.Item
             label={label}
@@ -22,7 +27,6 @@ export function validationMessage(field: string): string {
 }
 
 export function createFormSelect<T>(label: string, propName: keyof T, workflowTags: EWorkflowTag[]) {
-    // todo - extract this into a common helper
     return (
         <Form.Item
             label={label}
@@ -45,7 +49,6 @@ export function createFormSelect<T>(label: string, propName: keyof T, workflowTa
 }
 
 export function createSOPFormSelect<T>(label: string, propName: keyof T, sopTypes: ESOPType[]) {
-    // todo - extract this into a common helper.
     return (
         <Form.Item
             label={label}

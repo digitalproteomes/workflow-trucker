@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { ClinicalSample } from '../../../../types';
-import { getColumn } from '../../../../common/columnHelpers';
-import { Api } from './api';
-import { Constants } from '../../../../default-data/constants';
+import { Api } from '../api';
 import { ColumnsType } from 'antd/lib/table';
-import { CommonList } from '../../../../common/list';
-import moment from 'moment';
 import { Col, Row } from 'antd';
+import { getColumn } from '../../../../common/columnHelpers';
+import { CommonList } from '../../../../common/list';
+import { Constants } from '../../../../default-data/constants';
+import { ClinicalSample } from '../../../../types';
+import moment from 'moment';
 
 type ListProps = {
     isRefreshNeeded: boolean;

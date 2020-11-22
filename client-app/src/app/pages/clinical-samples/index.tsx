@@ -1,14 +1,12 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
-import { ButtonCreateNew } from './components/clinical-sample/createNewButton';
 import { AutoGenerateInputForm } from './components/autoGenerate';
 import { ButtonAutoGenerate } from './components/autoGenerateButton';
-import { List } from './components/clinical-sample/list';
 import { ClinicalSample } from '../../types';
-import { ButtonDelete } from './components/clinical-sample/delete';
 import { ButtonExport } from '../../common/export';
 import { ProcessSampleForm } from './components/processSample';
 import { Notifications, SampleNotifications } from '../../common/notifications';
+import { List, ButtonCreateNew, ButtonDelete } from '../functional-building-blocks/clinical-samples/';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [isActiveAutoGenerate, setActiveAutoGenerateFlag] = useState<boolean>(false);

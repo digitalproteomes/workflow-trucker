@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { MSReadySample } from '../../../types';
-import { getColumn } from '../../../common/listBase';
+import { getColumn } from '../../../common/columnHelpers';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';
@@ -8,7 +8,7 @@ import { CommonList } from '../../../common/list';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
 import { Button, Row, Col, Divider } from 'antd';
-import { getCompactClinicalSampleList } from '../../../common/getCompactClinicalSampleList';
+import { ListCompactClinicalSamples } from '../../../functional-building-blocks/clinical-samples';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -48,7 +48,7 @@ export const List: FunctionComponent<ListProps> = ({
                         </Col>
 
                         <Col className="gutter-row" span={8}>
-                            {getCompactClinicalSampleList(record.name, record.clinicalSamples)}
+                            <ListCompactClinicalSamples name={record.name} samples={record.clinicalSamples} />
                         </Col>
                     </Row>
                 ),

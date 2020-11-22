@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as notifications from '../common/notificationsBase';
+import { Notifications } from '../common/notifications';
 
 export type FriendlyError = {
     message: string;
@@ -60,16 +60,17 @@ class BaseApi {
     }
 
     private static logError(err: any) {
+        console.log('something is not ok', err);
+
         if (err.response) {
-            console.log(err.response.data);
-            notifications.queueError(
+            Notifications.queueError(
                 `Something is not OK`,
                 `Detailed error message is: ${err.response.data}
                     \nStatusCode is: ${err.response.status}
                     \nHeaders are: ${err.response.headers}`,
             );
         } else {
-            notifications.queueError(`Something is not OK`, `${err}`);
+            Notifications.queueError(`Something is not OK`, `${err}`);
         }
     }
 

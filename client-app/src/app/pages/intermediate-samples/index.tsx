@@ -1,10 +1,10 @@
 import React, { useState, FunctionComponent } from 'react';
-import { List } from './components/list';
 import { IntermediateSample } from '../../types';
 import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
 import { ButtonExport } from '../../common/export';
-import * as sampleNotifications from '../../common/sampleNotifications';
 import { PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { SampleNotifications } from '../../common/notifications';
+import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
 
 export const IntermediateSamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -19,13 +19,15 @@ export const IntermediateSamples: FunctionComponent = () => {
         setSelectedSamples(selectedRows);
     };
 
+    function onExportDone() {
+        SampleNotifications.queueExportSuccess();
+    }
+
     const renderActions = (record: IntermediateSample) => {
         return (
             <span>
                 <Space size="middle">
-                    <Button type="default" htmlType="button">
-                        Fractionate
-                    </Button>
+                    <ButtonFractionate sample={record} />
 
                     <Button type="default" htmlType="button">
                         Generate Ms Ready Sample
@@ -37,10 +39,6 @@ export const IntermediateSamples: FunctionComponent = () => {
             </span>
         );
     };
-
-    function onExportDone() {
-        sampleNotifications.queueExportSuccess();
-    }
 
     return (
         <>

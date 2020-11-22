@@ -1,4 +1,6 @@
-/** todo - deprecated - remove completely once no more references to this */
+import { Constants } from './default-data/constants';
+
+/** TODO: deprecated - remove completely once no more references to this */
 export class Sample {
     createdDate: string = '';
 
@@ -52,11 +54,10 @@ export enum EWorkflowTag {
     LibraryGeneration = 'Library Generation',
 }
 
-
 export enum ESOPType {
     sampleSOP = 'Standard Procedure Sample Preparation',
     msRunSOP = 'Standard Procedure Mass Spectrometry',
-    dataSOP = 'Standard Procedure Data Analysis'
+    dataSOP = 'Standard Procedure Data Analysis',
 }
 
 export enum EProtocolTag {
@@ -174,6 +175,18 @@ export class Project {
     updatedDate: string = '';
 
     public static nameof = (name: keyof Project) => name;
+
+    public static default: Project = {
+        id: Constants.projectId,
+        createdDate: '',
+        description: '',
+        isLocked: false,
+        name: '',
+        ownerName: '',
+        ownerORCID: '',
+        projectId: Constants.projectId,
+        updatedDate: '',
+    };
 }
 
 export class MsRun {
@@ -285,13 +298,13 @@ export class SOP {
 
     // projectId: string = '';
 
-    artefactClass = ''
+    artefactClass = '';
 
     processingPerson: string = '';
 
-    owner =  '';
+    owner = '';
 
-    revision =  '';
+    revision = '';
 
     updatedDate: string = '';
 

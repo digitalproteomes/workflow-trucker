@@ -1,9 +1,8 @@
 import { Form, Input, Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React, { FunctionComponent, useContext, useEffect, useRef, useState } from 'react';
-import { getColumn } from '../../../../../common/columnHelpers';
-import { getEditableColumn } from '../../../../../common/columnHelpers';
-import { ClinicalSample, SampleNew } from '../../../../../types';
+import { getColumn, getEditableColumn } from '../../../../common/columnHelpers';
+import { SampleNew, ClinicalSample } from '../../../../types';
 
 type Props = {
     entries: SampleNew[];

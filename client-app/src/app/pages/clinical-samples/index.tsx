@@ -2,10 +2,10 @@ import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
 import { ClinicalSample } from '../../types';
 import { ButtonExport } from '../../common/export';
-import { ButtonProcessSample } from '../functional-building-blocks/process-sample/';
+import { ButtonProcessSample } from '../../functional-building-blocks/process-sample/';
 import { SampleNotifications } from '../../common/notifications';
-import { List, ButtonCreateNew, ButtonDelete } from '../functional-building-blocks/clinical-samples/';
-import { ButtonAutoGenerate } from '../functional-building-blocks/auto-generate/';
+import { List, ButtonCreateNew, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';
+import { ButtonAutoGenerate } from '../../functional-building-blocks/auto-generate/';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [, setSelectedSamples] = useState<ClinicalSample[]>([]);

@@ -1,5 +1,5 @@
-import { SOP } from '../../../types';
-import { BaseApi } from '../../../infrastructure/api';
+import { BaseApi } from '../../infrastructure/api';
+import { SOP } from '../../types';
 
 export class Api {
     public static async getSOPsAsync(projectId: string): Promise<SOP[]> {

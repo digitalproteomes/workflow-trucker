@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Form, Select } from 'antd';
-import { InputModal } from '../../../../../common/inputModal';
-import { ClinicalSample, SOP } from '../../../../../types';
-import { validationMessage, createFormInput } from '../../../../../common/inputModalHelpers';
 import { Store } from 'antd/lib/form/interface';
 import { Api } from '../../api';
+import { InputModal } from '../../../../common/inputModal';
+import { createFormInput, validationMessage } from '../../../../common/inputModalHelpers';
+import { ClinicalSample, SOP } from '../../../../types';
 const { Option } = Select;
 
 type FormProps = {

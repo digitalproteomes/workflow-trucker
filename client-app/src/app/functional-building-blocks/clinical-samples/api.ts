@@ -1,7 +1,7 @@
-import { BaseApi } from '../../../infrastructure/api';
-import { ClinicalSample } from '../../../types';
-import { mockClinicalSamples } from '../../../default-data/samples';
-import { Constants } from '../../../default-data/constants';
+import { Constants } from '../../default-data/constants';
+import { mockClinicalSamples } from '../../default-data/samples';
+import { BaseApi } from '../../infrastructure/api';
+import { ClinicalSample } from '../../types';
 
 export class Api {
     public static async fetchSamples(projectId: string): Promise<ClinicalSample[]> {

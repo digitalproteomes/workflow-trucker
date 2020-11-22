@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { ClinicalSampleCompact } from '../../../../types';
-import { getColumn } from '../../../../common/columnHelpers';
 import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
+import { getColumn } from '../../../common/columnHelpers';
+import { ClinicalSampleCompact } from '../../../types';
 
 type Props = {
     name: string;

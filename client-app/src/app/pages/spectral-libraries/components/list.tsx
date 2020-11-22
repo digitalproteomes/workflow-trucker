@@ -8,8 +8,8 @@ import { ColumnsType } from 'antd/lib/table';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
 import { Row, Col, Divider } from 'antd';
-import { ListCompactClinicalSamples } from '../../functional-building-blocks/clinical-samples';
-import { ListCompactMsRuns } from '../../functional-building-blocks/ms-runs';
+import { ListCompactClinicalSamples } from '../../../functional-building-blocks/clinical-samples';
+import { ListCompactMsRuns } from '../../../functional-building-blocks/ms-runs';
 
 type ListProps = {
     isRefreshNeeded: boolean;

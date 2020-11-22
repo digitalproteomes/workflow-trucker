@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useState } from 'react';
-import { InputModal } from '../../../../../common/inputModal';
-import { GenerationData, SampleNew, EWorkflowTag } from '../../../../../types';
-import { createFormInput, createFormSelect } from '../../../../../common/inputModalHelpers';
 import { EditableList } from './autoGenerateResultList';
 import { Api } from '../../api';
-import { Constants } from '../../../../../default-data/constants';
 import { Store } from 'antd/lib/form/interface';
+import { InputModal } from '../../../../common/inputModal';
+import { createFormInput, createFormSelect } from '../../../../common/inputModalHelpers';
+import { Constants } from '../../../../default-data/constants';
+import { SampleNew, GenerationData, EWorkflowTag } from '../../../../types';
 
 type FormProps = {
     isActiveInputForm: boolean;

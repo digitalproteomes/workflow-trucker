@@ -1,18 +1,15 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Form, Button, Upload, Typography } from 'antd';
-import { FormInstance } from 'antd/lib/form';
+import { Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { Api } from '../api';
 import { UploadProps } from 'antd/lib/upload';
-import { FieldData } from 'rc-field-form/lib/interface';
+import { Store } from 'rc-field-form/lib/interface';
 import { Constants } from '../../../default-data/constants';
 import { createFormInput, createSOPFormSelect } from '../../../common/inputModalHelpers';
 
 import { RcFile } from 'antd/lib/upload/interface';
-import { InputModal } from '../../../common/inputModal';
-import { SOP, SOPDataKeys, ESOPType } from '../../../types';
-import { FormLayoutConstants } from '../../../common/constants';
-const { Text } = Typography;
+import { InputModal_v2 } from '../../../common/inputModal';
+import { SOP, ESOPType } from '../../../types';
 
 export { ButtonUploadSOP, FormUploadSOP };
 
@@ -36,11 +33,9 @@ type FormProps = {
 };
 
 const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUploadSuccessful, onCancel }) => {
-    const [isUploading, setIsUploadingFlag] = useState<boolean>(false);
     const [file, setFile] = useState<RcFile | null>(null);
-    const [sopData, setSopData] = useState<SOP>(SOP.Default);
 
-    const props: UploadProps = {
+    const uploadProps: UploadProps = {
         fileList: file === null ? [] : [file],
         onRemove: (_: any) => {
             setFile(null);
@@ -51,116 +46,52 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
         },
     };
 
-    const handleUpload = async () => {
+    const handleUpload = async (sopData: SOP) => {
         if (file === null) {
             // wait: set error message
             return;
         }
 
-        setIsUploadingFlag(true);
-
         try {
             await Api.postAsync(sopData, file, Constants.projectId);
 
             setFile(null);
+
+            onUploadSuccessful();
         } catch (error) {
             // wait: set the error message? in case the upload fails, nothing is shown on the UI at the moment
-        } finally {
-            setIsUploadingFlag(false);
-            onUploadSuccessful();
         }
     };
 
-    const onFieldsChange = (fields: FieldData[]) => {
-        if (!fields || fields.length === 0) return;
-
-        const validFields: FieldData[] = fields.filter((f) => SOPDataKeys.includes(f.name.toString()));
-
-        const newData: SOP = { ...sopData };
-
-        validFields.forEach((f) => {
-            // TODO: continue instead of if
-            if (f.value) {
-                // TODO: transform the switch/case into a dictionary
-                switch (f.name.toString()) {
-                    case SOP.nameof('name'):
-                        newData.name = f.value;
-                        break;
-                    case SOP.nameof('description'):
-                        newData.description = f.value;
-                        break;
-                    case SOP.nameof('artefactClass'):
-                        newData.artefactClass = f.value;
-                        break;
-                    case SOP.nameof('processingPerson'):
-                        newData.processingPerson = f.value;
-                        break;
-                    case SOP.nameof('owner'):
-                        newData.owner = f.value;
-                        break;
-                    case SOP.nameof('revision'):
-                        newData.revision = f.value;
-                        break;
-                }
-            }
-        });
-
-        setSopData(newData);
-    };
+    const inputs: JSX.Element[] = [
+        createFormInput('Name', SOP.nameof('name')),
+        createFormInput('Description', SOP.nameof('description')),
+        createFormInput('Processing person', SOP.nameof('processingPerson')),
+        createFormInput('Author', SOP.nameof('owner')),
+        createFormInput('Revision', SOP.nameof('revision')),
+        createSOPFormSelect('SOP Type', SOP.nameof('artefactClass'), [
+            ESOPType.sampleSOP,
+            ESOPType.msRunSOP,
+            ESOPType.dataSOP,
+        ]),
+    ];
 
     return (
-        <InputModal
+        <InputModal_v2
             isVisible={isActiveUploadForm}
             title="Upload SOP"
-            isLoading={isUploading}
-            inputForm={(form: FormInstance) => {
-                return inputForm(form, null, onFieldsChange);
-            }}
-            onCreate={(_) => {
-                handleUpload();
+            inputs={inputs}
+            onCreate={async (data: Store) => {
+                handleUpload(data as SOP);
             }}
             onCancel={onCancel}
+            errorMessage={null}
         >
-            <Upload {...props}>
+            <Upload {...uploadProps}>
                 <Button icon={<UploadOutlined />} style={{ float: 'right' }}>
                     Attach SOP
                 </Button>
             </Upload>
-        </InputModal>
+        </InputModal_v2>
     );
 };
-
-function inputForm(
-    form: FormInstance,
-    errorMessage: string | null,
-    onFieldsChange: (newFields: FieldData[]) => void,
-): JSX.Element {
-    return (
-        <Form
-            {...FormLayoutConstants.defaultFormLayout}
-            layout={'horizontal'}
-            form={form}
-            name="clinical-sample-input-form"
-            initialValues={SOP.Default}
-            onFieldsChange={(changedFields: FieldData[], _: FieldData[]) => onFieldsChange(changedFields)}
-        >
-            {createFormInput('Name', SOP.nameof('name'))}
-            {createFormInput('Description', SOP.nameof('description'))}
-            {createFormInput('Processing person', SOP.nameof('processingPerson'))}
-            {createFormInput('Author', SOP.nameof('owner'))}
-            {createFormInput('Revision', SOP.nameof('revision'))}
-
-            {createSOPFormSelect('SOP Type', SOP.nameof('artefactClass'), [
-                ESOPType.sampleSOP,
-                ESOPType.msRunSOP,
-                ESOPType.dataSOP,
-            ])}
-
-            {errorMessage == null ? null : (
-                <Form.Item label="Error" name="errorMessage">
-                    <Text type="danger">{errorMessage}</Text>
-                </Form.Item>
-            )}
-        </Form>
-    );
-}

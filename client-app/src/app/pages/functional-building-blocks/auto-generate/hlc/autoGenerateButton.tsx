@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { Notifications } from '../../../../common/notifications';
-import { AutoGenerateInputForm } from '../autoGenerate';
+import { AutoGenerateInputForm } from './components/autoGenerate';
 
 type ButtonCreateNewProps = {
     setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>;

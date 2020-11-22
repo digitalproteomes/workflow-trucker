@@ -1,38 +1,23 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import { Api } from '../api';
+import { Api } from '../../api';
 import { UploadProps } from 'antd/lib/upload';
 import { Store } from 'rc-field-form/lib/interface';
-import { Constants } from '../../../default-data/constants';
-import { createFormInput, createSOPFormSelect } from '../../../common/inputModalHelpers';
+import { Constants } from '../../../../default-data/constants';
+import { createFormInput, createSOPFormSelect } from '../../../../common/inputModalHelpers';
 
 import { RcFile } from 'antd/lib/upload/interface';
-import { InputModal } from '../../../common/inputModal';
-import { SOP, ESOPType } from '../../../types';
+import { InputModal } from '../../../../common/inputModal';
+import { SOP, ESOPType } from '../../../../types';
 
-export { ButtonUploadSOP, FormUploadSOP };
-
-type ButtonProps = {
-    onUploadDialogOpen: () => void;
-    style?: React.CSSProperties | undefined;
-};
-
-const ButtonUploadSOP: FunctionComponent<ButtonProps> = ({ onUploadDialogOpen, style }) => {
-    return (
-        <Button type="primary" icon={<UploadOutlined />} onClick={onUploadDialogOpen} style={style}>
-            Upload SOP
-        </Button>
-    );
-};
-
-type FormProps = {
+type Props = {
     isActiveUploadForm: boolean;
     onUploadSuccessful: () => void;
     onCancel: () => void;
 };
 
-const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUploadSuccessful, onCancel }) => {
+export const FormUpload: FunctionComponent<Props> = ({ isActiveUploadForm, onUploadSuccessful, onCancel }) => {
     const [file, setFile] = useState<RcFile | null>(null);
 
     const uploadProps: UploadProps = {

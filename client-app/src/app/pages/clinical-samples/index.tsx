@@ -13,6 +13,7 @@ import { ButtonAutoGenerate } from '../../functional-building-blocks/auto-genera
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [, setSelectedSamples] = useState<ClinicalSample[]>([]);
+    // debt - the setRefreshNeededFlag callback approach should be replaced with a "onSuccess" callback. The low leve component should not influence directly the state of a high level component
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
     const onRefreshDone = () => {

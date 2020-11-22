@@ -8,7 +8,6 @@ import { List } from './components/list';
 import { ClinicalSample } from '../../types';
 import { ButtonDelete } from './components/delete';
 import { ButtonExport } from '../../common/export';
-import { ButtonSinglePrep } from './components/singlePrep';
 import { ProcessSampleForm } from './components/processSample';
 import { Notifications, SampleNotifications } from '../../common/notifications';
 
@@ -49,12 +48,6 @@ export const ClinicalSamples: FunctionComponent = () => {
     const renderActions = (record: ClinicalSample) => {
         return (
             <Space size="middle">
-                <ButtonSinglePrep
-                    onSinglePrep={() => {
-                        console.log('on single prep click');
-                        setSampleToProcess(record);
-                    }}
-                />
                 <ButtonDelete
                     sample={record}
                     onDeleteDone={() => {

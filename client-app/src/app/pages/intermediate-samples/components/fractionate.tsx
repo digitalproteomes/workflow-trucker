@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Button, Form, Input, Tooltip } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { InputModal_v2 } from '../../../common/inputModal';
+import { InputModal } from '../../../common/inputModal';
 import { BaseApi } from '../../../infrastructure/api';
 import { IntermediateSample } from '../../../types';
 import { SplitCellsOutlined, EyeOutlined } from '@ant-design/icons';
@@ -96,7 +96,7 @@ export const FractionateInputForm: FunctionComponent<FormProps> = ({ parentSampl
     const inputs: JSX.Element[] = [getDynamicListInput()];
 
     return (
-        <InputModal_v2
+        <InputModal
             isVisible={parentSample != null}
             title={`Fractionate clinical sample`}
             inputs={inputs}

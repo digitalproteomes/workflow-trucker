@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Form, Select } from 'antd';
-import { InputModal_v2 } from '../../../common/inputModal';
+import { InputModal } from '../../../common/inputModal';
 import { ClinicalSample, SOP } from '../../../types';
 import { validationMessage, createFormInput } from '../../../common/inputModalHelpers';
 import { Store } from 'antd/lib/form/interface';
@@ -54,7 +54,7 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
     ];
 
     return (
-        <InputModal_v2
+        <InputModal
             isVisible={isActiveInputForm}
             title="Process sample (generates an intermediate sample)"
             inputs={inputs}

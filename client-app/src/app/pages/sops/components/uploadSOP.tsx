@@ -8,7 +8,7 @@ import { Constants } from '../../../default-data/constants';
 import { createFormInput, createSOPFormSelect } from '../../../common/inputModalHelpers';
 
 import { RcFile } from 'antd/lib/upload/interface';
-import { InputModal_v2 } from '../../../common/inputModal';
+import { InputModal } from '../../../common/inputModal';
 import { SOP, ESOPType } from '../../../types';
 
 export { ButtonUploadSOP, FormUploadSOP };
@@ -77,7 +77,7 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
     ];
 
     return (
-        <InputModal_v2
+        <InputModal
             isVisible={isActiveUploadForm}
             title="Upload SOP"
             inputs={inputs}
@@ -92,6 +92,6 @@ const FormUploadSOP: FunctionComponent<FormProps> = ({ isActiveUploadForm, onUpl
                     Attach SOP
                 </Button>
             </Upload>
-        </InputModal_v2>
+        </InputModal>
     );
 };

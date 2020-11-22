@@ -10,53 +10,6 @@ const { Text } = Typography;
 type ModalProps = {
     isVisible: boolean;
     title: string;
-    isLoading?: boolean;
-    inputForm: (form: FormInstance) => JSX.Element;
-    onCreate: (values: any) => void;
-    onCancel: () => void;
-};
-
-export const InputModal: FunctionComponent<ModalProps> = ({
-    isVisible,
-    title,
-    isLoading,
-    inputForm,
-    onCreate,
-    onCancel,
-    children,
-}) => {
-    const [form] = Form.useForm();
-
-    return (
-        <Modal
-            visible={isVisible}
-            width={'30%'}
-            title={title}
-            okText="Create"
-            okButtonProps={{ loading: isLoading }}
-            cancelText="Cancel"
-            onCancel={onCancel}
-            onOk={() => {
-                form.validateFields()
-                    .then((values) => {
-                        form.resetFields();
-                        onCreate(values);
-                    })
-                    .catch((info) => {
-                        console.log('Warning message shown. Validation failed:', info);
-                        Notifications.queueWarning('Validation', 'Field validation failed. Please check the values.');
-                    });
-            }}
-        >
-            {inputForm(form)}
-            {children}
-        </Modal>
-    );
-};
-
-type ModalProps_v2 = {
-    isVisible: boolean;
-    title: string;
     inputs: JSX.Element[];
     errorMessage: string | null;
     onCreate: (entry: Store) => Promise<void>;
@@ -65,7 +18,7 @@ type ModalProps_v2 = {
     onValuesChange?: (values: Store) => void;
 };
 
-export const InputModal_v2: FunctionComponent<ModalProps_v2> = ({
+export const InputModal: FunctionComponent<ModalProps> = ({
     isVisible,
     title,
     inputs,

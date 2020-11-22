@@ -5,9 +5,10 @@ import { App } from './app/App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
+    // debt - strict mode removed because of the diagrams library https://github.com/projectstorm/react-diagrams/issues/598#issuecomment-635924991
+    // <React.StrictMode>
+    <App />,
+    // </React.StrictMode>,
     document.getElementById('root'),
 );
 

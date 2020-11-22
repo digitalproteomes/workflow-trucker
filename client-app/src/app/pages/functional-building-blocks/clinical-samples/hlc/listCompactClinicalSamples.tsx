@@ -1,10 +1,15 @@
-import React from 'react';
-import { ClinicalSampleCompact } from '../../types';
-import { getColumn } from '../columnHelpers';
+import React, { FunctionComponent } from 'react';
+import { ClinicalSampleCompact } from '../../../../types';
+import { getColumn } from '../../../../common/columnHelpers';
 import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 
-export function getCompactClinicalSampleList(name: string, samples: ClinicalSampleCompact[]) {
+type Props = {
+    name: string;
+    samples: ClinicalSampleCompact[];
+};
+
+export const ListCompactClinicalSamples: FunctionComponent<Props> = ({ name, samples }) => {
     return (
         <Table
             title={() => <h3>{`Clinical samples of ${name}`}</h3>}
@@ -30,4 +35,4 @@ export function getCompactClinicalSampleList(name: string, samples: ClinicalSamp
             dataSource={samples}
         />
     );
-}
+};

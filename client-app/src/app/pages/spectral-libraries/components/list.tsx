@@ -8,8 +8,8 @@ import { ColumnsType } from 'antd/lib/table';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
 import { Row, Col, Divider } from 'antd';
-import { getCompactClinicalSampleList } from '../../../common/clinical-samples/listCompactClinicalSamples';
 import { getCompactMSRunsList } from '../../../common/ms-runs/listCompactMsRuns';
+import { ListCompactClinicalSamples } from '../../functional-building-blocks/clinical-samples';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -74,7 +74,7 @@ function renderExpandedRow(record: SpectralLibrary) {
             </Col>
 
             <Col className="gutter-row" span={8}>
-                {getCompactClinicalSampleList(record.name, record.clinicalSamples)}
+                <ListCompactClinicalSamples name={record.name} samples={record.clinicalSamples} />
             </Col>
 
             <Col className="gutter-row" span={8}>

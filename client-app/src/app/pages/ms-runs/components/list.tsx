@@ -8,7 +8,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
 import { Button, Row, Col, Divider } from 'antd';
-import { getCompactClinicalSampleList } from '../../../common/clinical-samples/listCompactClinicalSamples';
+import { ListCompactClinicalSamples } from '../../functional-building-blocks/clinical-samples';
 
 type ListProps = {
     isRefreshNeeded: boolean;
@@ -49,7 +49,7 @@ export const List: FunctionComponent<ListProps> = ({
                             </Col>
 
                             <Col className="gutter-row" span={8}>
-                                {getCompactClinicalSampleList(record.name, record.clinicalSamples)}
+                                <ListCompactClinicalSamples name={record.name} samples={record.clinicalSamples} />
                             </Col>
                         </Row>
                     );

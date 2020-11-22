@@ -5,6 +5,9 @@ import { ExportOutlined } from '@ant-design/icons';
 type ButtonExportProps = {
     onExportDone: () => void;
 };
+
+// todo - prioritize export implementation, and think about integrating it in the building blocks, or into the existing list implementation
+// wait - prioritize export implementation, and think about integrating it in the building blocks, or into the existing list implementation
 export const ButtonExport: FunctionComponent<ButtonExportProps> = ({ onExportDone }) => {
     async function onExport() {
         onExportDone();

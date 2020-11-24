@@ -59,14 +59,8 @@ const BasicLayout: React.FC = (props) => {
                 <Menu
                     mode="inline"
                     theme="dark"
-                    defaultSelectedKeys={[`${defaultProjectId}_5`]}
-                    // defaultSelectedKeys={[`${defaultProjectId}_intermediate`]}
-                    // defaultSelectedKeys={[`${defaultProjectId}_msready`]}
-                    defaultOpenKeys={[
-                        `${defaultProjectId}_sub1`,
-                        `${defaultProjectId}_sub1_1`,
-                        // `${otherProjectId}_sub1`,
-                    ]}
+                    defaultSelectedKeys={[`about`]}
+                    defaultOpenKeys={[`${defaultProjectId}_sub1`, `${defaultProjectId}_sub1_1`]}
                 >
                     <Menu.Item key={'about'} icon={<CoffeeOutlined />}>
                         <Link to={`/about`}>Home</Link>

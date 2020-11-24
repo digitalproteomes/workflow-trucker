@@ -131,6 +131,9 @@ function getSubmenu(projectId: string, name: string) {
             <Menu.Item key={`sops_${projectId}_sops`} icon={<UnorderedListOutlined />}>
                 <Link to={`/sops?project=${projectId}`}>SOPs</Link>
             </Menu.Item>
+            <Menu.Item key={`${projectId}_diagrams`} icon={<UnorderedListOutlined />}>
+                <Link to={`/diagrams?project=${projectId}`}>Diagrams</Link>
+            </Menu.Item>
         </SubMenu>
     );
 }

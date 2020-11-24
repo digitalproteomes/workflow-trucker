@@ -17,7 +17,7 @@ import {
     UnorderedListOutlined,
 } from '@ant-design/icons';
 
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { CollapseType } from 'antd/lib/layout/Sider';
 import { Constants } from '../default-data/constants';
 
@@ -29,7 +29,7 @@ type State = {
     isCollapsed: boolean;
 };
 
-const BasicLayout: React.FC = (props) => {
+const BasicLayout = withRouter((props) => {
     const [prevState, setState] = useState<State>({ isCollapsed: false });
 
     function onCollapse(isCollapsed: boolean, type: CollapseType) {
@@ -37,10 +37,11 @@ const BasicLayout: React.FC = (props) => {
         setState({ ...prevState, isCollapsed });
     }
 
+    let selectedMenuEntry = props.location.pathname;
+    if (selectedMenuEntry === '/') selectedMenuEntry = '/about';
+
     const defaultProjectId = Constants.projectId;
     const defaultProjectName = 'PHRT_005_CPAC';
-    const otherProjectId = '5f_other_project_id';
-    const otherProjectName = 'PHRT_006_CPAC';
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
@@ -59,14 +60,14 @@ const BasicLayout: React.FC = (props) => {
                 <Menu
                     mode="inline"
                     theme="dark"
-                    defaultSelectedKeys={[`about`]}
-                    defaultOpenKeys={[`${defaultProjectId}_sub1`, `${defaultProjectId}_sub1_1`]}
+                    defaultSelectedKeys={[`/about`]}
+                    selectedKeys={[selectedMenuEntry]}
+                    defaultOpenKeys={[`${defaultProjectId}`, `/samples`]}
                 >
-                    <Menu.Item key={'about'} icon={<CoffeeOutlined />}>
+                    <Menu.Item key={'/about'} icon={<CoffeeOutlined />}>
                         <Link to={`/about`}>Home</Link>
                     </Menu.Item>
                     {getSubmenu(defaultProjectId, defaultProjectName)}
-                    {getSubmenu(otherProjectId, otherProjectName)}
                 </Menu>
             </Sider>
             <Layout className="site-layout">
@@ -89,43 +90,43 @@ const BasicLayout: React.FC = (props) => {
             </Layout>
         </Layout>
     );
-};
+});
 
 export default BasicLayout;
 function getSubmenu(projectId: string, name: string) {
     return (
         <SubMenu
-            key={`${projectId}_sub1`}
+            key={`${projectId}`}
             icon={<ExperimentOutlined />}
             title={<Link to={`/projects?id=${projectId}`}>{name}</Link>}
         >
             <Menu.Item key={`${projectId}_0`} icon={<MonitorOutlined />}>
                 <Link to={`/projects?id=${projectId}`}>Project overview</Link>
             </Menu.Item>
-            <SubMenu key={`${projectId}_sub1_1`} title={'Samples'} icon={<BarcodeOutlined />}>
-                <Menu.Item key={`${projectId}_5`}>
+            <SubMenu key={`/samples`} title={'Samples'} icon={<BarcodeOutlined />}>
+                <Menu.Item key={`/samples/clinical`}>
                     <Link to={`/samples/clinical?project=${projectId}`}>Clinical</Link>
                 </Menu.Item>
-                <Menu.Item key={`${projectId}_intermediate`}>
+                <Menu.Item key={`/samples/intermediate`}>
                     <Link to={`/samples/intermediate?project=${projectId}`}>Intermediate</Link>
                 </Menu.Item>
-                <Menu.Item key={`${projectId}_msready`}>
+                <Menu.Item key={`/samples/msready`}>
                     <Link to={`/samples/msready?project=${projectId}`}>MS Ready</Link>
                 </Menu.Item>
             </SubMenu>
-            <Menu.Item key={`${projectId}_20`} icon={<DashboardOutlined />}>
+            <Menu.Item key={`/samples/msruns`} icon={<DashboardOutlined />}>
                 <Link to={`/msruns`}>MS Runs</Link>
             </Menu.Item>
-            <Menu.Item key={`${projectId}_30`} icon={<ReadOutlined />}>
+            <Menu.Item key={`/spectrallibraries`} icon={<ReadOutlined />}>
                 <Link to={`/spectrallibraries?project=${projectId}`}>Spectral Libraries</Link>
             </Menu.Item>
-            <Menu.Item key={`${projectId}_40`} icon={<HeatMapOutlined />}>
+            <Menu.Item key={`/swathanalyses`} icon={<HeatMapOutlined />}>
                 <Link to={`/swathanalyses?project=${projectId}`}>SWATH Analyses</Link>
             </Menu.Item>
-            <Menu.Item key={`sops_${projectId}_sops`} icon={<UnorderedListOutlined />}>
+            <Menu.Item key={`/sops`} icon={<UnorderedListOutlined />}>
                 <Link to={`/sops?project=${projectId}`}>SOPs</Link>
             </Menu.Item>
-            <Menu.Item key={`${projectId}_diagrams`} icon={<UnorderedListOutlined />}>
+            <Menu.Item key={`/diagrams`} icon={<UnorderedListOutlined />}>
                 <Link to={`/diagrams?project=${projectId}`}>Diagrams</Link>
             </Menu.Item>
         </SubMenu>

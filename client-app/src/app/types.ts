@@ -103,6 +103,16 @@ export class MSRunCompact {
     public static nameof = (name: keyof MSRunCompact) => name;
 }
 
+export class NewIntermediarySample {
+    description: string = '';
+    sopId: string = '';
+    clinicalSampleId: string = '';
+    processingPerson: string = '';
+    workflowTag: string = '';
+
+    public static nameof = (name: keyof NewIntermediarySample) => name;
+}
+
 export class IntermediateSample {
     clinicalSamples: ClinicalSampleCompact[] = [];
 

@@ -3,7 +3,7 @@ import { Button, Tooltip } from 'antd';
 import { IntermediateSample } from '../../../types';
 import { SplitCellsOutlined } from '@ant-design/icons';
 import { SampleNotifications } from '../../../common/notifications';
-import { FormFractionate } from './formFractionate';
+import { FormFractionate } from './components/formFractionate';
 
 type Props = {
     sample: IntermediateSample;

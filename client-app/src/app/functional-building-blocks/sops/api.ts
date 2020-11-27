@@ -1,5 +1,5 @@
 import { BaseApi } from '../../infrastructure/api';
-import { SOP } from '../../types';
+import { SOP } from '../../types/types';
 import { mockSOP } from '../../default-data/samples';
 import { Constants } from '../../default-data/constants';
 import { RcFile } from 'antd/lib/upload';

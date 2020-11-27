@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Project } from '../../types';
+import { Project } from '../../types/types';
 import { ProjectView } from './components/projectView';
 import { ProjectEdit } from './components/projectEdit';
 

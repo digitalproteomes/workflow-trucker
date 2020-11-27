@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Button, Tooltip } from 'antd';
 import { DeliveredProcedureOutlined } from '@ant-design/icons';
-import { ClinicalSample } from '../../../types';
+import { ClinicalSample } from '../../../types/clinicalSample';
 import { SampleNotifications } from '../../../common/notifications';
 import { ProcessSampleForm } from './components/formProcess';
 

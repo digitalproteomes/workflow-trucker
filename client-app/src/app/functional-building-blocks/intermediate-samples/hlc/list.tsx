@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { IntermediateSample } from '../../../types';
+import { IntermediateSample } from '../../../types/types';
 import { getColumn } from '../../../common/columnHelpers';
 import { Constants } from '../../../default-data/constants';
 import { ColumnsType } from 'antd/lib/table';

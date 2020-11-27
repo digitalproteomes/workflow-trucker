@@ -1,7 +1,7 @@
 import { Constants } from '../../default-data/constants';
 import { mockIntermediateSamples } from '../../default-data/samples';
 import { BaseApi } from '../../infrastructure/api';
-import { IntermediateSample, NewIntermediarySample, SOP } from '../../types';
+import { IntermediateSample, NewIntermediarySample, SOP } from '../../types/types';
 
 export class Api {
     public static async fetchSamples(projectId: string): Promise<IntermediateSample[]> {

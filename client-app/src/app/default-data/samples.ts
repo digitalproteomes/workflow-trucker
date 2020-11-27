@@ -1,6 +1,5 @@
 import {
     MsRun,
-    ClinicalSample,
     IntermediateSample,
     MSReadySample,
     EWorkflowTag,
@@ -8,7 +7,8 @@ import {
     SwathAnalysis,
     SpectralLibrary,
     SOP,
-} from '../types';
+} from '../types/types';
+import { ClinicalSample } from '../types/clinicalSample';
 import { Constants } from './constants';
 
 export function mockClinicalSamples(): ClinicalSample[] {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Select } from 'antd';
 import { getSOPType, getWorkflowTag } from './tags';
-import { ESOPType, EWorkflowTag } from '../types';
+import { ESOPType, EWorkflowTag } from '../types/types';
 
 const { Option } = Select;
 

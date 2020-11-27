@@ -1,5 +1,5 @@
 import { BaseApi } from '../../infrastructure/api';
-import { SpectralLibrary } from '../../types';
+import { SpectralLibrary } from '../../types/types';
 import { mockSpectralLibrary } from '../../default-data/samples';
 import { Constants } from '../../default-data/constants';
 

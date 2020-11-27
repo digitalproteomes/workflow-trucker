@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, PageHeader, Divider } from 'antd';
-import { SOP } from '../../types';
+import { SOP } from '../../types/types';
 import { ButtonExport } from '../../common/export';
 import { SampleNotifications } from '../../common/notifications';
 import { ButtonDeleteSOP, ButtonDownload, ButtonUploadSOP, List } from '../../functional-building-blocks/sops/';

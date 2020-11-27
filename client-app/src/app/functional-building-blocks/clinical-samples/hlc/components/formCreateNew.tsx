@@ -3,7 +3,7 @@ import { Api } from '../../api';
 import { Store } from 'antd/lib/form/interface';
 import { InputModal } from '../../../../common/inputModal';
 import { createFormInput } from '../../../../common/inputModalHelpers';
-import { ClinicalSample } from '../../../../types';
+import { ClinicalSample } from '../../../../types/clinicalSample';
 
 type Props = {
     isActiveInputForm: boolean;

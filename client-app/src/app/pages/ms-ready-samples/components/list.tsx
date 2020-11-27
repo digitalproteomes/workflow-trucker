@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { MSReadySample } from '../../../types';
+import { MSReadySample } from '../../../types/types';
 import { getColumn } from '../../../common/columnHelpers';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';

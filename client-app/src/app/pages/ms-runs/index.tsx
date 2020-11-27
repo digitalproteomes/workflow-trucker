@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
-import { MsRun } from '../../types';
+import { MsRun } from '../../types/types';
 import { List } from './components/list';
 import { ButtonExport } from '../../common/export';
 import { SampleNotifications } from '../../common/notifications';

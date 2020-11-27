@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Tooltip, Button } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
-import { SOP } from '../../../types';
+import { SOP } from '../../../types/types';
 import { Api } from '../api';
 
 type ButtonDownloadProps = {

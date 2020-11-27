@@ -6,7 +6,7 @@ import moment from 'moment';
 import { getColumn } from '../../../common/columnHelpers';
 import { CommonList } from '../../../common/list';
 import { Constants } from '../../../default-data/constants';
-import { ClinicalSample } from '../../../types';
+import { ClinicalSample } from '../../../types/clinicalSample';
 
 type ListProps = {
     isRefreshNeeded: boolean;

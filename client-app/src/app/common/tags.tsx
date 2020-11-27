@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Dictionary } from './utils';
 import Tag, { TagProps } from 'antd/lib/tag';
 import { CheckCircleOutlined, SyncOutlined, ClockCircleOutlined } from '@ant-design/icons';
-import { EWorkflowTag, EProtocolTag, ESOPType } from '../types';
+import { EWorkflowTag, EProtocolTag, ESOPType } from '../types/types';
 
 // workflow tags start
 const WorkflowTagProps: Dictionary<TagProps> = {};

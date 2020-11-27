@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 import { getColumn } from '../../../common/columnHelpers';
-import { ClinicalSampleCompact } from '../../../types';
+import { ClinicalSampleCompact } from '../../../types/clinicalSample';
 
 type Props = {
     name: string;

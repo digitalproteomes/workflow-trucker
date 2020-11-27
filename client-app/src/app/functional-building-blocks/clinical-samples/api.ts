@@ -1,7 +1,7 @@
 import { Constants } from '../../default-data/constants';
 import { mockClinicalSamples } from '../../default-data/samples';
 import { BaseApi } from '../../infrastructure/api';
-import { ClinicalSample, ClinicalSampleNew } from '../../types';
+import { ClinicalSample, ClinicalSampleNew } from '../../types/clinicalSample';
 
 export class Api {
     public static async fetchSamples(projectId: string): Promise<ClinicalSample[]> {

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { MsRun } from '../../../types';
+import { MsRun } from '../../../types/types';
 import { CommonList } from '../../../common/list';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';

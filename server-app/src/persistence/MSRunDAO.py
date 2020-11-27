@@ -35,6 +35,15 @@ def getMsRunsByClinicalSampleId(clinicalSampleId):
     return result_msruns
 
 
+def getMsRunsByMSREadySampleId(msrId):
+    msruns = MSRun.find(
+        {"msReadySampleId": ObjectId(msrId)})
+    result_msruns = []
+    for i in msruns:
+        result_msruns.append(i.dump())
+    return result_msruns
+
+
 def getMsRun(id):
     return MSRun.find_one({"id": id})
 

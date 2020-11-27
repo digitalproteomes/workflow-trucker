@@ -10,6 +10,7 @@ from endpoint.MSRunController import msrun_api
 from endpoint.sopController import sop_api
 from endpoint.swathAnalysisController import swathanalysis_api
 from endpoint.spectralLibraryController import spectrallibraries_api
+from endpoint.sampleJourneyController import sampleJourney_api
 
 
 app = Flask(__name__)
@@ -23,6 +24,7 @@ app.register_blueprint(msrun_api)
 app.register_blueprint(swathanalysis_api)
 app.register_blueprint(spectrallibraries_api)
 app.register_blueprint(sop_api)
+app.register_blueprint(sampleJourney_api)
 
 CORS(app)
 

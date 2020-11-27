@@ -16,3 +16,16 @@ def getAllLibrariesForProject(projectId):
     for i in spls:
         result_spls.append(i.dump())
     return result_spls
+
+
+def getLibrariesForMSRun(msRunId):
+    spls = SpectralLibrary.find({"msRunIds": ObjectId(msRunId)})
+    result_spls = []
+    for i in spls:
+        result_spls.append(i.dump())
+    return result_spls
+
+
+def getSpectralLibraryById(id):
+    spls = SpectralLibrary.find_one({"id": ObjectId(id)})
+    return spls.dump()

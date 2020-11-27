@@ -25,7 +25,11 @@ def getClinicalSampleByClinicalSampleCode(id):
 
 
 def getClinicalSampleById(id):
-    return ClinicalSample.find_one({"id": id})
+    return ClinicalSample.find_one({"id": ObjectId(id)})
+
+
+def getClinicalSampleByName(name):
+    return ClinicalSample.find_one({"name": name})
 
 
 def deleteSample(id):

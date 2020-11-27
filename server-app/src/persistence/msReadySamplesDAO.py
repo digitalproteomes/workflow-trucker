@@ -3,18 +3,18 @@ import datetime
 from bson import ObjectId
 
 
-def getMsReadySamplesByClinicalSample(clinicalSampleId, projectId):
-    samples = MSReadySample.find({"projectId": ObjectId(projectId),
-                                  "clinicalSamples": ObjectId(clinicalSampleId)})
+def getMsReadySamplesByClinicalSample(clinicalSampleId):
+    samples = MSReadySample.find(
+        {"clinicalSamples": ObjectId(clinicalSampleId)})
     result_samples = []
     for i in samples:
         result_samples.append(i.dump())
     return result_samples
 
 
-def getMsReadySampleByIntermediateSampleId(intermediateSampleId, projectId):
-    samples = MSReadySample.find({"projectId": ObjectId(projectId),
-                                  "intermediateSampleId": ObjectId(intermediateSampleId)})
+def getMsReadySampleByIntermediateSampleId(intermediateSampleId,):
+    samples = MSReadySample.find(
+        {"intermediateSampleId": ObjectId(intermediateSampleId)})
     result_samples = []
     for i in samples:
         result_samples.append(i.dump())

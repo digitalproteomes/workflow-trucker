@@ -19,8 +19,11 @@ import re
 
 import os
 
+# TODO delete class
 
 # can be deleted after integration
+
+
 def createMockGraph():
     g = Digraph('G', filename='sampleJourney5')
 

@@ -24,3 +24,8 @@ def getLibrariesForMSRun(msRunId):
     for i in spls:
         result_spls.append(i.dump())
     return result_spls
+
+
+def getSpectralLibraryById(id):
+    spls = SpectralLibrary.find_one({"id": ObjectId(id)})
+    return spls.dump()

@@ -2,11 +2,11 @@ import { Form, Input, Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import React, { FunctionComponent, useContext, useEffect, useRef, useState } from 'react';
 import { getColumn, getEditableColumn } from '../../../../common/columnHelpers';
-import { SampleNew, ClinicalSample } from '../../../../types';
+import { ClinicalSampleNew, ClinicalSample } from '../../../../types';
 
 type Props = {
-    entries: SampleNew[];
-    onListChanged: (newSamples: SampleNew[]) => void;
+    entries: ClinicalSampleNew[];
+    onListChanged: (newSamples: ClinicalSampleNew[]) => void;
 };
 
 export const EditableList: FunctionComponent<Props> = ({ entries, onListChanged }) => {
@@ -85,8 +85,8 @@ export const EditableList: FunctionComponent<Props> = ({ entries, onListChanged 
         return <td {...restProps}>{childNode}</td>;
     };
 
-    const handleSave = (row: SampleNew) => {
-        const newData: SampleNew[] = [...entries];
+    const handleSave = (row: ClinicalSampleNew) => {
+        const newData: ClinicalSampleNew[] = [...entries];
         const index = newData.findIndex((item) => row.name === item.name);
         const item = newData[index];
         newData.splice(index, 1, {
@@ -97,10 +97,10 @@ export const EditableList: FunctionComponent<Props> = ({ entries, onListChanged 
         onListChanged(newData);
     };
 
-    const columns: ColumnsType<SampleNew> = [
-        getColumn('Name', SampleNew.nameof('name')),
-        getEditableColumn('Clinical sample code', SampleNew.nameof('clinicalSampleCode'), handleSave),
-        getColumn('Processing person', SampleNew.nameof('processingPerson')),
+    const columns: ColumnsType<ClinicalSampleNew> = [
+        getColumn('Name', ClinicalSampleNew.nameof('name')),
+        getEditableColumn('Clinical sample code', ClinicalSampleNew.nameof('clinicalSampleCode'), handleSave),
+        getColumn('Processing person', ClinicalSampleNew.nameof('processingPerson')),
     ];
 
     return (

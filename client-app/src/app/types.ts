@@ -1,50 +1,3 @@
-/** TODO: deprecated - remove completely once no more references to this */
-export class Sample {
-    createdDate: string = '';
-
-    id: string = '';
-
-    name: string = '';
-
-    parentSampleId: string = '';
-
-    projectId: string = '';
-
-    protocolId: number = -1;
-
-    protocolName: string = '';
-
-    clinicalSampleCode: number = -1;
-
-    updatedDate: string = '';
-
-    public static nameof = (name: keyof Sample) => name;
-}
-
-export class SampleNew {
-    name: string = '';
-
-    parentSampleId: string = '';
-
-    projectId: string = '';
-
-    protocolId: number = -1;
-
-    /** shown on the ui as Id, it's actually a mock placeholder for the superficial identification of the samples coming in from the hospital */
-    clinicalSampleCode: string = '';
-
-    /** not sure shy this has to be on this sample. How come it is not present on the sample coming from the backend? */
-    processingPerson: string = '';
-
-    sampleCounter: number = -1;
-
-    description: string = '';
-
-    workflowTag: string = '';
-
-    public static nameof = (name: keyof SampleNew) => name;
-}
-
 export enum EWorkflowTag {
     Invalid = 'Invalid',
     SamplePreparation = 'Sample Preparation',
@@ -65,24 +18,48 @@ export enum EProtocolTag {
     Pooling = 'pooling_preparation',
 }
 
-export class ClinicalSample {
-    createdDate: string = '';
+export class ClinicalSampleNew {
+    name: string = '';
+
+    clinicalSampleCode: string = '';
 
     description: string = '';
 
-    id: string = '';
+    // field populated with contextual data
+    projectId: string = '';
 
-    name: string = '';
-
+    // field populated with contextual data
     processingPerson: string = '';
 
-    projectId: string = '';
+    workflowTag: string = '';
+
+    // plan - add the quality field when the sample is generated/created. // poor, good, excellent. to be selected from a dropdown. the value for now is a string (not an id)
+    quality: string = '';
+
+    public static nameof = (name: keyof ClinicalSampleNew) => name;
+}
+
+export class ClinicalSample {
+    name: string = '';
 
     clinicalSampleCode: number = -1;
 
-    updatedDate: string = '';
+    description: string = '';
+
+    processingPerson: string = '';
 
     workflowTag: EWorkflowTag = EWorkflowTag.Invalid;
+
+    projectId: string = '';
+
+    quality: string = '';
+
+    // auto generated id
+    id: string = '';
+
+    createdDate: string = '';
+
+    updatedDate: string = '';
 
     public static nameof = (name: keyof ClinicalSample) => name;
 }
@@ -337,11 +314,7 @@ export const SOPDataKeys: string[] = Object.keys(new SOP());
 export class GenerationData {
     prefixProject: string = '';
 
-    projectId: string = '-1';
-
     suffixProject: string = '';
-
-    processingPerson: string = '';
 
     description: string = '';
 
@@ -349,16 +322,17 @@ export class GenerationData {
 
     numberOfEntries: number = 10;
 
+    idSeed: number = 0; // plan - get this number from the backend. (already exists)
+
     public static nameof = (name: keyof GenerationData) => name;
 
     public static Default: GenerationData = {
         prefixProject: 'PHRT',
-        projectId: '005', //Constants.projectId,
         suffixProject: 'CPAC',
-        processingPerson: 'Admin',
         description: 'Zurich Hospital sample',
         workflowTag: EWorkflowTag.LibraryGeneration.toString(),
         numberOfEntries: 3,
+        idSeed: 0,
     };
 }
 

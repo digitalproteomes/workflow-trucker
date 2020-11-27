@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Button, Tooltip } from 'antd';
-import { IntermediateSample } from '../../../types/types';
+import { IntermediateSample } from '../../../types';
 import { SplitCellsOutlined } from '@ant-design/icons';
 import { SampleNotifications } from '../../../common/notifications';
 import { FormFractionate } from './components/formFractionate';

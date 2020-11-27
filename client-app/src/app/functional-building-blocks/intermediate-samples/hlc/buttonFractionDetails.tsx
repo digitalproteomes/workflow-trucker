@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Button, Tooltip } from 'antd';
-import { IntermediateSample } from '../../../types/types';
+import { IntermediateSample } from '../../../types';
 import { EyeOutlined } from '@ant-design/icons';
 
 type Props = {

@@ -1,5 +1,5 @@
 import { BaseApi } from '../../infrastructure/api';
-import { MsRun } from '../../types/types';
+import { MsRun } from '../../types';
 import { mockMsRun as mockMsRuns } from '../../default-data/samples';
 import { Constants } from '../../default-data/constants';
 

@@ -3,8 +3,8 @@ import { Form, Select } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 import { InputModal } from '../../../../common/inputModal';
 import { createFormInput, validationMessage } from '../../../../common/inputModalHelpers';
-import { IntermediateSample, NewIntermediarySample, SOP } from '../../../../types/types';
-import { ClinicalSample } from '../../../../types/clinicalSample';
+import { IntermediateSample, NewIntermediarySample, SOP } from '../../../../types';
+import { ClinicalSample } from '../../../../types';
 import { Api } from '../../api';
 const { Option } = Select;
 

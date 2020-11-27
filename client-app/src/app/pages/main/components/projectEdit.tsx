@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Card, Row, Col, Input, PageHeader, Divider, Button, Space } from 'antd';
-import { Project } from '../../../types/types';
+import { Project } from '../../../types';
 import { observer } from 'mobx-react';
 import { LockOutlined, DownloadOutlined } from '@ant-design/icons';
 

@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-import { IntermediateSample } from '../../types/types';
+import { IntermediateSample } from '../../types';
 import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
 import { ButtonExport } from '../../common/export';
 import { PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';

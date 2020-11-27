@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { SwathAnalysis } from '../../../types/types';
+import { SwathAnalysis } from '../../../types';
 import { CommonList } from '../../../common/list';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';

@@ -7,8 +7,8 @@ import {
     SwathAnalysis,
     SpectralLibrary,
     SOP,
-} from '../types/types';
-import { ClinicalSample } from '../types/clinicalSample';
+} from '../types';
+import { ClinicalSample } from '../types';
 import { Constants } from './constants';
 
 export function mockClinicalSamples(): ClinicalSample[] {

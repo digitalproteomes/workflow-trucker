@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from 'react';
 import { List } from './components/list';
-import { MSReadySample } from '../../types/types';
+import { MSReadySample } from '../../types';
 import { Space, Button, Tooltip, PageHeader, Divider } from 'antd';
 import { ButtonExport } from '../../common/export';
 import { DownloadOutlined } from '@ant-design/icons';

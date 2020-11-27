@@ -9,7 +9,7 @@ import { createFormInput, createSOPFormSelect } from '../../../../common/inputMo
 
 import { RcFile } from 'antd/lib/upload/interface';
 import { InputModal } from '../../../../common/inputModal';
-import { SOP, ESOPType } from '../../../../types/types';
+import { SOP, ESOPType } from '../../../../types';
 
 type Props = {
     isActiveUploadForm: boolean;

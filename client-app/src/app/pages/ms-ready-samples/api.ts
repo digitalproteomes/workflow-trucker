@@ -1,5 +1,5 @@
 import { BaseApi } from '../../infrastructure/api';
-import { MSReadySample } from '../../types/types';
+import { MSReadySample } from '../../types';
 import { mockMSReadySamples } from '../../default-data/samples';
 import { Constants } from '../../default-data/constants';
 

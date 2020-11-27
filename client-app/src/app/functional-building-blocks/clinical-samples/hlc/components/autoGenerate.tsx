@@ -5,8 +5,8 @@ import { Store } from 'antd/lib/form/interface';
 import { InputModal } from '../../../../common/inputModal';
 import { createFormInput, createFormSelect } from '../../../../common/inputModalHelpers';
 import { Constants } from '../../../../default-data/constants';
-import { GenerationData, EWorkflowTag } from '../../../../types/types';
-import { ClinicalSampleNew } from '../../../../types/clinicalSample';
+import { GenerationData, EWorkflowTag } from '../../../../types';
+import { ClinicalSampleNew } from '../../../../types';
 
 type FormProps = {
     isActiveInputForm: boolean;

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Button, Table } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
-import { MSRunCompact } from '../../../types/types';
+import { MSRunCompact } from '../../../types';
 import { getColumn } from '../../../common/columnHelpers';
 
 type Props = {

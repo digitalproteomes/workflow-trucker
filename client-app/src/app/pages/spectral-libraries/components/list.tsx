@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { SpectralLibrary } from '../../../types/types';
+import { SpectralLibrary } from '../../../types';
 import { CommonList } from '../../../common/list';
 import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';

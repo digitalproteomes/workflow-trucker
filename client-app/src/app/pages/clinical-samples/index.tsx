@@ -1,6 +1,6 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
-import { ClinicalSample } from '../../types/clinicalSample';
+import { ClinicalSample } from '../../types';
 import { ButtonExport } from '../../common/export';
 import { SampleNotifications } from '../../common/notifications';
 import { List, ButtonCreateNew, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';

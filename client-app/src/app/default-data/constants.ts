@@ -1,5 +1,5 @@
 import { BaseApi } from '../infrastructure/api';
-import { Project } from '../types/types';
+import { Project } from '../types';
 
 export class Constants {
     public static projectId: string = '5fba5f6a650bda00d27bbb9a';

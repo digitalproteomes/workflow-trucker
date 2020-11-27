@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { ClinicalInputForm } from './components/formCreateNew';
 import { SampleNotifications } from '../../../common/notifications';
-import { ClinicalSample } from '../../../types/clinicalSample';
+import { ClinicalSample } from '../../../types';
 
 type ButtonCreateNewProps = {
     setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>;

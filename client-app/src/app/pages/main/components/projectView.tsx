@@ -1,5 +1,5 @@
 import React from 'react';
-import { Project } from '../../../types/types';
+import { Project } from '../../../types';
 import { observer } from 'mobx-react';
 
 type ProjectViewProps = {

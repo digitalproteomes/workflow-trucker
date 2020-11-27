@@ -1,5 +1,5 @@
 import { BaseApi } from '../../infrastructure/api';
-import { SwathAnalysis } from '../../types/types';
+import { SwathAnalysis } from '../../types';
 import { mockSwathAnalysis } from '../../default-data/samples';
 import { Constants } from '../../default-data/constants';
 

@@ -1,15 +1,14 @@
 import {
-    Sample,
     MsRun,
-    ClinicalSample,
     IntermediateSample,
     MSReadySample,
     EWorkflowTag,
     EProtocolTag,
     SwathAnalysis,
     SpectralLibrary,
-    SOP
+    SOP,
 } from '../types';
+import { ClinicalSample } from '../types';
 import { Constants } from './constants';
 
 export function mockClinicalSamples(): ClinicalSample[] {
@@ -24,6 +23,7 @@ export function mockClinicalSamples(): ClinicalSample[] {
             clinicalSampleCode: 1,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             workflowTag: EWorkflowTag.LibraryGeneration,
+            quality: 'good',
         },
         {
             createdDate: '2020-06-06T13:53:35.357000+00:00',
@@ -35,6 +35,7 @@ export function mockClinicalSamples(): ClinicalSample[] {
             clinicalSampleCode: 1,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             workflowTag: EWorkflowTag.SamplePreparation,
+            quality: 'good',
         },
         {
             createdDate: '2020-06-06T13:53:35.357000+00:00',
@@ -46,6 +47,7 @@ export function mockClinicalSamples(): ClinicalSample[] {
             clinicalSampleCode: 1,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             workflowTag: EWorkflowTag.SwathAnalysis,
+            quality: 'good',
         },
     ];
 }
@@ -149,44 +151,6 @@ export function mockMSReadySamples(): MSReadySample[] {
             projectId: Constants.projectId,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             workflowTag: EWorkflowTag.SamplePreparation,
-        },
-    ];
-}
-
-export function mockSamples(): Sample[] {
-    return [
-        {
-            createdDate: '2020-06-06T13:53:35.357000+00:00',
-            id: '5edb9fdf4765770ed5b68a74',
-            name: 'mock PHRT_005_001_CPAC',
-            parentSampleId: 'mock 5edb9fdf4765770ed5b68a75',
-            projectId: Constants.projectId,
-            protocolId: 1,
-            protocolName: 'clinical_sample',
-            clinicalSampleCode: 1,
-            updatedDate: '2020-06-06T13:53:35.357000+00:00',
-        },
-        {
-            createdDate: '2020-06-06T13:53:35.392000+00:00',
-            id: '5edb9fdf4765770ed5b68a75',
-            name: 'mock PHRT_005_002_CPAC',
-            parentSampleId: 'mock 5edb9fdf4765770ed5b68a75',
-            projectId: Constants.projectId,
-            protocolId: 1,
-            protocolName: 'clinical_sample',
-            clinicalSampleCode: 2,
-            updatedDate: '2020-06-06T13:53:35.392000+00:00',
-        },
-        {
-            createdDate: '2020-06-06T13:53:35.401000+00:00',
-            id: '5edb9fdf4765770ed5b68a76',
-            name: 'mock PHRT_005_003_CPAC',
-            parentSampleId: 'mock 5edb9fdf4765770ed5b68a75',
-            projectId: Constants.projectId,
-            protocolId: 1,
-            protocolName: 'clinical_sample',
-            clinicalSampleCode: 3,
-            updatedDate: '2020-06-06T13:53:35.401000+00:00',
         },
     ];
 }
@@ -331,13 +295,13 @@ export function mockSOP(): SOP[] {
             id: '5f2330c4723e24adcf419e96',
             name: 'PHRT_SOP',
             processingPerson: 'System',
-            artefactClass: "sampleSOP",
+            artefactClass: 'sampleSOP',
             // projectId: Constants.projectId,
             updatedDate: '2020-06-06T13:53:35.357000+00:00',
             encodedFileId: '5f2330c4723e24adcf419e96',
             sopFileName: 'SOP file',
             owner: 'Admin',
-            revision: '1.00'
+            revision: '1.00',
         },
     ];
 }

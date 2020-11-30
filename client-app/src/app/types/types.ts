@@ -1,49 +1,4 @@
-/** TODO: deprecated - remove completely once no more references to this */
-export class Sample {
-    createdDate: string = '';
-
-    id: string = '';
-
-    name: string = '';
-
-    parentSampleId: string = '';
-
-    projectId: string = '';
-
-    protocolId: number = -1;
-
-    protocolName: string = '';
-
-    clinicalSampleCode: number = -1;
-
-    updatedDate: string = '';
-
-    public static nameof = (name: keyof Sample) => name;
-}
-
-export class SampleNew {
-    name: string = '';
-
-    parentSampleId: string = '';
-
-    projectId: string = '';
-
-    protocolId: number = -1;
-
-    /** shown on the ui as Id, it's actually a mock placeholder for the superficial identification of the samples coming in from the hospital */
-    clinicalSampleCode: string = '';
-
-    /** not sure shy this has to be on this sample. How come it is not present on the sample coming from the backend? */
-    processingPerson: string = '';
-
-    sampleCounter: number = -1;
-
-    description: string = '';
-
-    workflowTag: string = '';
-
-    public static nameof = (name: keyof SampleNew) => name;
-}
+import { ClinicalSampleCompact } from './clinicalSample';
 
 export enum EWorkflowTag {
     Invalid = 'Invalid',
@@ -65,42 +20,14 @@ export enum EProtocolTag {
     Pooling = 'pooling_preparation',
 }
 
-export class ClinicalSample {
-    createdDate: string = '';
-
+export class NewIntermediarySample {
     description: string = '';
-
-    id: string = '';
-
-    name: string = '';
-
+    sopId: string = '';
+    clinicalSampleId: string = '';
     processingPerson: string = '';
+    workflowTag: string = '';
 
-    projectId: string = '';
-
-    clinicalSampleCode: number = -1;
-
-    updatedDate: string = '';
-
-    workflowTag: EWorkflowTag = EWorkflowTag.Invalid;
-
-    public static nameof = (name: keyof ClinicalSample) => name;
-}
-
-export class ClinicalSampleCompact {
-    id: string = '';
-
-    name: string = '';
-
-    public static nameof = (name: keyof ClinicalSampleCompact) => name;
-}
-
-export class MSRunCompact {
-    id: string = '';
-
-    name: string = '';
-
-    public static nameof = (name: keyof MSRunCompact) => name;
+    public static nameof = (name: keyof NewIntermediarySample) => name;
 }
 
 export class IntermediateSample {
@@ -219,6 +146,14 @@ export class MsRun {
     public static nameof = (name: keyof MsRun) => name;
 }
 
+export class MSRunCompact {
+    id: string = '';
+
+    name: string = '';
+
+    public static nameof = (name: keyof MSRunCompact) => name;
+}
+
 export class SwathAnalysis {
     clinicalSamples: ClinicalSampleCompact[] = [];
 
@@ -327,11 +262,7 @@ export const SOPDataKeys: string[] = Object.keys(new SOP());
 export class GenerationData {
     prefixProject: string = '';
 
-    projectId: string = '-1';
-
     suffixProject: string = '';
-
-    processingPerson: string = '';
 
     description: string = '';
 
@@ -339,16 +270,17 @@ export class GenerationData {
 
     numberOfEntries: number = 10;
 
+    idSeed: number = 0; // plan - get this number from the backend. (already exists)
+
     public static nameof = (name: keyof GenerationData) => name;
 
     public static Default: GenerationData = {
         prefixProject: 'PHRT',
-        projectId: '005', //Constants.projectId,
         suffixProject: 'CPAC',
-        processingPerson: 'Admin',
         description: 'Zurich Hospital sample',
         workflowTag: EWorkflowTag.LibraryGeneration.toString(),
         numberOfEntries: 3,
+        idSeed: 0,
     };
 }
 

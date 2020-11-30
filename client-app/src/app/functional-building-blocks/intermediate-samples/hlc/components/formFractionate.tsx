@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { InputModal } from '../../../common/inputModal';
-import { IntermediateSample } from '../../../types';
+import { InputModal } from '../../../../common/inputModal';
+import { IntermediateSample } from '../../../../types';
 import { Store } from 'antd/lib/form/interface';
-import { Api } from '../api';
+import { Api } from '../../api';
 
 type Props = {
     parentSample: IntermediateSample | null;

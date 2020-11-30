@@ -3,18 +3,19 @@ import { Form, Select } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 import { InputModal } from '../../../../common/inputModal';
 import { createFormInput, validationMessage } from '../../../../common/inputModalHelpers';
-import { ClinicalSample, SOP } from '../../../../types';
+import { IntermediateSample, NewIntermediarySample, SOP } from '../../../../types';
+import { ClinicalSample } from '../../../../types';
 import { Api } from '../../api';
 const { Option } = Select;
 
 type FormProps = {
     originalSample: ClinicalSample | null;
-    onCreateSuccessful: () => void;
+    onCreateSuccessful: (sample: IntermediateSample) => void;
     onCancel: () => void;
 };
 
 export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample, onCreateSuccessful, onCancel }) => {
-    const [errorMessage] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [sops, setSops] = useState<SOP[] | null>(null);
 
     const isActiveInputForm: boolean = originalSample != null;
@@ -33,24 +34,28 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
     if (isActiveInputForm == null || sops == null) return <></>;
 
     const onCreate = (data: Store) => {
-        // wait - replace the SampleType with the proper sample type (maybe a new one has to be created)
-        // const sample: SampleType = data as SampleType;
-        // async function saveSample() {
-        //     try {
-        //         const createdSample: SampleType = await Api.postSampleAsync(sample);
-        //         onCreateSuccessful(createdSample);
-        //     } catch (error) {
-        //         setErrorMessage(error.message);
-        //     }
-        // }
-        onCreateSuccessful();
-        setSops(null);
+        const sample: NewIntermediarySample = data as NewIntermediarySample;
+        sample.clinicalSampleId = originalSample!.id;
+
+        async function saveSample() {
+            try {
+                const createdSamples = await Api.postProcessedSampleAsync([sample]);
+
+                onCreateSuccessful(createdSamples[0]);
+                setSops(null);
+            } catch (error) {
+                setErrorMessage(error.message);
+            }
+        }
+
+        saveSample();
     };
 
     const inputs: JSX.Element[] = [
-        createFormSelectInput('SOP Name', ClinicalSample.nameof('name'), sops),
-        createFormInput('Description', ClinicalSample.nameof('description')),
-        createFormInput('Processing person', ClinicalSample.nameof('processingPerson')),
+        createFormSelectInput('SOP', NewIntermediarySample.nameof('sopId'), sops),
+        createFormInput('Description', NewIntermediarySample.nameof('description')),
+        createFormInput('Processing person', NewIntermediarySample.nameof('processingPerson')),
+        createFormInput('Workflow tag', NewIntermediarySample.nameof('workflowTag')),
     ];
 
     return (
@@ -69,7 +74,7 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
 };
 
 // wait - if the createFormSelectInput is implemented 2-3 times, extract it into a helper
-function createFormSelectInput(label: string, propName: keyof ClinicalSample, sops: SOP[]) {
+function createFormSelectInput(label: string, propName: keyof NewIntermediarySample, sops: SOP[]) {
     return (
         <Form.Item
             label={label}
@@ -83,7 +88,7 @@ function createFormSelectInput(label: string, propName: keyof ClinicalSample, so
                         return a.name[0] > b.name[0] ? 1 : a.name[0] === b.name[0] ? 0 : -1;
                     })
                     .map((sop) => (
-                        <Option value={sop.artefactClass}>{sop.name}</Option>
+                        <Option value={sop.id}>{sop.name}</Option>
                     ))}
             </Select>
         </Form.Item>

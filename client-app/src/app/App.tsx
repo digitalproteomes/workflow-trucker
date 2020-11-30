@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { ProjectPage } from './pages/main';
+import { ProjectPage } from './pages/project';
 import { AboutPage } from './pages/about';
 import BasicLayout from './layouts';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';

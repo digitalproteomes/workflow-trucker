@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { ProjectPage } from './pages/project';
 import { AboutPage } from './pages/about';
-import BasicLayout from './layouts';
+import { BasicLayout } from './layouts';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { ClinicalSamples } from './pages/clinical-samples';
 import { MsRuns } from './pages/ms-runs';

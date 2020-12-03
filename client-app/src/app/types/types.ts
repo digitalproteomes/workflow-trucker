@@ -80,40 +80,6 @@ export class MSReadySample {
     public static nameof = (name: keyof MSReadySample) => name;
 }
 
-export class Project {
-    id: string = '';
-
-    description: string = '';
-
-    createdDate: string = '';
-
-    isLocked: boolean = false;
-
-    name: string = '';
-
-    ownerName: string = '';
-
-    ownerORCID: string = '';
-
-    projectId: string = '';
-
-    updatedDate: string = '';
-
-    public static nameof = (name: keyof Project) => name;
-
-    public static default: Project = {
-        id: 'default project id',
-        createdDate: '',
-        description: '',
-        isLocked: false,
-        name: '',
-        ownerName: '',
-        ownerORCID: '',
-        projectId: 'default project id',
-        updatedDate: '',
-    };
-}
-
 export class MsRun {
     clinicalSamples: ClinicalSampleCompact[] = [];
 

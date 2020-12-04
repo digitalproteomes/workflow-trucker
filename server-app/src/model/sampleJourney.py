@@ -4,32 +4,46 @@ import json
 class SampleJourney:
 
     def __init__(self):
-        pass
+        self.clinicalSampleNames = []
+        self.intermediateSampleNames = []
+        self.msReadySampleNames = []
+        self.msRunNames = []
+        self.swathAnalysisNames = []
+        self.specLibNames = []
+        self.outputProteinMatrixNames = []
+        self.outputSpecLibNames = []
+        self.links = []
 
     def toJson(self):
         return json.dumps(self, default=lambda o: o.__dict__)
 
-    def setClinicalSampleName(self, clinicalSampleName):
-        self.clinicalSampleName = clinicalSampleName
+    def apendClinicalSampleName(self, clinicalSampleName):
+        self.clinicalSampleNames.append(clinicalSampleName)
 
-    def setIntermediateSample(self, intermediateSampleName, samplePrepSOP):
-        self.intermediateSampleName = intermediateSampleName
-        self.samplePrepSOP = samplePrepSOP
+    def appendIntermediateSampleName(self, intermediateSampleName):
+        self.intermediateSampleNames.append(intermediateSampleName)
 
-    def setMsReadySampleName(self, msReadySampleName):
-        self.msReadySampleName = msReadySampleName
+    def appendMsReadySampleName(self, msReadySampleName):
+        self.msReadySampleNames.append(msReadySampleName)
 
-    def setMsRun(self, msRunName, MSPrepSOP):
-        self.msRunName = msRunName
-        self.MSPrepSOP = MSPrepSOP
+    def appendMsRunName(self, msRunName):
+        self.msRunNames.append(msRunName)
 
-    def setSwathAnalysis(self, swathAnalysisName, swathAnalysisSOP, specLibName, outputProteinMatrixName):
-        self.swathAnalysisName = swathAnalysisName
-        self.swathAnalysisSOP = swathAnalysisSOP
-        self.specLibName = specLibName
-        self.outputProteinMatrixName = outputProteinMatrixName
+    def appendSwathAnalysis(self, swathAnalysisName):
+        self.swathAnalysisNames.append(swathAnalysisName)
 
-    def setSpecralLibrary(self, specLibName, libGenSOP, outputSpecLibName):
-        self.specLibName = specLibName
-        self.libGenSOP = libGenSOP
-        self.outputSpecLibName = outputSpecLibName
+    def appendOutputProteinMatrixName(self, outputProteinMatrixName):
+        self.outputProteinMatrixNames.append(outputProteinMatrixName)
+
+    def appendSpecralLibrary(self, specLibName):
+        self.specLibNames.append(specLibName)
+
+    def appendOutputSpecralLibrary(self, outputSpecLibName):
+        self.outputSpecLibNames.append(outputSpecLibName)
+
+    def appendLink(self, nodeStart, nodeEnd, label):
+        link = {}
+        link["nodeStart"] = nodeStart
+        link["nodeEnd"] = nodeEnd
+        link["label"] = label
+        self.links.append(link)

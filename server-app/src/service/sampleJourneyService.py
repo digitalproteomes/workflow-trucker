@@ -12,16 +12,21 @@ from pymongo import MongoClient
 import os
 
 
-def setComputationalEntries(sampleJourney, msrunId):
-    specLibs = spectralLibraryDAO.getLibrariesForMSRun(msrunId)
-    swas = swathAnalysisDAO.getSWATHForMSRun(msrunId)
+def setComputationalEntries(sampleJourney, msrun):
+    specLibs = spectralLibraryDAO.getLibrariesForMSRun(msrun['id'])
+    swas = swathAnalysisDAO.getSWATHForMSRun(msrun['id'])
 
     if len(specLibs) > 0:
         specLib = specLibs[0]
         spl_name = specLib['name']
         spl_sop = specLib['sopFileName']
         spl_file = specLib['specLibFilename']
-        sampleJourney.setSpecralLibrary(spl_name, spl_sop, spl_file)
+
+        sampleJourney.appendSpecralLibrary(spl_name)
+        sampleJourney.appendLink(msrun['name'], spl_name, spl_sop)
+
+        sampleJourney.appendOutputSpecralLibrary(spl_file)
+        sampleJourney.appendLink(spl_name, spl_file, "output")
 
     if len(swas) > 0:
         swa = swas[0]
@@ -30,8 +35,12 @@ def setComputationalEntries(sampleJourney, msrunId):
             swa['spectralLibraryId'])['name']
         swa_sop = swa['sopFileName']
         swa_file = swa['proteinMatrixFileName']
-        sampleJourney.setSwathAnalysis(
-            swa_name, swa_sop, swa_spl_name, swa_file)
+
+        sampleJourney.appendSwathAnalysis(swa_name)
+        sampleJourney.appendLink(msrun['name'], swa_name, swa_sop)
+
+        sampleJourney.appendOutputProteinMatrixName(swa_file)
+        sampleJourney.appendLink(swa_name, swa_file, "output")
 
     return sampleJourney
 
@@ -41,13 +50,16 @@ def setMsPrepEntries(sampleJourney, ins):
     if len(msrs) > 0:
         msr = msrs[0]
         msr_name = msr['name']
-        sampleJourney.setMsReadySampleName(msr_name)
+        sampleJourney.appendMsReadySampleName(msr_name)
+        sampleJourney.appendLink(ins['name'], msr_name, "")
         msruns = MSRunDAO.getMsRunsByMSREadySampleId(msr['id'])
         for r in msruns:
             msrun_name = r['name']
             msrun_sop = r['sopFileName']
-            sampleJourney.setMsRun(msrun_name, msrun_sop)
-            setComputationalEntries(sampleJourney, msrunId=r['id'])
+            sampleJourney.appendMsRunName(msrun_name)
+            sampleJourney.appendLink(msr_name, msrun_name, msrun_sop)
+
+            setComputationalEntries(sampleJourney, r)
     return sampleJourney
 
 
@@ -56,7 +68,7 @@ def processSampleJourney(sampleId):
 
     clinicalSampleName = clinicalSampleDAO.getClinicalSampleById(sampleId)[
         'name']
-    sampleJourney.setClinicalSampleName(clinicalSampleName=clinicalSampleName)
+    sampleJourney.apendClinicalSampleName(clinicalSampleName)
 
     intermediateSamples = intermediateSampleDAO.getIntermediateSamplesByClinicalSampleId(
         sampleId)
@@ -64,8 +76,8 @@ def processSampleJourney(sampleId):
     for ins in intermediateSamples:
         is_name = ins['name']
         is_protocol = ins['sopFileName']
-        sampleJourney.setIntermediateSample(
-            intermediateSampleName=is_name, samplePrepSOP=is_protocol)
+        sampleJourney.appendIntermediateSampleName(is_name)
+        sampleJourney.appendLink(clinicalSampleName, is_name, is_protocol)
 
         setMsPrepEntries(sampleJourney, ins)
     return sampleJourney
@@ -82,7 +94,7 @@ if __name__ == '__main__':
 
     client = db  # MongoClient('localhost', 27017)
     sampleId = \
-        clinicalSampleDAO.getClinicalSampleByName('PHRT_005_004_CPAC'
+        clinicalSampleDAO.getClinicalSampleByName('PHRT_005_194_CPAC'
                                                   )['id']
     sampleJourney = processSampleJourney(sampleId)
     print("SUCCESS")

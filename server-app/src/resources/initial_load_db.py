@@ -88,6 +88,7 @@ def insertLibGenMSRuns(projectId):
                     "projectId": projectId,
                     "protocolId": "DDA_protocol",
                     "instrumentId": "MS:1002877",
+                    "sopFileName": "PHRT_Mass_Spectrometry_SOP",
                     "updatedDate": datetime.datetime.now(),
                     "createdDate": datetime.datetime.now(),
                     "workflowTag": "Library Generation",
@@ -294,6 +295,21 @@ if __name__ == '__main__':
     print("insert project")
     print("")
     projectId = insertProject(new_project)['id']
+
+    new_project = {
+        "projectId": "6",
+        "name": "Melanoma",
+        "ownerName": "Patrick Pedrioli",
+        "ownerORCID": "0000-0001-6719-9139",
+        "description": "Melanoma Project",
+        "isLocked": "false",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
+    }
+
+    print("insert second project")
+    print("")
+    insertProject(new_project)
 
     print("")
     print("___________________________________________________________")

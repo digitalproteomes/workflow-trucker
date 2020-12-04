@@ -508,7 +508,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"samples\":[\n    {\n        \"clinicalSampleCode\": \"1GFH\",\n        \"description\": \"Imported from Excel archive\",\n        \"name\": \"PHRT_005_1654_CPAC\",\n        \"projectId\": \"5f2be6294bd9c4b84241441b\",\n        \"processingPerson\": \"System\",\n        \"sampleCounter\": 410,\n        \"workflowTag\": \"Sample Preparation\"\n    },\n      {\n        \"clinicalSampleCode\": \"TGFD3\",\n        \"description\": \"Imported from Excel archive\",\n        \"name\": \"PHRT_005_1763_CPAC\",\n        \"projectId\": \"5f2be6294bd9c4b84241441b\",\n        \"processingPerson\": \"System\",\n        \"sampleCounter\": 411,\n        \"workflowTag\": \"Sample Preparation\"\n    },\n    {\n        \"clinicalSampleCode\": \"2FHJGH\",\n        \"description\": \"Imported from Excel archive\",\n        \"name\": \"PHRT_005_1882_CPAC\",\n        \"projectId\": \"5f2be6294bd9c4b84241441b\",\n        \"processingPerson\": \"System\",\n        \"sampleCounter\": 412,\n        \"workflowTag\": \"Sample Preparation\"\n    }]    \n}"
+							"raw": "{\"samples\":[\n    {\n        \"clinicalSampleCode\": \"1GFH\",\n        \"description\": \"Bulk from UI\",\n        \"name\": \"PHRT_005_1654_CPAC\",\n        \"projectId\": \"5f2be6294bd9c4b84241441b\",\n        \"processingPerson\": \"System\",\n        \"sampleCounter\": 410,\n        \"workflowTag\": \"Sample Preparation\"\n    },\n      {\n        \"clinicalSampleCode\": \"TGFD3\",\n        \"description\": \"Bulk from UI\",\n        \"name\": \"PHRT_005_1763_CPAC\",\n        \"projectId\": \"5f2be6294bd9c4b84241441b\",\n        \"processingPerson\": \"System\",\n        \"sampleCounter\": 411,\n        \"workflowTag\": \"Sample Preparation\"\n    },\n    {\n        \"clinicalSampleCode\": \"2FHJGH\",\n        \"description\": \"Bulk from UI\",\n        \"name\": \"PHRT_005_1882_CPAC\",\n        \"projectId\": \"5f2be6294bd9c4b84241441b\",\n        \"processingPerson\": \"System\",\n        \"sampleCounter\": 412,\n        \"workflowTag\": \"Sample Preparation\"\n    }]    \n}"
 						},
 						"description": ""
 					},
@@ -926,6 +926,184 @@
 							}
 						],
 						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "artefacts",
+			"description": "",
+			"item": [
+				{
+					"name": "create sop + file",
+					"request": {
+						"url": "http://127.0.0.1:5000/file-upload",
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"description": "",
+									"type": "file",
+									"src": "img_290740.png"
+								},
+								{
+									"key": "sop_data",
+									"value": "{artefactClass: \"Standard Procedure Mass Spectrometry\"\ncreatedDate: \"\"\ndescription: \"me\"\nencodedFileId: \"\"\nid: \"\"\nname: \"test\"\nowner: \"ghfj\"\nprocessingPerson: \"now\"\nprojectId: \"5fa174d69c74e162b29831bb\"\nrevision: \"hjgk\"\nsopFileName: \"\"\nupdatedDate: \"\"}",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get sops by type",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sops/project/type?projectId={{projectId}}&sopType=Standard Procedure Sample Preparation",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sops",
+								"project",
+								"type"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "{{projectId}}",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "sopType",
+									"value": "Standard Procedure Sample Preparation",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/download?filename=2.png",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/download/artefact?artefactName=2.png",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"download",
+								"artefact"
+							],
+							"query": [
+								{
+									"key": "artefactName",
+									"value": "2.png",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "export",
+			"description": "",
+			"item": [
+				{
+					"name": "get sample journey",
+					"request": {
+						"url": {
+							"raw": "http://127.0.0.1:5000/sampleJourney/sample?sampleId=5fca3a03cd591b6b7c3c6fa0",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sampleJourney",
+								"sample"
+							],
+							"query": [
+								{
+									"key": "sampleId",
+									"value": "5fca3a03cd591b6b7c3c6fa0",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "",
+									"description": "",
+									"type": "file"
+								},
+								{
+									"key": "sop_data",
+									"value": "{artefactClass: \"Standard Procedure Mass Spectrometry\"\ncreatedDate: \"\"\ndescription: \"me\"\nencodedFileId: \"\"\nid: \"\"\nname: \"test\"\nowner: \"ghfj\"\nprocessingPerson: \"now\"\nprojectId: \"5fa174d69c74e162b29831bb\"\nrevision: \"hjgk\"\nsopFileName: \"\"\nupdatedDate: \"\"}",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
 						"description": ""
 					},
 					"response": []

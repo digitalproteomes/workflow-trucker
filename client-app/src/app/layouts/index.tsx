@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import app_logo from './assets/logo_white.png';
-import { Layout, Menu, Avatar, Typography, Divider } from 'antd';
+import { Layout, Menu, Avatar, Typography, Divider, Select } from 'antd';
 import {
     DashboardOutlined,
     UserOutlined,
@@ -20,32 +20,41 @@ import {
 import { Link, withRouter } from 'react-router-dom';
 import { CollapseType } from 'antd/lib/layout/Sider';
 import { Constants } from '../default-data/constants';
+import { Project } from '../types';
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider, Header } = Layout;
 const { Text } = Typography;
+const { Option } = Select;
 
-type State = {
-    isCollapsed: boolean;
-};
-
-const BasicLayout = withRouter((props) => {
-    const [prevState, setState] = useState<State>({ isCollapsed: false });
+export const BasicLayout = withRouter((props) => {
+    const [isCollapsed, setCollapsedFlag] = useState<boolean>(false);
+    // when this basic layout is instantiated, the projects are already loaded
+    const [activeProject, setActiveProject] = useState<Project>(Constants.activeProject);
+    const projects: Project[] = Constants.projects;
 
     function onCollapse(isCollapsed: boolean, type: CollapseType) {
         console.log(`collapsed: ${isCollapsed} - event type: ${type}`);
-        setState({ ...prevState, isCollapsed });
+
+        setCollapsedFlag(isCollapsed);
+    }
+
+    // wait - projects - the active project could be set as null, and have a nice loading screen until the initial data is loaded from the server
+    function resetActiveProject(newActiveProject: Project) {
+        setActiveProject(newActiveProject);
+
+        Constants.setActiveProject(newActiveProject);
     }
 
     let selectedMenuEntry = props.location.pathname;
     if (selectedMenuEntry === '/') selectedMenuEntry = '/about';
 
-    const defaultProjectId = Constants.projectId;
-    const defaultProjectName = 'PHRT_005_CPAC';
+    const projectId = activeProject.id;
+    const projectName = activeProject.name;
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider width={250} collapsible collapsed={prevState.isCollapsed} onCollapse={onCollapse}>
+            <Sider width={250} collapsible collapsed={isCollapsed} onCollapse={onCollapse}>
                 <img
                     src={app_logo}
                     alt="logo"
@@ -62,23 +71,34 @@ const BasicLayout = withRouter((props) => {
                     theme="dark"
                     defaultSelectedKeys={[`/about`]}
                     selectedKeys={[selectedMenuEntry]}
-                    defaultOpenKeys={[`${defaultProjectId}`, `/samples`]}
+                    defaultOpenKeys={[`${projectId}`, `/samples`]}
                 >
                     <Menu.Item key={'/about'} icon={<CoffeeOutlined />}>
                         <Link to={`/about`}>Home</Link>
                     </Menu.Item>
-                    {getSubmenu(defaultProjectId, defaultProjectName)}
+                    {getSubmenu(projectId, projectName)}
                 </Menu>
             </Sider>
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
                     <div style={{ float: 'right', alignContent: 'horizontal' }}>
+                        <Select
+                            defaultValue={activeProject.id}
+                            onChange={(projectId: string) => {
+                                resetActiveProject(projects.filter((p) => p.id === projectId)[0]);
+                            }}
+                            style={{ width: 260 }}
+                        >
+                            {projects.map((project) => (
+                                <Option value={project.id}>{project.name}</Option>
+                            ))}
+                        </Select>
                         <SearchOutlined style={{ paddingRight: 8 }} />
                         <StarOutlined style={{ paddingRight: 8 }} />
                         <QuestionCircleOutlined style={{ paddingRight: 8 }} />
                         <NotificationOutlined style={{ paddingRight: 32 }} />
                         <Avatar shape={'square'} icon={<UserOutlined />} />
-                        <Text style={{ paddingRight: 16, paddingLeft: 4 }}>Patrick Pedrioli</Text>
+                        <Text style={{ paddingRight: 16, paddingLeft: 4 }}>{activeProject.ownerName}</Text>
                     </div>
                 </Header>
                 <Content style={{ margin: '0 16px' }}>
@@ -92,7 +112,6 @@ const BasicLayout = withRouter((props) => {
     );
 });
 
-export default BasicLayout;
 function getSubmenu(projectId: string, name: string) {
     return (
         <SubMenu

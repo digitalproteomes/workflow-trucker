@@ -6,23 +6,25 @@ import { createFormInput, validationMessage } from '../../../../common/inputModa
 import { NewIntermediarySample, SOP } from '../../../../types';
 import { ClinicalSample } from '../../../../types';
 import { Api } from '../../api';
+import { Constants } from '../../../../default-data/constants';
 const { Option } = Select;
 
 type FormProps = {
-    originalSample: ClinicalSample | null;
+    originalSamples: ClinicalSample[] | null;
     onCreateSuccessful: () => void;
     onCancel: () => void;
 };
 
-export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample, onCreateSuccessful, onCancel }) => {
+export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSamples, onCreateSuccessful, onCancel }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [sops, setSops] = useState<SOP[] | null>(null);
 
-    const isActiveInputForm: boolean = originalSample != null;
+    const isActiveInputForm: boolean = originalSamples != null;
+
     async function executeFetch() {
-        const receivedSops = await Api.getSOPsAsync(originalSample!.projectId);
+        const receivedSops = await Api.getSOPsAsync(Constants.projectId);
+
         setSops(receivedSops);
-        console.log('received sops', receivedSops);
     }
 
     useEffect(() => {
@@ -34,12 +36,16 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
     if (isActiveInputForm == null || sops == null) return <></>;
 
     const onCreate = (data: Store) => {
-        const sample: NewIntermediarySample = data as NewIntermediarySample;
-        sample.clinicalSampleId = originalSample!.id;
+        const sampleTemplate: NewIntermediarySample = data as NewIntermediarySample;
 
-        async function saveSample() {
+        const intermediateSamples: NewIntermediarySample[] = [];
+        originalSamples!.forEach((sample) => {
+            intermediateSamples.push({ ...sampleTemplate, clinicalSampleId: sample.id });
+        });
+
+        async function saveSamples() {
             try {
-                Api.postProcessedSampleAsync([sample]);
+                Api.postProcessedSampleAsync(intermediateSamples);
 
                 onCreateSuccessful();
                 setSops(null);
@@ -48,7 +54,7 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
             }
         }
 
-        saveSample();
+        saveSamples();
     };
 
     const inputs: JSX.Element[] = [

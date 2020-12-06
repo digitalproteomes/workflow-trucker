@@ -3,14 +3,14 @@ import { Form, Select } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 import { InputModal } from '../../../../common/inputModal';
 import { createFormInput, validationMessage } from '../../../../common/inputModalHelpers';
-import { IntermediateSample, NewIntermediarySample, SOP } from '../../../../types';
+import { NewIntermediarySample, SOP } from '../../../../types';
 import { ClinicalSample } from '../../../../types';
 import { Api } from '../../api';
 const { Option } = Select;
 
 type FormProps = {
     originalSample: ClinicalSample | null;
-    onCreateSuccessful: (sample: IntermediateSample) => void;
+    onCreateSuccessful: () => void;
     onCancel: () => void;
 };
 
@@ -39,9 +39,9 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
 
         async function saveSample() {
             try {
-                const createdSamples = await Api.postProcessedSampleAsync([sample]);
+                Api.postProcessedSampleAsync([sample]);
 
-                onCreateSuccessful(createdSamples[0]);
+                onCreateSuccessful();
                 setSops(null);
             } catch (error) {
                 setErrorMessage(error.message);

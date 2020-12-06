@@ -6,6 +6,7 @@ import { SampleNotifications } from '../../common/notifications';
 import { List, ButtonCreateNew, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonAutoGenerate } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonProcessSample, ButtonProcessSampleBulk } from '../../functional-building-blocks/intermediate-samples';
+import { ButtonJourneyDiagram } from '../../functional-building-blocks/diagrams';
 
 export const ClinicalSamples: FunctionComponent = () => {
     const [selectedSamples, setSelectedSamples] = useState<ClinicalSample[]>([]);
@@ -39,6 +40,7 @@ export const ClinicalSamples: FunctionComponent = () => {
                     }}
                 />
                 <ButtonProcessSample sample={record} />
+                <ButtonJourneyDiagram sampleId={record.id} />
             </Space>
         );
     };

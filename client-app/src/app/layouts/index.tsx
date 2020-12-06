@@ -44,6 +44,8 @@ export const BasicLayout = withRouter((props) => {
         setActiveProject(newActiveProject);
 
         Constants.setActiveProject(newActiveProject);
+
+        props.history.push('/');
     }
 
     let selectedMenuEntry = props.location.pathname;

@@ -92,7 +92,9 @@ export const BasicLayout = withRouter((props) => {
                             style={{ width: 260 }}
                         >
                             {projects.map((project) => (
-                                <Option value={project.id}>{project.name}</Option>
+                                <Option key={project.id} value={project.id}>
+                                    {project.name}
+                                </Option>
                             ))}
                         </Select>
                         <SearchOutlined style={{ paddingRight: 8 }} />

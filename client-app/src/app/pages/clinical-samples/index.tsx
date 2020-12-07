@@ -5,10 +5,11 @@ import { ButtonExport } from '../../common/export';
 import { SampleNotifications } from '../../common/notifications';
 import { List, ButtonCreateNew, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonAutoGenerate } from '../../functional-building-blocks/clinical-samples/';
-import { ButtonProcessSample } from '../../functional-building-blocks/intermediate-samples';
+import { ButtonProcessSample, ButtonProcessSampleBulk } from '../../functional-building-blocks/intermediate-samples';
+import { ButtonJourneyDiagram } from '../../functional-building-blocks/diagrams';
 
 export const ClinicalSamples: FunctionComponent = () => {
-    const [, setSelectedSamples] = useState<ClinicalSample[]>([]);
+    const [selectedSamples, setSelectedSamples] = useState<ClinicalSample[]>([]);
     // debt - the setRefreshNeededFlag callback approach should be replaced with a "onSuccess" callback. The low leve component should not influence directly the state of a high level component
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
@@ -39,6 +40,7 @@ export const ClinicalSamples: FunctionComponent = () => {
                     }}
                 />
                 <ButtonProcessSample sample={record} />
+                <ButtonJourneyDiagram sampleId={record.id} />
             </Space>
         );
     };
@@ -56,6 +58,8 @@ export const ClinicalSamples: FunctionComponent = () => {
                     setRefreshNeededFlag={setRefreshNeededFlag}
                     style={{ float: 'right', marginRight: 10 }}
                 />
+
+                <ButtonProcessSampleBulk samples={selectedSamples} style={{ float: 'right', marginRight: 16 }} />
 
                 <ButtonAutoGenerate
                     setRefreshNeededFlag={setRefreshNeededFlag}

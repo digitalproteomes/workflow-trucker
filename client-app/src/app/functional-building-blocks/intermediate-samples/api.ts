@@ -18,8 +18,9 @@ export class Api {
         return await BaseApi.postAsync(`/samples/intermediate`, payload);
     }
 
-    public static async postProcessedSampleAsync(payload: NewIntermediarySample[]): Promise<IntermediateSample[]> {
-        return await BaseApi.postAsync(`/samples/intermediate/singleprep`, payload);
+    public static async postProcessedSampleAsync(payload: NewIntermediarySample[]): Promise<void> {
+        // wait - the 'samples' object should not be mandatory in the backend, it should wait for a simple array
+        return await BaseApi.postAsync(`/samples/intermediate/singleprep`, { samples: payload });
     }
 
     public static async postFractionatedAsync(payload: any): Promise<IntermediateSample[]> {

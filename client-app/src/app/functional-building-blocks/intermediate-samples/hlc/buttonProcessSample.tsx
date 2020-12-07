@@ -7,20 +7,18 @@ import { ProcessSampleForm } from './components/formProcess';
 
 type ButtonProps = {
     sample: ClinicalSample;
+    style?: React.CSSProperties | undefined;
 };
 
-export const ButtonProcessSample: FunctionComponent<ButtonProps> = ({ sample }) => {
+export const ButtonProcessSample: FunctionComponent<ButtonProps> = ({ sample, style }) => {
     const [sampleToProcess, setSampleToProcess] = useState<ClinicalSample | null>(null);
 
-    return (
-        <>
-            <Tooltip title="Process sample">
-                <Button type="default" icon={<DeliveredProcedureOutlined />} onClick={() => setSampleToProcess(sample)}>
-                    Process
-                </Button>
-            </Tooltip>
+    const sampleProcessingForm =
+        sampleToProcess === null ? (
+            <></>
+        ) : (
             <ProcessSampleForm
-                originalSample={sampleToProcess}
+                originalSamples={[sampleToProcess!]}
                 onCancel={() => {
                     setSampleToProcess(null);
                 }}
@@ -29,6 +27,21 @@ export const ButtonProcessSample: FunctionComponent<ButtonProps> = ({ sample }) 
                     setSampleToProcess(null);
                 }}
             />
+        );
+
+    return (
+        <>
+            <Tooltip title="Process sample">
+                <Button
+                    type="default"
+                    icon={<DeliveredProcedureOutlined />}
+                    onClick={() => setSampleToProcess(sample)}
+                    style={style}
+                >
+                    Process
+                </Button>
+            </Tooltip>
+            {sampleProcessingForm}
         </>
     );
 };

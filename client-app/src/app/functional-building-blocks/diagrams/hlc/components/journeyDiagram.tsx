@@ -5,18 +5,21 @@ import createEngine, {
     DefaultPortModel,
     DiagramModel,
 } from '@projectstorm/react-diagrams';
+import styled from '@emotion/styled';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { Link, SampleJourney } from '../../../../types';
 import { Api } from '../../api';
 import legend from '../../../../layouts/assets/legend.png';
+import { Modal } from 'antd';
 
 type Props = {
     sampleId: string;
+    onClose: () => void;
 };
 
 // auto layout of nodes - dagre - https://github.com/projectstorm/react-diagrams/blob/655462087f1f54eccb5e75f024be00efda674eab/packages/diagrams-demo-gallery/demos/demo-dagre/index.tsx
 
-export const JourneyDiagram: FunctionComponent<Props> = ({ sampleId }) => {
+export const JourneyDiagram: FunctionComponent<Props> = ({ sampleId, onClose }) => {
     const [sampleJourney, setSampleJourney] = useState<SampleJourney | null>(null);
     const [, setErrorMessage] = useState<string | null>(null);
 
@@ -87,7 +90,7 @@ export const JourneyDiagram: FunctionComponent<Props> = ({ sampleId }) => {
 
     //6) render the diagram!
     return (
-        <>
+        <Modal width={1500} visible={true} centered onOk={() => onClose()} onCancel={() => onClose()}>
             <img
                 src={legend}
                 alt="legend"
@@ -99,7 +102,7 @@ export const JourneyDiagram: FunctionComponent<Props> = ({ sampleId }) => {
                 }}
             />
             <CanvasWidget className="canvas" engine={engine} />
-        </>
+        </Modal>
     );
 };
 
@@ -130,4 +133,62 @@ class Constants {
     public static SpectralLibColor: string = 'rgb(0,102,204)';
     public static SwathColor: string = 'rgb(0,102,204)';
     public static ArtefactColor: string = 'rgb(153,0,153)';
+}
+
+const Container = styled.div<{ color: string; background: string }>`
+    height: 100%;
+    background-color: ${(p) => p.background};
+    background-size: 50px 50px;
+    display: flex;
+    > * {
+        height: 100%;
+        min-height: 100%;
+        width: 100%;
+    }
+    background-image: linear-gradient(
+            0deg,
+            transparent 24%,
+            ${(p) => p.color} 25%,
+            ${(p) => p.color} 26%,
+            transparent 27%,
+            transparent 74%,
+            ${(p) => p.color} 75%,
+            ${(p) => p.color} 76%,
+            transparent 77%,
+            transparent
+        ),
+        linear-gradient(
+            90deg,
+            transparent 24%,
+            ${(p) => p.color} 25%,
+            ${(p) => p.color} 26%,
+            transparent 27%,
+            transparent 74%,
+            ${(p) => p.color} 75%,
+            ${(p) => p.color} 76%,
+            transparent 77%,
+            transparent
+        );
+`;
+
+interface DemoCanvasWidgetProps {
+    color?: string;
+    background?: string;
+    style?: React.CSSProperties | undefined;
+    className?: string;
+}
+
+export class DemoCanvasWidget extends React.Component<DemoCanvasWidgetProps> {
+    render() {
+        return (
+            <Container
+                background={this.props.background || 'rgb(60, 60, 60)'}
+                color={this.props.color || 'rgba(255,255,255, 0.05)'}
+                style={this.props.style}
+                className={this.props.className}
+            >
+                {this.props.children}
+            </Container>
+        );
+    }
 }

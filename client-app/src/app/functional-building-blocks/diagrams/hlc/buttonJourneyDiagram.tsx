@@ -11,7 +11,6 @@ type Props = {
 export const ButtonJourneyDiagram: FunctionComponent<Props> = ({ sampleId, style }) => {
     const [sourceSampleId, setSourceSampleId] = useState<string | null>(null);
 
-    // todo - either redirect to the diagram page, or create a popup with it
     const diagram =
         sourceSampleId === null ? (
             <></>

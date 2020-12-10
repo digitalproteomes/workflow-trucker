@@ -46,43 +46,104 @@ export const JourneyDiagram: FunctionComponent<Props> = ({ sampleId, onClose }) 
     if (sampleJourney === null) return <></>;
 
     //2) setup the diagram model
-    var model = new DiagramModel();
+    var diagramModel = new DiagramModel();
 
     //3) create all the nodes and links
 
     //4) add the models to the root graph
 
-    const clinicalSampleNodes: DefaultNodeModel[] = getClinicalSampleNodes(sampleJourney);
-    const sourceClinicalSampleNode: DefaultNodeModel = clinicalSampleNodes[0];
-    sourceClinicalSampleNode.setPosition(0, 0);
-    model.addAll(sourceClinicalSampleNode);
+    let modelDataArray: ModelData[] = [];
 
-    const intermediateSampleNodes: DefaultNodeModel[] = getIntermediateSampleNodes(sampleJourney);
-    model.addAll(...intermediateSampleNodes);
-
-    const clinicalToIntermediateLinks: DefaultLinkModel[] = getClinicalToIntermediateSampleLinks(
-        sampleJourney,
-        sourceClinicalSampleNode,
-        intermediateSampleNodes,
-    );
-    model.addAll(...clinicalToIntermediateLinks);
-
-    const {
-        msReadyNodes,
-        intermediateToMsReadyLinks,
-    }: { msReadyNodes: DefaultNodeModel[]; intermediateToMsReadyLinks: DefaultLinkModel[] } = getMsReadyRelatedModels(
-        intermediateSampleNodes,
-        sampleJourney,
+    modelDataArray = modelDataArray.concat(
+        getModels(diagramModel, 'Clinical sample', sampleJourney.clinicalSampleNames, 0, Constants.ClinicalSampleColor),
     );
 
-    model.addAll(...msReadyNodes, ...intermediateToMsReadyLinks);
+    modelDataArray = modelDataArray.concat(
+        getModels(
+            diagramModel,
+            'Intermediate sample',
+            sampleJourney.intermediateSampleNames,
+            Constants.IntermediateOffsetX,
+            Constants.IntermediateSampleColor,
+        ),
+    );
+
+    modelDataArray = modelDataArray.concat(
+        getModels(
+            diagramModel,
+            'MsReady sample',
+            sampleJourney.msReadySampleNames,
+            Constants.MsReadyOffsetX,
+            Constants.MsReadySampleColor,
+        ),
+    );
+
+    modelDataArray = modelDataArray.concat(
+        getModels(diagramModel, 'Ms Runs', sampleJourney.msRunNames, Constants.MsRunOffsetX, Constants.MsRunColor),
+    );
+
+    const swathModels = getModels(
+        diagramModel,
+        'Swath',
+        sampleJourney.swathAnalysisNames,
+        Constants.SwathOffsetX,
+        Constants.SwathColor,
+    );
+    modelDataArray = modelDataArray.concat(swathModels);
+
+    const libOffsetY = swathModels.length * Constants.NodeOffsetY;
+    modelDataArray = modelDataArray.concat(
+        getModels(
+            diagramModel,
+            'Lib',
+            sampleJourney.specLibNames,
+            Constants.LibOffsetX,
+            Constants.SpectralLibColor,
+            libOffsetY,
+        ),
+    );
+
+    const matrixModels = getModels(
+        diagramModel,
+        'Matrix',
+        sampleJourney.outputProteinMatrixNames,
+        Constants.OutMatrixOffsetX,
+        Constants.ArtefactColor,
+    );
+    modelDataArray = modelDataArray.concat(matrixModels);
+
+    const spectralOffsetY = matrixModels.length * Constants.NodeOffsetY;
+    modelDataArray = modelDataArray.concat(
+        getModels(
+            diagramModel,
+            'Spectral library',
+            sampleJourney.outputSpecLibNames,
+            Constants.OutLibOffsetX,
+            Constants.ArtefactColor,
+            spectralOffsetY,
+        ),
+    );
+
+    sampleJourney.links.forEach((link: Link) => {
+        const source: ModelData = modelDataArray[modelDataArray.findIndex((data) => data.name === link.nodeStart)];
+        const target: ModelData = modelDataArray[modelDataArray.findIndex((data) => data.name === link.nodeEnd)];
+
+        console.log('source target link', source, target, link);
+        if (source === undefined || target === undefined) return;
+
+        const linkModel: DefaultLinkModel = source.outPort.link(target.inPort);
+
+        if (link.label !== '') linkModel.addLabel(link.label);
+
+        diagramModel.addLink(linkModel);
+    });
 
     //5) load model into engine
-    engine.setModel(model);
+    engine.setModel(diagramModel);
 
     //6) render the diagram!
     return (
-        <Modal width={1500} visible={true} centered onOk={() => onClose()} onCancel={() => onClose()}>
+        <Modal width={1650} visible={true} centered onOk={() => onClose()} onCancel={() => onClose()}>
             <img
                 src={legend}
                 alt="legend"
@@ -98,78 +159,37 @@ export const JourneyDiagram: FunctionComponent<Props> = ({ sampleId, onClose }) 
     );
 };
 
-function getMsReadyRelatedModels(intermediateSampleNodes: DefaultNodeModel[], sampleJourney: SampleJourney) {
-    let y = 0;
-    const msReadyNodes: DefaultNodeModel[] = [];
-    const intermediateToMsReadyLinks: DefaultLinkModel[] = [];
+function getModels(
+    diagramModel: DiagramModel,
+    modelName: string,
+    samples: string[],
+    offsetX: number,
+    color: string,
+    offsetY: number = 0,
+): ModelData[] {
+    let y = offsetY;
 
-    intermediateSampleNodes.forEach((node) => {
-        const name: string = node.getOptions().name!;
-        const links: Link[] = sampleJourney.links.filter((link) => link.nodeStart === name);
-        const outPort: DefaultPortModel = node.addOutPort('');
-
-        links.forEach((link) => {
-            const msReadyNode: DefaultNodeModel = new DefaultNodeModel({
-                name: link.nodeEnd,
-                color: Constants.MsReadySampleColor,
-            });
-            msReadyNode.setPosition(Constants.MsReadyOffsetX, (y += Constants.NodeOffsetY));
-
-            const inPort: DefaultPortModel = msReadyNode.addInPort('MsReady');
-            const linkNode: DefaultLinkModel = outPort.link(inPort);
-
-            msReadyNodes.push(msReadyNode);
-            intermediateToMsReadyLinks.push(linkNode);
-            // model.addAll(msReadyNode, linkNode);
-        });
-    });
-    return { msReadyNodes, intermediateToMsReadyLinks };
-}
-
-function getClinicalSampleNodes(sampleJourney: SampleJourney): DefaultNodeModel[] {
-    return sampleJourney.clinicalSampleNames.map((name: string) => {
-        return new DefaultNodeModel({
-            name,
-            color: Constants.ClinicalSampleColor,
-        });
-    });
-}
-
-function getIntermediateSampleNodes(sampleJourney: SampleJourney): DefaultNodeModel[] {
-    let y = 0;
-
-    return sampleJourney.intermediateSampleNames.map((name: string) => {
+    return samples.map((name: string) => {
         const node: DefaultNodeModel = new DefaultNodeModel({
             name,
-            color: Constants.IntermediateSampleColor,
+            color,
         });
-        node.setPosition(Constants.IntermediateOffsetX, (y += Constants.NodeOffsetY));
+        node.setPosition(offsetX, (y += Constants.NodeOffsetY));
 
-        return node;
+        const inPort: DefaultPortModel = node.addInPort(modelName);
+        const outPort: DefaultPortModel = node.addOutPort('');
+
+        diagramModel.addNode(node);
+
+        return { node, inPort, outPort, name };
     });
 }
 
-function getClinicalToIntermediateSampleLinks(
-    sampleJourney: SampleJourney,
-    sourceClinicalSampleNode: DefaultNodeModel,
-    intermediateSampleNodes: DefaultNodeModel[],
-): DefaultLinkModel[] {
-    const sourceNodeName: string = sourceClinicalSampleNode.getOptions().name!;
-
-    // intermediates for a clinical are all the links starting from the source clinical sample
-    const clinicalIntermediateLinks: Link[] = sampleJourney.links.filter((link) => link.nodeStart === sourceNodeName);
-
-    const outPort: DefaultPortModel = sourceClinicalSampleNode.addOutPort('Clinical sample');
-
-    const clinicalIntermediateLinkModels: DefaultLinkModel[] = clinicalIntermediateLinks.map((link) => {
-        const node: DefaultNodeModel = intermediateSampleNodes.filter((n) => n.getOptions().name! === link.nodeEnd)[0];
-
-        const inPort: DefaultPortModel = node.addInPort('Intermediate sample');
-
-        return outPort.link(inPort);
-    });
-
-    return clinicalIntermediateLinkModels;
+interface ModelData {
+    node: DefaultNodeModel;
+    inPort: DefaultPortModel;
+    outPort: DefaultPortModel;
+    name: string;
 }
 
 class Constants {
@@ -184,4 +204,9 @@ class Constants {
     public static NodeOffsetY: number = 70;
     public static IntermediateOffsetX: number = 150;
     public static MsReadyOffsetX: number = 450;
+    public static MsRunOffsetX: number = 750;
+    public static SwathOffsetX: number = 1050;
+    public static LibOffsetX: number = 1050;
+    public static OutMatrixOffsetX: number = 1350;
+    public static OutLibOffsetX: number = 1350;
 }

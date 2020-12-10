@@ -10,40 +10,107 @@ export class Api {
         }
     }
 }
+
+// https://json-to-js.com/
 const mockSampleJourney: SampleJourney = {
-    clinicalSampleNames: ['PHRT_005_001_CPAC'],
-    intermediateSampleNames: ['IS_PHRT_005_1001_CPAC'],
-    msReadySampleNames: ['MSR_IS_PHRT_005_1001_CPAC'],
-    msRunNames: ['sgoetze_A1902_248'],
-    swathAnalysisNames: ['PHRT_001_005_CPAC_SWATH'],
-    specLibNames: [],
-    outputProteinMatrixNames: ['PHRT_005_Protein_Matrix.tsv'],
-    outputSpecLibNames: [],
+    clinicalSampleNames: ['clinical_1'],
+    intermediateSampleNames: ['mid_1', 'mid_2', 'mid_3', 'mid_4'],
+    msReadySampleNames: ['msready_1', 'msready_2'],
+    msRunNames: ['msrun_1', 'msrun_2', 'msrun_3'],
+    swathAnalysisNames: ['swath_1', 'swath_2'],
+    specLibNames: ['spec_1', 'spec_2'],
+    outputProteinMatrixNames: ['output_protein_matrix_1.tsv', 'output_protein_matrix_2.tsv'],
+    outputSpecLibNames: ['output_spec_lib_1.tsv', 'output_spec_lib_2.tsv'],
     links: [
         {
-            nodeStart: 'PHRT_005_001_CPAC',
-            nodeEnd: 'IS_PHRT_005_1001_CPAC',
-            label: 'PHRT_Sample_Preparation_SOP',
-        },
-        {
-            nodeStart: 'IS_PHRT_005_1001_CPAC',
-            nodeEnd: 'MSR_IS_PHRT_005_1001_CPAC',
+            nodeStart: 'clinical_1',
+            nodeEnd: 'mid_1',
             label: '',
         },
         {
-            nodeStart: 'MSR_IS_PHRT_005_1001_CPAC',
-            nodeEnd: 'sgoetze_A1902_248',
-            label: 'PHRT_Mass_Spectrometry_SOP',
+            nodeStart: 'clinical_1',
+            nodeEnd: 'mid_2',
+            label: '',
         },
         {
-            nodeStart: 'sgoetze_A1902_248',
-            nodeEnd: 'PHRT_001_005_CPAC_SWATH',
-            label: 'PHRT_Data_Analysis_SOP',
+            nodeStart: 'clinical_1',
+            nodeEnd: 'mid_3',
+            label: '',
         },
         {
-            nodeStart: 'PHRT_001_005_CPAC_SWATH',
-            nodeEnd: 'PHRT_005_Protein_Matrix.tsv',
-            label: 'output',
+            nodeStart: 'mid_2',
+            nodeEnd: 'mid_4',
+            label: '',
+        },
+        {
+            nodeStart: 'mid_3',
+            nodeEnd: 'mid_4',
+            label: '',
+        },
+        {
+            nodeStart: 'mid_1',
+            nodeEnd: 'msready_1',
+            label: '',
+        },
+        {
+            nodeStart: 'mid_4',
+            nodeEnd: 'msready_2',
+            label: '',
+        },
+        {
+            nodeStart: 'msready_1',
+            nodeEnd: 'msrun_1',
+            label: 'mass spec 1',
+        },
+        {
+            nodeStart: 'msready_1',
+            nodeEnd: 'msrun_2',
+            label: 'mass spec 2',
+        },
+        {
+            nodeStart: 'msready_2',
+            nodeEnd: 'msrun_3',
+            label: 'mass spec 2',
+        },
+        {
+            nodeStart: 'msrun_2',
+            nodeEnd: 'swath_1',
+            label: '',
+        },
+        {
+            nodeStart: 'msrun_2',
+            nodeEnd: 'swath_2',
+            label: '',
+        },
+        {
+            nodeStart: 'msrun_2',
+            nodeEnd: 'spec_1',
+            label: '',
+        },
+        {
+            nodeStart: 'msrun_3',
+            nodeEnd: 'spec_2',
+            label: '',
+        },
+        {
+            nodeStart: 'swath_1',
+            nodeEnd: 'output_spec_lib_1.tsv',
+            label: '',
+        },
+        {
+            nodeStart: 'swath_2',
+            nodeEnd: 'output_spec_lib_2.tsv',
+            label: '',
+        },
+        {
+            nodeStart: 'spec_1',
+            nodeEnd: 'output_protein_matrix_1.tsv',
+            label: '',
+        },
+        {
+            nodeStart: 'spec_2',
+            nodeEnd: 'output_protein_matrix_2.tsv',
+            label: '',
         },
     ],
 };

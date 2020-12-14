@@ -1,0 +1,137 @@
+{
+    "clinicalSampleNames": [
+      "PHRT_005_006_CPAC"
+    ],
+    "intermediateSampleNames": [
+      "IS_PHRT_005_mix1_CPAC",
+      "IS_PHRT_005_1006_CPAC",
+      "IS_PHRT_005_frac1_CPAC",
+      "IS_PHRT_005_frac1_CPAC"
+    ],
+    "msReadySampleNames": [
+      "MSR_IS_PHRT_005_1006_CPAC",
+      "MSR_IS_PHRT_005_mix1_CPAC"
+      
+    ],
+    "msRunNames": [
+      "sgoetze_A1902_053",
+      "sgoetze_C1902_025",
+      "sgoetze_C1902_052"
+      
+    ],
+    "swathAnalysisNames": [
+      "PHRT_001_005_CPAC_SWATH",
+      "PHRT_002_005_CPAC_SWATH"
+    ],
+    "specLibNames": [
+      "PHRT_001_005_CPAC_Lib",
+      "PHRT_002_005_CPAC_Lib"
+      
+    ],
+    "outputProteinMatrixNames": [
+      "PHRT_001_005_Protein_Matrix.tsv",
+      "PHRT_002_005_Protein_Matrix.tsv"
+    ],
+    "outputSpecLibNames": [
+      "PHRT_001_005_Spec_Lib.tsv",
+      "PHRT_002_005_Spec_Lib.tsv"
+      
+    ],
+    "links": [
+      {
+        "nodeStart": "PHRT_005_006_CPAC",
+        "nodeEnd": "IS_PHRT_005_frac1_CPAC",
+        "label": "PHRT_Sample_Preparation_SOP"
+      },
+      {
+        "nodeStart": "PHRT_005_006_CPAC",
+        "nodeEnd": "IS_PHRT_005_frac2_CPAC",
+        "label": "PHRT_Sample_Preparation_SOP"
+      },
+      {
+        "nodeStart": "IS_PHRT_005_frac1_CPAC",
+        "nodeEnd": "IS_PHRT_005_mix1_CPAC",
+        "label": "PHRT_Sample_Preparation_SOP"
+      },
+      {
+        "nodeStart": "IS_PHRT_005_frac2_CPAC",
+        "nodeEnd": "IS_PHRT_005_mix1_CPAC",
+        "label": "PHRT_Sample_Preparation_SOP"
+      },
+      {
+        "nodeStart": "PHRT_005_006_CPAC",
+        "nodeEnd": "IS_PHRT_005_1006_CPAC",
+        "label": "PHRT_Sample_Preparation_SOP"
+      },
+      {
+        "nodeStart": "IS_PHRT_005_1006_CPAC",
+        "nodeEnd": "MSR_IS_PHRT_005_1006_CPAC",
+        "label": ""
+      },
+      {
+        "nodeStart": "MSR_IS_PHRT_005_1006_CPAC",
+        "nodeEnd": "sgoetze_A1902_053",
+        "label": "PHRT_Mass_Spectrometry_SOP"
+      },
+      {
+        "nodeStart": "MSR_IS_PHRT_005_1006_CPAC",
+        "nodeEnd": "sgoetze_A1902_052",
+        "label": "PHRT_Mass_Spectrometry_SOP"
+      },
+      {
+        "nodeStart": "IS_PHRT_005_mix1_CPAC",
+        "nodeEnd": "MSR_IS_PHRT_005_mix1_CPAC",
+        "label": ""
+      },
+      {
+        "nodeStart": "MSR_IS_PHRT_005_mix1_CPAC",
+        "nodeEnd": "sgoetze_C1902_025",
+        "label": "PHRT_Mass_Spectrometry_SOP"
+      },
+      {
+        "nodeStart": "sgoetze_A1902_053",
+        "nodeEnd": "PHRT_001_005_CPAC_SWATH",
+        "label": "PHRT_Data_Analysis_SOP"
+      },
+      {
+        "nodeStart": "sgoetze_A1902_053",
+        "nodeEnd": "PHRT_002_005_CPAC_SWATH",
+        "label": "PHRT_Data_Analysis_SOP"
+      },
+      {
+        "nodeStart": "sgoetze_A1902_053",
+        "nodeEnd": "PHRT_002_005_Spec_Lib",
+        "label": "PHRT_Data_Analysis_SOP"
+      },
+      {
+        "nodeStart": "sgoetze_A1902_053",
+        "nodeEnd": "PHRT_001_005_Spec_Lib",
+        "label": "PHRT_Data_Analysis_SOP"
+      },
+      {
+        "nodeStart": "sgoetze_A1902_025",
+        "nodeEnd": "PHRT_002_005_Spec_Lib",
+        "label": "PHRT_Data_Analysis_SOP"
+      },
+      {
+        "nodeStart": "PHRT_001_005_CPAC_SWATH",
+        "nodeEnd": "PHRT_001_005_Protein_Matrix.tsv",
+        "label": "output"
+      },
+      {
+        "nodeStart": "PHRT_002_005_CPAC_SWATH",
+        "nodeEnd": "PHRT_002_005_Protein_Matrix.tsv",
+        "label": "output"
+      },
+      {
+        "nodeStart": "PHRT_001_005_CPAC_Lib",
+        "nodeEnd": "PHRT_001_005_Spec_Lib.tsv",
+        "label": "output"
+      },
+      {
+        "nodeStart": "PHRT_002_005_CPAC_Lib",
+        "nodeEnd": "PHRT_002_005_Spec_Lib.tsv",
+        "label": "output"
+      }
+    ]
+  }

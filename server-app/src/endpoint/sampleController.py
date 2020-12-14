@@ -227,3 +227,41 @@ def getMsReadySamplesByClinicalSampleId():
         return jsonify(samples), status.HTTP_200_OK
     else:
         return 'Clinical Sample with id does not exist.', status.HTTP_404_NOT_FOUND
+
+
+@sample_api.route('/samples/msready', methods=['POST'])
+def createMSReadySamples():
+    data = request.json
+    samples = data.get('samples')
+    success_names = []
+    for i in samples:
+        intermediateSample = intermediateSampleDAO.getIntermediateSampleById(
+            ObjectId(i['intermediateSampleId']))
+        msr_name = "MSR_" + str(intermediateSample['name'])
+
+        new_sample = {
+            "clinicalSamples": intermediateSample['clinicalSamples'],
+            "name": msr_name,
+            "intermediateSampleId": i['intermediateSampleId'],
+            "projectId": i['projectId'],
+            "processingPerson": i['processingPerson'],
+            "description": i['description'],
+            "quality": i['quality'],
+            "peptideNo": i['peptideNo'],
+            "workflowTag": i['workflowTag'],
+            "updatedDate": datetime.datetime.now(),
+            "createdDate": datetime.datetime.now()
+        }
+
+        created_sample = msReadySamplesDAO.createMSReadySample(
+            new_sample)
+        if(created_sample == 0):
+            msg = 'Sample with name: ' + msr_name+' already exists.'
+            if(len(success_names) > 0):
+                msg = msg+'The correct samples: ' + \
+                    str(success_names) + ' have been created.'
+            return msg, status.HTTP_400_BAD_REQUEST
+        else:
+            success_names.append(created_sample['name'])
+
+    return 'The correct ms ready samples: '+str(success_names) + ' have been created', status.HTTP_200_OK

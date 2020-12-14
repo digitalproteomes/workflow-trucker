@@ -82,11 +82,11 @@ class MSReadySample(Document):
     msReadySampleName = fields.StrField(required=False)
     workflowTag = fields.StrField(required=False)
     quality = fields.StrField(required=False)
-    peptideNo = fields.IntegerField(required=False)
-    description = fields.StrField()
+    peptideNo = fields.FloatField(required=False)
+    description = fields.StrField(required=False)
     concentration = fields.StrField(required=False)
-    processingPerson = fields.StrField()
-    currentLocation = fields.StrField()
+    processingPerson = fields.StrField(required=False)
+    currentLocation = fields.StrField(required=False)
     createdDate = fields.DateTimeField(
         validate=validate.Range(min=datetime(1900, 1, 1)))
     updatedDate = fields.DateTimeField(

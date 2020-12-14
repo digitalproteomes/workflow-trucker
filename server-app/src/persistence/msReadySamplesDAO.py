@@ -32,8 +32,15 @@ def getMsReadySamplesByProject(projectId):
 
 def createMSReadySample(sampleJson):
     new_sample = MSReadySample(**sampleJson)
-    created = new_sample.commit()
-    return MSReadySample.find_one({"id": created.inserted_id}).dump()
+
+    existing_sample_name = MSReadySample.find_one(
+        {"name": new_sample.name, "projectId": ObjectId(new_sample.projectId)})
+
+    if(existing_sample_name):
+        return 0
+    else:
+        created = new_sample.commit()
+        return MSReadySample.find_one({"id": created.inserted_id}).dump()
 
 
 def getMSReadySampleById(id):

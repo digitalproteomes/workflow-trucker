@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import { EditableList, EditableListProps } from './autoGenerateResultList';
+import { EditableList, EditableListProps } from '../../../../common/listEditable';
 import { Api } from '../../api';
 import { Store } from 'antd/lib/form/interface';
 import { InputModal } from '../../../../common/inputModal';

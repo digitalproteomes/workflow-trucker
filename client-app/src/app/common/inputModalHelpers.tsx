@@ -1,9 +1,26 @@
 import React from 'react';
-import { Form, Input, Select } from 'antd';
+import { Form, Input, InputNumber, Select } from 'antd';
 import { getSOPType, getWorkflowTag } from './tags';
 import { ESOPType, EWorkflowTag } from '../types';
 
 const { Option } = Select;
+
+export function createFormInputNumber<T>(
+    label: string,
+    propName: keyof T,
+    placeholder: string | undefined = undefined,
+    required: boolean = false,
+) {
+    return (
+        <Form.Item
+            label={label}
+            name={propName.toString()}
+            rules={[{ required: required, message: validationMessage(propName.toString()) }]}
+        >
+            <InputNumber placeholder={placeholder} />
+        </Form.Item>
+    );
+}
 
 export function createFormInput<T>(
     label: string,

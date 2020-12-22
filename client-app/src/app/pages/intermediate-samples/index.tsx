@@ -5,11 +5,12 @@ import { ButtonExport } from '../../common/export';
 import { PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { SampleNotifications } from '../../common/notifications';
 import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
+import { ButtonProcessFromIntermediateBulk } from '../../functional-building-blocks/ms-runs';
 
 export const IntermediateSamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const [, setSelectedSamples] = useState<IntermediateSample[]>([]);
+    const [selectedSamples, setSelectedSamples] = useState<IntermediateSample[]>([]);
 
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
@@ -42,23 +43,28 @@ export const IntermediateSamples: FunctionComponent = () => {
 
     return (
         <>
-            <PageHeader ghost={false} title="Intermediate Samples"></PageHeader>
+            <PageHeader ghost={false} title="Intermediate Samples">
+                <ButtonProcessFromIntermediateBulk
+                    samples={selectedSamples}
+                    style={{ float: 'right', marginRight: 10 }}
+                />
+                <ButtonExport
+                    onExportDone={() => {
+                        onExportDone();
+                    }}
+                />
+                <Tooltip title="Create MS Ready Samples">
+                    <Button type="primary" icon={<PlusOutlined />} style={{ float: 'right', marginRight: 10 }}>
+                        Create MS Ready Samples
+                    </Button>
+                </Tooltip>
+                <Tooltip title="Add to pooling preparation">
+                    <Button type="primary" icon={<PlusCircleOutlined />} style={{ float: 'right', marginRight: 10 }}>
+                        Add to pooling preparation
+                    </Button>
+                </Tooltip>
+            </PageHeader>
 
-            <ButtonExport
-                onExportDone={() => {
-                    onExportDone();
-                }}
-            />
-            <Tooltip title="Create MS Ready Samples">
-                <Button type="primary" icon={<PlusOutlined />} style={{ float: 'right', marginRight: 10 }}>
-                    Create MS Ready Samples
-                </Button>
-            </Tooltip>
-            <Tooltip title="Add to pooling preparation">
-                <Button type="primary" icon={<PlusCircleOutlined />} style={{ float: 'right', marginRight: 10 }}>
-                    Add to pooling preparation
-                </Button>
-            </Tooltip>
             <Divider></Divider>
 
             <List

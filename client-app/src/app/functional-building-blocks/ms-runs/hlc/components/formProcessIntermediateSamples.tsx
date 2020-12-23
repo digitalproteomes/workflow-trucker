@@ -1,7 +1,10 @@
+import { Button } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 import { ColumnsType } from 'antd/lib/table';
+import { DeleteOutlined } from '@ant-design/icons';
+
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { getColumn, getEditableColumn } from '../../../../common/columnHelpers';
+import { getActionsColumn, getColumn, getEditableColumn } from '../../../../common/columnHelpers';
 import { InputModal } from '../../../../common/inputModal';
 import { createFormInput } from '../../../../common/inputModalHelpers';
 import { EditableList, EditableListProps } from '../../../../common/listEditable';
@@ -34,7 +37,7 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
                     description: entry.description,
                     peptideCount: 0,
                     processingPerson: Constants.personName,
-                    quality: 'better than expected',
+                    quality: 'good',
                 };
             });
 
@@ -57,8 +60,8 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
     };
 
     const handleSave = (row: MsReadyNew) => {
-        const newData: MsReadyNew[] = [...samplesToProcess!];
-        const index = newData.findIndex((item) => row.name === item.name);
+        const newData: MsReadyNew[] = samplesToProcess!;
+        const index = newData.findIndex((item) => row.id === item.id);
         const item = newData[index];
         newData.splice(index, 1, {
             ...item,
@@ -68,11 +71,28 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
         setSamplesToProcess(newData);
     };
 
+    const renderActions = (sample: MsReadyNew): JSX.Element => {
+        return (
+            <Button
+                type={'primary'}
+                icon={<DeleteOutlined />}
+                onClick={() => {
+                    const newData: MsReadyNew[] = samplesToProcess!;
+                    const index = newData.findIndex((item) => sample.id === item.id);
+                    newData.splice(index, 1);
+
+                    setSamplesToProcess([...newData]);
+                }}
+            />
+        );
+    };
+
     const columns: ColumnsType<MsReadyNew> = [
         getColumn('Name', MsReadyNew.nameof('name')),
         getEditableColumn('Peptide #', MsReadyNew.nameof('peptideCount'), handleSave),
         getEditableColumn('Quality', MsReadyNew.nameof('quality'), handleSave),
         getColumn('Description', MsReadyNew.nameof('description')),
+        getActionsColumn(renderActions),
     ];
 
     const inputs: JSX.Element[] = [createFormInput('Processing person', MsReadyNew.nameof('processingPerson'))];

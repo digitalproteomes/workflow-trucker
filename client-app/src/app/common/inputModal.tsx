@@ -16,6 +16,7 @@ type ModalProps = {
     onCancel: () => void;
     placeholder?: any;
     onValuesChange?: (values: Store) => void;
+    getExistingValues?: () => any;
 };
 
 export const InputModal: FunctionComponent<ModalProps> = ({
@@ -27,10 +28,13 @@ export const InputModal: FunctionComponent<ModalProps> = ({
     onCancel,
     placeholder,
     onValuesChange,
+    getExistingValues,
     children,
 }) => {
     const [form] = Form.useForm();
     const [isSaving, setSavingFlag] = useState<boolean>(false);
+
+    if (getExistingValues !== undefined) form.setFieldsValue(getExistingValues());
 
     const onCreateWrapper = async (sample: Store) => {
         setSavingFlag(true);

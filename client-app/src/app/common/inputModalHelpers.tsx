@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, InputNumber, Select } from 'antd';
+import { Checkbox, Form, Input, InputNumber, Select } from 'antd';
 import { getSOPType, getWorkflowTag } from './tags';
 import { ESOPType, EWorkflowTag } from '../types';
 
@@ -15,9 +15,23 @@ export function createFormInputNumber<T>(
         <Form.Item
             label={label}
             name={propName.toString()}
+            key={propName.toString()}
             rules={[{ required: required, message: validationMessage(propName.toString()) }]}
         >
             <InputNumber placeholder={placeholder} />
+        </Form.Item>
+    );
+}
+
+export function createFormInputCheckbox<T>(label: string, propName: keyof T, value?: boolean) {
+    return (
+        <Form.Item
+            name={propName.toString()}
+            valuePropName="checked"
+            key={propName.toString()}
+            rules={[{ required: false, message: validationMessage(propName.toString()) }]}
+        >
+            <Checkbox value={value}>{label}</Checkbox>
         </Form.Item>
     );
 }
@@ -32,6 +46,7 @@ export function createFormInput<T>(
         <Form.Item
             label={label}
             name={propName.toString()}
+            key={propName.toString()}
             rules={[{ required: required, message: validationMessage(propName.toString()) }]}
         >
             <Input placeholder={placeholder} />
@@ -48,6 +63,7 @@ export function createFormSelect<T>(label: string, propName: keyof T, workflowTa
         <Form.Item
             label={label}
             name={propName.toString()}
+            key={propName.toString()}
             rules={[{ required: false, message: validationMessage(propName.toString()) }]}
         >
             <Select
@@ -70,6 +86,7 @@ export function createSOPFormSelect<T>(label: string, propName: keyof T, sopType
         <Form.Item
             label={label}
             name={propName.toString()}
+            key={propName.toString()}
             rules={[{ required: false, message: validationMessage(propName.toString()) }]}
         >
             <Select

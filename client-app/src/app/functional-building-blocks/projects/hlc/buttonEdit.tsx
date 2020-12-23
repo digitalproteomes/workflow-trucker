@@ -7,12 +7,25 @@ import { FormEditProject } from './components/formEditProject';
 type Props = {
     project: Project | null;
     style?: React.CSSProperties;
+    onUpdateProjectSuccess: (updated: Project) => void;
 };
 
 export const ButtonEditProject: FunctionComponent<Props> = (props: Props) => {
     const [project, setProject] = useState<Project | null>(null);
 
-    const projectEditForm = project === null ? <></> : <FormEditProject />;
+    const projectEditForm =
+        project === null ? (
+            <></>
+        ) : (
+            <FormEditProject
+                project={project}
+                onCancel={() => setProject(null)}
+                onCreateSuccessful={(updated: Project) => {
+                    props.onUpdateProjectSuccess(updated);
+                    setProject(null);
+                }}
+            />
+        );
 
     return (
         <>

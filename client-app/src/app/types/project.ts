@@ -1,5 +1,5 @@
 export class Project {
-    id: string = '';
+    projectId: string = '';
 
     description: string = '';
 
@@ -18,7 +18,7 @@ export class Project {
     public static nameof = (name: keyof Project) => name;
 
     public static default: Project = {
-        id: 'default project id',
+        projectId: 'default project id',
         createdDate: '',
         description: '',
         isLocked: false,

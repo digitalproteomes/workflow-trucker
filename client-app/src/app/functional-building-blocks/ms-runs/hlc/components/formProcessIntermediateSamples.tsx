@@ -32,11 +32,13 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
         if (samplesToProcess === null && originalSamples !== null) {
             const newSamples: MsReadyNew[] = originalSamples.map((entry) => {
                 return {
-                    id: entry.id,
+                    intermediateSampleId: entry.id,
                     name: entry.name,
                     description: entry.description,
-                    peptideCount: 0,
+                    peptideNo: 0,
                     processingPerson: Constants.personName,
+                    workflowTag: 'default',
+                    projectId: Constants.projectId,
                     quality: 'good',
                 };
             });
@@ -61,7 +63,7 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
 
     const handleSave = (row: MsReadyNew) => {
         const newData: MsReadyNew[] = samplesToProcess!;
-        const index = newData.findIndex((item) => row.id === item.id);
+        const index = newData.findIndex((item) => row.intermediateSampleId === item.intermediateSampleId);
         const item = newData[index];
         newData.splice(index, 1, {
             ...item,
@@ -78,7 +80,9 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
                 icon={<DeleteOutlined />}
                 onClick={() => {
                     const newData: MsReadyNew[] = samplesToProcess!;
-                    const index = newData.findIndex((item) => sample.id === item.id);
+                    const index = newData.findIndex(
+                        (item) => sample.intermediateSampleId === item.intermediateSampleId,
+                    );
                     newData.splice(index, 1);
 
                     setSamplesToProcess([...newData]);
@@ -89,7 +93,7 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
 
     const columns: ColumnsType<MsReadyNew> = [
         getColumn('Name', MsReadyNew.nameof('name')),
-        getEditableColumn('Peptide #', MsReadyNew.nameof('peptideCount'), handleSave),
+        getEditableColumn('Peptide #', MsReadyNew.nameof('peptideNo'), handleSave),
         getEditableColumn('Quality', MsReadyNew.nameof('quality'), handleSave),
         getColumn('Description', MsReadyNew.nameof('description')),
         getActionsColumn(renderActions),
@@ -116,7 +120,11 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
                 setSamplesToProcess(null);
             }}
         >
-            <EditableMsReadyList entries={samplesToProcess!} columns={columns} />
+            <EditableMsReadyList
+                entries={samplesToProcess!}
+                columns={columns}
+                rowKeySelector={(row: MsReadyNew) => row.intermediateSampleId}
+            />
         </InputModal>
     );
 };

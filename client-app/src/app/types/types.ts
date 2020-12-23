@@ -81,17 +81,21 @@ export class MSReadySample {
 }
 
 export class MsReadyNew {
-    id: string = '';
+    intermediateSampleId: string = '';
 
     name: string = '';
 
-    peptideCount: number = 0;
+    peptideNo: number = 0;
 
     quality: string = '';
 
     description: string = '';
 
     processingPerson: string = '';
+
+    workflowTag: string = '';
+
+    projectId: string = '';
 
     public static nameof = (name: keyof MsReadyNew) => name;
 }

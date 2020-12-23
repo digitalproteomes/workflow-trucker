@@ -5,10 +5,11 @@ import React, { FunctionComponent, useContext, useEffect, useRef, useState } fro
 export type EditableListProps<T> = {
     entries: T[];
     columns: ColumnsType<T>;
+    rowKeySelector: (row: T) => string;
 };
 
 export function EditableList<T extends object>(): FunctionComponent<EditableListProps<T>> {
-    return ({ entries, columns }) => {
+    return ({ entries, columns, rowKeySelector }) => {
         const EditableContext = React.createContext<any>(null);
 
         const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
@@ -95,6 +96,7 @@ export function EditableList<T extends object>(): FunctionComponent<EditableList
                 rowClassName={() => 'editable-row'}
                 bordered
                 dataSource={entries}
+                rowKey={(row) => rowKeySelector(row)}
                 columns={columns}
             />
         );

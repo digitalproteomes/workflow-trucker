@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { TableRowSelection, ExpandableConfig, ColumnType } from 'antd/lib/table/interface';
+import { TableRowSelection, ExpandableConfig } from 'antd/lib/table/interface';
 import { getActionsColumn } from './columnHelpers';
 
 type Props<T extends object> = {

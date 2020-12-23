@@ -60,7 +60,7 @@ function getDynamicListInput() {
                                 {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
                                 label={index === 0 ? 'Fractions' : ''}
                                 required={false}
-                                key={field.key}
+                                key={`${field.key}_${field.name}_${index}`}
                             >
                                 <Form.Item
                                     {...field}

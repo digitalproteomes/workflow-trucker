@@ -16,7 +16,6 @@ export class Api {
                     name: 'DRBD',
                     ownerName: 'Silvana Albert',
                     ownerORCID: '0000-0002-7820-9139',
-                    projectId: 'this is coming as a number from the backend',
                     updatedDate: '2020-12-03T19:38:17.905000+00:00',
                 },
             ];

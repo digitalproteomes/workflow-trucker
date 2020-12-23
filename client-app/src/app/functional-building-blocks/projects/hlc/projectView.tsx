@@ -18,7 +18,7 @@ export class ProjectView extends React.Component<ProjectViewProps, {}> {
                 <Paragraph>{project.ownerORCID}</Paragraph>
                 <Paragraph>{project.description}</Paragraph>
                 <Text strong={true}>Project id</Text>
-                <Paragraph>{project.projectId}</Paragraph>
+                <Paragraph>{project.id}</Paragraph>
             </>
         );
     }

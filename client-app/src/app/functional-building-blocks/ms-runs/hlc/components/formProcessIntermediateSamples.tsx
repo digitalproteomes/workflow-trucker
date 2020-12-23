@@ -61,6 +61,12 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
         saveSamples();
     };
 
+    const handleOnCancel = () => {
+        onCancel();
+
+        setSamplesToProcess(null);
+    };
+
     const handleSave = (row: MsReadyNew) => {
         const newData: MsReadyNew[] = samplesToProcess!;
         const index = newData.findIndex((item) => row.intermediateSampleId === item.intermediateSampleId);
@@ -73,22 +79,21 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
         setSamplesToProcess(newData);
     };
 
-    const renderActions = (sample: MsReadyNew): JSX.Element => {
-        return (
-            <Button
-                type={'primary'}
-                icon={<DeleteOutlined />}
-                onClick={() => {
-                    const newData: MsReadyNew[] = samplesToProcess!;
-                    const index = newData.findIndex(
-                        (item) => sample.intermediateSampleId === item.intermediateSampleId,
-                    );
-                    newData.splice(index, 1);
+    const handleDelete = (row: MsReadyNew) => {
+        const newData: MsReadyNew[] = samplesToProcess!;
+        const index = newData.findIndex((item) => row.intermediateSampleId === item.intermediateSampleId);
+        newData.splice(index, 1);
 
-                    setSamplesToProcess([...newData]);
-                }}
-            />
-        );
+        if (newData.length === 0) {
+            handleOnCancel();
+            return;
+        }
+
+        setSamplesToProcess([...newData]);
+    };
+
+    const renderActions = (sample: MsReadyNew): JSX.Element => {
+        return <Button type={'primary'} icon={<DeleteOutlined />} onClick={() => handleDelete(sample)} />;
     };
 
     const columns: ColumnsType<MsReadyNew> = [
@@ -114,11 +119,7 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
 
                 onCreate(samplesToProcess!);
             }}
-            onCancel={() => {
-                onCancel();
-
-                setSamplesToProcess(null);
-            }}
+            onCancel={() => handleOnCancel()}
         >
             <EditableMsReadyList
                 entries={samplesToProcess!}

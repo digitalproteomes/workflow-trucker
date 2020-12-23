@@ -5,7 +5,10 @@ import { ButtonExport } from '../../common/export';
 import { PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { SampleNotifications } from '../../common/notifications';
 import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
-import { ButtonProcessFromIntermediateBulk } from '../../functional-building-blocks/ms-runs';
+import {
+    ButtonProcessFromIntermediate,
+    ButtonProcessFromIntermediateBulk,
+} from '../../functional-building-blocks/ms-runs';
 
 export const IntermediateSamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -29,10 +32,8 @@ export const IntermediateSamples: FunctionComponent = () => {
             <span>
                 <Space size="middle">
                     <ButtonFractionate sample={record} />
+                    <ButtonProcessFromIntermediate sample={record} title={'Process to MsReady'} />
 
-                    <Button type="default" htmlType="button">
-                        Generate Ms Ready Sample
-                    </Button>
                     <Button type="default" htmlType="button">
                         Delete
                     </Button>
@@ -46,6 +47,7 @@ export const IntermediateSamples: FunctionComponent = () => {
             <PageHeader ghost={false} title="Intermediate Samples">
                 <ButtonProcessFromIntermediateBulk
                     samples={selectedSamples}
+                    title={'Process samples in bulk'}
                     style={{ float: 'right', marginRight: 10 }}
                 />
                 <ButtonExport

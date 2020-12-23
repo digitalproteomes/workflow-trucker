@@ -7,7 +7,7 @@ import { SampleNotifications } from '../../../common/notifications';
 
 type Props = {
     samples: IntermediateSample[];
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
     title: string;
 };
 

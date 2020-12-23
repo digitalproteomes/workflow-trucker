@@ -6,7 +6,7 @@ import { FormUpload } from './components/formUpload';
 
 type Props = {
     setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>;
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 export const ButtonUploadSOP: FunctionComponent<Props> = ({ setRefreshNeededFlag, style }) => {

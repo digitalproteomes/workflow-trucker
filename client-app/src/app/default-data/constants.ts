@@ -22,7 +22,7 @@ export class Constants {
     static setActiveProject(newActiveProject: Project) {
         this.activeProject = newActiveProject;
 
-        this.projectId = this.activeProject.projectId;
+        this.projectId = this.activeProject.id;
         this.projectName = this.activeProject.name;
 
         // plan - get the currently logged in user id

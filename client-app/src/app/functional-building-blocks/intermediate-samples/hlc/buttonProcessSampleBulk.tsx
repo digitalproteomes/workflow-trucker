@@ -8,7 +8,7 @@ import { ProcessSampleForm } from './components/formProcess';
 type ButtonProps = {
     // todo - an array of sample ids are more than enough (instead of the entire clinical sample instances)
     samples: ClinicalSample[];
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 export const ButtonProcessSampleBulk: FunctionComponent<ButtonProps> = ({ samples, style }) => {

@@ -5,7 +5,7 @@ import { ButtonProcessFromIntermediateBulk } from './buttonProcessFromIntermedia
 type PropsSingle = {
     sample: IntermediateSample;
     title: string;
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 export const ButtonProcessFromIntermediate: FunctionComponent<PropsSingle> = ({ sample, style, title }) => {

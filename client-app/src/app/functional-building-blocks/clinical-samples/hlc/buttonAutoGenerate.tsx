@@ -6,7 +6,7 @@ import { AutoGenerateInputForm } from './components/autoGenerate';
 
 type Props = {
     setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>;
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 export const ButtonAutoGenerate: FunctionComponent<Props> = ({ setRefreshNeededFlag, style }) => {

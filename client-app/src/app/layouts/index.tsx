@@ -51,7 +51,7 @@ export const BasicLayout = withRouter((props) => {
     let selectedMenuEntry = props.location.pathname;
     if (selectedMenuEntry === '/') selectedMenuEntry = '/about';
 
-    const projectId = activeProject.projectId;
+    const projectId = activeProject.id;
     const projectName = activeProject.name;
 
     return (
@@ -85,14 +85,14 @@ export const BasicLayout = withRouter((props) => {
                 <Header className="site-layout-background" style={{ padding: 0 }}>
                     <div style={{ float: 'right', alignContent: 'horizontal' }}>
                         <Select
-                            defaultValue={activeProject.projectId}
+                            defaultValue={activeProject.id}
                             onChange={(projectId: string) => {
-                                resetActiveProject(projects.filter((p) => p.projectId === projectId)[0]);
+                                resetActiveProject(projects.filter((p) => p.id === projectId)[0]);
                             }}
                             style={{ width: 260 }}
                         >
                             {projects.map((project) => (
-                                <Option key={project.projectId} value={project.projectId}>
+                                <Option key={project.id} value={project.id}>
                                     {project.name}
                                 </Option>
                             ))}

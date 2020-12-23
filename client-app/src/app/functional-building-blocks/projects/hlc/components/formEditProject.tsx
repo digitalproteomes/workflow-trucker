@@ -1,5 +1,6 @@
 import { Store } from 'antd/lib/form/interface';
 import React, { FunctionComponent, useState } from 'react';
+import { Api } from '../..';
 import { InputModal } from '../../../../common/inputModal';
 import { createFormInput, createFormInputCheckbox } from '../../../../common/inputModalHelpers';
 import { Project } from '../../../../types';
@@ -11,22 +12,32 @@ type Props = {
 };
 
 export const FormEditProject: FunctionComponent<Props> = (props: Props) => {
-    const [errorMessage] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const isActiveInputForm: boolean = props.project !== null;
 
     if (!isActiveInputForm) return null;
 
-    const onCreate = (data: Project) => {
-        console.log('data', data);
-        props.onCreateSuccessful(data);
+    const project: Project = props.project!;
+
+    const onCreate = (data: Store) => {
+        const updated: Project = { ...project, ...(data as Project) };
+
+        async function saveProject() {
+            try {
+                const result: Project = await Api.post(updated);
+                props.onCreateSuccessful(result);
+            } catch (error) {
+                setErrorMessage(error.message);
+            }
+        }
+
+        saveProject();
     };
 
     const onCancel = () => {
         props.onCancel();
     };
-
-    const project: Project = props.project!;
 
     const inputs: JSX.Element[] = [
         createFormInput('Name', Project.nameof('name'), 'name', true),
@@ -42,7 +53,7 @@ export const FormEditProject: FunctionComponent<Props> = (props: Props) => {
             title="Edit project details"
             inputs={inputs}
             errorMessage={errorMessage}
-            onCreate={async (data: Store) => onCreate(data as Project)}
+            onCreate={async (data: Store) => onCreate(data)}
             onCancel={onCancel}
             getExistingValues={() => {
                 return project;

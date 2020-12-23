@@ -21,8 +21,8 @@ export const ButtonEditProject: FunctionComponent<Props> = (props: Props) => {
                 project={project}
                 onCancel={() => setProject(null)}
                 onCreateSuccessful={(updated: Project) => {
-                    props.onUpdateProjectSuccess(updated);
                     setProject(null);
+                    props.onUpdateProjectSuccess(updated);
                 }}
             />
         );

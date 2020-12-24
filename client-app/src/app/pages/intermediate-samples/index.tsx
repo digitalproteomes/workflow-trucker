@@ -2,7 +2,7 @@ import React, { useState, FunctionComponent } from 'react';
 import { IntermediateSample } from '../../types';
 import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
 import { ButtonExport } from '../../common/export';
-import { PlusOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 import { SampleNotifications } from '../../common/notifications';
 import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
 import {
@@ -47,7 +47,7 @@ export const IntermediateSamples: FunctionComponent = () => {
             <PageHeader ghost={false} title="Intermediate Samples">
                 <ButtonProcessFromIntermediateBulk
                     samples={selectedSamples}
-                    title={'Process samples in bulk'}
+                    title={'Create MS Ready Sample'}
                     style={{ float: 'right', marginRight: 10 }}
                 />
                 <ButtonExport
@@ -55,11 +55,6 @@ export const IntermediateSamples: FunctionComponent = () => {
                         onExportDone();
                     }}
                 />
-                <Tooltip title="Create MS Ready Samples">
-                    <Button type="primary" icon={<PlusOutlined />} style={{ float: 'right', marginRight: 10 }}>
-                        Create MS Ready Samples
-                    </Button>
-                </Tooltip>
                 <Tooltip title="Add to pooling preparation">
                     <Button type="primary" icon={<PlusCircleOutlined />} style={{ float: 'right', marginRight: 10 }}>
                         Add to pooling preparation

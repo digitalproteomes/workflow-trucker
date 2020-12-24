@@ -20,7 +20,7 @@ export const ButtonEditProject: FunctionComponent<Props> = (props: Props) => {
             <FormEditProject
                 project={project}
                 onCancel={() => setProject(null)}
-                onCreateSuccessful={(updated: Project) => {
+                onUpdateSuccessful={(updated: Project) => {
                     setProject(null);
                     props.onUpdateProjectSuccess(updated);
                 }}

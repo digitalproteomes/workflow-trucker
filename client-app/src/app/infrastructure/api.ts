@@ -40,6 +40,19 @@ class BaseApi {
         }
     }
 
+    public static async putAsync<T>(path: string, payload: any): Promise<T> {
+        try {
+            this.logCall(path, payload);
+
+            const response = await axios.put(`${path}`, payload);
+            return response.data;
+        } catch (err) {
+            BaseApi.logError(err);
+
+            throw BaseApi.getFriendlyError(err);
+        }
+    }
+
     public static async deleteAsync<T>(path: string): Promise<void> {
         try {
             this.logCall(path);

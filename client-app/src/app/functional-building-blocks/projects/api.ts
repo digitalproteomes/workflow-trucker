@@ -23,4 +23,8 @@ export class Api {
     public static async post(updated: Project): Promise<Project> {
         return await BaseApi.postAsync('projects', updated);
     }
+
+    public static async put(updated: Project): Promise<Project> {
+        return await BaseApi.putAsync('projects', updated);
+    }
 }

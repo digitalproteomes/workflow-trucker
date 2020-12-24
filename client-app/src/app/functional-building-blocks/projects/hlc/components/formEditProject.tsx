@@ -8,7 +8,7 @@ import { Project } from '../../../../types';
 type Props = {
     project: Project | null;
     onCancel: () => void;
-    onCreateSuccessful: (updated: Project) => void;
+    onUpdateSuccessful: (updated: Project) => void;
 };
 
 export const FormEditProject: FunctionComponent<Props> = (props: Props) => {
@@ -25,8 +25,8 @@ export const FormEditProject: FunctionComponent<Props> = (props: Props) => {
 
         async function saveProject() {
             try {
-                const result: Project = await Api.post(updated);
-                props.onCreateSuccessful(result);
+                const result: Project = await Api.put(updated);
+                props.onUpdateSuccessful(result);
             } catch (error) {
                 setErrorMessage(error.message);
             }

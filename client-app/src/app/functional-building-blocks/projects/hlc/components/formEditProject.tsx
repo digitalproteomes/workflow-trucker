@@ -54,6 +54,7 @@ export const FormEditProject: FunctionComponent<Props> = (props: Props) => {
             inputs={inputs}
             errorMessage={errorMessage}
             onCreate={async (data: Store) => onCreate(data)}
+            buttonConfirmText={'Update'}
             onCancel={onCancel}
             getExistingValues={() => {
                 return project;

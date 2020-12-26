@@ -5,7 +5,7 @@ import { EyeOutlined } from '@ant-design/icons';
 
 type Props = {
     sample: IntermediateSample;
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 // wait - do we need a button to view the fractionation details? (because at the moment this is not used)

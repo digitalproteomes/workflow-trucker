@@ -5,7 +5,7 @@ import { JourneyDiagram } from './components/journeyDiagram';
 
 type Props = {
     sampleId: string;
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 export const ButtonJourneyDiagram: FunctionComponent<Props> = ({ sampleId, style }) => {

@@ -4,7 +4,7 @@ import { ClinicalSample, ClinicalSampleNew, ClinicalSampleCompact } from './clin
 
 import { Link, SampleJourney } from './diagrams';
 
-import { EWorkflowTag, ESOPType, EProtocolTag } from './types';
+import { EWorkflowTag, ESOPType, EProtocolTag, MsReadyNew } from './types';
 
 import { IntermediateSample, NewIntermediarySample } from './types';
 
@@ -22,7 +22,7 @@ export { EWorkflowTag, ESOPType, EProtocolTag };
 
 export { NewIntermediarySample, IntermediateSample };
 
-export { MSReadySample, MsRun, MSRunCompact };
+export { MSReadySample, MsReadyNew, MsRun, MSRunCompact };
 
 export { SwathAnalysis };
 export { SpectralLibrary };

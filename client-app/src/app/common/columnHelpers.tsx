@@ -43,3 +43,13 @@ export function getEditableColumn<T>(
 
     return column;
 }
+
+export function getActionsColumn<T>(renderActions: (record: T) => JSX.Element): ColumnType<T> {
+    return {
+        title: 'Action',
+        key: 'action',
+        render: (_value: any, record: T, _index: number) => {
+            return renderActions(record);
+        },
+    };
+}

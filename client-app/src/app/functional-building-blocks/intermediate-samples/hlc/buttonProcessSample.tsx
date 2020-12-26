@@ -7,7 +7,7 @@ import { ProcessSampleForm } from './components/formProcess';
 
 type ButtonProps = {
     sample: ClinicalSample;
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 export const ButtonProcessSample: FunctionComponent<ButtonProps> = ({ sample, style }) => {

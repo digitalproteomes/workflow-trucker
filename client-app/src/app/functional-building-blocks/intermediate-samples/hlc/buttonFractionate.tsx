@@ -7,7 +7,7 @@ import { FormFractionate } from './components/formFractionate';
 
 type Props = {
     sample: IntermediateSample;
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 export const ButtonFractionate: FunctionComponent<Props> = ({ sample, style }) => {

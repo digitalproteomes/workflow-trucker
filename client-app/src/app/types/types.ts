@@ -80,6 +80,26 @@ export class MSReadySample {
     public static nameof = (name: keyof MSReadySample) => name;
 }
 
+export class MsReadyNew {
+    intermediateSampleId: string = '';
+
+    name: string = '';
+
+    peptideNo: number = 0;
+
+    quality: string = '';
+
+    description: string = '';
+
+    processingPerson: string = '';
+
+    workflowTag: string = '';
+
+    projectId: string = '';
+
+    public static nameof = (name: keyof MsReadyNew) => name;
+}
+
 export class MsRun {
     clinicalSamples: ClinicalSampleCompact[] = [];
 

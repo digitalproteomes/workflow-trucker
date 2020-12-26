@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Form, Modal, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { Notifications } from './notifications';
@@ -16,6 +16,8 @@ type ModalProps = {
     onCancel: () => void;
     placeholder?: any;
     onValuesChange?: (values: Store) => void;
+    getExistingValues?: () => any;
+    buttonConfirmText?: string;
 };
 
 export const InputModal: FunctionComponent<ModalProps> = ({
@@ -27,10 +29,17 @@ export const InputModal: FunctionComponent<ModalProps> = ({
     onCancel,
     placeholder,
     onValuesChange,
+    getExistingValues,
+    buttonConfirmText,
     children,
 }) => {
     const [form] = Form.useForm();
     const [isSaving, setSavingFlag] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (getExistingValues !== undefined) form.setFieldsValue(getExistingValues());
+        console.log('form set data');
+    }, [getExistingValues, form]);
 
     const onCreateWrapper = async (sample: Store) => {
         setSavingFlag(true);
@@ -47,7 +56,7 @@ export const InputModal: FunctionComponent<ModalProps> = ({
             visible={isVisible}
             width={'30%'}
             title={title}
-            okText="Create"
+            okText={buttonConfirmText === null ? 'Create' : buttonConfirmText}
             okButtonProps={{ loading: isSaving }}
             cancelText="Cancel"
             onCancel={onCancel}

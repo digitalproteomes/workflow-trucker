@@ -6,7 +6,7 @@ import { Api } from '../api';
 
 type ButtonDownloadProps = {
     sop: SOP;
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 export const ButtonDownload: FunctionComponent<ButtonDownloadProps> = ({ sop, style }) => {

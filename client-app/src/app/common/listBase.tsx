@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { TableRowSelection, ExpandableConfig } from 'antd/lib/table/interface';
+import { getActionsColumn } from './columnHelpers';
 
 type Props<T extends object> = {
     style?: React.CSSProperties;
@@ -41,7 +42,7 @@ export function ListBase<T extends object>({
     let columnsType: ColumnsType<T>;
 
     if (renderActions) {
-        columnsType = [...columns, getRenderObject(renderActions)];
+        columnsType = [...columns, getActionsColumn(renderActions)];
     } else {
         columnsType = columns;
     }
@@ -66,14 +67,4 @@ export function ListBase<T extends object>({
             expandable={expandableConfig}
         />
     );
-}
-
-function getRenderObject<T>(renderActions: (record: T) => React.ReactNode) {
-    return {
-        title: 'Action',
-        key: 'action',
-        render: (_value: any, record: T, _index: number) => {
-            return renderActions(record);
-        },
-    };
 }

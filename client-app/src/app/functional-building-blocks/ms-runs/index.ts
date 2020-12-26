@@ -1,3 +1,5 @@
+import { ButtonProcessFromIntermediateBulk } from './hlc/buttonProcessFromIntermediateBulk';
+import { ButtonProcessFromIntermediate } from './hlc/buttonProcessFromIntermediate';
 import { ListCompactMsRuns } from './hlc/listCompactMsRuns';
 
-export { ListCompactMsRuns };
+export { ButtonProcessFromIntermediate, ButtonProcessFromIntermediateBulk, ListCompactMsRuns };

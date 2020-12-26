@@ -1,49 +1,48 @@
 import React, { FunctionComponent, useState } from 'react';
+import { IntermediateSample } from '../../../types';
 import { Button, Tooltip } from 'antd';
 import { DeliveredProcedureOutlined } from '@ant-design/icons';
-import { ClinicalSample } from '../../../types';
+import { FormProcessIntermediateSamples } from './components/formProcessIntermediateSamples';
 import { SampleNotifications } from '../../../common/notifications';
-import { ProcessSampleForm } from './components/formProcess';
 
-type ButtonProps = {
-    // todo - an array of sample ids are more than enough (instead of the entire clinical sample instances)
-    samples: ClinicalSample[];
+type Props = {
+    samples: IntermediateSample[];
     style?: React.CSSProperties;
+    title: string;
 };
 
-export const ButtonProcessSampleBulk: FunctionComponent<ButtonProps> = ({ samples, style }) => {
-    const [samplesToProcess, setSamplesToProcessInBulk] = useState<ClinicalSample[] | null>(null);
+export const ButtonProcessFromIntermediateBulk: FunctionComponent<Props> = ({ samples, style, title }) => {
+    const [samplesToProcess, setSamplesToProcess] = useState<IntermediateSample[] | null>(null);
 
     const sampleProcessingForm =
         samplesToProcess === null ? (
             <></>
         ) : (
-            <ProcessSampleForm
-                originalSamples={samplesToProcess!}
+            <FormProcessIntermediateSamples
+                originalSamples={samplesToProcess}
                 onCancel={() => {
-                    setSamplesToProcessInBulk(null);
+                    setSamplesToProcess(null);
                 }}
                 onCreateSuccessful={() => {
                     SampleNotifications.queueCreateSuccess('Samples processed in bulk succesfully');
 
-                    setSamplesToProcessInBulk(null);
+                    setSamplesToProcess(null);
                 }}
             />
         );
-
     return (
         <>
-            <Tooltip title="Process samples in bulk">
+            <Tooltip title={title}>
                 <Button
                     type="primary"
                     disabled={samples === null || samples.length === 0}
                     icon={<DeliveredProcedureOutlined />}
                     onClick={() => {
-                        setSamplesToProcessInBulk(samples);
+                        setSamplesToProcess(samples);
                     }}
                     style={style}
                 >
-                    Process samples in bulk
+                    {title}
                 </Button>
             </Tooltip>
             {sampleProcessingForm}

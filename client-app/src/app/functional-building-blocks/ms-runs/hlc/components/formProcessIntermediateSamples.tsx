@@ -7,7 +7,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { getActionsColumn, getColumn, getEditableColumn } from '../../../../common/columnHelpers';
 import { InputModal } from '../../../../common/inputModal';
 import { createFormInput } from '../../../../common/inputModalHelpers';
-import { EditableList, EditableListProps } from '../../../../common/listEditable';
+import { EditableList } from '../../../../common/listEditable';
 import { Constants } from '../../../../default-data/constants';
 import { IntermediateSample, MsReadyNew } from '../../../../types';
 import { Api } from '../../api';
@@ -17,8 +17,6 @@ type Props = {
     onCreateSuccessful: () => void;
     onCancel: () => void;
 };
-
-const EditableMsReadyList: FunctionComponent<EditableListProps<MsReadyNew>> = EditableList<MsReadyNew>();
 
 export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
     originalSamples,
@@ -121,7 +119,7 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
             }}
             onCancel={() => handleOnCancel()}
         >
-            <EditableMsReadyList
+            <EditableList<MsReadyNew>
                 entries={samplesToProcess!}
                 columns={columns}
                 rowKeySelector={(row: MsReadyNew) => row.intermediateSampleId}

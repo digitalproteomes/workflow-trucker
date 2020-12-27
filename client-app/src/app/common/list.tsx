@@ -11,6 +11,7 @@ type Props<T extends object> = {
     onRefreshDone: () => void;
     renderActions?: (sample: T) => JSX.Element;
     onRowSelectionChange?: (selectedSamples: T[]) => void;
+    onActiveDataChanged?: (activeData: T[]) => void;
 
     fetchEntries: () => Promise<T[]>;
     rowKeySelector: (row: T) => string;
@@ -26,6 +27,7 @@ export function CommonList<T extends object>({
     onRefreshDone,
     renderActions,
     onRowSelectionChange,
+    onActiveDataChanged,
 
     fetchEntries,
     rowKeySelector,
@@ -35,7 +37,10 @@ export function CommonList<T extends object>({
     const [entries, setEntries] = useState<T[] | null>(null);
 
     async function executeFetch() {
-        setEntries(await fetchEntries());
+        const data = await fetchEntries();
+        setEntries(data);
+
+        if (onActiveDataChanged != null) onActiveDataChanged(data);
     }
 
     useEffect(() => {
@@ -55,6 +60,7 @@ export function CommonList<T extends object>({
             columns={columns}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
+            onActiveDataChanged={onActiveDataChanged}
             rowKeySelector={rowKeySelector}
             expandableConfig={expandableConfig}
         />

@@ -15,6 +15,7 @@ type ListProps = {
     onRefreshDone: () => void;
     renderActions?: (sample: MSReadySample) => JSX.Element;
     onRowSelectionChange?: (selectedSamples: MSReadySample[]) => void;
+    onActiveDataChanged?: (activeData: MSReadySample[]) => void;
 };
 
 export const List: FunctionComponent<ListProps> = ({
@@ -22,6 +23,7 @@ export const List: FunctionComponent<ListProps> = ({
     onRefreshDone,
     renderActions,
     onRowSelectionChange,
+    onActiveDataChanged,
 }) => {
     return (
         <CommonList<MSReadySample>
@@ -29,6 +31,7 @@ export const List: FunctionComponent<ListProps> = ({
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
             onRowSelectionChange={onRowSelectionChange}
+            onActiveDataChanged={onActiveDataChanged}
             fetchEntries={() => Api.fetchSamples(Constants.projectId)}
             rowKeySelector={(row: MSReadySample) => row.id}
             columns={defaultColumns}

@@ -2,14 +2,16 @@ import React, { useState, FunctionComponent } from 'react';
 import { List } from './components/list';
 import { MSReadySample } from '../../types';
 import { Space, Button, Tooltip, PageHeader, Divider } from 'antd';
-import { ButtonExport } from '../../common/export';
+import { ButtonExport, ButtonExportProps } from '../../common/buttonExport';
 import { DownloadOutlined } from '@ant-design/icons';
-import { SampleNotifications } from '../../common/notifications';
+
+const ButtonExportMsReady: FunctionComponent<ButtonExportProps<MSReadySample>> = ButtonExport<MSReadySample>();
 
 export const MSReadySamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
     const [, setSelectedSamples] = useState<MSReadySample[]>([]);
+    const [activeData, setActiveData] = useState<MSReadySample[]>([]);
 
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
@@ -17,6 +19,10 @@ export const MSReadySamples: FunctionComponent = () => {
 
     const onRowSelectionChange = (selectedRows: MSReadySample[]) => {
         setSelectedSamples(selectedRows);
+    };
+
+    const onActiveDataChange = (activeData: MSReadySample[]) => {
+        setActiveData(activeData);
     };
 
     const renderActions = (record: MSReadySample) => {
@@ -29,18 +35,10 @@ export const MSReadySamples: FunctionComponent = () => {
         );
     };
 
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
-
     return (
         <>
             <PageHeader ghost={false} title="MS Ready Samples"></PageHeader>
-            <ButtonExport
-                onExportDone={() => {
-                    onExportDone();
-                }}
-            />
+            <ButtonExportMsReady title={'Export all from table'} activeData={activeData} />
             <Tooltip title="Exports sample names to .tsv, to be inputed in the Mass Spec">
                 <Button type="primary" icon={<DownloadOutlined />} style={{ float: 'right', marginRight: 10 }}>
                     Export MS Runs running queue
@@ -52,6 +50,7 @@ export const MSReadySamples: FunctionComponent = () => {
                 onRefreshDone={onRefreshDone}
                 renderActions={renderActions}
                 onRowSelectionChange={onRowSelectionChange}
+                onActiveDataChanged={onActiveDataChange}
             />
         </>
     );

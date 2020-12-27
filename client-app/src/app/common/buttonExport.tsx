@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Button, Tooltip } from 'antd';
 import { SampleNotifications } from './notifications';
 
@@ -7,27 +7,25 @@ import { SampleNotifications } from './notifications';
 //     selectedRows: T[] = [];
 //     activeData: T[] = [];
 // }
-export type ButtonExportProps<T> = {
+export type ButtonExportProps<T extends object> = {
     title: string;
     // dataStore: ListDataStore<T>;
     activeData: T[];
 };
 
-export function ButtonExport<T extends object>(): FunctionComponent<ButtonExportProps<T>> {
-    return (props: ButtonExportProps<T>) => {
-        return (
-            <Tooltip title="Download the current table data through a file">
-                <Button
-                    type={'default'}
-                    onClick={() => {
-                        console.log('active data', props.activeData);
+export function ButtonExport<T extends object>(props: ButtonExportProps<T>): React.ReactElement {
+    return (
+        <Tooltip title="Download the current table data through a file">
+            <Button
+                type={'default'}
+                onClick={() => {
+                    console.log('active data', props.activeData);
 
-                        SampleNotifications.queueExportSuccess();
-                    }}
-                >
-                    {props.title}
-                </Button>
-            </Tooltip>
-        );
-    };
+                    SampleNotifications.queueExportSuccess();
+                }}
+            >
+                {props.title}
+            </Button>
+        </Tooltip>
+    );
 }

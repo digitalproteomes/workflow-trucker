@@ -1,9 +1,8 @@
 import React, { useState, FunctionComponent } from 'react';
 import { IntermediateSample } from '../../types';
 import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
-import { ButtonExport } from '../../common/export';
+import { ButtonExport } from '../../common/buttonExport';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { SampleNotifications } from '../../common/notifications';
 import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
 import {
     ButtonProcessFromIntermediate,
@@ -22,10 +21,6 @@ export const IntermediateSamples: FunctionComponent = () => {
     const onRowSelectionChange = (selectedRows: IntermediateSample[]) => {
         setSelectedSamples(selectedRows);
     };
-
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
 
     const renderActions = (record: IntermediateSample) => {
         return (
@@ -50,11 +45,7 @@ export const IntermediateSamples: FunctionComponent = () => {
                     title={'Create MS Ready Sample'}
                     style={{ float: 'right', marginRight: 10 }}
                 />
-                <ButtonExport
-                    onExportDone={() => {
-                        onExportDone();
-                    }}
-                />
+                <ButtonExport title="Export" activeData={[]} />
                 <Tooltip title="Add to pooling preparation">
                     <Button type="primary" icon={<PlusCircleOutlined />} style={{ float: 'right', marginRight: 10 }}>
                         Add to pooling preparation

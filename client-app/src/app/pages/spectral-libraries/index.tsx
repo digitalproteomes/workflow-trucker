@@ -2,8 +2,7 @@ import React, { useState, FunctionComponent } from 'react';
 import { Space, Button, PageHeader, Divider } from 'antd';
 import { SpectralLibrary } from '../../types';
 import { List } from './components/list';
-import { ButtonExport } from '../../common/export';
-import { SampleNotifications } from '../../common/notifications';
+import { ButtonExport } from '../../common/buttonExport';
 
 export const SpectralLibrariesPage: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -18,10 +17,6 @@ export const SpectralLibrariesPage: FunctionComponent = () => {
         setSelectedSamples(selectedRows);
     };
 
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
-
     const renderActions = () => {
         return (
             <Space size="middle">
@@ -35,11 +30,8 @@ export const SpectralLibrariesPage: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="Spectral Libraries"></PageHeader>
-            <ButtonExport
-                onExportDone={() => {
-                    onExportDone();
-                }}
-            />
+            <ButtonExport title="Export" activeData={[]} />
+
             <Divider></Divider>
             <List
                 isRefreshNeeded={isRefreshNeeded}

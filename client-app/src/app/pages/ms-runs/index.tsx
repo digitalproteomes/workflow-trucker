@@ -2,8 +2,7 @@ import React, { useState, FunctionComponent } from 'react';
 import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
 import { MsRun } from '../../types';
 import { List } from './components/list';
-import { ButtonExport } from '../../common/export';
-import { SampleNotifications } from '../../common/notifications';
+import { ButtonExport } from '../../common/buttonExport';
 import { UploadOutlined } from '@ant-design/icons';
 
 export const MsRuns: FunctionComponent = () => {
@@ -33,19 +32,12 @@ export const MsRuns: FunctionComponent = () => {
         );
     };
 
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
-
     return (
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
 
-            <ButtonExport
-                onExportDone={() => {
-                    onExportDone();
-                }}
-            />
+            <ButtonExport title="Export" activeData={[]} />
+
             <Tooltip title="Import MS ready sample names and Run codes from Mass Spec">
                 <Button type="default" icon={<UploadOutlined />} style={{ float: 'right', marginRight: 10 }}>
                     Import MS Runs

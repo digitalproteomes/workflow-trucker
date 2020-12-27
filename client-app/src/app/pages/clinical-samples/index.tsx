@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
 import { ClinicalSample } from '../../types';
-import { ButtonExport } from '../../common/export';
+import { ButtonExport } from '../../common/buttonExport';
 import { SampleNotifications } from '../../common/notifications';
 import { List, ButtonCreateNew, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonAutoGenerate } from '../../functional-building-blocks/clinical-samples/';
@@ -20,10 +20,6 @@ export const ClinicalSamples: FunctionComponent = () => {
     function onDeleteDone(sample: ClinicalSample) {
         setRefreshNeededFlag(true);
         SampleNotifications.queueDeleteSuccess(sample.name);
-    }
-
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
     }
 
     const onRowSelectionChange = (selectedRows: ClinicalSample[]) => {
@@ -48,11 +44,7 @@ export const ClinicalSamples: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="Clinical Samples">
-                <ButtonExport
-                    onExportDone={() => {
-                        onExportDone();
-                    }}
-                />
+                <ButtonExport<ClinicalSample> title={'Export'} activeData={[]} />
 
                 <ButtonCreateNew
                     setRefreshNeededFlag={setRefreshNeededFlag}

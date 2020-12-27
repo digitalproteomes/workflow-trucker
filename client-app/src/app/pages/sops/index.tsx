@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, PageHeader, Divider } from 'antd';
 import { SOP } from '../../types';
-import { ButtonExport } from '../../common/export';
+import { ButtonExport } from '../../common/buttonExport';
 import { SampleNotifications } from '../../common/notifications';
 import { ButtonDeleteSOP, ButtonDownload, ButtonUploadSOP, List } from '../../functional-building-blocks/sops/';
 
@@ -17,10 +17,6 @@ export const SOPPage: FunctionComponent = () => {
     const onRowSelectionChange = (selectedRows: SOP[]) => {
         setSOP(selectedRows);
     };
-
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
 
     function onDeleteDone(sop: SOP) {
         setRefreshNeededFlag(true);
@@ -48,11 +44,7 @@ export const SOPPage: FunctionComponent = () => {
             <Space style={{ float: 'right' }} direction="horizontal">
                 <ButtonUploadSOP setRefreshNeededFlag={setRefreshNeededFlag} />
 
-                <ButtonExport
-                    onExportDone={() => {
-                        onExportDone();
-                    }}
-                />
+                <ButtonExport title="Export" activeData={[]} />
             </Space>
             <Divider />
             <List

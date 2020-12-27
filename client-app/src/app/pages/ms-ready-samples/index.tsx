@@ -2,10 +2,8 @@ import React, { useState, FunctionComponent } from 'react';
 import { List } from './components/list';
 import { MSReadySample } from '../../types';
 import { Space, Button, Tooltip, PageHeader, Divider } from 'antd';
-import { ButtonExport, ButtonExportProps } from '../../common/buttonExport';
+import { ButtonExport } from '../../common/buttonExport';
 import { DownloadOutlined } from '@ant-design/icons';
-
-const ButtonExportMsReady: FunctionComponent<ButtonExportProps<MSReadySample>> = ButtonExport<MSReadySample>();
 
 export const MSReadySamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -38,7 +36,7 @@ export const MSReadySamples: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="MS Ready Samples"></PageHeader>
-            <ButtonExportMsReady title={'Export all from table'} activeData={activeData} />
+            <ButtonExport<MSReadySample> title={'Export all from table'} activeData={activeData} />
             <Tooltip title="Exports sample names to .tsv, to be inputed in the Mass Spec">
                 <Button type="primary" icon={<DownloadOutlined />} style={{ float: 'right', marginRight: 10 }}>
                     Export MS Runs running queue

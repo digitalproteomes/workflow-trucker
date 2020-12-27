@@ -44,7 +44,7 @@ export const SOPPage: FunctionComponent = () => {
             <Space style={{ float: 'right' }} direction="horizontal">
                 <ButtonUploadSOP setRefreshNeededFlag={setRefreshNeededFlag} />
 
-                <ButtonExport title="Export" activeData={[]} />
+                <ButtonExport title="Export" data={[]} />
             </Space>
             <Divider />
             <List

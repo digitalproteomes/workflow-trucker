@@ -45,7 +45,7 @@ export const IntermediateSamples: FunctionComponent = () => {
                     title={'Create MS Ready Sample'}
                     style={{ float: 'right', marginRight: 10 }}
                 />
-                <ButtonExport title="Export" activeData={[]} />
+                <ButtonExport title="Export" data={[]} />
                 <Tooltip title="Add to pooling preparation">
                     <Button type="primary" icon={<PlusCircleOutlined />} style={{ float: 'right', marginRight: 10 }}>
                         Add to pooling preparation

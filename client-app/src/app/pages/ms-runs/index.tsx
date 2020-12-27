@@ -36,7 +36,7 @@ export const MsRuns: FunctionComponent = () => {
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
 
-            <ButtonExport title="Export" activeData={[]} />
+            <ButtonExport title="Export" data={[]} />
 
             <Tooltip title="Import MS ready sample names and Run codes from Mass Spec">
                 <Button type="default" icon={<UploadOutlined />} style={{ float: 'right', marginRight: 10 }}>

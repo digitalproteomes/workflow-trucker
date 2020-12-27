@@ -44,7 +44,7 @@ export const ClinicalSamples: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="Clinical Samples">
-                <ButtonExport<ClinicalSample> title={'Export'} activeData={[]} />
+                <ButtonExport<ClinicalSample> title={'Export'} data={[]} />
 
                 <ButtonCreateNew
                     setRefreshNeededFlag={setRefreshNeededFlag}

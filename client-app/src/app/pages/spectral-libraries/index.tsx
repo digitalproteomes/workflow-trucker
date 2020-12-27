@@ -30,7 +30,7 @@ export const SpectralLibrariesPage: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="Spectral Libraries"></PageHeader>
-            <ButtonExport title="Export" activeData={[]} />
+            <ButtonExport title="Export" data={[]} />
 
             <Divider></Divider>
             <List

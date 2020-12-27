@@ -30,7 +30,7 @@ export const SwathAnalysisPage: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="SWATH Analyses"></PageHeader>
-            <ButtonExport title="Export" activeData={[]} />
+            <ButtonExport title="Export" data={[]} />
 
             <Divider></Divider>
             <List

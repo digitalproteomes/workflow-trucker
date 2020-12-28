@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
 import { List } from './components/list';
-import { ButtonExportSelected } from '../../common/code/buttonExport';
+import { ButtonExportSelected } from '../../common';
 import { UploadOutlined } from '@ant-design/icons';
 
 export const MsRuns: FunctionComponent = () => {

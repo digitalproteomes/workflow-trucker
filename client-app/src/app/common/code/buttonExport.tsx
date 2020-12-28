@@ -23,5 +23,3 @@ export function ButtonExportAll<T extends object>(props: ButtonExportProps<T>): 
 
     return <ButtonExportBase headers={props.headers} title={props.title} fetchData={getData} />;
 }
-
-

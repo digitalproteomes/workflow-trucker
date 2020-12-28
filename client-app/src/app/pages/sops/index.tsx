@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, PageHeader, Divider } from 'antd';
 import { SOP } from '../../types';
-import { ButtonExportSelected } from '../../common/code/buttonExport';
+import { ButtonExportSelected } from '../../common';
 import { SampleNotifications } from '../../common/notifications';
 import { ButtonDeleteSOP, ButtonDownload, ButtonUploadSOP, List } from '../../functional-building-blocks/sops/';
 

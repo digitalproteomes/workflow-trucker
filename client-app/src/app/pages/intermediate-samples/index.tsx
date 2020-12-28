@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { IntermediateSample } from '../../types';
 import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
-import { ButtonExportSelected } from '../../common/code/buttonExport';
+import { ButtonExportSelected } from '../../common';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
 import {

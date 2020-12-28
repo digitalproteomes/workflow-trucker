@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Button, PageHeader, Divider } from 'antd';
 import { List } from './components/list';
-import { ButtonExportSelected } from '../../common/code/buttonExport';
+import { ButtonExportSelected } from '../../common';
 
 export const SpectralLibrariesPage: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);

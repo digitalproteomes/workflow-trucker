@@ -7,6 +7,10 @@ import { List, ButtonCreateNew, ButtonDelete } from '../../functional-building-b
 import { ButtonAutoGenerate } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonProcessSample, ButtonProcessSampleBulk } from '../../functional-building-blocks/intermediate-samples';
 import { ButtonJourneyDiagram } from '../../functional-building-blocks/diagrams';
+import { ListDataContext, Store, StoreContext } from '../../common';
+
+const ContextName = 'ClinicalSampleDataContext';
+Store.addStore(ContextName, new ListDataContext<ClinicalSample>());
 
 export const ClinicalSamples: FunctionComponent = () => {
     // debt - the setRefreshNeededFlag callback approach should be replaced with a "onSuccess" callback. The low leve component should not influence directly the state of a high level component
@@ -37,7 +41,7 @@ export const ClinicalSamples: FunctionComponent = () => {
     };
 
     return (
-        <>
+        <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="Clinical Samples">
                 <ButtonExportSelected<ClinicalSample> title={'Export'} />
 
@@ -46,7 +50,7 @@ export const ClinicalSamples: FunctionComponent = () => {
                     style={{ float: 'right', marginRight: 10 }}
                 />
 
-                {/* <ButtonProcessSampleBulk samples={selectedSamples} style={{ float: 'right', marginRight: 16 }} /> */}
+                <ButtonProcessSampleBulk style={{ float: 'right', marginRight: 16 }} />
 
                 <ButtonAutoGenerate
                     setRefreshNeededFlag={setRefreshNeededFlag}
@@ -56,6 +60,6 @@ export const ClinicalSamples: FunctionComponent = () => {
             <Divider></Divider>
 
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
-        </>
+        </StoreContext.Provider>
     );
 };

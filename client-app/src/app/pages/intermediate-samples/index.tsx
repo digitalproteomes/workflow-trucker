@@ -1,13 +1,13 @@
 import React, { useState, FunctionComponent } from 'react';
 import { IntermediateSample } from '../../types';
 import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
-import { ButtonExportSelected } from '../../common';
+import { ButtonExportSelected, ListDataContext, Store, StoreContext } from '../../common';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
-import {
-    ButtonProcessFromIntermediate,
-    ButtonProcessFromIntermediateBulk,
-} from '../../functional-building-blocks/ms-runs';
+import { ButtonProcessFromIntermediateBulk } from '../../functional-building-blocks/ms-runs';
+
+const ContextName = 'IntermediateSampleDataContext';
+Store.addStore(ContextName, new ListDataContext<IntermediateSample>());
 
 export const IntermediateSamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -21,8 +21,6 @@ export const IntermediateSamples: FunctionComponent = () => {
             <span>
                 <Space size="middle">
                     <ButtonFractionate sample={record} />
-                    <ButtonProcessFromIntermediate sample={record} title={'Process to MsReady'} />
-
                     <Button type="default" htmlType="button">
                         Delete
                     </Button>
@@ -32,13 +30,12 @@ export const IntermediateSamples: FunctionComponent = () => {
     };
 
     return (
-        <>
+        <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="Intermediate Samples">
-                {/* <ButtonProcessFromIntermediateBulk
-                    samples={selectedSamples}
+                <ButtonProcessFromIntermediateBulk
                     title={'Create MS Ready Sample'}
                     style={{ float: 'right', marginRight: 10 }}
-                /> */}
+                />
                 <ButtonExportSelected title="Export" />
                 <Tooltip title="Add to pooling preparation">
                     <Button type="primary" icon={<PlusCircleOutlined />} style={{ float: 'right', marginRight: 10 }}>
@@ -50,6 +47,6 @@ export const IntermediateSamples: FunctionComponent = () => {
             <Divider></Divider>
 
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
-        </>
+        </StoreContext.Provider>
     );
 };

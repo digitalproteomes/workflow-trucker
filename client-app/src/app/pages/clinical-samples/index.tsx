@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
 import { ClinicalSample } from '../../types';
-import { ButtonExport } from '../../common/buttonExport';
+import { ButtonExportSelected } from '../../common/buttonExport';
 import { SampleNotifications } from '../../common/notifications';
 import { List, ButtonCreateNew, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonAutoGenerate } from '../../functional-building-blocks/clinical-samples/';
@@ -9,7 +9,6 @@ import { ButtonProcessSample, ButtonProcessSampleBulk } from '../../functional-b
 import { ButtonJourneyDiagram } from '../../functional-building-blocks/diagrams';
 
 export const ClinicalSamples: FunctionComponent = () => {
-    const [selectedSamples, setSelectedSamples] = useState<ClinicalSample[]>([]);
     // debt - the setRefreshNeededFlag callback approach should be replaced with a "onSuccess" callback. The low leve component should not influence directly the state of a high level component
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
@@ -21,10 +20,6 @@ export const ClinicalSamples: FunctionComponent = () => {
         setRefreshNeededFlag(true);
         SampleNotifications.queueDeleteSuccess(sample.name);
     }
-
-    const onRowSelectionChange = (selectedRows: ClinicalSample[]) => {
-        setSelectedSamples(selectedRows);
-    };
 
     const renderActions = (record: ClinicalSample) => {
         return (
@@ -44,14 +39,14 @@ export const ClinicalSamples: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="Clinical Samples">
-                <ButtonExport<ClinicalSample> title={'Export'} data={[]} />
+                <ButtonExportSelected<ClinicalSample> title={'Export'} data={[]} />
 
                 <ButtonCreateNew
                     setRefreshNeededFlag={setRefreshNeededFlag}
                     style={{ float: 'right', marginRight: 10 }}
                 />
 
-                <ButtonProcessSampleBulk samples={selectedSamples} style={{ float: 'right', marginRight: 16 }} />
+                {/* <ButtonProcessSampleBulk samples={selectedSamples} style={{ float: 'right', marginRight: 16 }} /> */}
 
                 <ButtonAutoGenerate
                     setRefreshNeededFlag={setRefreshNeededFlag}
@@ -64,7 +59,6 @@ export const ClinicalSamples: FunctionComponent = () => {
                 isRefreshNeeded={isRefreshNeeded}
                 onRefreshDone={onRefreshDone}
                 renderActions={renderActions}
-                onRowSelectionChange={onRowSelectionChange}
             />
         </>
     );

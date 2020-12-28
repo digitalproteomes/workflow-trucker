@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { IntermediateSample } from '../../types';
 import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
-import { ButtonExport } from '../../common/buttonExport';
+import { ButtonExportSelected } from '../../common/buttonExport';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
 import {
@@ -12,14 +12,8 @@ import {
 export const IntermediateSamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const [selectedSamples, setSelectedSamples] = useState<IntermediateSample[]>([]);
-
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
-    };
-
-    const onRowSelectionChange = (selectedRows: IntermediateSample[]) => {
-        setSelectedSamples(selectedRows);
     };
 
     const renderActions = (record: IntermediateSample) => {
@@ -40,12 +34,12 @@ export const IntermediateSamples: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="Intermediate Samples">
-                <ButtonProcessFromIntermediateBulk
+                {/* <ButtonProcessFromIntermediateBulk
                     samples={selectedSamples}
                     title={'Create MS Ready Sample'}
                     style={{ float: 'right', marginRight: 10 }}
-                />
-                <ButtonExport title="Export" data={[]} />
+                /> */}
+                <ButtonExportSelected title="Export" data={[]} />
                 <Tooltip title="Add to pooling preparation">
                     <Button type="primary" icon={<PlusCircleOutlined />} style={{ float: 'right', marginRight: 10 }}>
                         Add to pooling preparation
@@ -55,12 +49,7 @@ export const IntermediateSamples: FunctionComponent = () => {
 
             <Divider></Divider>
 
-            <List
-                isRefreshNeeded={isRefreshNeeded}
-                onRefreshDone={onRefreshDone}
-                renderActions={renderActions}
-                onRowSelectionChange={onRowSelectionChange}
-            />
+            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>
     );
 };

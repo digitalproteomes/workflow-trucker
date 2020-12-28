@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-import { List } from './components/list';
+import { List } from '../../functional-building-blocks/ms-ready';
 import { MSReadySample } from '../../types';
 import { Space, Button, Tooltip, PageHeader, Divider } from 'antd';
 import { ButtonExport, Header } from '../../common/buttonExport';

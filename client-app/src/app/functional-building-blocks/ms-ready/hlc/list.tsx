@@ -8,7 +8,7 @@ import { CommonList } from '../../../common/list';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
 import { Button, Row, Col, Divider } from 'antd';
-import { ListCompactClinicalSamples } from '../../../functional-building-blocks/clinical-samples';
+import { ListCompactClinicalSamples } from '../../clinical-samples';
 
 type ListProps = {
     isRefreshNeeded: boolean;

@@ -35,31 +35,3 @@ export function ButtonExport<T extends object>(props: ButtonExportProps<T>): Rea
         </Tooltip>
     );
 }
-
-// export function ButtonExport<T extends object>(props: ButtonExportProps<T>): React.ReactElement {
-//     const [downloadActive, setDownloadActiveFlag] = useState<boolean>(false);
-
-//     const downloadElement = downloadActive ? <CSVDownload data={[props.data]}>Download</CSVDownload> : null;
-
-//     useEffect(() => {
-//         if (downloadActive) setDownloadActiveFlag(false);
-//     });
-
-//     return (
-//         <Tooltip title="Download the current table data through a file">
-//             <Button
-//                 type={'default'}
-//                 onClick={() => {
-//                     console.log('active data', props.data);
-
-//                     setDownloadActiveFlag(true);
-//                     // SampleNotifications.queueExportSuccess();
-//                 }}
-//             >
-//                 {props.title}
-//                 {/* <CSVLink data={[props.data]}></CSVLink> */}
-//             </Button>
-//             {downloadElement}
-//         </Tooltip>
-//     );
-// }

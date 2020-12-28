@@ -36,7 +36,7 @@ export const ButtonProcessSampleBulk: FunctionComponent<ButtonProps> = ({ style 
         <>
             <Tooltip title="Process samples in bulk">
                 <Button
-                    type="primary"
+                    type="default"
                     // disabled={samples === null || samples.length === 0}
                     icon={<DeliveredProcedureOutlined />}
                     onClick={() => {

@@ -14,21 +14,14 @@ type ListProps = {
     isRefreshNeeded: boolean;
     onRefreshDone: () => void;
     renderActions?: (sample: MsRun) => JSX.Element;
-    onRowSelectionChange?: (selectedSamples: MsRun[]) => void;
 };
 
-export const List: FunctionComponent<ListProps> = ({
-    isRefreshNeeded,
-    onRefreshDone,
-    renderActions,
-    onRowSelectionChange,
-}) => {
+export const List: FunctionComponent<ListProps> = ({ isRefreshNeeded, onRefreshDone, renderActions }) => {
     return (
         <CommonList<MsRun>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
-            onRowSelectionChange={onRowSelectionChange}
             fetchEntries={() => Api.getMsRunsAsync(Constants.projectId)}
             rowKeySelector={(row: MsRun) => row.id}
             columns={defaultColumns}

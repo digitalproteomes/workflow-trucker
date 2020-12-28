@@ -4,15 +4,17 @@ import { Button, Tooltip } from 'antd';
 import { DeliveredProcedureOutlined } from '@ant-design/icons';
 import { FormProcessIntermediateSamples } from './components/formProcessIntermediateSamples';
 import { SampleNotifications } from '../../../common/notifications';
+import { Store, StoreContext } from '../../../common';
 
 type Props = {
-    samples: IntermediateSample[];
     style?: React.CSSProperties;
     title: string;
 };
 
-export const ButtonProcessFromIntermediateBulk: FunctionComponent<Props> = ({ samples, style, title }) => {
+export const ButtonProcessFromIntermediateBulk: FunctionComponent<Props> = ({ style, title }) => {
     const [samplesToProcess, setSamplesToProcess] = useState<IntermediateSample[] | null>(null);
+
+    const storeName = React.useContext(StoreContext).name;
 
     const sampleProcessingForm =
         samplesToProcess === null ? (
@@ -35,9 +37,10 @@ export const ButtonProcessFromIntermediateBulk: FunctionComponent<Props> = ({ sa
             <Tooltip title={title}>
                 <Button
                     type="primary"
-                    disabled={samples === null || samples.length === 0}
+                    // disabled={samples === null || samples.length === 0}
                     icon={<DeliveredProcedureOutlined />}
                     onClick={() => {
+                        const samples = Store.getStore<IntermediateSample>(storeName).selectedData;
                         setSamplesToProcess(samples);
                     }}
                     style={style}

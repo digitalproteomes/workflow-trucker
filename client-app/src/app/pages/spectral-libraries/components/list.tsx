@@ -15,21 +15,14 @@ type ListProps = {
     isRefreshNeeded: boolean;
     onRefreshDone: () => void;
     renderActions?: (sample: SpectralLibrary) => JSX.Element;
-    onRowSelectionChange?: (selectedSamples: SpectralLibrary[]) => void;
 };
 
-export const List: FunctionComponent<ListProps> = ({
-    isRefreshNeeded,
-    onRefreshDone,
-    renderActions,
-    onRowSelectionChange,
-}) => {
+export const List: FunctionComponent<ListProps> = ({ isRefreshNeeded, onRefreshDone, renderActions }) => {
     return (
         <CommonList<SpectralLibrary>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
-            onRowSelectionChange={onRowSelectionChange}
             fetchEntries={() => Api.getSpectralLibraryAsync(Constants.projectId)}
             rowKeySelector={(row: SpectralLibrary) => row.id}
             columns={defaultColumns}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ColumnsType } from 'antd/lib/table';
 import { ListBase } from './listBase';
 import { ExpandableConfig } from 'antd/lib/table/interface';
+import { StoreContext, Store, ListDataContext } from '.';
 
 type Props<T extends object> = {
     style?: React.CSSProperties;
@@ -10,7 +11,6 @@ type Props<T extends object> = {
     isRefreshNeeded: boolean;
     onRefreshDone: () => void;
     renderActions?: (sample: T) => JSX.Element;
-    onRowSelectionChange?: (selectedSamples: T[]) => void;
 
     fetchEntries: () => Promise<T[]>;
     rowKeySelector: (row: T) => string;
@@ -25,17 +25,22 @@ export function CommonList<T extends object>({
     isRefreshNeeded,
     onRefreshDone,
     renderActions,
-    onRowSelectionChange,
 
     fetchEntries,
     rowKeySelector,
     columns,
     expandableConfig,
 }: Props<T> & { children?: React.ReactNode }): React.ReactElement {
+    const storeContext = React.useContext(StoreContext);
+    const store: ListDataContext<T> = Store.getStore<T>(storeContext.name);
+
     const [entries, setEntries] = useState<T[] | null>(null);
 
     async function executeFetch() {
-        setEntries(await fetchEntries());
+        const data = await fetchEntries();
+        setEntries(data);
+
+        store.setActiveData(data);
     }
 
     useEffect(() => {
@@ -54,7 +59,6 @@ export function CommonList<T extends object>({
             entries={entries}
             columns={columns}
             renderActions={renderActions}
-            onRowSelectionChange={onRowSelectionChange}
             rowKeySelector={rowKeySelector}
             expandableConfig={expandableConfig}
         />

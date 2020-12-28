@@ -1,26 +1,16 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, PageHeader, Divider } from 'antd';
 import { SOP } from '../../types';
-import { ButtonExport } from '../../common/export';
+import { ButtonExportSelected } from '../../common';
 import { SampleNotifications } from '../../common/notifications';
 import { ButtonDeleteSOP, ButtonDownload, ButtonUploadSOP, List } from '../../functional-building-blocks/sops/';
 
 export const SOPPage: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const [, setSOP] = useState<SOP[]>([]);
-
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
     };
-
-    const onRowSelectionChange = (selectedRows: SOP[]) => {
-        setSOP(selectedRows);
-    };
-
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
 
     function onDeleteDone(sop: SOP) {
         setRefreshNeededFlag(true);
@@ -48,19 +38,10 @@ export const SOPPage: FunctionComponent = () => {
             <Space style={{ float: 'right' }} direction="horizontal">
                 <ButtonUploadSOP setRefreshNeededFlag={setRefreshNeededFlag} />
 
-                <ButtonExport
-                    onExportDone={() => {
-                        onExportDone();
-                    }}
-                />
+                <ButtonExportSelected title="Export" />
             </Space>
             <Divider />
-            <List
-                isRefreshNeeded={isRefreshNeeded}
-                onRefreshDone={onRefreshDone}
-                renderActions={renderActions}
-                onRowSelectionChange={onRowSelectionChange}
-            />
+            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>
     );
 };

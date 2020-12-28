@@ -4,15 +4,16 @@ import { DeliveredProcedureOutlined } from '@ant-design/icons';
 import { ClinicalSample } from '../../../types';
 import { SampleNotifications } from '../../../common/notifications';
 import { ProcessSampleForm } from './components/formProcess';
+import { Store, StoreContext } from '../../../common';
 
 type ButtonProps = {
-    // todo - an array of sample ids are more than enough (instead of the entire clinical sample instances)
-    samples: ClinicalSample[];
     style?: React.CSSProperties;
 };
 
-export const ButtonProcessSampleBulk: FunctionComponent<ButtonProps> = ({ samples, style }) => {
+export const ButtonProcessSampleBulk: FunctionComponent<ButtonProps> = ({ style }) => {
     const [samplesToProcess, setSamplesToProcessInBulk] = useState<ClinicalSample[] | null>(null);
+
+    const storeName = React.useContext(StoreContext).name;
 
     const sampleProcessingForm =
         samplesToProcess === null ? (
@@ -35,10 +36,11 @@ export const ButtonProcessSampleBulk: FunctionComponent<ButtonProps> = ({ sample
         <>
             <Tooltip title="Process samples in bulk">
                 <Button
-                    type="primary"
-                    disabled={samples === null || samples.length === 0}
+                    type="default"
+                    // disabled={samples === null || samples.length === 0}
                     icon={<DeliveredProcedureOutlined />}
                     onClick={() => {
+                        const samples = Store.getStore<ClinicalSample>(storeName).selectedData;
                         setSamplesToProcessInBulk(samples);
                     }}
                     style={style}

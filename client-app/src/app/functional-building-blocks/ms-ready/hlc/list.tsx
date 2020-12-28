@@ -8,27 +8,20 @@ import { CommonList } from '../../../common/list';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
 import { Button, Row, Col, Divider } from 'antd';
-import { ListCompactClinicalSamples } from '../../../functional-building-blocks/clinical-samples';
+import { ListCompactClinicalSamples } from '../../clinical-samples';
 
 type ListProps = {
     isRefreshNeeded: boolean;
     onRefreshDone: () => void;
     renderActions?: (sample: MSReadySample) => JSX.Element;
-    onRowSelectionChange?: (selectedSamples: MSReadySample[]) => void;
 };
 
-export const List: FunctionComponent<ListProps> = ({
-    isRefreshNeeded,
-    onRefreshDone,
-    renderActions,
-    onRowSelectionChange,
-}) => {
+export const List: FunctionComponent<ListProps> = ({ isRefreshNeeded, onRefreshDone, renderActions }) => {
     return (
         <CommonList<MSReadySample>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
-            onRowSelectionChange={onRowSelectionChange}
             fetchEntries={() => Api.fetchSamples(Constants.projectId)}
             rowKeySelector={(row: MSReadySample) => row.id}
             columns={defaultColumns}

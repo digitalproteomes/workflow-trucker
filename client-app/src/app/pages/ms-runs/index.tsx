@@ -1,22 +1,14 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
-import { MsRun } from '../../types';
 import { List } from './components/list';
-import { ButtonExport } from '../../common/export';
-import { SampleNotifications } from '../../common/notifications';
+import { ButtonExportSelected } from '../../common';
 import { UploadOutlined } from '@ant-design/icons';
 
 export const MsRuns: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const [, setSelectedSamples] = useState<MsRun[]>([]);
-
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
-    };
-
-    const onRowSelectionChange = (selectedRows: MsRun[]) => {
-        setSelectedSamples(selectedRows);
     };
 
     const renderActions = () => {
@@ -33,19 +25,12 @@ export const MsRuns: FunctionComponent = () => {
         );
     };
 
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
-
     return (
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
 
-            <ButtonExport
-                onExportDone={() => {
-                    onExportDone();
-                }}
-            />
+            <ButtonExportSelected title="Export" />
+
             <Tooltip title="Import MS ready sample names and Run codes from Mass Spec">
                 <Button type="default" icon={<UploadOutlined />} style={{ float: 'right', marginRight: 10 }}>
                     Import MS Runs
@@ -62,12 +47,7 @@ export const MsRuns: FunctionComponent = () => {
                 </Button>
             </Tooltip>
             <Divider></Divider>
-            <List
-                isRefreshNeeded={isRefreshNeeded}
-                onRefreshDone={onRefreshDone}
-                renderActions={renderActions}
-                onRowSelectionChange={onRowSelectionChange}
-            />
+            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>
     );
 };

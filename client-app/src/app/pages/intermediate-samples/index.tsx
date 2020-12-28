@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { IntermediateSample } from '../../types';
 import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
-import { ButtonExportSelected } from '../../common/buttonExport';
+import { ButtonExportSelected } from '../../common/code/buttonExport';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
 import {
@@ -39,7 +39,7 @@ export const IntermediateSamples: FunctionComponent = () => {
                     title={'Create MS Ready Sample'}
                     style={{ float: 'right', marginRight: 10 }}
                 /> */}
-                <ButtonExportSelected title="Export" data={[]} />
+                <ButtonExportSelected title="Export" />
                 <Tooltip title="Add to pooling preparation">
                     <Button type="primary" icon={<PlusCircleOutlined />} style={{ float: 'right', marginRight: 10 }}>
                         Add to pooling preparation

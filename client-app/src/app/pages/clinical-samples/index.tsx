@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
 import { ClinicalSample } from '../../types';
-import { ButtonExportSelected } from '../../common/buttonExport';
+import { ButtonExportSelected } from '../../common/code/buttonExport';
 import { SampleNotifications } from '../../common/notifications';
 import { List, ButtonCreateNew, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonAutoGenerate } from '../../functional-building-blocks/clinical-samples/';
@@ -39,7 +39,7 @@ export const ClinicalSamples: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="Clinical Samples">
-                <ButtonExportSelected<ClinicalSample> title={'Export'} data={[]} />
+                <ButtonExportSelected<ClinicalSample> title={'Export'} />
 
                 <ButtonCreateNew
                     setRefreshNeededFlag={setRefreshNeededFlag}
@@ -55,11 +55,7 @@ export const ClinicalSamples: FunctionComponent = () => {
             </PageHeader>
             <Divider></Divider>
 
-            <List
-                isRefreshNeeded={isRefreshNeeded}
-                onRefreshDone={onRefreshDone}
-                renderActions={renderActions}
-            />
+            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>
     );
 };

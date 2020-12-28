@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
 import { List } from './components/list';
-import { ButtonExportSelected } from '../../common/buttonExport';
+import { ButtonExportSelected } from '../../common/code/buttonExport';
 import { UploadOutlined } from '@ant-design/icons';
 
 export const MsRuns: FunctionComponent = () => {
@@ -29,7 +29,7 @@ export const MsRuns: FunctionComponent = () => {
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
 
-            <ButtonExportSelected title="Export" data={[]} />
+            <ButtonExportSelected title="Export" />
 
             <Tooltip title="Import MS ready sample names and Run codes from Mass Spec">
                 <Button type="default" icon={<UploadOutlined />} style={{ float: 'right', marginRight: 10 }}>

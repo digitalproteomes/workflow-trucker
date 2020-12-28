@@ -2,7 +2,7 @@ import React, { useState, FunctionComponent } from 'react';
 import { List } from '../../functional-building-blocks/ms-ready';
 import { MSReadySample } from '../../types';
 import { Space, Button, Tooltip, PageHeader, Divider } from 'antd';
-import { ButtonExportAll, Header } from '../../common/buttonExport';
+import { ButtonExportAll, Header } from '../../common/code/buttonExport';
 import { DownloadOutlined } from '@ant-design/icons';
 import { ListDataContext, Store, StoreContext } from '../../common';
 

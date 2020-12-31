@@ -17,9 +17,9 @@ export class Store {
 
     public static getStore<T>(globalUniqueIdentifier: string): ListDataContext<T> {
         if (!Store.map.has(globalUniqueIdentifier)) {
-            console.exception(`requested store does not exist - ${globalUniqueIdentifier}`);
+            console.log(`requested store does not exist - ${globalUniqueIdentifier}`);
             // todo - this check should exist only in development mode
-            return new ListDataContext<T>();
+            return this.addStore(globalUniqueIdentifier, new ListDataContext<T>());
         }
 
         return Store.map.get(globalUniqueIdentifier) as ListDataContext<T>;

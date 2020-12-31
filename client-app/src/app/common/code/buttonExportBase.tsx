@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button, Tooltip } from 'antd';
 import { CSVLink } from 'react-csv';
-import { StoreContext, ListDataContext, Store } from '..';
+import { ListDataContext, Store } from '..';
 import { Header } from './buttonExport';
+import { StoreContext } from './datastore'; // by importing it directly from here, instead of importing it from index.ts, will avoid throwing an undefined exception because of named/default module export
 
 type BaseProps<T> = {
     title: string;
@@ -12,7 +13,7 @@ type BaseProps<T> = {
 type Base<T> = { data: T[] };
 
 export class ButtonExportBase<T> extends React.Component<BaseProps<T>, Base<T>> {
-    csvLink = React.createRef();
+    csvLink = React.createRef(); // todo - this is getting initialized, but the value is actually overwritten when the ref is assigned from the button to this member
     state = { data: [] };
 
     static contextType = StoreContext;

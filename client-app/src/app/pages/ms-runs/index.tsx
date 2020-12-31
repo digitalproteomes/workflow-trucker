@@ -3,9 +3,14 @@ import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
 import { List } from './components/list';
 import { ButtonExportSelected } from '../../common';
 import { UploadOutlined } from '@ant-design/icons';
+import CSVReaderComponent from '../../common/code/csvReaderComponent';
+import { MSRunNewTypeMap } from './components/msRunNewTypeMap';
+import { MSRunNew } from '../../types';
 
 export const MsRuns: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
+
+    const [typeMap] = useState<MSRunNewTypeMap>(new MSRunNewTypeMap());
 
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
@@ -25,12 +30,14 @@ export const MsRuns: FunctionComponent = () => {
         );
     };
 
+    function onDataLoaded(entries: MSRunNew[]) {
+        console.log('new entries', entries);
+    }
+
     return (
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
-
             <ButtonExportSelected title="Export" />
-
             <Tooltip title="Import MS ready sample names and Run codes from Mass Spec">
                 <Button type="default" icon={<UploadOutlined />} style={{ float: 'right', marginRight: 10 }}>
                     Import MS Runs
@@ -46,6 +53,8 @@ export const MsRuns: FunctionComponent = () => {
                     Generate Spectral Library
                 </Button>
             </Tooltip>
+            <Divider />
+            <CSVReaderComponent<MSRunNew> converter={typeMap} onDataLoaded={onDataLoaded} />
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>

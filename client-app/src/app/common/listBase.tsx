@@ -3,7 +3,8 @@ import { Table, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { TableRowSelection, ExpandableConfig, TableCurrentDataSource } from 'antd/lib/table/interface';
 import { getActionsColumn } from './columnHelpers';
-import { ListDataContext, Store, StoreContext } from '.';
+import { ListDataContext, Store } from '.';
+import { StoreContext } from './code/datastore';
 
 type Props<T extends object> = {
     style?: React.CSSProperties;

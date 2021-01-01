@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListDataContext } from '..';
-import { ButtonExportBase } from './buttonExportBase';
+import { ButtonExportBase } from './csvExporterButtonBase';
 
 export type Header<T> = {
     label: string;

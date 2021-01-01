@@ -5,8 +5,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { getActionsColumn, getColumn, getEditableColumn } from '../../../../common/columnHelpers';
-import { InputModal } from '../../../../common/inputModal';
-import { createFormInput } from '../../../../common/inputModalHelpers';
+import { InputModal, InputHelper } from '../../../../common';
 import { EditableList } from '../../../../common/listEditable';
 import { Constants } from '../../../../default-data/constants';
 import { IntermediateSample, MsReadyNew } from '../../../../types';
@@ -74,7 +73,7 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
             ...row,
         });
 
-        setSamplesToProcess(newData);
+        setSamplesToProcess([...newData]);
     };
 
     const handleDelete = (row: MsReadyNew) => {
@@ -91,7 +90,7 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
     };
 
     const renderActions = (sample: MsReadyNew): JSX.Element => {
-        return <Button type={'primary'} icon={<DeleteOutlined />} onClick={() => handleDelete(sample)} />;
+        return <Button type={'default'} icon={<DeleteOutlined />} onClick={() => handleDelete(sample)} />;
     };
 
     const columns: ColumnsType<MsReadyNew> = [
@@ -102,7 +101,9 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
         getActionsColumn(renderActions),
     ];
 
-    const inputs: JSX.Element[] = [createFormInput('Processing person', MsReadyNew.nameof('processingPerson'))];
+    const inputs: JSX.Element[] = [
+        InputHelper.createFormInput('Processing person', MsReadyNew.nameof('processingPerson')),
+    ];
 
     return (
         <InputModal

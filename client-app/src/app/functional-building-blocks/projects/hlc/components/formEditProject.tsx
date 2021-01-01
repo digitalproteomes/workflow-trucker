@@ -1,8 +1,7 @@
 import { Store } from 'antd/lib/form/interface';
 import React, { FunctionComponent, useState } from 'react';
 import { Api } from '../..';
-import { InputModal } from '../../../../common/inputModal';
-import { createFormInput, createFormInputCheckbox } from '../../../../common/inputModalHelpers';
+import { InputModal, InputHelper } from '../../../../common';
 import { Project } from '../../../../types';
 
 type Props = {
@@ -40,11 +39,11 @@ export const FormEditProject: FunctionComponent<Props> = (props: Props) => {
     };
 
     const inputs: JSX.Element[] = [
-        createFormInput('Name', Project.nameof('name'), 'name', true),
-        createFormInput('Owner name', Project.nameof('ownerName'), 'owner name', true),
-        createFormInput('Owner ORCID', Project.nameof('ownerORCID'), 'owner ORCID', true),
-        createFormInput('Description', Project.nameof('description'), 'description', true),
-        createFormInputCheckbox('isLocked', Project.nameof('isLocked'), project.isLocked),
+        InputHelper.createFormInput('Name', Project.nameof('name'), 'name', true),
+        InputHelper.createFormInput('Owner name', Project.nameof('ownerName'), 'owner name', true),
+        InputHelper.createFormInput('Owner ORCID', Project.nameof('ownerORCID'), 'owner ORCID', true),
+        InputHelper.createFormInput('Description', Project.nameof('description'), 'description', true),
+        InputHelper.createFormInputCheckbox('isLocked', Project.nameof('isLocked'), project.isLocked),
     ];
 
     return (

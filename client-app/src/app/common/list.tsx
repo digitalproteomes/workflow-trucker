@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ColumnsType } from 'antd/lib/table';
 import { ListBase } from './listBase';
 import { ExpandableConfig } from 'antd/lib/table/interface';
-import { StoreContext, Store, ListDataContext } from '.';
+import { Store, ListDataContext } from '.';
+import { StoreContext } from './code/datastore';
 
 type Props<T extends object> = {
     style?: React.CSSProperties;

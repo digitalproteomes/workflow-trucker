@@ -132,6 +132,25 @@ export class MsRun {
     public static nameof = (name: keyof MsRun) => name;
 }
 
+export type MSRunMode = 'DDA' | 'DIA' | 'Unknown';
+
+export class MSRunNew {
+    temporaryId: number = -1;
+
+    name: string = '';
+    msReadySampleName: string = '';
+    instrumentMethod: string = '';
+    description: string = '';
+
+    instrumentId: string = ''; //user entry
+    processingPerson: string = ''; //user entry
+    SOPDDA: string = ''; //user entry
+    SOPDIA: string = ''; //user entry
+    runMode: MSRunMode = 'Unknown'; //based on instrument method
+
+    public static nameof = (name: keyof MSRunNew) => name;
+}
+
 export class MSRunCompact {
     id: string = '';
 

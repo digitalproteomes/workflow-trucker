@@ -1,6 +1,7 @@
 import { ColumnType } from 'antd/lib/table';
 import { getAllFilterProps } from './listBaseFiltering';
 
+// todo - refactor - do the same with the column helpers as done with the inputhelpers
 export function getColumn<T>(
     label: string,
     name: keyof T,

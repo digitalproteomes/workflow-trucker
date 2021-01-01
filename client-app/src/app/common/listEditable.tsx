@@ -1,6 +1,6 @@
 import { Form, Input, Table } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import React, { Component, useContext, useEffect, useRef, useState } from 'react';
+import React, { FunctionComponent, useContext, useEffect, useRef, useState } from 'react';
 
 type EditableListProps<T> = {
     entries: T[];
@@ -8,11 +8,11 @@ type EditableListProps<T> = {
     rowKeySelector: (row: T) => string;
 };
 
-export class EditableList<T extends object> extends Component<EditableListProps<T>> {
+export class EditableList<T extends object> extends React.Component<EditableListProps<T>> {
     public render() {
         const EditableContext = React.createContext<any>(null);
 
-        const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
+        const EditableRow: FunctionComponent<EditableRowProps> = ({ index, ...props }) => {
             const [form] = Form.useForm();
             return (
                 <Form form={form} component={false}>
@@ -23,7 +23,7 @@ export class EditableList<T extends object> extends Component<EditableListProps<
             );
         };
 
-        const EditableCell: React.FC<EditableCellProps<T>> = ({
+        const EditableCell: FunctionComponent<EditableCellProps<T>> = ({
             title,
             editable,
             children,

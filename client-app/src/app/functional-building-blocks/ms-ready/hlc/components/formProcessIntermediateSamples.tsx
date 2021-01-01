@@ -9,7 +9,7 @@ import { InputModal, InputHelper } from '../../../../common';
 import { EditableList } from '../../../../common/listEditable';
 import { Constants } from '../../../../default-data/constants';
 import { IntermediateSample, MsReadyNew } from '../../../../types';
-import { Api } from '../../../ms-runs/api';
+import { Api } from '../../api';
 
 type Props = {
     originalSamples: IntermediateSample[];
@@ -90,7 +90,7 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
     };
 
     const renderActions = (sample: MsReadyNew): JSX.Element => {
-        return <Button type={'primary'} icon={<DeleteOutlined />} onClick={() => handleDelete(sample)} />;
+        return <Button type={'default'} icon={<DeleteOutlined />} onClick={() => handleDelete(sample)} />;
     };
 
     const columns: ColumnsType<MsReadyNew> = [

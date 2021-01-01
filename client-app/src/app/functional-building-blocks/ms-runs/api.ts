@@ -1,12 +1,8 @@
 import { Constants } from '../../default-data/constants';
 import { BaseApi } from '../../infrastructure/api';
-import { EWorkflowTag, MsReadyNew, MsRun } from '../../types';
+import { EWorkflowTag, MsRun } from '../../types';
 
 export class Api {
-    public static async postMsReady(payload: MsReadyNew[]): Promise<MsReadyNew[]> {
-        return await BaseApi.postAsync(`/samples/msready`, { samples: [...payload] });
-    }
-    
     public static async getMsRunsAsync(projectId: string): Promise<MsRun[]> {
         try {
             return await BaseApi.getAsync(`msruns/project?projectId=${projectId}`);

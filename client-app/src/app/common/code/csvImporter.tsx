@@ -1,6 +1,10 @@
+import { Button, Row, Col, Typography } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import React, { Component } from 'react';
 import { CSVReader } from 'react-papaparse';
 import { TypeMapConverter } from '..';
+
+const { Text } = Typography;
 
 interface ReaderEntry {
     data: any;
@@ -14,11 +18,12 @@ type Props<T> = {
     converter: TypeMapConverter<T>;
 };
 
+// todo - docs - mind the difference between react-papaparse https://github.com/bunlong/react-papaparse and the original papaparse https://github.com/mholt/PapaParse
+
 export default class CSVImporter<T> extends Component<Props<T>, {}> {
     private buttonRef: React.RefObject<CSVReader> = React.createRef(); // todo - this initialization is useless, as it gets overwritten by the button reference.
 
     handleOpenDialog = (e: any) => {
-        // Note that the ref is set async, so it might be null at some point
         if (this.buttonRef.current) {
             (this.buttonRef.current as any).open(e);
         }
@@ -37,14 +42,9 @@ export default class CSVImporter<T> extends Component<Props<T>, {}> {
         console.log(err);
     };
 
-    handleOnRemoveFile = (data: any) => {
-        console.log('---------------------------');
-        console.log('on file remove', data);
-        console.log('---------------------------');
-    };
+    handleOnRemoveFile = (_: any) => {};
 
     handleRemoveFile = (e: any) => {
-        // Note that the ref is set async, so it might be null at some point
         if (this.buttonRef.current) {
             (this.buttonRef.current as any).removeFile(e);
         }
@@ -77,58 +77,56 @@ export default class CSVImporter<T> extends Component<Props<T>, {}> {
                 onRemoveFile={this.handleOnRemoveFile}
             >
                 {({ file }: any) => (
-                    <aside
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            marginBottom: 10,
-                        }}
-                    >
-                        <button
-                            type="button"
-                            onClick={this.handleOpenDialog}
-                            style={{
-                                borderRadius: 0,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                width: '40%',
-                                paddingLeft: 0,
-                                paddingRight: 0,
-                            }}
-                        >
-                            Browse file
-                        </button>
-                        <div
-                            style={{
-                                borderWidth: 1,
-                                borderStyle: 'solid',
-                                borderColor: '#ccc',
-                                height: 45,
-                                lineHeight: 2.5,
-                                marginTop: 5,
-                                marginBottom: 5,
-                                paddingLeft: 13,
-                                paddingTop: 3,
-                                width: '60%',
-                            }}
-                        >
-                            {file && file.name}
-                        </div>
-                        <button
-                            style={{
-                                borderRadius: 0,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                paddingLeft: 20,
-                                paddingRight: 20,
-                            }}
-                            onClick={this.handleRemoveFile}
-                        >
-                            Remove
-                        </button>
-                    </aside>
+                    <>
+                        <Row>
+                            <Col span={8}>
+                                <Button type="default" icon={<UploadOutlined />} onClick={this.handleOpenDialog}>
+                                    Browse file
+                                </Button>
+                            </Col>
+                            <Col span={8}>
+                                <Text>{file !== null ? file.name : 'No file selected'}</Text>
+                            </Col>
+                            <Col span={8}>
+                                {file && (
+                                    <Button type="default" onClick={this.handleRemoveFile}>
+                                        Remove
+                                    </Button>
+                                )}
+                            </Col>
+                        </Row>
+                    </>
                 )}
             </CSVReader>
         );
+
+        // drag & drop style
+        // return (
+        //     // todo - styling - to handle the width of the div behind the filename, create a pr against the react-papaparse repo with the style prop added in https://github.com/Bunlong/react-papaparse/blob/master/src/CSVReader.tsx
+        //     <CSVReader
+        //         ref={this.buttonRef}
+        //         onFileLoad={this.handleOnFileLoad}
+        //         onDrop={this.handleOnFileLoad}
+        //         onError={this.handleOnError}
+        //         onRemoveFile={this.handleOnRemoveFile}
+        //         addRemoveButton
+        //         config={{
+        //             // all config options can be found here https://www.papaparse.com/docs#config. check what is the version used by react-papaparse first!
+        //             header: true,
+        //             dynamicTyping: true,
+        //             skipEmptyLines: 'greedy',
+        //             transformHeader: (header: string) => {
+        //                 const processedHeader: string = header.toLowerCase().replaceAll(' ', '');
+
+        //                 const query = this.props.converter.tryGet(processedHeader);
+
+        //                 // the undefined value will be mapped to the ignored_columns_sink
+        //                 return query.found ? query.value : 'ignored_columns_sink';
+        //             },
+        //         }}
+        //     >
+        //         <span>Drop CSV file here or click to upload.</span>
+        //     </CSVReader>
+        // );
     }
 }

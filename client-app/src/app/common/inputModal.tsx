@@ -1,13 +1,14 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Form, Modal, Typography } from 'antd';
+import { Col, Form, Modal, Row, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { Notifications } from './notifications';
 import { Store } from 'antd/lib/form/interface';
 import { FormLayoutConstants } from './constants';
+import { ModalProps } from 'antd/lib/modal';
 
 const { Text } = Typography;
 
-type ModalProps = {
+type Props = {
     isVisible: boolean;
     title: string;
     inputs: JSX.Element[];
@@ -18,9 +19,10 @@ type ModalProps = {
     onValuesChange?: (values: Store) => void;
     getExistingValues?: () => any;
     buttonConfirmText?: string;
+    styleModal?: ModalProps;
 };
 
-export const InputModal: FunctionComponent<ModalProps> = ({
+export const InputModal: FunctionComponent<Props> = ({
     isVisible,
     title,
     inputs,
@@ -31,6 +33,7 @@ export const InputModal: FunctionComponent<ModalProps> = ({
     onValuesChange,
     getExistingValues,
     buttonConfirmText,
+    styleModal,
     children,
 }) => {
     const [form] = Form.useForm();
@@ -51,6 +54,25 @@ export const InputModal: FunctionComponent<ModalProps> = ({
         console.log('set saving flag', false);
     };
 
+    let modalContent: JSX.Element = getInputForm(
+        title,
+        form,
+        inputs,
+        errorMessage,
+        onCreateWrapper,
+        placeholder,
+        onValuesChange,
+    );
+
+    if (styleModal !== undefined) {
+        modalContent = (
+            <Row>
+                <Col span={12}>{modalContent}</Col>
+                <Col span={12} />
+            </Row>
+        );
+    }
+
     return (
         <Modal
             visible={isVisible}
@@ -63,8 +85,9 @@ export const InputModal: FunctionComponent<ModalProps> = ({
             onOk={() => {
                 form.submit();
             }}
+            {...styleModal} // this may override the default values set above
         >
-            {getInputForm(title, form, inputs, errorMessage, onCreateWrapper, placeholder, onValuesChange)}
+            {modalContent}
             {children}
         </Modal>
     );

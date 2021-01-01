@@ -1,11 +1,9 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
-import { List } from './components/list';
-import { ButtonExportSelected } from '../../common';
-import { UploadOutlined } from '@ant-design/icons';
-import CSVImporter from '../../common/code/csvImporter';
-import { MSRunNewTypeMap } from './components/msRunNewTypeMap';
+import { ButtonExportSelected, CSVImporter } from '../../common';
+import { MSRunNewTypeMap } from '../../functional-building-blocks/ms-runs/typemaps/msRunNewTypeMap';
 import { MSRunNew } from '../../types';
+import { List, ButtonImportMsRuns } from '../../functional-building-blocks/ms-runs';
 
 export const MsRuns: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -38,11 +36,7 @@ export const MsRuns: FunctionComponent = () => {
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
             <ButtonExportSelected title="Export" />
-            <Tooltip title="Import MS ready sample names and Run codes from Mass Spec">
-                <Button type="default" icon={<UploadOutlined />} style={{ float: 'right', marginRight: 10 }}>
-                    Import MS Runs
-                </Button>
-            </Tooltip>
+            <ButtonImportMsRuns style={{ float: 'right', marginRight: 10 }} />
             <Tooltip title="Bulk Generate SWATH Analysis">
                 <Button type="primary" style={{ float: 'right', marginRight: 10 }}>
                     Generate SWATH Analysis

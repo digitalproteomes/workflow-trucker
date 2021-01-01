@@ -1,5 +1,5 @@
 import { MSRunNew } from '../../../types';
-import { TypeMapConverter } from '../../../common/types/typeMapConverter';
+import { TypeMapConverter } from '../../../common';
 
 export class MSRunNewTypeMap extends TypeMapConverter<MSRunNew> {
     public constructor() {

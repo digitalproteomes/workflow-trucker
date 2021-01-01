@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Form, Select } from 'antd';
 import { Store } from 'antd/lib/form/interface';
-import { InputModal } from '../../../../common/inputModal';
-import { createFormInput, validationMessage } from '../../../../common/inputModalHelpers';
+import { InputModal, InputHelper, validationMessage } from '../../../../common';
 import { NewIntermediarySample, SOP } from '../../../../types';
 import { ClinicalSample } from '../../../../types';
 import { Api } from '../../api';
@@ -59,9 +58,9 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
 
     const inputs: JSX.Element[] = [
         createFormSelectInput('SOP', NewIntermediarySample.nameof('sopId'), sops),
-        createFormInput('Description', NewIntermediarySample.nameof('description')),
-        createFormInput('Processing person', NewIntermediarySample.nameof('processingPerson')),
-        createFormInput('Workflow tag', NewIntermediarySample.nameof('workflowTag')),
+        InputHelper.createFormInput('Description', NewIntermediarySample.nameof('description')),
+        InputHelper.createFormInput('Processing person', NewIntermediarySample.nameof('processingPerson')),
+        InputHelper.createFormInput('Workflow tag', NewIntermediarySample.nameof('workflowTag')),
     ];
 
     return (

@@ -5,10 +5,9 @@ import { Api } from '../../api';
 import { UploadProps } from 'antd/lib/upload';
 import { Store } from 'rc-field-form/lib/interface';
 import { Constants } from '../../../../default-data/constants';
-import { createFormInput, createSOPFormSelect } from '../../../../common/inputModalHelpers';
 
 import { RcFile } from 'antd/lib/upload/interface';
-import { InputModal } from '../../../../common/inputModal';
+import { InputModal, InputHelper } from '../../../../common';
 import { SOP, ESOPType } from '../../../../types';
 
 type Props = {
@@ -49,12 +48,12 @@ export const FormUpload: FunctionComponent<Props> = ({ isActiveUploadForm, onUpl
     };
 
     const inputs: JSX.Element[] = [
-        createFormInput('Name', SOP.nameof('name')),
-        createFormInput('Description', SOP.nameof('description')),
-        createFormInput('Processing person', SOP.nameof('processingPerson')),
-        createFormInput('Author', SOP.nameof('owner')),
-        createFormInput('Revision', SOP.nameof('revision')),
-        createSOPFormSelect('SOP Type', SOP.nameof('artefactClass'), [
+        InputHelper.createFormInput('Name', SOP.nameof('name')),
+        InputHelper.createFormInput('Description', SOP.nameof('description')),
+        InputHelper.createFormInput('Processing person', SOP.nameof('processingPerson')),
+        InputHelper.createFormInput('Author', SOP.nameof('owner')),
+        InputHelper.createFormInput('Revision', SOP.nameof('revision')),
+        InputHelper.createSOPFormSelect('SOP Type', SOP.nameof('artefactClass'), [
             ESOPType.sampleSOP,
             ESOPType.msRunSOP,
             ESOPType.dataSOP,

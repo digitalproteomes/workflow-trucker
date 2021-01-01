@@ -4,7 +4,7 @@ import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
 import { ButtonExportSelected, ListDataContext, Store, StoreContext } from '../../common';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
-import { ButtonProcessFromIntermediateBulk } from '../../functional-building-blocks/ms-runs';
+import { ButtonProcessFromIntermediateBulk } from '../../functional-building-blocks/ms-ready';
 
 const ContextName = 'IntermediateSampleDataContext';
 Store.addStore(ContextName, new ListDataContext<IntermediateSample>());

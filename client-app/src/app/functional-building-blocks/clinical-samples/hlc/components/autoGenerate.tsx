@@ -2,8 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { EditableList } from '../../../../common/listEditable';
 import { Api } from '../../api';
 import { Store } from 'antd/lib/form/interface';
-import { InputModal } from '../../../../common/inputModal';
-import { createFormInput, createFormInputNumber, createFormSelect } from '../../../../common/inputModalHelpers';
+import { InputModal, InputHelper } from '../../../../common';
 import { Constants } from '../../../../default-data/constants';
 import { GenerationData, EWorkflowTag } from '../../../../types';
 import { ClinicalSampleNew } from '../../../../types';
@@ -48,11 +47,11 @@ export const AutoGenerateInputForm: FunctionComponent<FormProps> = ({
     };
 
     const inputs: JSX.Element[] = [
-        createFormInput('Project prefix', GenerationData.nameof('prefixProject')),
-        createFormInput('Project suffix', GenerationData.nameof('suffixProject')),
-        createFormInput('Description', GenerationData.nameof('description')),
-        createFormInputNumber('Number of entries', GenerationData.nameof('numberOfEntries')),
-        createFormSelect('Workflow tags', GenerationData.nameof('workflowTag'), [
+        InputHelper.createFormInput('Project prefix', GenerationData.nameof('prefixProject')),
+        InputHelper.createFormInput('Project suffix', GenerationData.nameof('suffixProject')),
+        InputHelper.createFormInput('Description', GenerationData.nameof('description')),
+        InputHelper.createFormInputNumber('Number of entries', GenerationData.nameof('numberOfEntries')),
+        InputHelper.createFormSelect('Workflow tags', GenerationData.nameof('workflowTag'), [
             EWorkflowTag.LibraryGeneration,
             EWorkflowTag.SamplePreparation,
             EWorkflowTag.SwathAnalysis,

@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Api } from '../../api';
 import { Store } from 'antd/lib/form/interface';
-import { InputModal } from '../../../../common/inputModal';
-import { createFormInput } from '../../../../common/inputModalHelpers';
+import { InputModal, InputHelper } from '../../../../common';
 import { ClinicalSample } from '../../../../types';
 
 type Props = {
@@ -28,9 +27,9 @@ export const ClinicalInputForm: FunctionComponent<Props> = ({ isActiveInputForm,
     };
 
     const inputs: JSX.Element[] = [
-        createFormInput('Name', ClinicalSample.nameof('name'), '', true),
-        createFormInput('ProjectId', ClinicalSample.nameof('projectId'), '', true),
-        createFormInput('Clinical sample code', ClinicalSample.nameof('clinicalSampleCode'), '', true),
+        InputHelper.createFormInput('Name', ClinicalSample.nameof('name'), '', true),
+        InputHelper.createFormInput('ProjectId', ClinicalSample.nameof('projectId'), '', true),
+        InputHelper.createFormInput('Clinical sample code', ClinicalSample.nameof('clinicalSampleCode'), '', true),
     ];
 
     return (

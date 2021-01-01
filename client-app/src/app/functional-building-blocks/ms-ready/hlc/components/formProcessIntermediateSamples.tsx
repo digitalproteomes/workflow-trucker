@@ -5,12 +5,11 @@ import { DeleteOutlined } from '@ant-design/icons';
 
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { getActionsColumn, getColumn, getEditableColumn } from '../../../../common/columnHelpers';
-import { InputModal } from '../../../../common/inputModal';
-import { createFormInput } from '../../../../common/inputModalHelpers';
+import { InputModal, InputHelper } from '../../../../common';
 import { EditableList } from '../../../../common/listEditable';
 import { Constants } from '../../../../default-data/constants';
 import { IntermediateSample, MsReadyNew } from '../../../../types';
-import { Api } from '../../api';
+import { Api } from '../../../ms-runs/api';
 
 type Props = {
     originalSamples: IntermediateSample[];
@@ -102,7 +101,9 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
         getActionsColumn(renderActions),
     ];
 
-    const inputs: JSX.Element[] = [createFormInput('Processing person', MsReadyNew.nameof('processingPerson'))];
+    const inputs: JSX.Element[] = [
+        InputHelper.createFormInput('Processing person', MsReadyNew.nameof('processingPerson')),
+    ];
 
     return (
         <InputModal

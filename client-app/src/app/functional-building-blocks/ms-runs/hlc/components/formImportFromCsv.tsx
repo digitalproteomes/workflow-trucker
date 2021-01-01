@@ -2,12 +2,13 @@ import { Button, Col, Divider } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Store } from 'antd/lib/form/interface';
 import { ColumnsType } from 'antd/lib/table';
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { InputModal, InputHelper, EditableList, CSVImporter } from '../../../../common';
 import { getActionsColumn, getEditableColumn } from '../../../../common/columnHelpers';
-import { MSRunNew } from '../../../../types';
+import { MSRunNew, SOP } from '../../../../types';
 import { Api } from '../../api';
 import { MSRunNewTypeMap } from '../../typemaps/msRunNewTypeMap';
+import { Constants } from '../../../../default-data/constants';
 
 type Props = {
     onCreateSuccessful: () => void;
@@ -18,6 +19,19 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     const [typeMap] = useState<MSRunNewTypeMap>(new MSRunNewTypeMap());
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [samplesToProcess, setSamplesToProcess] = useState<MSRunNew[]>([]);
+    const [sops, setSops] = useState<SOP[] | null>(null);
+
+    async function executeFetch() {
+        const receivedSops = await Api.getSOPsAsync(Constants.projectId);
+
+        setSops(receivedSops);
+    }
+
+    useEffect(() => {
+        if (sops == null) {
+            executeFetch();
+        }
+    });
 
     const onCreate = (samples: MSRunNew[]) => {
         async function saveSamples() {
@@ -38,12 +52,15 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     };
 
     function onDataImported(entries: MSRunNew[]) {
+        let tempId = 0;
+        entries.forEach((entry) => (entry.temporaryId = tempId++));
+
         setSamplesToProcess(entries);
     }
 
     const handleDelete = (row: MSRunNew) => {
         const newData: MSRunNew[] = samplesToProcess;
-        const index = newData.findIndex((item) => row.name === item.name);
+        const index = newData.findIndex((item) => row.temporaryId === item.temporaryId);
         newData.splice(index, 1);
 
         if (newData.length === 0) {
@@ -57,7 +74,7 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     const handleSave = (row: MSRunNew) => {
         const newData: MSRunNew[] = samplesToProcess;
 
-        const index = newData.findIndex((item) => row.name === item.name);
+        const index = newData.findIndex((item) => row.temporaryId === item.temporaryId);
         const item: MSRunNew = newData[index];
 
         newData.splice(index, 1, {
@@ -72,7 +89,7 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
         <InputModal
             isVisible={true}
             title="Import MS Runs from a .csv file"
-            inputs={inputs}
+            inputs={getInputs(sops ?? [])}
             errorMessage={errorMessage}
             onCreate={async (data: Store) => {
                 const template: MSRunNew = data as MSRunNew;
@@ -97,10 +114,19 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     );
 };
 
-const inputs: JSX.Element[] = [
-    InputHelper.createFormInput('Instrument', MSRunNew.nameof('instrumentId'), 'instrument name', true),
-    InputHelper.createFormInput('Processing person', MSRunNew.nameof('processingPerson'), 'processing person', true),
-];
+function getInputs(sops: SOP[]): JSX.Element[] {
+    return [
+        InputHelper.createFormInput('Instrument', MSRunNew.nameof('instrumentId'), 'instrument name', true),
+        InputHelper.createFormInput(
+            'Processing person',
+            MSRunNew.nameof('processingPerson'),
+            'processing person',
+            true,
+        ),
+        InputHelper.createSOPFormSelectInput('SOP DDA', MSRunNew.nameof('SOPDDA'), sops),
+        InputHelper.createSOPFormSelectInput('SOP DIA', MSRunNew.nameof('SOPDIA'), sops),
+    ];
+}
 
 // todo - refactor list with removable entries - start from here and continue in formProcessIntermediateSamples
 
@@ -118,7 +144,6 @@ function getColumns(
         getEditableColumn('Name', 'name', handleSave),
         getEditableColumn('Sample', 'msReadySampleName', handleSave),
         getEditableColumn('Run mode', 'runMode', handleSave),
-        // getColumn('Instrument', 'instrumentId'),
         getEditableColumn('Method', 'instrumentMethod', handleSave),
         getEditableColumn('Description', 'description', handleSave),
         getActionsColumn(renderActions(handleDeleteCallback)),

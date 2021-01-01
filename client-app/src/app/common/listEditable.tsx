@@ -76,7 +76,11 @@ export class EditableList<T extends object> extends React.Component<EditableList
                         <Input ref={inputRef} onPressEnter={save} onBlur={save} />
                     </Form.Item>
                 ) : (
-                    <div className="editable-cell-value-wrap" style={{ paddingRight: 24 }} onClick={toggleEdit}>
+                    <div
+                        className="editable-cell-value-wrap"
+                        style={{ paddingRight: 24, minWidth: 100, minHeight: 30 }} // set the min width and height so in case the {children} will have no text, there is still an area on which the user can click
+                        onClick={toggleEdit}
+                    >
                         {children}
                     </div>
                 );

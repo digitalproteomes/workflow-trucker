@@ -1,12 +1,10 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Form, Select } from 'antd';
 import { Store } from 'antd/lib/form/interface';
-import { InputModal, InputHelper, validationMessage } from '../../../../common';
+import { InputModal, InputHelper } from '../../../../common';
 import { NewIntermediarySample, SOP } from '../../../../types';
 import { ClinicalSample } from '../../../../types';
 import { Api } from '../../api';
 import { Constants } from '../../../../default-data/constants';
-const { Option } = Select;
 
 type FormProps = {
     originalSamples: ClinicalSample[] | null;
@@ -57,7 +55,7 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
     };
 
     const inputs: JSX.Element[] = [
-        createFormSelectInput('SOP', NewIntermediarySample.nameof('sopId'), sops),
+        InputHelper.createSOPFormSelectInput('SOP', NewIntermediarySample.nameof('sopId'), sops),
         InputHelper.createFormInput('Description', NewIntermediarySample.nameof('description')),
         InputHelper.createFormInput('Processing person', NewIntermediarySample.nameof('processingPerson')),
         InputHelper.createFormInput('Workflow tag', NewIntermediarySample.nameof('workflowTag')),
@@ -77,25 +75,3 @@ export const ProcessSampleForm: FunctionComponent<FormProps> = ({ originalSample
         />
     );
 };
-
-// wait - if the createFormSelectInput is implemented 2-3 times, extract it into a helper
-function createFormSelectInput(label: string, propName: keyof NewIntermediarySample, sops: SOP[]) {
-    return (
-        <Form.Item
-            label={label}
-            name={propName.toString()}
-            rules={[{ required: false, message: validationMessage(propName.toString()) }]}
-        >
-            <Select showSearch filterOption={true} optionFilterProp={'children'}>
-                {sops
-                    .sort((a, b) => {
-                        // wait: is this the best string filtering approach? is empty string?
-                        return a.name[0] > b.name[0] ? 1 : a.name[0] === b.name[0] ? 0 : -1;
-                    })
-                    .map((sop) => (
-                        <Option value={sop.id}>{sop.name}</Option>
-                    ))}
-            </Select>
-        </Form.Item>
-    );
-}

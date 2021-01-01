@@ -1,6 +1,6 @@
 import { Constants } from '../../default-data/constants';
 import { BaseApi } from '../../infrastructure/api';
-import { EWorkflowTag, MsRun, MSRunNew } from '../../types';
+import { EWorkflowTag, MsRun, MSRunNew, SOP } from '../../types';
 
 export class Api {
     public static async getMsRunsAsync(projectId: string): Promise<MsRun[]> {
@@ -21,6 +21,12 @@ export class Api {
 
     public static async postMsRuns(samples: MSRunNew[]): Promise<void> {
         return await BaseApi.postAsync(`/msrun`, { samples: samples });
+    }
+
+    public static async getSOPsAsync(projectId: string): Promise<SOP[]> {
+        return await BaseApi.getAsync(
+            `/sops/project/type?projectId=${projectId}&sopType=Standard Procedure Sample Preparation`,
+        );
     }
 }
 

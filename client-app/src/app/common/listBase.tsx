@@ -18,49 +18,46 @@ type Props<T extends object> = {
     expandableConfig?: ExpandableConfig<T>;
 };
 
-export function ListBase<T extends object>({
-    style,
-    title,
-    entries,
-    columns,
-    renderActions,
-    rowKeySelector,
-    expandableConfig,
-}: Props<T> & { children?: React.ReactNode }): React.ReactElement {
-    const storeContext = React.useContext(StoreContext);
-    const store: ListDataContext<T> = Store.getStore<T>(storeContext.name);
+// export function ListBase<T extends object>(: Props<T> & { children?: React.ReactNode }): React.ReactElement {
+export class ListBase<T extends object> extends React.Component<Props<T>> {
+    public render() {
+        const storeContext = React.useContext(StoreContext);
+        const store: ListDataContext<T> = Store.getStore<T>(storeContext.name);
 
-    const rowSelection: TableRowSelection<T> = {
-        onChange: (_selectedRowKeys: any, selectedRows: T[]) => store.setSelectedData(selectedRows),
-        selections: [Table.SELECTION_ALL],
-    };
+        const rowSelection: TableRowSelection<T> = {
+            onChange: (_selectedRowKeys: any, selectedRows: T[]) => store.setSelectedData(selectedRows),
+            selections: [Table.SELECTION_ALL],
+        };
 
-    if (entries == null) {
-        return <Skeleton active />;
+        const { style, title, entries, columns, renderActions, rowKeySelector, expandableConfig } = { ...this.props };
+
+        if (entries == null) {
+            return <Skeleton active />;
+        }
+
+        let columnsType: ColumnsType<T>;
+
+        if (renderActions) {
+            columnsType = [...columns, getActionsColumn(renderActions)];
+        } else {
+            columnsType = columns;
+        }
+
+        // todo - compose the table props based on the incoming handlers/callbacks. The onChange prop should be set only if there is a listener to be subscribed
+        return (
+            <Table
+                style={style}
+                title={() => (title === null ? undefined : <h3>{title}</h3>)}
+                rowSelection={rowSelection}
+                dataSource={entries}
+                columns={columnsType}
+                rowKey={(row) => rowKeySelector(row)}
+                expandable={expandableConfig}
+                onChange={(_pagination, _filters, _sorter, extra: TableCurrentDataSource<T>) => {
+                    store.setActiveData(extra.currentDataSource);
+                    console.log('store active data', store.activeData);
+                }}
+            />
+        );
     }
-
-    let columnsType: ColumnsType<T>;
-
-    if (renderActions) {
-        columnsType = [...columns, getActionsColumn(renderActions)];
-    } else {
-        columnsType = columns;
-    }
-
-    // todo - compose the table props based on the incoming handlers/callbacks. The onChange prop should be set only if there is a listener to be subscribed
-    return (
-        <Table
-            style={style}
-            title={() => (title === null ? undefined : <h3>{title}</h3>)}
-            rowSelection={rowSelection}
-            dataSource={entries}
-            columns={columnsType}
-            rowKey={(row) => rowKeySelector(row)}
-            expandable={expandableConfig}
-            onChange={(_pagination, _filters, _sorter, extra: TableCurrentDataSource<T>) => {
-                store.setActiveData(extra.currentDataSource);
-                console.log('store active data', store.activeData);
-            }}
-        />
-    );
 }

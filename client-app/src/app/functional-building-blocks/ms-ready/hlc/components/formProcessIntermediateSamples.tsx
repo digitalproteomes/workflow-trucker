@@ -73,7 +73,7 @@ export const FormProcessIntermediateSamples: FunctionComponent<Props> = ({
             ...row,
         });
 
-        setSamplesToProcess(newData);
+        setSamplesToProcess([...newData]);
     };
 
     const handleDelete = (row: MsReadyNew) => {

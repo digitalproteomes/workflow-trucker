@@ -2,9 +2,9 @@ import { Button, Col, Divider } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Store } from 'antd/lib/form/interface';
 import { ColumnsType } from 'antd/lib/table';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { InputModal, InputHelper, EditableList, CSVImporter } from '../../../../common';
-import { getActionsColumn, getColumn, getEditableColumn } from '../../../../common/columnHelpers';
+import { getActionsColumn, getEditableColumn } from '../../../../common/columnHelpers';
 import { MSRunNew } from '../../../../types';
 import { Api } from '../../api';
 import { MSRunNewTypeMap } from '../../typemaps/msRunNewTypeMap';
@@ -16,17 +16,17 @@ type Props = {
 
 export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     const [typeMap] = useState<MSRunNewTypeMap>(new MSRunNewTypeMap());
-    const [errorMessage] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [samplesToProcess, setSamplesToProcess] = useState<MSRunNew[]>([]);
 
     const onCreate = (samples: MSRunNew[]) => {
         async function saveSamples() {
-            // try {
-            //     await Api.postMsReady(samples);
-            //     onCreateSuccessful();
-            // } catch (error) {
-            //     setErrorMessage(error.message);
-            // }
+            try {
+                await Api.postMsRuns(samples);
+                props.onCreateSuccessful();
+            } catch (error) {
+                setErrorMessage(error.message);
+            }
         }
 
         saveSamples();
@@ -54,6 +54,20 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
         setSamplesToProcess([...newData]);
     };
 
+    const handleSave = (row: MSRunNew) => {
+        const newData: MSRunNew[] = samplesToProcess;
+
+        const index = newData.findIndex((item) => row.name === item.name);
+        const item: MSRunNew = newData[index];
+
+        newData.splice(index, 1, {
+            ...item, //unfold the existing item
+            ...row, // complete it with the new data
+        });
+
+        setSamplesToProcess([...newData]); // unfold the elements of the array into a new array => the array reference will change => the downsttream components receiving the samples will be able to update
+    };
+
     return (
         <InputModal
             isVisible={true}
@@ -76,7 +90,7 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
             <Divider />
             <EditableList<MSRunNew>
                 entries={samplesToProcess}
-                columns={getColumns(handleDelete)}
+                columns={getColumns(handleDelete, handleSave)}
                 rowKeySelector={(row: MSRunNew) => row.name}
             />
         </InputModal>
@@ -84,8 +98,8 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
 };
 
 const inputs: JSX.Element[] = [
-    InputHelper.createFormInput('Instrument', MSRunNew.nameof('instrumentId')),
-    InputHelper.createFormInput('Processing person', MSRunNew.nameof('processingPerson')),
+    InputHelper.createFormInput('Instrument', MSRunNew.nameof('instrumentId'), 'instrument name', true),
+    InputHelper.createFormInput('Processing person', MSRunNew.nameof('processingPerson'), 'processing person', true),
 ];
 
 // todo - refactor list with removable entries - start from here and continue in formProcessIntermediateSamples
@@ -96,14 +110,17 @@ function renderActions(handleDeleteCallback: (sample: MSRunNew) => void) {
     };
 }
 
-function getColumns(handleDeleteCallback: (sample: MSRunNew) => void): ColumnsType<MSRunNew> {
+function getColumns(
+    handleDeleteCallback: (sample: MSRunNew) => void,
+    handleSave: (sample: MSRunNew) => void,
+): ColumnsType<MSRunNew> {
     return [
-        getColumn('Name', 'name'),
-        getColumn('Sample', 'msReadySampleName'),
-        getColumn('Run mode', 'runMode'),
-        getColumn('Instrument', 'instrumentId'),
-        getColumn('Method', 'instrumentMethod'),
-        getColumn('Description', 'description'),
+        getEditableColumn('Name', 'name', handleSave),
+        getEditableColumn('Sample', 'msReadySampleName', handleSave),
+        getEditableColumn('Run mode', 'runMode', handleSave),
+        // getColumn('Instrument', 'instrumentId'),
+        getEditableColumn('Method', 'instrumentMethod', handleSave),
+        getEditableColumn('Description', 'description', handleSave),
         getActionsColumn(renderActions(handleDeleteCallback)),
     ];
 }

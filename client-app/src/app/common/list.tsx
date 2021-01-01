@@ -19,49 +19,53 @@ type Props<T extends object> = {
     expandableConfig?: ExpandableConfig<T>;
 };
 
-export function CommonList<T extends object>({
-    style,
-    tableTitle,
+export class CommonList<T extends object> extends React.Component<Props<T>> {
+    public render() {
+        const storeContext = React.useContext(StoreContext);
+        const store: ListDataContext<T> = Store.getStore<T>(storeContext.name);
 
-    isRefreshNeeded,
-    onRefreshDone,
-    renderActions,
+        const [entries, setEntries] = useState<T[] | null>(null);
 
-    fetchEntries,
-    rowKeySelector,
-    columns,
-    expandableConfig,
-}: Props<T> & { children?: React.ReactNode }): React.ReactElement {
-    const storeContext = React.useContext(StoreContext);
-    const store: ListDataContext<T> = Store.getStore<T>(storeContext.name);
+        const {
+            style,
+            tableTitle,
 
-    const [entries, setEntries] = useState<T[] | null>(null);
+            isRefreshNeeded,
+            onRefreshDone,
+            renderActions,
 
-    async function executeFetch() {
-        const data = await fetchEntries();
-        setEntries(data);
+            fetchEntries,
+            rowKeySelector,
+            columns,
+            expandableConfig,
+        } = { ...this.props };
 
-        store.setActiveData(data);
-    }
+        async function executeFetch() {
+            const data = await fetchEntries();
+            setEntries(data);
 
-    useEffect(() => {
-        if (entries == null || isRefreshNeeded) {
-            console.log('refresh was needed');
-
-            executeFetch();
-            onRefreshDone();
+            store.setActiveData(data);
         }
-    });
 
-    return (
-        <ListBase
-            style={style}
-            title={tableTitle}
-            entries={entries}
-            columns={columns}
-            renderActions={renderActions}
-            rowKeySelector={rowKeySelector}
-            expandableConfig={expandableConfig}
-        />
-    );
+        useEffect(() => {
+            if (entries == null || isRefreshNeeded) {
+                console.log('refresh was needed');
+
+                executeFetch();
+                onRefreshDone();
+            }
+        });
+
+        return (
+            <ListBase
+                style={style}
+                title={tableTitle}
+                entries={entries}
+                columns={columns}
+                renderActions={renderActions}
+                rowKeySelector={rowKeySelector}
+                expandableConfig={expandableConfig}
+            />
+        );
+    }
 }

@@ -14,7 +14,7 @@ type Props<T> = {
     converter: TypeMapConverter<T>;
 };
 
-export default class CSVReaderComponent<T> extends Component<Props<T>, {}> {
+export default class CSVImporter<T> extends Component<Props<T>, {}> {
     private buttonRef: React.RefObject<CSVReader> = React.createRef(); // todo - this initialization is useless, as it gets overwritten by the button reference.
 
     handleOpenDialog = (e: any) => {

@@ -3,7 +3,7 @@ import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
 import { List } from './components/list';
 import { ButtonExportSelected } from '../../common';
 import { UploadOutlined } from '@ant-design/icons';
-import CSVReaderComponent from '../../common/code/csvReaderComponent';
+import CSVImporter from '../../common/code/csvImporter';
 import { MSRunNewTypeMap } from './components/msRunNewTypeMap';
 import { MSRunNew } from '../../types';
 
@@ -54,7 +54,7 @@ export const MsRuns: FunctionComponent = () => {
                 </Button>
             </Tooltip>
             <Divider />
-            <CSVReaderComponent<MSRunNew> converter={typeMap} onDataLoaded={onDataLoaded} />
+            <CSVImporter<MSRunNew> converter={typeMap} onDataLoaded={onDataLoaded} />
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>

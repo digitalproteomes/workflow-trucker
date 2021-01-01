@@ -1,5 +1,5 @@
-import CSVReaderComponent from './code/csvReaderComponent';
-import { Header, ButtonExportSelected, ButtonExportAll } from './code/buttonExport';
+import CSVImporter from './code/csvImporter';
+import { Header, ButtonExportSelected, ButtonExportAll } from './code/csvExporterButton';
 import { StoreDetails, ListDataContext, Store, StoreContext } from './code/datastore';
 import { Dictionary } from './types/dictionary';
 import { TypeMapConverter } from './types/typeMapConverter';
@@ -10,4 +10,4 @@ export { ButtonExportSelected, ButtonExportAll };
 export type { Header };
 
 export type { Dictionary };
-export { CSVReaderComponent, TypeMapConverter };
+export { CSVImporter as CSVReaderComponent, TypeMapConverter };

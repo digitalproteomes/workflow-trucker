@@ -1,14 +1,11 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
-import { ButtonExportSelected, CSVImporter } from '../../common';
-import { MSRunNewTypeMap } from '../../functional-building-blocks/ms-runs/typemaps/msRunNewTypeMap';
-import { MSRunNew } from '../../types';
+import { ButtonExportSelected } from '../../common';
 import { List, ButtonImportMsRuns } from '../../functional-building-blocks/ms-runs';
 
 export const MsRuns: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const [typeMap] = useState<MSRunNewTypeMap>(new MSRunNewTypeMap());
 
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
@@ -28,10 +25,6 @@ export const MsRuns: FunctionComponent = () => {
         );
     };
 
-    function onDataLoaded(entries: MSRunNew[]) {
-        console.log('new entries', entries);
-    }
-
     return (
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
@@ -48,7 +41,6 @@ export const MsRuns: FunctionComponent = () => {
                 </Button>
             </Tooltip>
             <Divider />
-            <CSVImporter<MSRunNew> converter={typeMap} onDataLoaded={onDataLoaded} />
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>

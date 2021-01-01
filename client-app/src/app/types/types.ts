@@ -141,6 +141,7 @@ export class MSRunNew {
     description: string = '';
 
     instrumentId: string = ''; //user entry
+    processingPerson: string = ''; //user entry
     runMode: MSRunMode = 'Unknown'; //based on instrument method
 
     public static nameof = (name: keyof MSRunNew) => name;

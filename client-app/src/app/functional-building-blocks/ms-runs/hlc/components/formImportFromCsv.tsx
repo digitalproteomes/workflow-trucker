@@ -1,19 +1,24 @@
 import { Store } from 'antd/lib/form/interface';
 import { ColumnsType } from 'antd/lib/table';
 import React, { FunctionComponent, useEffect, useState } from 'react';
-import { InputModal, InputHelper, EditableList } from '../../../../common';
+import { InputModal, InputHelper, EditableList, CSVImporter } from '../../../../common';
 import { MSRunNew } from '../../../../types';
 import { Api } from '../../api';
+import { MSRunNewTypeMap } from '../../typemaps/msRunNewTypeMap';
 
-type Props = {};
+type Props = {
+    onCreateSuccessful: () => void;
+    onCancel: () => void;
+};
 
 export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
+    const [typeMap] = useState<MSRunNewTypeMap>(new MSRunNewTypeMap());
     const [errorMessage] = useState<string | null>(null);
     const [samplesToProcess, setSamplesToProcess] = useState<MSRunNew[] | null>(null);
 
     const inputs: JSX.Element[] = [
         InputHelper.createFormInput('Instrument', MSRunNew.nameof('instrumentId')),
-        InputHelper.createFormInput('Instrument', MSRunNew.nameof('instrumentId')),
+        InputHelper.createFormInput('Processing person', MSRunNew.nameof('processingPerson')),
     ];
 
     const columns: ColumnsType<MSRunNew> = [];
@@ -32,9 +37,13 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     };
 
     const handleOnCancel = () => {
-        // onCancel();
+        props.onCancel();
         // setSamplesToProcess(null);
     };
+
+    function onDataLoaded(entries: MSRunNew[]) {
+        console.log('new entries', entries);
+    }
 
     return (
         <InputModal
@@ -51,6 +60,7 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
             }}
             onCancel={() => handleOnCancel()}
         >
+            <CSVImporter<MSRunNew> converter={typeMap} onDataLoaded={onDataLoaded} />
             <EditableList<MSRunNew>
                 entries={samplesToProcess!}
                 columns={columns}

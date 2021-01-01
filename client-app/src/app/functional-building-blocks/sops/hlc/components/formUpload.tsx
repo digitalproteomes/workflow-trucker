@@ -54,7 +54,7 @@ export const FormUpload: FunctionComponent<Props> = ({ isActiveUploadForm, onUpl
 
     const inputs: JSX.Element[] = [
         InputHelper.createFormInput('Name', SOP.nameof('name'), placeholder, isRequired),
-        InputHelper.createFormInput('Description', SOP.nameof('description')),
+        InputHelper.createFormInput('Description', SOP.nameof('description'), placeholder, isRequired),
         InputHelper.createFormInput('Processing person', SOP.nameof('processingPerson'), placeholder, isRequired),
         InputHelper.createFormInput('Author', SOP.nameof('owner'), placeholder, isRequired),
         InputHelper.createFormInput('Revision', SOP.nameof('revision'), placeholder, isRequired),

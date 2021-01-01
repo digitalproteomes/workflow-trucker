@@ -94,7 +94,12 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
             onCreate={async (data: Store) => {
                 const template: MSRunNew = data as MSRunNew;
 
-                samplesToProcess.forEach((entry) => (entry.instrumentId = template.instrumentId));
+                samplesToProcess.forEach((entry) => {
+                    entry.instrumentId = template.instrumentId;
+                    entry.processingPerson = template.processingPerson;
+                    entry.SOPDDA = template.SOPDDA;
+                    entry.SOPDIA = template.SOPDIA;
+                });
 
                 onCreate(samplesToProcess!);
             }}

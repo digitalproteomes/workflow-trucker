@@ -36,6 +36,12 @@ export const List: FunctionComponent<ListProps> = ({ isRefreshNeeded, onRefreshD
                             <h3>Processing person</h3>
                             <span>{record.processingPerson}</span>
                             <Divider />
+                            <h3>Quality</h3>
+                            <span>{record.quality}</span>
+                            <Divider />
+                            <h3>Peptide number</h3>
+                            <span>{record.peptideNo}</span>
+                            <Divider />
                             <h3>Workflow tag</h3>
                             {getWorkflowTag(record.workflowTag)}
                         </Col>

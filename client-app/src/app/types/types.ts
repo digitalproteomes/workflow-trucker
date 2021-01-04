@@ -63,6 +63,10 @@ export class MSReadySample {
 
     id: string = '';
 
+    peptideNo: number = 0;
+
+    quality: string = '';
+
     intermediateSampleId: string = '';
 
     intermediateSampleName: string = '';

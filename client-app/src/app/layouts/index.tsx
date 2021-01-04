@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import app_logo from './assets/logo_white.png';
+import app_logo from './assets/logoPP_white.png';
 import { Layout, Menu, Avatar, Typography, Divider, Select } from 'antd';
 import {
     DashboardOutlined,
@@ -62,9 +62,9 @@ export const BasicLayout = withRouter((props) => {
                     alt="logo"
                     style={{
                         alignContent: 'center',
-                        marginLeft: '23px',
+                        marginLeft: '20px',
                         paddingTop: '14px',
-                        width: '110px',
+                        width: '160px',
                     }}
                 />
                 <Divider style={{ margin: 0 }} />

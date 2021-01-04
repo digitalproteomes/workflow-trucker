@@ -143,7 +143,15 @@ export const JourneyDiagram: FunctionComponent<Props> = ({ sampleId, onClose }) 
 
     //6) render the diagram!
     return (
-        <Modal width={1650} visible={true} centered onOk={() => onClose()} onCancel={() => onClose()}>
+        <Modal
+            title="Sample journey"
+            width={1650}
+            visible={true}
+            centered
+            onOk={() => onClose()}
+            onCancel={() => onClose()}
+        >
+            <CanvasWidget className="canvas" engine={engine} />
             <img
                 src={legend}
                 alt="legend"
@@ -154,7 +162,6 @@ export const JourneyDiagram: FunctionComponent<Props> = ({ sampleId, onClose }) 
                     width: '300px',
                 }}
             />
-            <CanvasWidget className="canvas" engine={engine} />
         </Modal>
     );
 };
@@ -202,11 +209,11 @@ class Constants {
     public static ArtefactColor: string = 'rgb(153,0,153)';
 
     public static NodeOffsetY: number = 70;
-    public static IntermediateOffsetX: number = 150;
-    public static MsReadyOffsetX: number = 450;
-    public static MsRunOffsetX: number = 750;
-    public static SwathOffsetX: number = 1050;
-    public static LibOffsetX: number = 1050;
-    public static OutMatrixOffsetX: number = 1350;
-    public static OutLibOffsetX: number = 1350;
+    public static IntermediateOffsetX: number = 350;
+    public static MsReadyOffsetX: number = 530;
+    public static MsRunOffsetX: number = 900;
+    public static SwathOffsetX: number = 1200;
+    public static LibOffsetX: number = 1350;
+    public static OutMatrixOffsetX: number = 1450;
+    public static OutLibOffsetX: number = 1550;
 }

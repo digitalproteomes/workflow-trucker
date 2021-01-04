@@ -6,15 +6,15 @@ import {
     UserOutlined,
     MonitorOutlined,
     ReadOutlined,
-    CoffeeOutlined,
+    SettingFilled,
     BarcodeOutlined,
     HeatMapOutlined,
     NotificationOutlined,
     StarOutlined,
     QuestionCircleOutlined,
-    SearchOutlined,
     ExperimentOutlined,
     UnorderedListOutlined,
+    HomeOutlined,
 } from '@ant-design/icons';
 
 import { Link, withRouter } from 'react-router-dom';
@@ -75,7 +75,7 @@ export const BasicLayout = withRouter((props) => {
                     selectedKeys={[selectedMenuEntry]}
                     defaultOpenKeys={[`${projectId}`, `/samples`]}
                 >
-                    <Menu.Item key={'/about'} icon={<CoffeeOutlined />}>
+                    <Menu.Item key={'/about'} icon={<HomeOutlined />}>
                         <Link to={`/about`}>Home</Link>
                     </Menu.Item>
                     {getSubmenu(projectId, projectName)}
@@ -97,7 +97,7 @@ export const BasicLayout = withRouter((props) => {
                                 </Option>
                             ))}
                         </Select>
-                        <SearchOutlined style={{ paddingRight: 8 }} />
+                        <SettingFilled style={{ paddingRight: 8 }} />
                         <StarOutlined style={{ paddingRight: 8 }} />
                         <QuestionCircleOutlined style={{ paddingRight: 8 }} />
                         <NotificationOutlined style={{ paddingRight: 32 }} />
@@ -110,7 +110,7 @@ export const BasicLayout = withRouter((props) => {
                         {props.children}
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Workflow Trucker ©2020 Created by PHRT - CPAC</Footer>
+                <Footer style={{ textAlign: 'center' }}>ProtoPile ©2020 Created by PHRT - CPAC</Footer>
             </Layout>
         </Layout>
     );
@@ -123,7 +123,7 @@ function getSubmenu(projectId: string, name: string) {
             icon={<ExperimentOutlined />}
             title={<Link to={`/projects?id=${projectId}`}>{name}</Link>}
         >
-            <Menu.Item key={`/projects`} icon={<MonitorOutlined />}>
+            <Menu.Item key={`/projects`} icon={<SettingFilled />}>
                 <Link to={`/projects?id=${projectId}`}>Administation</Link>
             </Menu.Item>
             <SubMenu key={`/samples`} title={'Samples'} icon={<BarcodeOutlined />}>
@@ -149,9 +149,9 @@ function getSubmenu(projectId: string, name: string) {
             <Menu.Item key={`/sops`} icon={<UnorderedListOutlined />}>
                 <Link to={`/sops?project=${projectId}`}>SOPs</Link>
             </Menu.Item>
-            <Menu.Item key={`/diagrams`} icon={<UnorderedListOutlined />}>
+            {/* <Menu.Item key={`/diagrams`} icon={<UnorderedListOutlined />}>
                 <Link to={`/diagrams?project=${projectId}`}>Diagrams</Link>
-            </Menu.Item>
+            </Menu.Item> */}
         </SubMenu>
     );
 }

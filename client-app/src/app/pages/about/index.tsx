@@ -4,7 +4,7 @@ import diagram from '../../layouts/assets/WFT_Flow_Landscape.png';
 export function AboutPage() {
     return (
         <div>
-            <PageHeader title="Welcome to the Workflow Tracker">
+            <PageHeader title="Welcome to ProtoPile">
                 <Divider />
                 <Space direction="vertical" size="middle">
                     <h3>The first Proteomics based Laboratory Information Management system that allows:</h3>

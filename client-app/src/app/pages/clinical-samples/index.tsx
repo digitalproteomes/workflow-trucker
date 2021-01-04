@@ -28,14 +28,14 @@ export const ClinicalSamples: FunctionComponent = () => {
     const renderActions = (record: ClinicalSample) => {
         return (
             <Space size="middle">
+                <ButtonProcessSample sample={record} />
+                <ButtonJourneyDiagram sampleId={record.id} />
                 <ButtonDelete
                     sample={record}
                     onDeleteDone={() => {
                         onDeleteDone(record);
                     }}
                 />
-                <ButtonProcessSample sample={record} />
-                <ButtonJourneyDiagram sampleId={record.id} />
             </Space>
         );
     };

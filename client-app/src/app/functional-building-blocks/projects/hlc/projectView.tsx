@@ -1,7 +1,7 @@
 import React from 'react';
 import { Project } from '../../../types';
 
-import { Descriptions } from 'antd';
+import { Descriptions, List } from 'antd';
 
 type ProjectViewProps = {
     project: Project;
@@ -11,14 +11,35 @@ export class ProjectView extends React.Component<ProjectViewProps, {}> {
     public render() {
         const project: Project = this.props.project;
         return (
-            <Descriptions title="Project details">
-                <Descriptions.Item label={'Name'}>{project.name}</Descriptions.Item>
-                <Descriptions.Item label={'Owner name'}>{project.ownerName}</Descriptions.Item>
-                <Descriptions.Item label={'Owner ORCID'}>{project.ownerORCID}</Descriptions.Item>
-                <Descriptions.Item label={'Id'}>{project.id}</Descriptions.Item>
-                <Descriptions.Item label={'Description'}>{project.description}</Descriptions.Item>
-                <Descriptions.Item label={'Is locked'}>{project.isLocked ? 'true' : 'false'}</Descriptions.Item>
-            </Descriptions>
+            <List>
+                <List.Item>
+                    <h3>Project details</h3>
+                </List.Item>
+                <List.Item>
+                    <b>Id: </b>
+                    {project.id}
+                </List.Item>
+                <List.Item>
+                    <b>Name: </b>
+                    {project.name}
+                </List.Item>
+                <List.Item>
+                    <b>Owner Name: </b>
+                    {project.ownerName}
+                </List.Item>
+                <List.Item>
+                    <b>Owner ORCID: </b>
+                    {project.ownerORCID}
+                </List.Item>
+                <List.Item>
+                    <b>Description: </b>
+                    {project.ownerORCID}
+                </List.Item>
+                <List.Item>
+                    <b>Is locked: </b>
+                    {project.isLocked ? 'true' : 'false'}
+                </List.Item>
+            </List>
         );
     }
 }

@@ -12,7 +12,9 @@ code {
 
 /* debt - added becauase of diagramming https://github.com/projectstorm/react-diagrams/issues/598#issuecomment-635924991 */
 .canvas {
-    height: 1000px;
+    height: 900px;
     width: 1550px;
-    background-color: rgb(60, 60, 60);
+    border: 1px;
+    border-color: #fff023;
+    background-color: rgba(112, 111, 111, 0.098);
 }

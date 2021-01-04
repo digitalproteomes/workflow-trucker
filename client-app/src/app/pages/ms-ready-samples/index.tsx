@@ -1,58 +1,48 @@
 import React, { useState, FunctionComponent } from 'react';
-import { List } from './components/list';
+import { List } from '../../functional-building-blocks/ms-ready';
 import { MSReadySample } from '../../types';
 import { Space, Button, Tooltip, PageHeader, Divider } from 'antd';
-import { ButtonExport } from '../../common/export';
+import { ButtonExportAll, ButtonExportSelected, Header } from '../../common';
 import { DownloadOutlined } from '@ant-design/icons';
-import { SampleNotifications } from '../../common/notifications';
+import { ListDataContext, Store, StoreContext } from '../../common';
+
+const ContextName = 'MsReadyDataContext';
+Store.addStore(ContextName, new ListDataContext<MSReadySample>());
 
 export const MSReadySamples: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const [, setSelectedSamples] = useState<MSReadySample[]>([]);
-
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
-    };
-
-    const onRowSelectionChange = (selectedRows: MSReadySample[]) => {
-        setSelectedSamples(selectedRows);
     };
 
     const renderActions = (record: MSReadySample) => {
         return (
             <Space size="middle">
                 <Button type="default" htmlType="button">
-                    Generate MS Run
+                    Generate MS Run - {record.name}
                 </Button>
             </Space>
         );
     };
 
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
+    const exportHeaders: Header<MSReadySample>[] = [
+        { label: 'Id', key: MSReadySample.nameof('id') },
+        { label: 'Name', key: MSReadySample.nameof('name') },
+    ];
 
     return (
-        <>
+        <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="MS Ready Samples"></PageHeader>
-            <ButtonExport
-                onExportDone={() => {
-                    onExportDone();
-                }}
-            />
+            <ButtonExportAll<MSReadySample> title={'Export all from table'} headers={exportHeaders} />
+            <ButtonExportSelected<MSReadySample> title={'Export selected'} headers={exportHeaders} />
             <Tooltip title="Exports sample names to .tsv, to be inputed in the Mass Spec">
                 <Button type="primary" icon={<DownloadOutlined />} style={{ float: 'right', marginRight: 10 }}>
                     Export MS Runs running queue
                 </Button>
             </Tooltip>
             <Divider></Divider>
-            <List
-                isRefreshNeeded={isRefreshNeeded}
-                onRefreshDone={onRefreshDone}
-                renderActions={renderActions}
-                onRowSelectionChange={onRowSelectionChange}
-            />
-        </>
+            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
+        </StoreContext.Provider>
     );
 };

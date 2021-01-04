@@ -1,21 +1,13 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Button, PageHeader, Divider } from 'antd';
-import { SwathAnalysis } from '../../types';
 import { List } from './components/list';
-import { ButtonExport } from '../../common/export';
-import { SampleNotifications } from '../../common/notifications';
+import { ButtonExportSelected } from '../../common';
 
 export const SwathAnalysisPage: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const [, setSelectedSamples] = useState<SwathAnalysis[]>([]);
-
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
-    };
-
-    const onRowSelectionChange = (selectedRows: SwathAnalysis[]) => {
-        setSelectedSamples(selectedRows);
     };
 
     const renderActions = () => {
@@ -28,25 +20,13 @@ export const SwathAnalysisPage: FunctionComponent = () => {
         );
     };
 
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
-
     return (
         <>
             <PageHeader ghost={false} title="SWATH Analyses"></PageHeader>
-            <ButtonExport
-                onExportDone={() => {
-                    onExportDone();
-                }}
-            />
+            <ButtonExportSelected title="Export" />
+
             <Divider></Divider>
-            <List
-                isRefreshNeeded={isRefreshNeeded}
-                onRefreshDone={onRefreshDone}
-                renderActions={renderActions}
-                onRowSelectionChange={onRowSelectionChange}
-            />
+            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>
     );
 };

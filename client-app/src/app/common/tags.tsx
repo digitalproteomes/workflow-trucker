@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dictionary } from './utils';
+import { Dictionary } from './';
 import Tag, { TagProps } from 'antd/lib/tag';
 import { CheckCircleOutlined, SyncOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import { EWorkflowTag, EProtocolTag, ESOPType } from '../types';

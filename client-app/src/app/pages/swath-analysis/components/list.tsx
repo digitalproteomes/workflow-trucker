@@ -15,21 +15,14 @@ type ListProps = {
     isRefreshNeeded: boolean;
     onRefreshDone: () => void;
     renderActions?: (sample: SwathAnalysis) => JSX.Element;
-    onRowSelectionChange?: (selectedSamples: SwathAnalysis[]) => void;
 };
 
-export const List: FunctionComponent<ListProps> = ({
-    isRefreshNeeded,
-    onRefreshDone,
-    renderActions,
-    onRowSelectionChange,
-}) => {
+export const List: FunctionComponent<ListProps> = ({ isRefreshNeeded, onRefreshDone, renderActions }) => {
     return (
         <CommonList<SwathAnalysis>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
-            onRowSelectionChange={onRowSelectionChange}
             fetchEntries={() => Api.getSwathAnalysisAsync(Constants.projectId)}
             rowKeySelector={(row: SwathAnalysis) => row.id}
             columns={defaultColumns}

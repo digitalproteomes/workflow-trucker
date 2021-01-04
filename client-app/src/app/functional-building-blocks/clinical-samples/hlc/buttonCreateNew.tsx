@@ -7,7 +7,7 @@ import { ClinicalSample } from '../../../types';
 
 type ButtonCreateNewProps = {
     setRefreshNeededFlag: React.Dispatch<React.SetStateAction<boolean>>;
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 export const ButtonCreateNew: FunctionComponent<ButtonCreateNewProps> = ({ setRefreshNeededFlag, style }) => {

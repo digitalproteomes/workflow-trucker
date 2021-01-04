@@ -1,13 +1,14 @@
-import React, { FunctionComponent, useState } from 'react';
-import { Form, Modal, Typography } from 'antd';
+import React, { FunctionComponent, useEffect, useState } from 'react';
+import { Col, Form, Modal, Row, Typography } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import { Notifications } from './notifications';
 import { Store } from 'antd/lib/form/interface';
 import { FormLayoutConstants } from './constants';
+import { ModalProps } from 'antd/lib/modal';
 
 const { Text } = Typography;
 
-type ModalProps = {
+type Props = {
     isVisible: boolean;
     title: string;
     inputs: JSX.Element[];
@@ -16,9 +17,12 @@ type ModalProps = {
     onCancel: () => void;
     placeholder?: any;
     onValuesChange?: (values: Store) => void;
+    getExistingValues?: () => any;
+    buttonConfirmText?: string;
+    styleModal?: ModalProps;
 };
 
-export const InputModal: FunctionComponent<ModalProps> = ({
+export const InputModal: FunctionComponent<Props> = ({
     isVisible,
     title,
     inputs,
@@ -27,10 +31,18 @@ export const InputModal: FunctionComponent<ModalProps> = ({
     onCancel,
     placeholder,
     onValuesChange,
+    getExistingValues,
+    buttonConfirmText,
+    styleModal,
     children,
 }) => {
     const [form] = Form.useForm();
     const [isSaving, setSavingFlag] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (getExistingValues !== undefined) form.setFieldsValue(getExistingValues());
+        console.log('form set data');
+    }, [getExistingValues, form]);
 
     const onCreateWrapper = async (sample: Store) => {
         setSavingFlag(true);
@@ -42,20 +54,40 @@ export const InputModal: FunctionComponent<ModalProps> = ({
         console.log('set saving flag', false);
     };
 
+    let modalContent: JSX.Element = getInputForm(
+        title,
+        form,
+        inputs,
+        errorMessage,
+        onCreateWrapper,
+        placeholder,
+        onValuesChange,
+    );
+
+    if (styleModal !== undefined) {
+        modalContent = (
+            <Row>
+                <Col span={12}>{modalContent}</Col>
+                <Col span={12} />
+            </Row>
+        );
+    }
+
     return (
         <Modal
             visible={isVisible}
             width={'30%'}
             title={title}
-            okText="Create"
+            okText={buttonConfirmText === null ? 'Create' : buttonConfirmText}
             okButtonProps={{ loading: isSaving }}
             cancelText="Cancel"
             onCancel={onCancel}
             onOk={() => {
                 form.submit();
             }}
+            {...styleModal} // this may override the default values set above
         >
-            {getInputForm(title, form, inputs, errorMessage, onCreateWrapper, placeholder, onValuesChange)}
+            {modalContent}
             {children}
         </Modal>
     );

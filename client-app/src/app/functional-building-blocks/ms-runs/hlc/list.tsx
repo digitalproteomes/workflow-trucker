@@ -1,34 +1,27 @@
 import React, { FunctionComponent } from 'react';
 import { MsRun } from '../../../types';
 import { CommonList } from '../../../common/list';
-import { Api } from '../api';
 import { Constants } from '../../../default-data/constants';
 import { getColumn } from '../../../common/columnHelpers';
 import { ColumnsType } from 'antd/lib/table';
 import { formatDate } from '../../../common/utils';
 import { getWorkflowTag } from '../../../common/tags';
 import { Button, Row, Col, Divider } from 'antd';
-import { ListCompactClinicalSamples } from '../../../functional-building-blocks/clinical-samples';
+import { ListCompactClinicalSamples } from '../../clinical-samples';
+import { Api } from '../api';
 
 type ListProps = {
     isRefreshNeeded: boolean;
     onRefreshDone: () => void;
     renderActions?: (sample: MsRun) => JSX.Element;
-    onRowSelectionChange?: (selectedSamples: MsRun[]) => void;
 };
 
-export const List: FunctionComponent<ListProps> = ({
-    isRefreshNeeded,
-    onRefreshDone,
-    renderActions,
-    onRowSelectionChange,
-}) => {
+export const List: FunctionComponent<ListProps> = ({ isRefreshNeeded, onRefreshDone, renderActions }) => {
     return (
         <CommonList<MsRun>
             isRefreshNeeded={isRefreshNeeded}
             onRefreshDone={onRefreshDone}
             renderActions={renderActions}
-            onRowSelectionChange={onRowSelectionChange}
             fetchEntries={() => Api.getMsRunsAsync(Constants.projectId)}
             rowKeySelector={(row: MsRun) => row.id}
             columns={defaultColumns}

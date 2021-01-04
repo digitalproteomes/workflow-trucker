@@ -5,18 +5,11 @@ import { JourneyDiagram } from './components/journeyDiagram';
 
 type Props = {
     sampleId: string;
-    style?: React.CSSProperties | undefined;
+    style?: React.CSSProperties;
 };
 
 export const ButtonJourneyDiagram: FunctionComponent<Props> = ({ sampleId, style }) => {
     const [sourceSampleId, setSourceSampleId] = useState<string | null>(null);
-
-    const diagram =
-        sourceSampleId === null ? (
-            <></>
-        ) : (
-            <JourneyDiagram sampleId={sourceSampleId} onClose={() => setSourceSampleId(null)} />
-        );
 
     return (
         <>
@@ -27,10 +20,10 @@ export const ButtonJourneyDiagram: FunctionComponent<Props> = ({ sampleId, style
                     onClick={() => setSourceSampleId(sampleId)}
                     style={style}
                 >
-                    Process
+                    Journey
                 </Button>
             </Tooltip>
-            {diagram}
+            {sourceSampleId && <JourneyDiagram sampleId={sourceSampleId} onClose={() => setSourceSampleId(null)} />}
         </>
     );
 };

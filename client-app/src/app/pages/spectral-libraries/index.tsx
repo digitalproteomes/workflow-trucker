@@ -1,26 +1,14 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Button, PageHeader, Divider } from 'antd';
-import { SpectralLibrary } from '../../types';
 import { List } from './components/list';
-import { ButtonExport } from '../../common/export';
-import { SampleNotifications } from '../../common/notifications';
+import { ButtonExportSelected } from '../../common';
 
 export const SpectralLibrariesPage: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-    const [, setSelectedSamples] = useState<SpectralLibrary[]>([]);
-
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
     };
-
-    const onRowSelectionChange = (selectedRows: SpectralLibrary[]) => {
-        setSelectedSamples(selectedRows);
-    };
-
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
 
     const renderActions = () => {
         return (
@@ -35,18 +23,10 @@ export const SpectralLibrariesPage: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="Spectral Libraries"></PageHeader>
-            <ButtonExport
-                onExportDone={() => {
-                    onExportDone();
-                }}
-            />
+            <ButtonExportSelected title="Export" />
+
             <Divider></Divider>
-            <List
-                isRefreshNeeded={isRefreshNeeded}
-                onRefreshDone={onRefreshDone}
-                renderActions={renderActions}
-                onRowSelectionChange={onRowSelectionChange}
-            />
+            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
         </>
     );
 };

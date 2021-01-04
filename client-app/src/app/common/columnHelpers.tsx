@@ -1,6 +1,7 @@
 import { ColumnType } from 'antd/lib/table';
 import { getAllFilterProps } from './listBaseFiltering';
 
+// todo - refactor - do the same with the column helpers as done with the inputhelpers
 export function getColumn<T>(
     label: string,
     name: keyof T,
@@ -42,4 +43,14 @@ export function getEditableColumn<T>(
     if (render) column.render = (_value, record, _index) => render(record);
 
     return column;
+}
+
+export function getActionsColumn<T>(renderActions: (record: T) => JSX.Element): ColumnType<T> {
+    return {
+        title: 'Action',
+        key: 'action',
+        render: (_value: any, record: T, _index: number) => {
+            return renderActions(record);
+        },
+    };
 }

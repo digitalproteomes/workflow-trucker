@@ -124,7 +124,7 @@ function getSubmenu(projectId: string, name: string) {
             title={<Link to={`/projects?id=${projectId}`}>{name}</Link>}
         >
             <Menu.Item key={`/projects`} icon={<MonitorOutlined />}>
-                <Link to={`/projects?id=${projectId}`}>Project overview</Link>
+                <Link to={`/projects?id=${projectId}`}>Administation</Link>
             </Menu.Item>
             <SubMenu key={`/samples`} title={'Samples'} icon={<BarcodeOutlined />}>
                 <Menu.Item key={`/samples/clinical`}>

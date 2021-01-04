@@ -1,15 +1,18 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
 import { ClinicalSample } from '../../types';
-import { ButtonExport } from '../../common/export';
+import { ButtonExportSelected } from '../../common';
 import { SampleNotifications } from '../../common/notifications';
 import { List, ButtonCreateNew, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonAutoGenerate } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonProcessSample, ButtonProcessSampleBulk } from '../../functional-building-blocks/intermediate-samples';
 import { ButtonJourneyDiagram } from '../../functional-building-blocks/diagrams';
+import { ListDataContext, Store, StoreContext } from '../../common';
+
+const ContextName = 'ClinicalSampleDataContext';
+Store.addStore(ContextName, new ListDataContext<ClinicalSample>());
 
 export const ClinicalSamples: FunctionComponent = () => {
-    const [selectedSamples, setSelectedSamples] = useState<ClinicalSample[]>([]);
     // debt - the setRefreshNeededFlag callback approach should be replaced with a "onSuccess" callback. The low leve component should not influence directly the state of a high level component
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
@@ -21,14 +24,6 @@ export const ClinicalSamples: FunctionComponent = () => {
         setRefreshNeededFlag(true);
         SampleNotifications.queueDeleteSuccess(sample.name);
     }
-
-    function onExportDone() {
-        SampleNotifications.queueExportSuccess();
-    }
-
-    const onRowSelectionChange = (selectedRows: ClinicalSample[]) => {
-        setSelectedSamples(selectedRows);
-    };
 
     const renderActions = (record: ClinicalSample) => {
         return (
@@ -46,20 +41,16 @@ export const ClinicalSamples: FunctionComponent = () => {
     };
 
     return (
-        <>
+        <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="Clinical Samples">
-                <ButtonExport
-                    onExportDone={() => {
-                        onExportDone();
-                    }}
-                />
+                <ButtonExportSelected<ClinicalSample> title={'Export'} />
 
                 <ButtonCreateNew
                     setRefreshNeededFlag={setRefreshNeededFlag}
                     style={{ float: 'right', marginRight: 10 }}
                 />
 
-                <ButtonProcessSampleBulk samples={selectedSamples} style={{ float: 'right', marginRight: 16 }} />
+                <ButtonProcessSampleBulk style={{ float: 'right', marginRight: 16 }} />
 
                 <ButtonAutoGenerate
                     setRefreshNeededFlag={setRefreshNeededFlag}
@@ -68,12 +59,7 @@ export const ClinicalSamples: FunctionComponent = () => {
             </PageHeader>
             <Divider></Divider>
 
-            <List
-                isRefreshNeeded={isRefreshNeeded}
-                onRefreshDone={onRefreshDone}
-                renderActions={renderActions}
-                onRowSelectionChange={onRowSelectionChange}
-            />
-        </>
+            <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />
+        </StoreContext.Provider>
     );
 };

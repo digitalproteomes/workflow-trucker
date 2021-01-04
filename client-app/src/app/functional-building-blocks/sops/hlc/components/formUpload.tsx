@@ -5,10 +5,9 @@ import { Api } from '../../api';
 import { UploadProps } from 'antd/lib/upload';
 import { Store } from 'rc-field-form/lib/interface';
 import { Constants } from '../../../../default-data/constants';
-import { createFormInput, createSOPFormSelect } from '../../../../common/inputModalHelpers';
 
 import { RcFile } from 'antd/lib/upload/interface';
-import { InputModal } from '../../../../common/inputModal';
+import { InputModal, InputHelper } from '../../../../common';
 import { SOP, ESOPType } from '../../../../types';
 
 type Props = {
@@ -18,6 +17,7 @@ type Props = {
 };
 
 export const FormUpload: FunctionComponent<Props> = ({ isActiveUploadForm, onUploadSuccessful, onCancel }) => {
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [file, setFile] = useState<RcFile | null>(null);
 
     const uploadProps: UploadProps = {
@@ -27,13 +27,14 @@ export const FormUpload: FunctionComponent<Props> = ({ isActiveUploadForm, onUpl
         },
         beforeUpload: (selectedFile: RcFile, _: RcFile[]) => {
             setFile(selectedFile);
+            setErrorMessage(null);
             return false;
         },
     };
 
     const handleUpload = async (sopData: SOP) => {
         if (file === null) {
-            // wait: set error message
+            setErrorMessage('An SOP must be attached');
             return;
         }
 
@@ -44,21 +45,25 @@ export const FormUpload: FunctionComponent<Props> = ({ isActiveUploadForm, onUpl
 
             onUploadSuccessful();
         } catch (error) {
-            // wait: set the error message? in case the upload fails, nothing is shown on the UI at the moment
+            setErrorMessage(error.message);
         }
     };
 
+    const placeholder = undefined;
+    const isRequired = true;
+
     const inputs: JSX.Element[] = [
-        createFormInput('Name', SOP.nameof('name')),
-        createFormInput('Description', SOP.nameof('description')),
-        createFormInput('Processing person', SOP.nameof('processingPerson')),
-        createFormInput('Author', SOP.nameof('owner')),
-        createFormInput('Revision', SOP.nameof('revision')),
-        createSOPFormSelect('SOP Type', SOP.nameof('artefactClass'), [
-            ESOPType.sampleSOP,
-            ESOPType.msRunSOP,
-            ESOPType.dataSOP,
-        ]),
+        InputHelper.createFormInput('Name', SOP.nameof('name'), placeholder, isRequired),
+        InputHelper.createFormInput('Description', SOP.nameof('description'), placeholder, isRequired),
+        InputHelper.createFormInput('Processing person', SOP.nameof('processingPerson'), placeholder, isRequired),
+        InputHelper.createFormInput('Author', SOP.nameof('owner'), placeholder, isRequired),
+        InputHelper.createFormInput('Revision', SOP.nameof('revision'), placeholder, isRequired),
+        InputHelper.createSOPTypeFormSelect(
+            'SOP Type',
+            SOP.nameof('artefactClass'),
+            [ESOPType.sampleSOP, ESOPType.msRunSOP, ESOPType.dataSOP],
+            isRequired,
+        ),
     ];
 
     return (
@@ -70,7 +75,7 @@ export const FormUpload: FunctionComponent<Props> = ({ isActiveUploadForm, onUpl
                 handleUpload(data as SOP);
             }}
             onCancel={onCancel}
-            errorMessage={null}
+            errorMessage={errorMessage}
         >
             <Upload {...uploadProps}>
                 <Button icon={<UploadOutlined />} style={{ float: 'right' }}>

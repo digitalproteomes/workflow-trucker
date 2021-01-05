@@ -33,10 +33,10 @@ export const IntermediateSamples: FunctionComponent = () => {
         <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="Intermediate Samples">
                 <ButtonProcessFromIntermediateBulk
-                    title={'Create MS Ready Sample'}
+                    title={'Create MS Ready Samples'}
                     style={{ float: 'right', marginRight: 10 }}
                 />
-                <ButtonExportSelected title="Export" />
+                <ButtonExportSelected title="Export table" />
                 <Tooltip title="Add to pooling preparation">
                     <Button type="primary" icon={<PlusCircleOutlined />} style={{ float: 'right', marginRight: 10 }}>
                         Add to pooling preparation

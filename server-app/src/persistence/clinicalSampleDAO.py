@@ -67,4 +67,7 @@ def augmentClinicalSampleNames(sampleIds):
 def getMaxCounter(projectId):
     sample = ClinicalSample.find_one({"projectId": ObjectId(projectId)}, sort=[
         ("sampleCounter", pymongo.DESCENDING)])
-    return sample
+    if sample != None:
+        return sample.dump()['sampleCounter']
+    else:
+        return 0

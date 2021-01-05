@@ -38,7 +38,7 @@ export const SOPPage: FunctionComponent = () => {
             <Space style={{ float: 'right' }} direction="horizontal">
                 <ButtonUploadSOP setRefreshNeededFlag={setRefreshNeededFlag} />
 
-                <ButtonExportSelected title="Export" />
+                <ButtonExportSelected title="Export table" />
             </Space>
             <Divider />
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />

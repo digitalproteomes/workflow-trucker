@@ -8,6 +8,7 @@ export class Constants {
     public static activeProject: Project = Project.default;
 
     public static projectId: string = '';
+    public static displayProjectId: string = '';
     public static projectName: string = '';
 
     public static personId: string = '';
@@ -23,10 +24,11 @@ export class Constants {
         this.activeProject = newActiveProject;
 
         this.projectId = this.activeProject.id;
+        this.displayProjectId = this.activeProject.projectId;
         this.projectName = this.activeProject.name;
 
-        // plan - get the currently logged in user id
-        this.personId = 'current person id';
+        // todo - wait - plan- get the currently logged in user id
+        this.personId = 'silalbert';
         this.personName = this.activeProject.ownerName;
     }
 }

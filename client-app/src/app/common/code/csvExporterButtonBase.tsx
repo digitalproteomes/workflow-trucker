@@ -52,8 +52,8 @@ export class ButtonExportBase<T> extends React.Component<Props<T>, State<T>> {
         });
 
         return (
-            <Tooltip title="Download the current table data through a file">
-                <Button type={'default'} onClick={this.fetchData}>
+            <Tooltip title="Download the current selection">
+                <Button type={'primary'} onClick={this.fetchData} style={{ float: 'right', marginRight: 10 }}>
                     <CSVLink
                         data={this.state.data}
                         className="hidden"

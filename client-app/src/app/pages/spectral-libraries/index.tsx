@@ -23,7 +23,7 @@ export const SpectralLibrariesPage: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="Spectral Libraries"></PageHeader>
-            <ButtonExportSelected title="Export" />
+            <ButtonExportSelected title="Export table" />
 
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />

@@ -6,7 +6,6 @@ import { List, ButtonImportMsRuns } from '../../functional-building-blocks/ms-ru
 export const MsRuns: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
 
-
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
     };
@@ -28,7 +27,7 @@ export const MsRuns: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
-            <ButtonExportSelected title="Export" />
+            <ButtonExportSelected title="Export table" />
             <ButtonImportMsRuns style={{ float: 'right', marginRight: 10 }} />
             <Tooltip title="Bulk Generate SWATH Analysis">
                 <Button type="primary" style={{ float: 'right', marginRight: 10 }}>

@@ -17,16 +17,16 @@ export const ButtonAutoGenerate: FunctionComponent<Props> = ({ setRefreshNeededF
         setRefreshNeededFlag,
     );
 
+    const form = isActiveAutoGenerate ? (
+        <AutoGenerateInputForm onCreateSuccessful={onAutoGenerateSuccessful} onCancel={onAutoGenerateCancel} />
+    ) : undefined;
+
     return (
         <>
             <Button type="primary" icon={<PlusOutlined />} onClick={onAutoGenerateButtonClick} style={style}>
                 Bulk create clinical samples
             </Button>
-            <AutoGenerateInputForm
-                isActiveInputForm={isActiveAutoGenerate}
-                onCreateSuccessful={onAutoGenerateSuccessful}
-                onCancel={onAutoGenerateCancel}
-            />
+            {form}
         </>
     );
 

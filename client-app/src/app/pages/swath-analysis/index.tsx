@@ -23,7 +23,7 @@ export const SwathAnalysisPage: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="SWATH Analyses"></PageHeader>
-            <ButtonExportSelected title="Export" />
+            <ButtonExportSelected title="Export table" />
 
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />

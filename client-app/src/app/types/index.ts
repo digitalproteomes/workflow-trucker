@@ -1,6 +1,6 @@
 import { Project } from './project';
 
-import { ClinicalSample, ClinicalSampleNew, ClinicalSampleCompact } from './clinicalSample';
+import { ClinicalSample, ClinicalSampleNew, ClinicalSampleCompact, MaxCounter } from './clinicalSample';
 
 import { Link, SampleJourney } from './diagrams';
 
@@ -14,7 +14,7 @@ import { SwathAnalysis, SpectralLibrary, SOP, GenerationData } from './types';
 
 export { Project };
 
-export { ClinicalSample, ClinicalSampleNew, ClinicalSampleCompact };
+export { ClinicalSample, ClinicalSampleNew, ClinicalSampleCompact, MaxCounter };
 
 export { Link, SampleJourney };
 

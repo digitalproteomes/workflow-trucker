@@ -43,12 +43,12 @@ export const ClinicalSamples: FunctionComponent = () => {
     return (
         <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="Clinical Samples">
-                <ButtonExportSelected<ClinicalSample> title={'Export'} />
+                <ButtonExportSelected<ClinicalSample> title={'Export table'} />
 
-                <ButtonCreateNew
+                {/* <ButtonCreateNew
                     setRefreshNeededFlag={setRefreshNeededFlag}
                     style={{ float: 'right', marginRight: 10 }}
-                />
+                /> */}
 
                 <ButtonProcessSampleBulk style={{ float: 'right', marginRight: 16 }} />
 

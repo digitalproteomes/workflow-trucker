@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageHeader, Divider, Timeline, Space } from 'antd';
-import diagram from '../../layouts/assets/WFT_Flow_Landscape.png';
+import diagram from '../../layouts/assets/journey.png';
 export function AboutPage() {
     return (
         <div>
@@ -16,11 +16,15 @@ export function AboutPage() {
                             Creating connections between MS runs and computational analysis
                         </Timeline.Item>
                     </Timeline>
+                    <h2>
+                        Bellow there is one potential timeline of interacting with the system in ca clinical proteomics
+                        setting/
+                    </h2>
                 </Space>
             </PageHeader>
             <img
                 src={diagram}
-                alt="Flow diagram"
+                alt="Protopile journey"
                 style={{
                     alignContent: 'center',
                     marginLeft: '23px',

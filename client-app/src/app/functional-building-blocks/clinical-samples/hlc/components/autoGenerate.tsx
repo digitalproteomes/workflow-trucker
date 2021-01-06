@@ -116,10 +116,10 @@ function autoGenerateSamples(templateData: GenerationData): ClinicalSampleNew[] 
     const projectId = Constants.projectId;
     const personId = Constants.personId;
 
-    let index = 1;
+    let index = 0;
 
     while (index < numberOfEntries) {
-        const id = index + templateData.idSeed;
+        const id = index + templateData.idSeed + 1;
 
         samples[index] = {
             projectId: Constants.projectId,

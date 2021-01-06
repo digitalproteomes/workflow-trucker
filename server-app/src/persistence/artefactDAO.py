@@ -39,3 +39,7 @@ def deleteSOP(id):
 
 def getArtefactByFilename(artefactName):
     return Artefact.find_one({"sopFileName": artefactName})
+
+
+def getArtefactById(id):
+    return Artefact.find_one({"id": ObjectId(id)}).dump()

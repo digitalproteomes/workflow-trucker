@@ -8,6 +8,7 @@ from persistence import clinicalSampleDAO
 from persistence import intermediateSampleDAO
 from persistence import msReadySamplesDAO
 from persistence import projectDAO
+from persistence import artefactDAO
 
 
 sample_api = Blueprint('sample_api', __name__)
@@ -151,11 +152,17 @@ def createSinglePrepSamples():
         clinicalSample = clinicalSampleDAO.getClinicalSampleById(
             ObjectId(i['clinicalSampleId']))
         is_name = "IS_" + str(clinicalSample['name'])
+        sop = artefactDAO.getArtefactById(i['sopId'])
+        if sop != None:
+            sop_name = sop['name']
+        else:
+            sop_name = "NA"
         new_sample = {
             "clinicalSamples": [i['clinicalSampleId']],
             "name": is_name,
             "projectId": clinicalSample['projectId'],
             "processingPerson": i['processingPerson'],
+            "sopFileName": sop_name,
             "description": i['description'],
             "workflowTag": i['workflowTag'],
             "protocolName": "single_preparation",

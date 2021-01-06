@@ -56,6 +56,7 @@ const defaultColumns: ColumnsType<MsRun> = [
     getColumn('Name', MsRun.nameof('name')),
     getColumn('Id', MsRun.nameof('id')),
     getColumn('Instrument', MsRun.nameof('instrumentId')),
+    getColumn('SOP', MsRun.nameof('sopFileName')),
     getColumn('MS Ready sample', MsRun.nameof('msReadySampleName'), (record: MsRun) => (
         <Button type="link">{record.msReadySampleName}</Button>
     )),

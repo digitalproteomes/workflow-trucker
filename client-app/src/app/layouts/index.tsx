@@ -21,6 +21,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { CollapseType } from 'antd/lib/layout/Sider';
 import { Constants } from '../default-data/constants';
 import { Project } from '../types';
+import { LabelModel } from '@projectstorm/react-diagrams';
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider, Header } = Layout;
@@ -84,12 +85,13 @@ export const BasicLayout = withRouter((props) => {
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
                     <div style={{ float: 'right', alignContent: 'horizontal' }}>
+                        <Text style={{ paddingRight: 16, paddingLeft: 4 }}>Select current project:</Text>
                         <Select
                             defaultValue={activeProject.id}
                             onChange={(projectId: string) => {
                                 resetActiveProject(projects.filter((p) => p.id === projectId)[0]);
                             }}
-                            style={{ width: 260 }}
+                            style={{ width: 260, paddingRight: 16 }}
                         >
                             {projects.map((project) => (
                                 <Option key={project.id} value={project.id}>

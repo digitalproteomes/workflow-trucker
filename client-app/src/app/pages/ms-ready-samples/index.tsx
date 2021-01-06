@@ -37,7 +37,7 @@ export const MSReadySamples: FunctionComponent = () => {
         <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="MS Ready Samples"></PageHeader>
 
-            <ButtonExportAll<MSReadySample> title={'Export all from table'} headers={exportHeaders} />
+            <ButtonExportSelected<MSReadySample> title={'Export all from table'} />
 
             <Tooltip title="Exports sample names to .csv, to be inputed in the Mass Spec">
                 <ButtonExportSelected<MSReadySample>

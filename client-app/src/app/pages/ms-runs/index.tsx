@@ -28,7 +28,7 @@ export const MsRuns: FunctionComponent = () => {
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
             <ButtonExportSelected title="Export table" />
-            <ButtonImportMsRuns style={{ float: 'right', marginRight: 10 }} />
+
             <Tooltip title="Bulk Generate SWATH Analysis">
                 <Button type="primary" style={{ float: 'right', marginRight: 10 }}>
                     Generate SWATH Analysis
@@ -39,6 +39,7 @@ export const MsRuns: FunctionComponent = () => {
                     Generate Spectral Library
                 </Button>
             </Tooltip>
+            <ButtonImportMsRuns style={{ float: 'right', marginRight: 10 }} />
             <Divider />
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />

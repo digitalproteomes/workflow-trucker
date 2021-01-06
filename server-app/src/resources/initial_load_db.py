@@ -109,7 +109,7 @@ def insertMelanomaJourney(projectId):
         "runId": 1,
         "clinicalSamples": msr1['clinicalSamples'],
         "msReadySampleId": msr1['id'],
-        "name": "salbert__A1902_012",
+        "name": "PHRT_6_salbert_A1902_012",
         "projectId": projectId,
         "protocolId": "DIA",
         "instrumentId": "MS:1002523",
@@ -125,7 +125,7 @@ def insertMelanomaJourney(projectId):
         "runId": 2,
         "clinicalSamples": msr2['clinicalSamples'],
         "msReadySampleId": msr2['id'],
-        "name": "salbert__A1902_045",
+        "name": "PHRT_6_salbert_A1902_045",
         "projectId": projectId,
         "protocolId": "DIA",
         "instrumentId": "MS:1002523",
@@ -241,7 +241,7 @@ def insertLibGenMSRuns(projectId):
                     "runId": run_counter,
                     "clinicalSamples": msr['clinicalSamples'],
                     "msReadySampleId": msr['id'],
-                    "name": "sgoetze_C1902_0"+str(name_counter),
+                    "name": "PHRT_5_sgoetze_C1902_0"+str(name_counter),
                     "projectId": projectId,
                     "protocolId": "DDA_protocol",
                     "instrumentId": "MS:1002877",
@@ -440,7 +440,7 @@ if __name__ == '__main__':
 
     new_project = {
         "projectId": "5",
-        "name": "CPAC",
+        "name": "PHRT_005_CPAC",
         "ownerName": "Patrick Pedrioli",
         "ownerORCID": "0000-0001-6719-9139",
         "description": "MMA Project",
@@ -455,7 +455,7 @@ if __name__ == '__main__':
 
     new_project = {
         "projectId": "6",
-        "name": "Melanoma",
+        "name": "PHRT_006_CPAC",
         "ownerName": "Silvana Albert",
         "ownerORCID": "0000-0001-3244-3453",
         "description": "Melanoma Project",

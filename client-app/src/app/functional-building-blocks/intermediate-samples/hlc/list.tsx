@@ -37,6 +37,7 @@ export const List: FunctionComponent<Props> = ({ isRefreshNeeded, onRefreshDone,
 const defaultColumns: ColumnsType<IntermediateSample> = [
     getColumn('Name', IntermediateSample.nameof('name')),
     getColumn('Id', IntermediateSample.nameof('id')),
+    getColumn('SOP', IntermediateSample.nameof('sopFileName')),
     getColumn('Protocol', IntermediateSample.nameof('protocolName'), (record: IntermediateSample) =>
         getProtocolTag(record.protocolName),
     ),

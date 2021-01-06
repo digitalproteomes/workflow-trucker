@@ -41,6 +41,8 @@ export class IntermediateSample {
 
     name: string = '';
 
+    sopFileName: string = ''
+
     processingPerson: string = '';
 
     projectId: string = '';
@@ -118,6 +120,8 @@ export class MsRun {
     msReadySampleId: string = '';
 
     msReadySampleName: string = '';
+
+    sopFileName: string = '';
 
     name: string = '';
 
@@ -288,7 +292,7 @@ export class GenerationData {
         suffixProject: 'CPAC',
         description: 'Zurich Hospital sample',
         workflowTag: EWorkflowTag.LibraryGeneration.toString(),
-        numberOfEntries: 3,
+        numberOfEntries: 1,
         idSeed: 0,
     };
 }

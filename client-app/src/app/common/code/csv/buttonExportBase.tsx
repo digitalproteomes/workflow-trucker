@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Tooltip } from 'antd';
 import { CSVLink } from 'react-csv';
-import { ListDataContext, Store } from '..';
-import { Header } from './csvExporterButton';
-import { StoreContext } from './datastore'; // by importing it directly from here, instead of importing it from index.ts, will avoid throwing an undefined exception because of named/default module export
+import { ListDataContext, Store } from '../..';
+import { Header } from "./types";
+import { StoreContext } from '../datastore'; // by importing it directly from here, instead of importing it from index.ts, will avoid throwing an undefined exception because of named/default module export
 
 type Props<T> = {
     title: string;

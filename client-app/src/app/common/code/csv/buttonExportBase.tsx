@@ -2,13 +2,15 @@ import React from 'react';
 import { Button, Tooltip } from 'antd';
 import { CSVLink } from 'react-csv';
 import { ListDataContext, Store } from '../..';
-import { Header } from "./types";
+import { Header } from './types';
 import { StoreContext } from '../datastore'; // by importing it directly from here, instead of importing it from index.ts, will avoid throwing an undefined exception because of named/default module export
 
 type Props<T> = {
     title: string;
     headers?: Header<T>[];
     fetchData: (store: ListDataContext<T>) => T[];
+
+    filename?: string;
 };
 
 type State<T> = { data: T[] };
@@ -60,6 +62,7 @@ export class ButtonExportBase<T> extends React.Component<Props<T>, State<T>> {
                         ref={(r: any) => (this.csvLink = r)}
                         target="_blank"
                         headers={convertedHeaders}
+                        filename={this.props.filename}
                     >
                         {this.props.title}
                     </CSVLink>

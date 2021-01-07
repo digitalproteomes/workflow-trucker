@@ -22,16 +22,16 @@ export const ButtonUploadSOP: FunctionComponent<Props> = ({ setRefreshNeededFlag
         setActiveUploadFlag(false);
     };
 
+    const form = isActiveUpload ? (
+        <FormUpload onUploadSuccessful={onUploadSuccessful} onCancel={onUploadCancel} />
+    ) : undefined;
+
     return (
         <>
             <Button type="primary" icon={<UploadOutlined />} onClick={() => setActiveUploadFlag(true)} style={style}>
                 Upload SOP
             </Button>
-            <FormUpload
-                isActiveUploadForm={isActiveUpload}
-                onUploadSuccessful={onUploadSuccessful}
-                onCancel={onUploadCancel}
-            />
+            {form}
         </>
     );
 };

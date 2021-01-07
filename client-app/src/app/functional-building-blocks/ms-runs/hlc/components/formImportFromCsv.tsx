@@ -21,13 +21,13 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     const [samplesToProcess, setSamplesToProcess] = useState<MSRunNew[]>([]);
     const [sops, setSops] = useState<SOP[] | null>(null);
 
-    async function executeFetch() {
-        const receivedSops = await Api.getSOPsAsync(Constants.projectId);
-
-        setSops(receivedSops);
-    }
-
     useEffect(() => {
+        async function executeFetch() {
+            const receivedSops = await Api.getSOPsAsync(Constants.projectId);
+
+            setSops(receivedSops);
+        }
+
         if (sops == null) {
             executeFetch();
         }

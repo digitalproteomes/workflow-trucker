@@ -11,12 +11,11 @@ import { InputModal, InputHelper } from '../../../../common';
 import { SOP, ESOPType } from '../../../../types';
 
 type Props = {
-    isActiveUploadForm: boolean;
     onUploadSuccessful: () => void;
     onCancel: () => void;
 };
 
-export const FormUpload: FunctionComponent<Props> = ({ isActiveUploadForm, onUploadSuccessful, onCancel }) => {
+export const FormUpload: FunctionComponent<Props> = ({ onUploadSuccessful, onCancel }) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [file, setFile] = useState<RcFile | null>(null);
 
@@ -68,7 +67,7 @@ export const FormUpload: FunctionComponent<Props> = ({ isActiveUploadForm, onUpl
 
     return (
         <InputModal
-            isVisible={isActiveUploadForm}
+            isVisible={true}
             title="Upload SOP"
             inputs={inputs}
             onCreate={async (data: Store) => {

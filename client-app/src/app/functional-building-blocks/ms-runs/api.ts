@@ -28,7 +28,8 @@ export class Api {
 
     public static async getSOPsAsync(projectId: string): Promise<SOP[]> {
         return await BaseApi.getAsync(
-            `/sops/project/type?projectId=${projectId}&sopType=Standard Procedure Sample Preparation`,
+            // `/sops/project/type?projectId=${projectId}&sopType=Standard Procedure Sample Preparation`,
+            `/sops/project?projectId=${projectId}`,
         );
     }
 }

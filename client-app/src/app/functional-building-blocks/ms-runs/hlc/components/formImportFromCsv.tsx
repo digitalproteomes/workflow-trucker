@@ -36,7 +36,11 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     const onCreate = (samples: MSRunNew[]) => {
         async function saveSamples() {
             try {
-                await Api.postMsRuns(samples);
+                //todo - get the actual response message instead of using the mock
+                const createResponse = await Api.postMsRuns(samples);
+
+                console.log('ms run import result', createResponse);
+
                 props.onCreateSuccessful();
             } catch (error) {
                 setErrorMessage(error.message);

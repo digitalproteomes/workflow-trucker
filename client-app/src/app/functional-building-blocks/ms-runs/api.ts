@@ -1,6 +1,7 @@
 import { Constants } from '../../default-data/constants';
 import { BaseApi } from '../../infrastructure/api';
 import { EWorkflowTag, MsRun, MSRunNew, SOP } from '../../types';
+import { MSRunNewCreateResponse } from '../../types/types';
 
 export class Api {
     public static async getMsRunsAsync(projectId: string): Promise<MsRun[]> {
@@ -19,8 +20,10 @@ export class Api {
         }
     }
 
-    public static async postMsRuns(samples: MSRunNew[]): Promise<void> {
-        return await BaseApi.postAsync(`/msruns`, { samples: samples });
+    public static async postMsRuns(samples: MSRunNew[]): Promise<MSRunNewCreateResponse> {
+        await BaseApi.postAsync(`/msruns`, { samples: samples });
+
+        return { createFail: ['id1', 'id2'], createSuccess: ['id3', 'id4'], overwritten: ['id5', 'id6'] };
     }
 
     public static async getSOPsAsync(projectId: string): Promise<SOP[]> {

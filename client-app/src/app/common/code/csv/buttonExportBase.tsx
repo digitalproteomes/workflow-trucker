@@ -42,7 +42,8 @@ export class ButtonExportBase<T> extends React.Component<Props<T>, State<T>> {
 
     fetchData = () => {
         const store: ListDataContext<T> = Store.getStore(this.context.name);
-        this.setState({ data: store.activeData }, () => {
+
+        this.setState({ data: this.props.fetchData(store) }, () => {
             // click the CSVLink component to trigger the CSV download
             if (this.csvLink.current != null) (this.csvLink.current as any).link.click();
         });

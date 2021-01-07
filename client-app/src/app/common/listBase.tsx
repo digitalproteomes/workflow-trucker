@@ -31,7 +31,9 @@ export function ListBase<T extends object>({
     const store: ListDataContext<T> = Store.getStore<T>(storeContext.name);
 
     const rowSelection: TableRowSelection<T> = {
-        onChange: (_selectedRowKeys: any, selectedRows: T[]) => store.setSelectedData(selectedRows),
+        onChange: (_selectedRowKeys: any, selectedRows: T[]) => {
+            store.setSelectedData(selectedRows);
+        },
         selections: [Table.SELECTION_ALL],
     };
 
@@ -59,7 +61,6 @@ export function ListBase<T extends object>({
             expandable={expandableConfig}
             onChange={(_pagination, _filters, _sorter, extra: TableCurrentDataSource<T>) => {
                 store.setActiveData(extra.currentDataSource);
-                console.log('store active data', store.activeData);
             }}
         />
     );

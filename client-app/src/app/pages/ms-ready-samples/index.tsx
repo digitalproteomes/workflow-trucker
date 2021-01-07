@@ -2,7 +2,7 @@ import React, { useState, FunctionComponent } from 'react';
 import { List } from '../../functional-building-blocks/ms-ready';
 import { MSReadySample } from '../../types';
 import { Space, Button, Tooltip, PageHeader, Divider } from 'antd';
-import { ButtonExportSelected, Header } from '../../common';
+import { ButtonExportAll, ButtonExportSelected, Header } from '../../common';
 import { ListDataContext, Store, StoreContext } from '../../common';
 
 const ContextName = 'MsReadyDataContext';
@@ -37,7 +37,7 @@ export const MSReadySamples: FunctionComponent = () => {
         <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="MS Ready Samples"></PageHeader>
 
-            <ButtonExportSelected<MSReadySample> title={'Export all from table'} />
+            <ButtonExportAll<MSReadySample> title={'Export all from table'} />
 
             <Tooltip title="Exports sample names to .csv, to be inputed in the Mass Spec">
                 <ButtonExportSelected<MSReadySample>

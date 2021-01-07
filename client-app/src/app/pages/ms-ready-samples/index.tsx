@@ -28,7 +28,15 @@ export const MSReadySamples: FunctionComponent = () => {
         );
     };
 
-    const exportHeaders: Header<MSReadySample>[] = [
+    const exportAllHeaders: Header<MSReadySample>[] = [
+        { label: 'Id', key: MSReadySample.nameof('id') },
+        { label: 'Name', key: MSReadySample.nameof('name') },
+        { label: 'Peptide #', key: MSReadySample.nameof('peptideNo') },
+        { label: 'Processing person', key: MSReadySample.nameof('processingPerson') },
+        { label: 'Quality', key: MSReadySample.nameof('quality') },
+    ];
+
+    const exportNameHeaders: Header<MSReadySample>[] = [
         { label: 'Id', key: MSReadySample.nameof('id') },
         { label: 'Name', key: MSReadySample.nameof('name') },
     ];
@@ -37,12 +45,12 @@ export const MSReadySamples: FunctionComponent = () => {
         <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="MS Ready Samples"></PageHeader>
 
-            <ButtonExportAll<MSReadySample> title={'Export all from table'} />
+            <ButtonExportAll<MSReadySample> title={'Export all from table'} headers={exportAllHeaders} />
 
             <Tooltip title="Exports sample names to .csv, to be inputed in the Mass Spec">
                 <ButtonExportSelected<MSReadySample>
                     title={'Export selected names for MS Runs running queue'}
-                    headers={exportHeaders}
+                    headers={exportNameHeaders}
                 />
             </Tooltip>
             <Divider></Divider>

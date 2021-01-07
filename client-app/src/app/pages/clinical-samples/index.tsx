@@ -3,7 +3,7 @@ import { Divider, Space, PageHeader } from 'antd';
 import { ClinicalSample } from '../../types';
 import { ButtonExportSelected } from '../../common';
 import { SampleNotifications } from '../../common/notifications';
-import { List, ButtonCreateNew, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';
+import { List, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonAutoGenerate } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonProcessSample, ButtonProcessSampleBulk } from '../../functional-building-blocks/intermediate-samples';
 import { ButtonJourneyDiagram } from '../../functional-building-blocks/diagrams';

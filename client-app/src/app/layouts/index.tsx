@@ -4,7 +4,6 @@ import { Layout, Menu, Avatar, Typography, Divider, Select } from 'antd';
 import {
     DashboardOutlined,
     UserOutlined,
-    MonitorOutlined,
     ReadOutlined,
     SettingFilled,
     BarcodeOutlined,
@@ -21,7 +20,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { CollapseType } from 'antd/lib/layout/Sider';
 import { Constants } from '../default-data/constants';
 import { Project } from '../types';
-import { LabelModel } from '@projectstorm/react-diagrams';
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider, Header } = Layout;

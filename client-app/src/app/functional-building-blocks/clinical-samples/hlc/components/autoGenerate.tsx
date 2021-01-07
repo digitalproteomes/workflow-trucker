@@ -113,7 +113,6 @@ function autoGenerateSamples(templateData: GenerationData): ClinicalSampleNew[] 
     const { numberOfEntries, prefixProject, suffixProject } = templateData;
     const samples: ClinicalSampleNew[] = new Array<ClinicalSampleNew>(numberOfEntries);
 
-    const projectId = Constants.projectId;
     const personId = Constants.personId;
 
     let index = 0;

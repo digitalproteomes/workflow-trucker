@@ -100,6 +100,7 @@ export class EditableList<T extends object> extends React.Component<EditableList
                 rowClassName={() => 'editable-row'}
                 bordered
                 dataSource={this.props.entries}
+                size="small"
                 rowKey={(row) => this.props.rowKeySelector(row)}
                 columns={this.props.columns}
             />

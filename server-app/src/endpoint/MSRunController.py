@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask import Flask, jsonify, request
 from flask_api import status
 from bson import ObjectId
+import datetime
 
 
 from persistence import MSRunDAO
@@ -45,38 +46,6 @@ def getMSRunById():
         return 'MS Run with id does not exist.', status.HTTP_404_NOT_FOUND
 
 
-@msrun_api.route('/msruns', methods=['POST'])
-def createMSRun():
-    data = request.json
-    projectId = data.get('projectId')
-    name = data.get('name')
-    protocolId = data.get('protocolId')
-    instrumentId = data.get('instrumentId')
-    runCode = data.get('runCode')
-    workflowTag = data.get('workflowTag')
-    msReadySampleId = data.get('msReadySampleId')
-    description = data.get('description')
-    processingPerson = data.get('processingPerson')
-
-    new_msrun = {
-        "msReadySampleId": msReadySampleId,
-        "clinicalSamples": clinicalSamples,
-        "name": name,
-        "projectId": projectId,
-        "protocolId": protocolId,
-        "instrumentId": instrumentId,
-        "runCode": runCode,
-        "updatedDate": datetime.datetime.now(),
-        "createdDate": datetime.datetime.now(),
-        "workflowTag": workflowTag,
-        "processingPerson": processingPerson
-    }
-
-    created_ms_run = MSRunDAO.createMsRun(new_msrun)
-
-    return jsonify(created_ms_run), status.HTTP_200_OK
-
-
 @msrun_api.route('/msruns', methods=['DELETE'])
 def deleteRun():
     id = request.args.get('id')
@@ -103,3 +72,45 @@ def getMsRunsByClinicalSampleId():
         return jsonify(msruns), status.HTTP_200_OK
     else:
         return 'Clinical Sample with id does not exist.', status.HTTP_404_NOT_FOUND
+
+
+@msrun_api.route('/msruns', methods=['POST'])
+def createMSRuns():
+    data = request.json
+    msRuns = data.get('samples')
+    msg = ""
+    not_found_ms_ready = []
+    found_ms_ready = []
+
+    for i in msRuns:
+        msReadySample = msReadySamplesDAO.getMSReadySampleByName(
+            i['msReadySampleName'])
+        if(msReadySample != None):
+            new_msrun = {
+                "clinicalSamples": msReadySample['clinicalSamples'],
+                "msReadySampleId": msReadySample['id'],
+                "name": i['name'],
+                "projectId": i['projectId'],
+                "protocolId": i['runMode'],
+                "instrumentId": i['instrumentId'],
+                "sopFileName": "PHRT_Mass_Spectrometry_SOP",
+                "instrumentMethod": i['instrumentMethod'],
+                "updatedDate": datetime.datetime.now(),
+                "createdDate": datetime.datetime.now(),
+                "workflowTag": "Library Generation",
+                "description": i['description'],
+                "processingPerson": i['processingPerson'],
+            }
+            new_run = MSRunDAO.createMsRun(new_msrun)
+            found_ms_ready.append(i['msReadySampleName'])
+        else:
+            not_found_ms_ready.append(i['msReadySampleName'])
+
+    if(len(found_ms_ready) > 0):
+        msg = 'MS Runs were created successfully for samples with names: ' + \
+            str(found_ms_ready) + '.'
+    if(len(not_found_ms_ready) > 0):
+        msg = msg + ' Inexistent MS Ready Samples that have been discarded: ' + \
+            str(not_found_ms_ready) + '.'
+
+    return msg, status.HTTP_200_OK

@@ -76,7 +76,7 @@ export const InputModal: FunctionComponent<Props> = ({
     return (
         <Modal
             visible={isVisible}
-            width={'30%'}
+            width={'60%'}
             title={title}
             okText={buttonConfirmText === null ? 'Create' : buttonConfirmText}
             okButtonProps={{ loading: isSaving }}

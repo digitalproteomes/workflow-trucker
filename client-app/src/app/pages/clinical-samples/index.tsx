@@ -45,11 +45,6 @@ export const ClinicalSamples: FunctionComponent = () => {
             <PageHeader ghost={false} title="Clinical Samples">
                 <ButtonExportSelected<ClinicalSample> title={'Export table'} />
 
-                {/* <ButtonCreateNew
-                    setRefreshNeededFlag={setRefreshNeededFlag}
-                    style={{ float: 'right', marginRight: 10 }}
-                /> */}
-
                 <ButtonProcessSampleBulk style={{ float: 'right', marginRight: 16 }} />
 
                 <ButtonAutoGenerate

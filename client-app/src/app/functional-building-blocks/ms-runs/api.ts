@@ -13,14 +13,14 @@ export class Api {
 
     public static async postAsync(msRun: MsRun): Promise<MsRun> {
         try {
-            return await BaseApi.postAsync(`/msrun`, msRun);
+            return await BaseApi.postAsync(`/msruns`, msRun);
         } catch (error) {
             return mockMsRuns()[0];
         }
     }
 
     public static async postMsRuns(samples: MSRunNew[]): Promise<void> {
-        return await BaseApi.postAsync(`/msrun`, { samples: samples });
+        return await BaseApi.postAsync(`/msruns`, { samples: samples });
     }
 
     public static async getSOPsAsync(projectId: string): Promise<SOP[]> {
@@ -47,6 +47,7 @@ function mockMsRuns(): MsRun[] {
             description: '3 Generated as mock',
             id: '5edb9fdf4765770ed5b68a74',
             instrumentId: '3 instrument id',
+            instrumentMethod: "C:\Xcalibur\methods\sgo\TP",
             msReadySampleId: '3 ms ready sample id',
             msReadySampleName: '3 ms ready sample name',
             name: '3 mock PHRT_005_001_CPAC',
@@ -74,6 +75,7 @@ function mockMsRuns(): MsRun[] {
             id: '5edb9fdf4765770ed5b68a74',
             sopFileName: "Sample_PREP_SOP",
             instrumentId: '4 instrument id',
+            instrumentMethod: "C:\Xcalibur\methods\sgo\TP",
             msReadySampleId: '4 ms ready sample id',
             msReadySampleName: '4 ms ready sample name',
             name: '4 mock PHRT_005_001_CPAC',

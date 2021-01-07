@@ -245,6 +245,7 @@ def insertLibGenMSRuns(projectId):
                     "projectId": projectId,
                     "protocolId": "DDA_protocol",
                     "instrumentId": "MS:1002877",
+                    "instrumentMethod": "C:\Xcalibur\methods\sgo\TP",
                     "sopFileName": "PHRT_Mass_Spectrometry_SOP",
                     "updatedDate": datetime.datetime.now(),
                     "createdDate": datetime.datetime.now(),

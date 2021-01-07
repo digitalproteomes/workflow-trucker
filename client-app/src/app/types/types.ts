@@ -117,6 +117,8 @@ export class MsRun {
 
     instrumentId: string = '';
 
+    instrumentMethod: string = '';
+
     msReadySampleId: string = '';
 
     msReadySampleName: string = '';
@@ -149,6 +151,7 @@ export class MSRunNew {
     msReadySampleName: string = '';
     instrumentMethod: string = '';
     description: string = '';
+    projectId: string= '';
 
     instrumentId: string = ''; //user entry
     processingPerson: string = ''; //user entry

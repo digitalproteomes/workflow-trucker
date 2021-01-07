@@ -53,7 +53,19 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
 
     function onDataImported(entries: MSRunNew[]) {
         let tempId = 0;
-        entries.forEach((entry) => (entry.temporaryId = tempId++));
+
+        entries.forEach(function (entry) {
+            entry.temporaryId = tempId++;
+            // TODO set here or somewhere the run mode like this
+            // console.log(entry.instrumentMethod);
+            // if (entry.instrumentMethod.includes('DDA')) {
+            //     entry.runMode = 'DDA';
+            // } else if (entry.instrumentMethod.includes('DIA')) {
+            //     entry.runMode = 'DIA';
+            // } else {
+            //     entry.runMode = 'Unknown';
+            // }
+        });
 
         setSamplesToProcess(entries);
     }
@@ -95,6 +107,7 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
                 const template: MSRunNew = data as MSRunNew;
 
                 samplesToProcess.forEach((entry) => {
+                    entry.projectId = Constants.projectId;
                     entry.instrumentId = template.instrumentId;
                     entry.processingPerson = template.processingPerson;
                     entry.SOPDDA = template.SOPDDA;
@@ -104,9 +117,9 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
                 onCreate(samplesToProcess!);
             }}
             onCancel={() => handleOnCancel()}
-            styleModal={{ centered: true, width: 1560 }}
+            styleModal={{ centered: true, width: 1760 }}
         >
-            <Col span={12}>
+            <Col span={11}>
                 <CSVImporter<MSRunNew> converter={typeMap} onDataLoaded={onDataImported} />
             </Col>
             <Divider />

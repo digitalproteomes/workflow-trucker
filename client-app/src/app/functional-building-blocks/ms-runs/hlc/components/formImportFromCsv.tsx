@@ -56,15 +56,18 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
 
         entries.forEach(function (entry) {
             entry.temporaryId = tempId++;
-            // TODO set here or somewhere the run mode like this
-            // console.log(entry.instrumentMethod);
-            // if (entry.instrumentMethod.includes('DDA')) {
-            //     entry.runMode = 'DDA';
-            // } else if (entry.instrumentMethod.includes('DIA')) {
-            //     entry.runMode = 'DIA';
-            // } else {
-            //     entry.runMode = 'Unknown';
-            // }
+
+            if (!entry.description) entry.description = '';
+
+            if (!entry.instrumentMethod) return;
+
+            if (entry.instrumentMethod.toUpperCase().includes('DDA')) {
+                entry.runMode = 'DDA';
+            } else if (entry.instrumentMethod.toUpperCase().includes('DIA')) {
+                entry.runMode = 'DIA';
+            } else {
+                entry.runMode = 'Unknown';
+            }
         });
 
         setSamplesToProcess(entries);

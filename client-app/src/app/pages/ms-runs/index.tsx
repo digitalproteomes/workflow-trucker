@@ -39,7 +39,12 @@ export const MsRuns: FunctionComponent = () => {
                     Generate Spectral Library
                 </Button>
             </Tooltip>
-            <ButtonImportMsRuns style={{ float: 'right', marginRight: 10 }} />
+            <ButtonImportMsRuns
+                style={{ float: 'right', marginRight: 10 }}
+                onImportSuccess={() => {
+                    setRefreshNeededFlag(true);
+                }}
+            />
             <Divider />
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />

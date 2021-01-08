@@ -7,7 +7,9 @@ import datetime
 
 from persistence import MSRunDAO
 from persistence import projectDAO
+from persistence import artefactDAO
 from persistence import clinicalSampleDAO, msReadySamplesDAO
+from model.bulkCreateResponseDTO import BulkCreateResponseDTO
 
 msrun_api = Blueprint('msrun_api', __name__)
 
@@ -78,39 +80,54 @@ def getMsRunsByClinicalSampleId():
 def createMSRuns():
     data = request.json
     msRuns = data.get('samples')
-    msg = ""
-    not_found_ms_ready = []
-    found_ms_ready = []
+    responseDTO = BulkCreateResponseDTO()
 
     for i in msRuns:
         msReadySample = msReadySamplesDAO.getMSReadySampleByName(
             i['msReadySampleName'])
+
+        sop = "NA"
         if(msReadySample != None):
-            new_msrun = {
-                "clinicalSamples": msReadySample['clinicalSamples'],
-                "msReadySampleId": msReadySample['id'],
-                "name": i['name'],
-                "projectId": i['projectId'],
-                "protocolId": i['runMode'],
-                "instrumentId": i['instrumentId'],
-                "sopFileName": "PHRT_Mass_Spectrometry_SOP",
-                "instrumentMethod": i['instrumentMethod'],
-                "updatedDate": datetime.datetime.now(),
-                "createdDate": datetime.datetime.now(),
-                "workflowTag": "Library Generation",
-                "description": i['description'],
-                "processingPerson": i['processingPerson'],
-            }
-            new_run = MSRunDAO.createMsRun(new_msrun)
-            found_ms_ready.append(i['msReadySampleName'])
+            if i['runMode'] == "DIA":
+                entry = artefactDAO.getArtefactById(i['SOPDIA'])
+                if(entry != None):
+                    sop = entry['name']
+            elif i['runMode'] == "DDA":
+                entry = artefactDAO.getArtefactById(i['SOPDDA'])
+                if(entry != None):
+                    sop = entry['name']
+
+            description = ""
+            if i['description'] != None:
+                description = i['description']
+
+            existingMSRun = MSRunDAO.getMsRunByName(i['name'])
+
+            if(existingMSRun != None):
+                MSRunDAO.updateMSRun(
+                    existingMSRun['id'], msReadySample['id'], msReadySample['clinicalSamples'], i['instrumentId'], sop,
+                    description, i['instrumentMethod'], i['processingPerson'])
+                responseDTO.appendOverwritten(i['name'])
+
+            else:
+                new_msrun = {
+                    "clinicalSamples": msReadySample['clinicalSamples'],
+                    "msReadySampleId": msReadySample['id'],
+                    "name": i['name'],
+                    "projectId": i['projectId'],
+                    "protocolId": i['runMode'],
+                    "instrumentId": i['instrumentId'],
+                    "sopFileName": sop,
+                    "instrumentMethod": i['instrumentMethod'],
+                    "updatedDate": datetime.datetime.now(),
+                    "createdDate": datetime.datetime.now(),
+                    "workflowTag": "Library Generation",
+                    "description": description,
+                    "processingPerson": i['processingPerson'],
+                }
+                new_run = MSRunDAO.createMsRun(new_msrun)
+                responseDTO.appendCreateSuccess(i['name'])
         else:
-            not_found_ms_ready.append(i['msReadySampleName'])
+            responseDTO.appendCreateFail(i['name'])
 
-    if(len(found_ms_ready) > 0):
-        msg = 'MS Runs were created successfully for samples with names: ' + \
-            str(found_ms_ready) + '.'
-    if(len(not_found_ms_ready) > 0):
-        msg = msg + ' Inexistent MS Ready Samples that have been discarded: ' + \
-            str(not_found_ms_ready) + '.'
-
-    return msg, status.HTTP_200_OK
+    return responseDTO.toJson(), status.HTTP_200_OK

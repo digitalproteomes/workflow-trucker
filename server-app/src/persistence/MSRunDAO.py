@@ -48,6 +48,31 @@ def getMsRun(id):
     return MSRun.find_one({"id": id})
 
 
+def getMsRunByName(name):
+    run = MSRun.find_one({"name": name})
+    if(run):
+        return run.dump()
+    else:
+        return None
+
+
+def updateMSRun(id, msReadySampleId, clinicalSamples, instrumentId, sopFileName, description, instrumentMethod, processingPerson):
+    run = MSRun.find_one({"id": ObjectId(id)})
+    if(run):
+        run.msReadySampleId = msReadySampleId
+        run.clinicalSamples = clinicalSamples
+        run.instrumentId = instrumentId
+        run.sopFileName = sopFileName
+        run.description = description
+        run.instrumentMethod = instrumentMethod
+        run.processingPerson = processingPerson
+        run.description = description
+        run.commit()
+        return MSRun.find_one({"id": ObjectId(id)}).dump()
+    else:
+        return 0
+
+
 def deleteMSrun(id):
     runToDelete = MSRun.find_one({"id": ObjectId(id)})
 

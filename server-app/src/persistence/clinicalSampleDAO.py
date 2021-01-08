@@ -33,7 +33,7 @@ def getClinicalSampleByName(name):
 
 
 def deleteSample(id):
-    sampleToDelete = Sample.find_one({"id": ObjectId(id)})
+    sampleToDelete = ClinicalSample.find_one({"id": ObjectId(id)})
     if(sampleToDelete):
         deleted_count = sampleToDelete.delete().deleted_count
         return 1

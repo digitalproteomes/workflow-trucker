@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
-import { ButtonExportSelected } from '../../common';
-import { List, ButtonImportMsRuns } from '../../functional-building-blocks/ms-runs';
+import { ButtonExportAll } from '../../common';
+import { List, ButtonImportMsRuns, ExportColumns } from '../../functional-building-blocks/ms-runs';
 
 export const MsRuns: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -27,7 +27,7 @@ export const MsRuns: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
-            <ButtonExportSelected title="Export table" />
+            <ButtonExportAll title="Export table" headers={ExportColumns.all} />
 
             <Tooltip title="Bulk Generate SWATH Analysis">
                 <Button type="primary" style={{ float: 'right', marginRight: 10 }}>

@@ -21,16 +21,11 @@ export class Api {
     }
 
     public static async postMsRuns(samples: MSRunNew[]): Promise<MSRunNewCreateResponse> {
-        await BaseApi.postAsync(`/msruns`, { samples: samples });
-
-        return { createFail: ['id1', 'id2'], createSuccess: ['id3', 'id4'], overwritten: ['id5', 'id6'] };
+        return await BaseApi.postAsync(`/msruns`, { samples: samples });
     }
 
     public static async getSOPsAsync(projectId: string): Promise<SOP[]> {
-        return await BaseApi.getAsync(
-            // `/sops/project/type?projectId=${projectId}&sopType=Standard Procedure Sample Preparation`,
-            `/sops/project?projectId=${projectId}`,
-        );
+        return await BaseApi.getAsync(`/sops/project?projectId=${projectId}`);
     }
 }
 

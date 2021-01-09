@@ -9,10 +9,11 @@ import { MSRunNew, SOP } from '../../../../types';
 import { Api } from '../../api';
 import { MSRunNewTypeMap } from '../../typemaps/msRunNewTypeMap';
 import { Constants } from '../../../../default-data/constants';
+import { MSRunNewCreateResponse } from '../../../../types/types';
+import { ModalImportSummary } from './modalSummary';
 
 type Props = {
-    onCreateSuccessful: () => void;
-    onCancel: () => void;
+    onClose: (dataWasCreated: boolean) => void;
 };
 
 export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
@@ -20,6 +21,7 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [samplesToProcess, setSamplesToProcess] = useState<MSRunNew[]>([]);
     const [sops, setSops] = useState<SOP[] | null>(null);
+    const [importSummary, setImportSummary] = useState<MSRunNewCreateResponse | undefined>(undefined);
 
     useEffect(() => {
         async function executeFetch() {
@@ -36,12 +38,9 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     const onCreate = (samples: MSRunNew[]) => {
         async function saveSamples() {
             try {
-                //todo - get the actual response message instead of using the mock
                 const createResponse = await Api.postMsRuns(samples);
 
-                console.log('ms run import result', createResponse);
-
-                props.onCreateSuccessful();
+                setImportSummary(createResponse);
             } catch (error) {
                 setErrorMessage(error.message);
             }
@@ -51,8 +50,7 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     };
 
     const handleOnCancel = () => {
-        props.onCancel();
-        // setSamplesToProcess(null);
+        props.onClose(false);
     };
 
     function onDataImported(entries: MSRunNew[]) {
@@ -104,38 +102,47 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
         setSamplesToProcess([...newData]); // unfold the elements of the array into a new array => the array reference will change => the downsttream components receiving the samples will be able to update
     };
 
+    const handleCloseSummary = () => {
+        setImportSummary(undefined);
+    };
+
     return (
-        <InputModal
-            isVisible={true}
-            title="Import MS Runs from a .csv file"
-            inputs={getInputs(sops ?? [])}
-            errorMessage={errorMessage}
-            onCreate={async (data: Store) => {
-                const template: MSRunNew = data as MSRunNew;
+        <>
+            <InputModal
+                isVisible={true}
+                title="Import MS Runs from a .csv file"
+                buttonConfirmText="Import"
+                buttonCancelText="Close"
+                inputs={getInputs(sops ?? [])}
+                errorMessage={errorMessage}
+                onCreate={async (data: Store) => {
+                    const template: MSRunNew = data as MSRunNew;
 
-                samplesToProcess.forEach((entry) => {
-                    entry.projectId = Constants.projectId;
-                    entry.instrumentId = template.instrumentId;
-                    entry.processingPerson = template.processingPerson;
-                    entry.SOPDDA = template.SOPDDA;
-                    entry.SOPDIA = template.SOPDIA;
-                });
+                    samplesToProcess.forEach((entry) => {
+                        entry.projectId = Constants.projectId;
+                        entry.instrumentId = template.instrumentId;
+                        entry.processingPerson = template.processingPerson;
+                        entry.SOPDDA = template.SOPDDA;
+                        entry.SOPDIA = template.SOPDIA;
+                    });
 
-                onCreate(samplesToProcess!);
-            }}
-            onCancel={() => handleOnCancel()}
-            styleModal={{ centered: true, width: 1760 }}
-        >
-            <Col span={11}>
-                <CSVImporter<MSRunNew> converter={typeMap} onDataLoaded={onDataImported} />
-            </Col>
-            <Divider />
-            <EditableList<MSRunNew>
-                entries={samplesToProcess}
-                columns={getColumns(handleDelete, handleSave)}
-                rowKeySelector={(row: MSRunNew) => row.name}
-            />
-        </InputModal>
+                    onCreate(samplesToProcess!);
+                }}
+                onCancel={() => handleOnCancel()}
+                styleModal={{ centered: true, width: 1760 }}
+            >
+                <Col span={11}>
+                    <CSVImporter<MSRunNew> converter={typeMap} onDataLoaded={onDataImported} />
+                </Col>
+                <Divider />
+                <EditableList<MSRunNew>
+                    entries={samplesToProcess}
+                    columns={getColumns(handleDelete, handleSave)}
+                    rowKeySelector={(row: MSRunNew) => row.name}
+                />
+            </InputModal>
+            {importSummary && <ModalImportSummary summary={importSummary} onClose={handleCloseSummary} />}
+        </>
     );
 };
 

@@ -25,12 +25,11 @@ export const ButtonImportMsRuns: FunctionComponent<Props> = (props: Props) => {
             </Tooltip>
             {isFormActive ? (
                 <FormImportFromCsv
-                    onCreateSuccessful={() => {
+                    onClose={(dataWasCreated: boolean) => {
                         setFormActiveFlag(false);
 
-                        if (props.onImportSuccess) props.onImportSuccess();
+                        if (dataWasCreated && props.onImportSuccess) props.onImportSuccess();
                     }}
-                    onCancel={() => setFormActiveFlag(false)}
                 />
             ) : undefined}
         </>

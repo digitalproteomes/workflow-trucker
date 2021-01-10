@@ -34,6 +34,7 @@ const getList = (title: string, entries: string[], listStyle: ListStyle) => {
             renderActions={undefined}
             rowKeySelector={(row) => row.name}
             expandableConfig={undefined}
+            noCheckbox={true}
         />
     );
 };

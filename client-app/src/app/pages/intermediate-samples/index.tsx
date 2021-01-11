@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { IntermediateSample } from '../../types';
 import { Space, Button, Divider, PageHeader, Tooltip } from 'antd';
-import { ButtonExportSelected, ListDataContext, Store, StoreContext } from '../../common';
+import { ButtonExportAll, ListDataContext, Store, StoreContext } from '../../common';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { ButtonFractionate, List } from '../../functional-building-blocks/intermediate-samples/';
 import { ButtonProcessFromIntermediateBulk } from '../../functional-building-blocks/ms-ready';
@@ -36,7 +36,7 @@ export const IntermediateSamples: FunctionComponent = () => {
                     title={'Create MS Ready Samples'}
                     style={{ float: 'right', marginRight: 10 }}
                 />
-                <ButtonExportSelected title="Export table" />
+                <ButtonExportAll title="Export table" />
                 <Tooltip title="Add to pooling preparation">
                     <Button type="primary" icon={<PlusCircleOutlined />} style={{ float: 'right', marginRight: 10 }}>
                         Add to pooling preparation

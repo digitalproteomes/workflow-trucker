@@ -57,7 +57,7 @@ def setMsPrepEntries(sampleJourney, ins):
         msr_name = msr['name']
         sampleJourney.appendMsReadySampleName(msr_name)
         sampleJourney.appendLink(ins['name'], msr_name, "")
-        msruns = MSRunDAO.getMsRunsByMSREadySampleId(msr['id'])
+        msruns = MSRunDAO.getMsRunsByMSReadySampleId(msr['id'])
         for r in msruns:
             msrun_name = r['name']
             msrun_sop = r['sopFileName']

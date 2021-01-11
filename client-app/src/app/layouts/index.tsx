@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import app_logo from './assets/logoPP_white.png';
+import app_logo from './assets/proteopile.png';
 import { Layout, Menu, Avatar, Typography, Divider, Select } from 'antd';
 import {
     DashboardOutlined,
@@ -110,7 +110,7 @@ export const BasicLayout = withRouter((props) => {
                         {props.children}
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>ProtoPile ©2020 Created by PHRT - CPAC</Footer>
+                <Footer style={{ textAlign: 'center' }}>ProteoPile ©2020 Created by PHRT - CPAC</Footer>
             </Layout>
         </Layout>
     );

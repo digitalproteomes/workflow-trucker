@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Divider, Space, PageHeader } from 'antd';
 import { ClinicalSample } from '../../types';
-import { ButtonExportSelected } from '../../common';
+import { ButtonExportAll } from '../../common';
 import { SampleNotifications } from '../../common/notifications';
 import { List, ButtonDelete } from '../../functional-building-blocks/clinical-samples/';
 import { ButtonAutoGenerate } from '../../functional-building-blocks/clinical-samples/';
@@ -43,7 +43,7 @@ export const ClinicalSamples: FunctionComponent = () => {
     return (
         <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="Clinical Samples">
-                <ButtonExportSelected<ClinicalSample> title={'Export table'} />
+                <ButtonExportAll title="Export table" />
 
                 <ButtonProcessSampleBulk style={{ float: 'right', marginRight: 16 }} />
 

@@ -4,7 +4,7 @@ import diagram from '../../layouts/assets/journey.png';
 export function AboutPage() {
     return (
         <div>
-            <PageHeader title="Welcome to ProtoPile">
+            <PageHeader title="Welcome to ProteoPile">
                 <Divider />
                 <Space direction="vertical" size="middle">
                     <h3>The first Proteomics based Laboratory Information Management system that allows:</h3>
@@ -24,7 +24,7 @@ export function AboutPage() {
             </PageHeader>
             <img
                 src={diagram}
-                alt="Protopile journey"
+                alt="Proteopile journey"
                 style={{
                     alignContent: 'center',
                     marginLeft: '23px',

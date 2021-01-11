@@ -113,12 +113,13 @@ def insertMelanomaJourney(projectId):
         "projectId": projectId,
         "protocolId": "DIA",
         "instrumentId": "MS:1002523",
-                        "sopFileName": "PHRT_Mass_Spectrometry_SOP",
-                        "updatedDate": datetime.datetime.now(),
-                        "createdDate": datetime.datetime.now(),
-                        "workflowTag": "Sample Preparation",
-                        "description": "Mock run",
-                        "processingPerson": "System"
+        "instrumentMethod": "Xcalibur methods TP",
+        "sopFileName": "PHRT_Mass_Spectrometry_SOP",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now(),
+        "workflowTag": "Sample Preparation",
+        "description": "Mock run",
+        "processingPerson": "System"
     }
 
     new_msrun2 = {
@@ -129,12 +130,13 @@ def insertMelanomaJourney(projectId):
         "projectId": projectId,
         "protocolId": "DIA",
         "instrumentId": "MS:1002523",
-                        "sopFileName": "PHRT_Mass_Spectrometry_SOP",
-                        "updatedDate": datetime.datetime.now(),
-                        "createdDate": datetime.datetime.now(),
-                        "workflowTag": "Sample Preparation",
-                        "description": "Mock run",
-                        "processingPerson": "System"
+        "sopFileName": "PHRT_Mass_Spectrometry_SOP",
+        "updatedDate": datetime.datetime.now(),
+        "instrumentMethod": "Xcalibur methods TP",
+        "createdDate": datetime.datetime.now(),
+        "workflowTag": "Sample Preparation",
+        "description": "Mock run",
+        "processingPerson": "System"
     }
     run1 = MSRunDAO.createMsRun(new_msrun1)
     run2 = MSRunDAO.createMsRun(new_msrun2)
@@ -217,6 +219,7 @@ def insertMSRuns(msruns, projectId):
                         "protocolId": i['protocolId'],
                         "instrumentId": i['instrumentId'],
                         "sopFileName": "PHRT_Mass_Spectrometry_SOP",
+                        "instrumentMethod": "Xcalibur methods TP",
                         "updatedDate": datetime.datetime.now(),
                         "createdDate": datetime.datetime.now(),
                         "workflowTag": "Sample Preparation",
@@ -245,7 +248,7 @@ def insertLibGenMSRuns(projectId):
                     "projectId": projectId,
                     "protocolId": "DDA_protocol",
                     "instrumentId": "MS:1002877",
-                    "instrumentMethod": "C:\Xcalibur\methods\sgo\TP",
+                    "instrumentMethod": "Xcalibur methods TP",
                     "sopFileName": "PHRT_Mass_Spectrometry_SOP",
                     "updatedDate": datetime.datetime.now(),
                     "createdDate": datetime.datetime.now(),

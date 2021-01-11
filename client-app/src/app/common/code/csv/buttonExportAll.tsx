@@ -12,7 +12,7 @@ export function ButtonExportAll<T extends object>(props: ButtonExportProps<T>): 
             headers={props.headers}
             title={props.title}
             fetchData={getData}
-            filename={`ProtoPile_export_${getCurrentDate()}.csv`}
+            filename={`ProteoPile_export_${getCurrentDate()}.csv`}
         />
     );
 }

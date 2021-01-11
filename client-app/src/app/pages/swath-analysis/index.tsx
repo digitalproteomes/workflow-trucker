@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Button, PageHeader, Divider } from 'antd';
 import { List } from './components/list';
-import { ButtonExportSelected } from '../../common';
+import { ButtonExportAll } from '../../common';
 
 export const SwathAnalysisPage: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
@@ -23,7 +23,7 @@ export const SwathAnalysisPage: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="SWATH Analyses"></PageHeader>
-            <ButtonExportSelected title="Export table" />
+            <ButtonExportAll title="Export table" />
 
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />

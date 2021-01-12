@@ -18,7 +18,7 @@
         "@projectstorm/react-diagrams": "^6.3.0",
         "@types/react-router-dom": "^5.1.6",
         "antd": "^4.8.6",
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "closest": "0.0.1",
         "dagre": "^0.8.5",
         "lodash": "^4.17.20",

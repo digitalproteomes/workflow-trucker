@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import app_logo from './assets/logoPP_white.png';
+import app_logo from './assets/proteopile.png';
 import { Layout, Menu, Avatar, Typography, Divider, Select } from 'antd';
 import {
     DashboardOutlined,
     UserOutlined,
-    MonitorOutlined,
     ReadOutlined,
     SettingFilled,
     BarcodeOutlined,
@@ -84,12 +83,13 @@ export const BasicLayout = withRouter((props) => {
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
                     <div style={{ float: 'right', alignContent: 'horizontal' }}>
+                        <Text style={{ paddingRight: 16, paddingLeft: 4 }}>Select current project:</Text>
                         <Select
                             defaultValue={activeProject.id}
                             onChange={(projectId: string) => {
                                 resetActiveProject(projects.filter((p) => p.id === projectId)[0]);
                             }}
-                            style={{ width: 260 }}
+                            style={{ width: 260, paddingRight: 16 }}
                         >
                             {projects.map((project) => (
                                 <Option key={project.id} value={project.id}>
@@ -110,7 +110,7 @@ export const BasicLayout = withRouter((props) => {
                         {props.children}
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>ProtoPile ©2020 Created by PHRT - CPAC</Footer>
+                <Footer style={{ textAlign: 'center' }}>ProteoPile ©2020 Created by PHRT - CPAC</Footer>
             </Layout>
         </Layout>
     );

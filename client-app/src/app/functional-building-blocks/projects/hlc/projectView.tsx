@@ -1,7 +1,7 @@
 import React from 'react';
 import { Project } from '../../../types';
 
-import { Descriptions, List } from 'antd';
+import { List } from 'antd';
 
 type ProjectViewProps = {
     project: Project;

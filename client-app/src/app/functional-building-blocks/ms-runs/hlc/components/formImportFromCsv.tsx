@@ -9,10 +9,11 @@ import { MSRunNew, SOP } from '../../../../types';
 import { Api } from '../../api';
 import { MSRunNewTypeMap } from '../../typemaps/msRunNewTypeMap';
 import { Constants } from '../../../../default-data/constants';
+import { MSRunNewCreateResponse } from '../../../../types/types';
+import { ModalImportSummary } from './modalSummary';
 
 type Props = {
-    onCreateSuccessful: () => void;
-    onCancel: () => void;
+    onClose: (dataWasCreated: boolean) => void;
 };
 
 export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
@@ -20,14 +21,15 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [samplesToProcess, setSamplesToProcess] = useState<MSRunNew[]>([]);
     const [sops, setSops] = useState<SOP[] | null>(null);
-
-    async function executeFetch() {
-        const receivedSops = await Api.getSOPsAsync(Constants.projectId);
-
-        setSops(receivedSops);
-    }
+    const [importSummary, setImportSummary] = useState<MSRunNewCreateResponse | undefined>(undefined);
 
     useEffect(() => {
+        async function executeFetch() {
+            const receivedSops = await Api.getSOPsAsync(Constants.projectId);
+
+            setSops(receivedSops);
+        }
+
         if (sops == null) {
             executeFetch();
         }
@@ -36,8 +38,9 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     const onCreate = (samples: MSRunNew[]) => {
         async function saveSamples() {
             try {
-                await Api.postMsRuns(samples);
-                props.onCreateSuccessful();
+                const createResponse = await Api.postMsRuns(samples);
+
+                setImportSummary(createResponse);
             } catch (error) {
                 setErrorMessage(error.message);
             }
@@ -47,13 +50,27 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
     };
 
     const handleOnCancel = () => {
-        props.onCancel();
-        // setSamplesToProcess(null);
+        props.onClose(false);
     };
 
     function onDataImported(entries: MSRunNew[]) {
         let tempId = 0;
-        entries.forEach((entry) => (entry.temporaryId = tempId++));
+
+        entries.forEach(function (entry) {
+            entry.temporaryId = tempId++;
+
+            if (!entry.description) entry.description = '';
+
+            if (!entry.instrumentMethod) return;
+
+            if (entry.instrumentMethod.toUpperCase().includes('DDA')) {
+                entry.runMode = 'DDA';
+            } else if (entry.instrumentMethod.toUpperCase().includes('DIA')) {
+                entry.runMode = 'DIA';
+            } else {
+                entry.runMode = 'Unknown';
+            }
+        });
 
         setSamplesToProcess(entries);
     }
@@ -85,37 +102,47 @@ export const FormImportFromCsv: FunctionComponent<Props> = (props: Props) => {
         setSamplesToProcess([...newData]); // unfold the elements of the array into a new array => the array reference will change => the downsttream components receiving the samples will be able to update
     };
 
+    const handleCloseSummary = () => {
+        setImportSummary(undefined);
+    };
+
     return (
-        <InputModal
-            isVisible={true}
-            title="Import MS Runs from a .csv file"
-            inputs={getInputs(sops ?? [])}
-            errorMessage={errorMessage}
-            onCreate={async (data: Store) => {
-                const template: MSRunNew = data as MSRunNew;
+        <>
+            <InputModal
+                isVisible={true}
+                title="Import MS Runs from a .csv file"
+                buttonConfirmText="Import"
+                buttonCancelText="Close"
+                inputs={getInputs(sops ?? [])}
+                errorMessage={errorMessage}
+                onCreate={async (data: Store) => {
+                    const template: MSRunNew = data as MSRunNew;
 
-                samplesToProcess.forEach((entry) => {
-                    entry.instrumentId = template.instrumentId;
-                    entry.processingPerson = template.processingPerson;
-                    entry.SOPDDA = template.SOPDDA;
-                    entry.SOPDIA = template.SOPDIA;
-                });
+                    samplesToProcess.forEach((entry) => {
+                        entry.projectId = Constants.projectId;
+                        entry.instrumentId = template.instrumentId;
+                        entry.processingPerson = template.processingPerson;
+                        entry.SOPDDA = template.SOPDDA;
+                        entry.SOPDIA = template.SOPDIA;
+                    });
 
-                onCreate(samplesToProcess!);
-            }}
-            onCancel={() => handleOnCancel()}
-            styleModal={{ centered: true, width: 1560 }}
-        >
-            <Col span={12}>
-                <CSVImporter<MSRunNew> converter={typeMap} onDataLoaded={onDataImported} />
-            </Col>
-            <Divider />
-            <EditableList<MSRunNew>
-                entries={samplesToProcess}
-                columns={getColumns(handleDelete, handleSave)}
-                rowKeySelector={(row: MSRunNew) => row.name}
-            />
-        </InputModal>
+                    onCreate(samplesToProcess!);
+                }}
+                onCancel={() => handleOnCancel()}
+                styleModal={{ centered: true, width: 1760 }}
+            >
+                <Col span={11}>
+                    <CSVImporter<MSRunNew> converter={typeMap} onDataLoaded={onDataImported} />
+                </Col>
+                <Divider />
+                <EditableList<MSRunNew>
+                    entries={samplesToProcess}
+                    columns={getColumns(handleDelete, handleSave)}
+                    rowKeySelector={(row: MSRunNew) => row.name}
+                />
+            </InputModal>
+            {importSummary && <ModalImportSummary summary={importSummary} onClose={handleCloseSummary} />}
+        </>
     );
 };
 

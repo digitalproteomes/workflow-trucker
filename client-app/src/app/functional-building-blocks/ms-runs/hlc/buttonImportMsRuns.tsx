@@ -5,6 +5,7 @@ import { FormImportFromCsv } from './components/formImportFromCsv';
 
 type Props = {
     style?: React.CSSProperties;
+    onImportSuccess?(): void;
 };
 
 export const ButtonImportMsRuns: FunctionComponent<Props> = (props: Props) => {
@@ -24,8 +25,11 @@ export const ButtonImportMsRuns: FunctionComponent<Props> = (props: Props) => {
             </Tooltip>
             {isFormActive ? (
                 <FormImportFromCsv
-                    onCreateSuccessful={() => setFormActiveFlag(false)}
-                    onCancel={() => setFormActiveFlag(false)}
+                    onClose={(dataWasCreated: boolean) => {
+                        setFormActiveFlag(false);
+
+                        if (dataWasCreated && props.onImportSuccess) props.onImportSuccess();
+                    }}
                 />
             ) : undefined}
         </>

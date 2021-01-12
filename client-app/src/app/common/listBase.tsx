@@ -16,6 +16,8 @@ type Props<T extends object> = {
 
     rowKeySelector: (row: T) => string;
     expandableConfig?: ExpandableConfig<T>;
+
+    noCheckbox?: boolean;
 };
 
 export function ListBase<T extends object>({
@@ -26,14 +28,20 @@ export function ListBase<T extends object>({
     renderActions,
     rowKeySelector,
     expandableConfig,
+    noCheckbox,
 }: Props<T> & { children?: React.ReactNode }): React.ReactElement {
     const storeContext = React.useContext(StoreContext);
     const store: ListDataContext<T> = Store.getStore<T>(storeContext.name);
 
-    const rowSelection: TableRowSelection<T> = {
-        onChange: (_selectedRowKeys: any, selectedRows: T[]) => store.setSelectedData(selectedRows),
-        selections: [Table.SELECTION_ALL],
-    };
+    const rowSelection: TableRowSelection<T> | undefined =
+        noCheckbox === undefined || noCheckbox === false
+            ? {
+                  onChange: (_selectedRowKeys: any, selectedRows: T[]) => {
+                      store.setSelectedData(selectedRows);
+                  },
+                  selections: [Table.SELECTION_ALL],
+              }
+            : undefined;
 
     if (entries == null) {
         return <Skeleton active />;
@@ -59,7 +67,6 @@ export function ListBase<T extends object>({
             expandable={expandableConfig}
             onChange={(_pagination, _filters, _sorter, extra: TableCurrentDataSource<T>) => {
                 store.setActiveData(extra.currentDataSource);
-                console.log('store active data', store.activeData);
             }}
         />
     );

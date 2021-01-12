@@ -22,10 +22,12 @@ def setComputationalEntries(sampleJourney, msrun):
         spl_sop = specLib['sopFileName']
         spl_file = specLib['specLibFilename']
 
-        sampleJourney.appendSpecralLibrary(spl_name)
+        if(spl_name not in sampleJourney.specLibNames):
+            sampleJourney.appendSpecralLibrary(spl_name)
         sampleJourney.appendLink(msrun['name'], spl_name, spl_sop)
 
-        sampleJourney.appendOutputSpecralLibrary(spl_file)
+        if(spl_file not in sampleJourney.outputSpecLibNames):
+            sampleJourney.appendOutputSpecralLibrary(spl_file)
         sampleJourney.appendLink(spl_name, spl_file, "output")
 
     if len(swas) > 0:
@@ -36,11 +38,14 @@ def setComputationalEntries(sampleJourney, msrun):
         swa_sop = swa['sopFileName']
         swa_file = swa['proteinMatrixFileName']
 
-        sampleJourney.appendSwathAnalysis(swa_name)
+        if(swa_name not in sampleJourney.swathAnalysisNames):
+            sampleJourney.appendSwathAnalysis(swa_name)
         sampleJourney.appendLink(msrun['name'], swa_name, swa_sop)
 
-        sampleJourney.appendOutputProteinMatrixName(swa_file)
+        if(swa_file not in sampleJourney.outputProteinMatrixNames):
+            sampleJourney.appendOutputProteinMatrixName(swa_file)
         sampleJourney.appendLink(swa_name, swa_file, "output")
+        sampleJourney.appendLink(swa_name, swa_spl_name, "uses")
 
     return sampleJourney
 
@@ -52,7 +57,7 @@ def setMsPrepEntries(sampleJourney, ins):
         msr_name = msr['name']
         sampleJourney.appendMsReadySampleName(msr_name)
         sampleJourney.appendLink(ins['name'], msr_name, "")
-        msruns = MSRunDAO.getMsRunsByMSREadySampleId(msr['id'])
+        msruns = MSRunDAO.getMsRunsByMSReadySampleId(msr['id'])
         for r in msruns:
             msrun_name = r['name']
             msrun_sop = r['sopFileName']

@@ -1,11 +1,10 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, Tooltip, Button, PageHeader, Divider } from 'antd';
-import { ButtonExportSelected } from '../../common';
-import { List, ButtonImportMsRuns } from '../../functional-building-blocks/ms-runs';
+import { ButtonExportAll } from '../../common';
+import { List, ButtonImportMsRuns, ExportColumns } from '../../functional-building-blocks/ms-runs';
 
 export const MsRuns: FunctionComponent = () => {
     const [isRefreshNeeded, setRefreshNeededFlag] = useState<boolean>(false);
-
 
     const onRefreshDone = () => {
         setRefreshNeededFlag(false);
@@ -28,8 +27,8 @@ export const MsRuns: FunctionComponent = () => {
     return (
         <>
             <PageHeader ghost={false} title="MS Runs"></PageHeader>
-            <ButtonExportSelected title="Export" />
-            <ButtonImportMsRuns style={{ float: 'right', marginRight: 10 }} />
+            <ButtonExportAll title="Export table" headers={ExportColumns.all} />
+
             <Tooltip title="Bulk Generate SWATH Analysis">
                 <Button type="primary" style={{ float: 'right', marginRight: 10 }}>
                     Generate SWATH Analysis
@@ -40,6 +39,12 @@ export const MsRuns: FunctionComponent = () => {
                     Generate Spectral Library
                 </Button>
             </Tooltip>
+            <ButtonImportMsRuns
+                style={{ float: 'right', marginRight: 10 }}
+                onImportSuccess={() => {
+                    setRefreshNeededFlag(true);
+                }}
+            />
             <Divider />
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />

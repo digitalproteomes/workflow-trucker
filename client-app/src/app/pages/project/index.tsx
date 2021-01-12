@@ -15,7 +15,7 @@ export const ProjectPage: FunctionComponent = () => {
         <>
             <Row>
                 {/* total of 24 columns available */}
-                <Col span={8}>
+                <Col span={10}>
                     <ProjectView project={project} />
                     <Divider></Divider>
                     <ButtonEditProject

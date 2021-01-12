@@ -19,6 +19,7 @@ type Props = {
     onValuesChange?: (values: Store) => void;
     getExistingValues?: () => any;
     buttonConfirmText?: string;
+    buttonCancelText?: string;
     styleModal?: ModalProps;
 };
 
@@ -33,6 +34,7 @@ export const InputModal: FunctionComponent<Props> = ({
     onValuesChange,
     getExistingValues,
     buttonConfirmText,
+    buttonCancelText,
     styleModal,
     children,
 }) => {
@@ -80,7 +82,7 @@ export const InputModal: FunctionComponent<Props> = ({
             title={title}
             okText={buttonConfirmText === null ? 'Create' : buttonConfirmText}
             okButtonProps={{ loading: isSaving }}
-            cancelText="Cancel"
+            cancelText={buttonCancelText === null ? 'Cancel' : buttonCancelText}
             onCancel={onCancel}
             onOk={() => {
                 form.submit();

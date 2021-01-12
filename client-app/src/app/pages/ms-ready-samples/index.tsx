@@ -1,9 +1,8 @@
 import React, { useState, FunctionComponent } from 'react';
-import { List } from '../../functional-building-blocks/ms-ready';
+import { ExportColumns, List } from '../../functional-building-blocks/ms-ready';
 import { MSReadySample } from '../../types';
 import { Space, Button, Tooltip, PageHeader, Divider } from 'antd';
-import { ButtonExportAll, ButtonExportSelected, Header } from '../../common';
-import { DownloadOutlined } from '@ant-design/icons';
+import { ButtonExportAll, ButtonExportSelected } from '../../common';
 import { ListDataContext, Store, StoreContext } from '../../common';
 
 const ContextName = 'MsReadyDataContext';
@@ -20,26 +19,26 @@ export const MSReadySamples: FunctionComponent = () => {
         return (
             <Space size="middle">
                 <Button type="default" htmlType="button">
-                    Generate MS Run - {record.name}
+                    Manually Generate MS Run
+                </Button>
+                <Button type="default" htmlType="button">
+                    Delete
                 </Button>
             </Space>
         );
     };
 
-    const exportHeaders: Header<MSReadySample>[] = [
-        { label: 'Id', key: MSReadySample.nameof('id') },
-        { label: 'Name', key: MSReadySample.nameof('name') },
-    ];
-
     return (
         <StoreContext.Provider value={{ name: ContextName }}>
             <PageHeader ghost={false} title="MS Ready Samples"></PageHeader>
-            <ButtonExportAll<MSReadySample> title={'Export all from table'} headers={exportHeaders} />
-            <ButtonExportSelected<MSReadySample> title={'Export selected'} headers={exportHeaders} />
-            <Tooltip title="Exports sample names to .tsv, to be inputed in the Mass Spec">
-                <Button type="primary" icon={<DownloadOutlined />} style={{ float: 'right', marginRight: 10 }}>
-                    Export MS Runs running queue
-                </Button>
+
+            <ButtonExportAll<MSReadySample> title={'Export all from table'} headers={ExportColumns.all} />
+
+            <Tooltip title="Exports sample names to .csv, to be inputed in the Mass Spec">
+                <ButtonExportSelected<MSReadySample>
+                    title={'Export selected names for MS Runs running queue'}
+                    headers={ExportColumns.nameInfo}
+                />
             </Tooltip>
             <Divider></Divider>
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />

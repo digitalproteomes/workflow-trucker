@@ -2,7 +2,7 @@ import { Button, Row, Col, Typography } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import React, { Component } from 'react';
 import { CSVReader } from 'react-papaparse';
-import { TypeMapConverter } from '..';
+import { TypeMapConverter } from '../..';
 
 const { Text } = Typography;
 

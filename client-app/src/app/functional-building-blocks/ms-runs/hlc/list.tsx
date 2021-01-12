@@ -31,6 +31,9 @@ export const List: FunctionComponent<ListProps> = ({ isRefreshNeeded, onRefreshD
                     return (
                         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                             <Col className="gutter-row" span={3}>
+                                <h3>Method</h3>
+                                <span>{record.instrumentMethod}</span>
+                                <Divider />
                                 <h3>Notes</h3>
                                 <span>{record.description}</span>
                                 <Divider />
@@ -56,6 +59,7 @@ const defaultColumns: ColumnsType<MsRun> = [
     getColumn('Name', MsRun.nameof('name')),
     getColumn('Id', MsRun.nameof('id')),
     getColumn('Instrument', MsRun.nameof('instrumentId')),
+    getColumn('SOP', MsRun.nameof('sopFileName')),
     getColumn('MS Ready sample', MsRun.nameof('msReadySampleName'), (record: MsRun) => (
         <Button type="link">{record.msReadySampleName}</Button>
     )),

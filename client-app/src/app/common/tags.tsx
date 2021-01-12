@@ -39,3 +39,7 @@ export function getProtocolTag(tagName: EProtocolTag) {
     return <Tag {...tagProps}>{tagName}</Tag>;
 }
 // protocol tags end
+
+export function getCustomTag(name: string, style?: React.CSSProperties) {
+    return <Tag style={style}>{name}</Tag>;
+}

@@ -10,6 +10,7 @@ export class Api {
                 Project.default,
                 {
                     description: 'Beta project',
+                    projectId: '6',
                     id: '10a324d9457b878df257516c',
                     isLocked: false,
                     name: 'DRBD',

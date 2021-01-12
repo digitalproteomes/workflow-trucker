@@ -22,6 +22,165 @@ def insertProject(project):
     return projectDAO.createProject(project)
 
 
+def insertMelanomaJourney(projectId):
+
+    new_sample = {
+        "clinicalSampleCode": "FDSG23",
+        "name": "PHRT_006_FDSG23_CPAC",
+        "sampleCounter": 1,
+        "projectId": projectId,
+        "processingPerson": "System",
+        "description": "Mock sample",
+        "workflowTag": "Sample Preparation",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
+    }
+    second_sample = {
+        "clinicalSampleCode": "RTYD12",
+        "name": "PHRT_006_RTYD12_CPAC",
+        "sampleCounter": 2,
+        "projectId": projectId,
+        "processingPerson": "System",
+        "description": "Mock sample",
+        "workflowTag": "Sample Preparation",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
+    }
+    cs1 = clinicalSampleDAO.createClinicalSample(new_sample)
+    cs2 = clinicalSampleDAO.createClinicalSample(second_sample)
+
+    is_sample1 = {
+        "name": "IS_" + str(cs1['name']) + "_1",
+        "projectId": projectId,
+        "clinicalSamples": [cs1['id']],
+        "workflowTag": "Sample Preparation",
+        "protocolName": "fractionation_preparation",
+        "sopFileName": "PHRT_Sample_Preparation_SOP",
+        "description": "Mock sample",
+        "processingPerson": "System",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
+    }
+    is_sample2 = {
+        "name": "IS_" + str(cs1['name']) + "_2",
+        "projectId": projectId,
+        "clinicalSamples": [cs1['id']],
+        "workflowTag": "Sample Preparation",
+        "protocolName": "fractionation_preparation",
+        "sopFileName": "PHRT_Sample_Preparation_SOP",
+        "description": "Mock sample",
+        "processingPerson": "System",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
+    }
+
+    is1 = intermediateSampleDAO.createIntermediateSample(is_sample1)
+    is2 = intermediateSampleDAO.createIntermediateSample(is_sample2)
+
+    new_msr1 = {
+        "name": "MSR_" + is1['name'],
+        "projectId": projectId,
+        "clinicalSamples": is1['clinicalSamples'],
+        "intermediateSampleId": is1['id'],
+        "workflowTag": "Sample Preparation",
+        "description": "Mock samples",
+        "processingPerson": "System",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
+
+    }
+
+    new_msr2 = {
+        "name": "MSR_" + is2['name'],
+        "projectId": projectId,
+        "clinicalSamples": is2['clinicalSamples'],
+        "intermediateSampleId": is2['id'],
+        "workflowTag": "Sample Preparation",
+        "description": "Mock samples",
+        "processingPerson": "System",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now()
+
+    }
+    msr1 = msReadySamplesDAO.createMSReadySample(new_msr1)
+    msr2 = msReadySamplesDAO.createMSReadySample(new_msr2)
+
+    new_msrun1 = {
+        "runId": 1,
+        "clinicalSamples": msr1['clinicalSamples'],
+        "msReadySampleId": msr1['id'],
+        "name": "PHRT_6_salbert_A1902_012",
+        "projectId": projectId,
+        "protocolId": "DIA",
+        "instrumentId": "MS:1002523",
+        "instrumentMethod": "Xcalibur methods TP",
+        "sopFileName": "PHRT_Mass_Spectrometry_SOP",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now(),
+        "workflowTag": "Sample Preparation",
+        "description": "Mock run",
+        "processingPerson": "System"
+    }
+
+    new_msrun2 = {
+        "runId": 2,
+        "clinicalSamples": msr2['clinicalSamples'],
+        "msReadySampleId": msr2['id'],
+        "name": "PHRT_6_salbert_A1902_045",
+        "projectId": projectId,
+        "protocolId": "DIA",
+        "instrumentId": "MS:1002523",
+        "sopFileName": "PHRT_Mass_Spectrometry_SOP",
+        "updatedDate": datetime.datetime.now(),
+        "instrumentMethod": "Xcalibur methods TP",
+        "createdDate": datetime.datetime.now(),
+        "workflowTag": "Sample Preparation",
+        "description": "Mock run",
+        "processingPerson": "System"
+    }
+    run1 = MSRunDAO.createMsRun(new_msrun1)
+    run2 = MSRunDAO.createMsRun(new_msrun2)
+
+    new_spl = {
+        "libId": 1,
+        "clinicalSamples": is1['clinicalSamples'],
+        "msRunIds": [run1['id'], run2['id']],
+        "name": "PHRT_001_006_CPAC_Lib",
+        "projectId": projectId,
+        "protocolId": "1",
+        "protocolName": "PHRT_Data_Analysis_SOP",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now(),
+        "specLibFilename": "PHRT_005_Spec_Lib.tsv",
+        "sopFileName": "PHRT_Data_Analysis_SOP",
+        "workflowTag": "Library Generation",
+        "description": "Mock lib",
+        "proteinDatabaseOrganism": "UP000005640",
+        "proteinDatabaseVersion": "200812"
+    }
+
+    spl = spectralLibraryDAO.createSpectralLibrary(new_spl)
+
+    new_swa = {
+        "swathId": 1,
+        "clinicalSamples": is1['clinicalSamples'],
+        "msRunIds": [run1['id']],
+        "name": "PHRT_001_006_CPAC_SWATH",
+        "spectralLibraryId": spl['id'],
+        "projectId": projectId,
+        "protocolId": "1",
+        "protocolName": "PHRT_Data_Analysis_SOP",
+        "sopFileName": "PHRT_Data_Analysis_SOP",
+        "proteinMatrixFileName": "PHRT_006_Protein_Matrix.tsv",
+        "updatedDate": datetime.datetime.now(),
+        "createdDate": datetime.datetime.now(),
+        "workflowTag": "SWATHAnalysis",
+        "description": "Mock swath"
+    }
+
+    print(swathAnalysisDAO.createSWATHAnalysis(new_swa))
+
+
 def insertSamples(samples, projectId):
     counter = 1
     for i in samples:
@@ -60,6 +219,7 @@ def insertMSRuns(msruns, projectId):
                         "protocolId": i['protocolId'],
                         "instrumentId": i['instrumentId'],
                         "sopFileName": "PHRT_Mass_Spectrometry_SOP",
+                        "instrumentMethod": "Xcalibur methods TP",
                         "updatedDate": datetime.datetime.now(),
                         "createdDate": datetime.datetime.now(),
                         "workflowTag": "Sample Preparation",
@@ -84,10 +244,11 @@ def insertLibGenMSRuns(projectId):
                     "runId": run_counter,
                     "clinicalSamples": msr['clinicalSamples'],
                     "msReadySampleId": msr['id'],
-                    "name": "sgoetze_C1902_0"+str(name_counter),
+                    "name": "PHRT_5_sgoetze_C1902_0"+str(name_counter),
                     "projectId": projectId,
                     "protocolId": "DDA_protocol",
                     "instrumentId": "MS:1002877",
+                    "instrumentMethod": "Xcalibur methods TP",
                     "sopFileName": "PHRT_Mass_Spectrometry_SOP",
                     "updatedDate": datetime.datetime.now(),
                     "createdDate": datetime.datetime.now(),
@@ -283,7 +444,7 @@ if __name__ == '__main__':
 
     new_project = {
         "projectId": "5",
-        "name": "CPAC",
+        "name": "PHRT_005_CPAC",
         "ownerName": "Patrick Pedrioli",
         "ownerORCID": "0000-0001-6719-9139",
         "description": "MMA Project",
@@ -298,9 +459,9 @@ if __name__ == '__main__':
 
     new_project = {
         "projectId": "6",
-        "name": "Melanoma",
-        "ownerName": "Patrick Pedrioli",
-        "ownerORCID": "0000-0001-6719-9139",
+        "name": "PHRT_006_CPAC",
+        "ownerName": "Silvana Albert",
+        "ownerORCID": "0000-0001-3244-3453",
         "description": "Melanoma Project",
         "isLocked": "false",
         "updatedDate": datetime.datetime.now(),
@@ -309,7 +470,7 @@ if __name__ == '__main__':
 
     print("insert second project")
     print("")
-    insertProject(new_project)
+    melanomaProjectId = insertProject(new_project)['id']
 
     print("")
     print("___________________________________________________________")
@@ -364,6 +525,11 @@ if __name__ == '__main__':
 
     print("insert SWATH Analysis")
     insertSWATHAnalysis(project_json['swath_analysis'], projectId)
+
+    print("insert Melanoma Project")
+    print("___________________________________________________________")
+    print("")
+    insertMelanomaJourney(melanomaProjectId)
 
     print("Project Id: " + str(projectId))
 

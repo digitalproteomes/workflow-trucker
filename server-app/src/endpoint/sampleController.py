@@ -8,6 +8,7 @@ from persistence import clinicalSampleDAO
 from persistence import intermediateSampleDAO
 from persistence import msReadySamplesDAO
 from persistence import projectDAO
+from persistence import artefactDAO
 
 
 sample_api = Blueprint('sample_api', __name__)
@@ -15,13 +16,13 @@ sample_api = Blueprint('sample_api', __name__)
 # clinical
 
 
-@sample_api.route("/samples/clinical/counter",  methods=['GET'])
+@sample_api.route("/samples/clinical/maxcounter",  methods=['GET'])
 def getMaxCounter():
     projectId = request.args.get('projectId')
 
     if (projectDAO.getProjectById(projectId)):
-        sample = clinicalSampleDAO.getMaxCounter(projectId)
-        return jsonify({"max_counter": sample['sampleCounter']}), status.HTTP_200_OK
+        maxCounter = clinicalSampleDAO.getMaxCounter(projectId)
+        return jsonify({"maxCounter": maxCounter}), status.HTTP_200_OK
     else:
         return 'Project with id does not exist.', status.HTTP_404_NOT_FOUND
 
@@ -53,11 +54,14 @@ def createClinicalSamples():
     data = request.json
     samples = data.get('samples')
     success_names = []
+
     for i in samples:
+        maxSampleCounter = clinicalSampleDAO.getMaxCounter(i['projectId'])
+        sampleCounter = maxSampleCounter + 1
         new_sample = {
             "clinicalSampleCode": i['clinicalSampleCode'],
             "name": i['name'],
-            "sampleCounter": i['sampleCounter'],
+            "sampleCounter": sampleCounter,
             "projectId": i['projectId'],
             "processingPerson": i['processingPerson'],
             "description": i['description'],
@@ -148,11 +152,17 @@ def createSinglePrepSamples():
         clinicalSample = clinicalSampleDAO.getClinicalSampleById(
             ObjectId(i['clinicalSampleId']))
         is_name = "IS_" + str(clinicalSample['name'])
+        sop = artefactDAO.getArtefactById(i['sopId'])
+        if sop != None:
+            sop_name = sop['name']
+        else:
+            sop_name = "NA"
         new_sample = {
             "clinicalSamples": [i['clinicalSampleId']],
             "name": is_name,
             "projectId": clinicalSample['projectId'],
             "processingPerson": i['processingPerson'],
+            "sopFileName": sop_name,
             "description": i['description'],
             "workflowTag": i['workflowTag'],
             "protocolName": "single_preparation",

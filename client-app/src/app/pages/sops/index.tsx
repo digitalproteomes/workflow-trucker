@@ -1,7 +1,7 @@
 import React, { useState, FunctionComponent } from 'react';
 import { Space, PageHeader, Divider } from 'antd';
 import { SOP } from '../../types';
-import { ButtonExportSelected } from '../../common';
+import { ButtonExportAll } from '../../common';
 import { SampleNotifications } from '../../common/notifications';
 import { ButtonDeleteSOP, ButtonDownload, ButtonUploadSOP, List } from '../../functional-building-blocks/sops/';
 
@@ -38,7 +38,7 @@ export const SOPPage: FunctionComponent = () => {
             <Space style={{ float: 'right' }} direction="horizontal">
                 <ButtonUploadSOP setRefreshNeededFlag={setRefreshNeededFlag} />
 
-                <ButtonExportSelected title="Export" />
+                <ButtonExportAll title="Export table" />
             </Space>
             <Divider />
             <List isRefreshNeeded={isRefreshNeeded} onRefreshDone={onRefreshDone} renderActions={renderActions} />

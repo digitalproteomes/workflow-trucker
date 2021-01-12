@@ -41,6 +41,8 @@ export class IntermediateSample {
 
     name: string = '';
 
+    sopFileName: string = '';
+
     processingPerson: string = '';
 
     projectId: string = '';
@@ -62,6 +64,10 @@ export class MSReadySample {
     description: string = '';
 
     id: string = '';
+
+    peptideNo: number = 0;
+
+    quality: string = '';
 
     intermediateSampleId: string = '';
 
@@ -111,9 +117,13 @@ export class MsRun {
 
     instrumentId: string = '';
 
+    instrumentMethod: string = '';
+
     msReadySampleId: string = '';
 
     msReadySampleName: string = '';
+
+    sopFileName: string = '';
 
     name: string = '';
 
@@ -141,6 +151,7 @@ export class MSRunNew {
     msReadySampleName: string = '';
     instrumentMethod: string = '';
     description: string = '';
+    projectId: string = '';
 
     instrumentId: string = ''; //user entry
     processingPerson: string = ''; //user entry
@@ -149,6 +160,12 @@ export class MSRunNew {
     runMode: MSRunMode = 'Unknown'; //based on instrument method
 
     public static nameof = (name: keyof MSRunNew) => name;
+}
+
+export class MSRunNewCreateResponse {
+    createSuccess: string[] = [];
+    createFail: string[] = [];
+    overwritten: string[] = [];
 }
 
 export class MSRunCompact {
@@ -284,7 +301,7 @@ export class GenerationData {
         suffixProject: 'CPAC',
         description: 'Zurich Hospital sample',
         workflowTag: EWorkflowTag.LibraryGeneration.toString(),
-        numberOfEntries: 3,
+        numberOfEntries: 1,
         idSeed: 0,
     };
 }

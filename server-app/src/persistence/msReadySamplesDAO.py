@@ -47,6 +47,10 @@ def getMSReadySampleById(id):
     return MSReadySample.find_one({"id": id})
 
 
+def getMSReadySampleByName(name):
+    return MSReadySample.find_one({"name": name})
+
+
 def getMSReadySamplesByClinicalSampleId(clinicalSampleId):
     samples = MSReadySample.find(
         {"clinicalSamples": ObjectId(clinicalSampleId)})

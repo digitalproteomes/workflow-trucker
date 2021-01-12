@@ -109,6 +109,7 @@ class MSRun(Document):
     sopFileName = fields.StrField(required=False)
     description = fields.StrField(required=False)
     instrumentId = fields.StrField(required=True)
+    instrumentMethod = fields.StrField(required=False)
     runCode = fields.StrField(required=False)
     status = fields.StrField(required=False)
     processingPerson = fields.StrField(required=False)

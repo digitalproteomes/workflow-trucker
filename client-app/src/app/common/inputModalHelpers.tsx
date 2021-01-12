@@ -90,13 +90,16 @@ export class InputHelper {
                 rules={[{ required: required, message: validationMessage(propName.toString()) }]}
             >
                 <Select
+                    key={propName.toString()}
                     tagRender={(props) => {
                         const { value } = props; // reference https://ant.design/components/select/#components-select-demo-custom-tag-render
                         return getSOPType(value as ESOPType);
                     }}
                 >
                     {sopTypes.map((type) => (
-                        <Option value={type}>{type}</Option>
+                        <Option key={type} value={type}>
+                            {type}
+                        </Option>
                     ))}
                 </Select>
             </Form.Item>

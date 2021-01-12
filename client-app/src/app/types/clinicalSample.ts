@@ -53,3 +53,7 @@ export class ClinicalSampleCompact {
 
     public static nameof = (name: keyof ClinicalSampleCompact) => name;
 }
+
+export class MaxCounter {
+    maxCounter: number = 0;
+}

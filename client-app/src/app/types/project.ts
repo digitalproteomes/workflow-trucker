@@ -1,6 +1,8 @@
 export class Project {
     id: string = '';
 
+    projectId: string = '';
+
     name: string = '';
 
     ownerName: string = '';
@@ -15,6 +17,7 @@ export class Project {
 
     public static default: Project = {
         id: 'default project id',
+        projectId: '',
         description: '',
         isLocked: false,
         name: '',

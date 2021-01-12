@@ -1,14 +1,16 @@
 import React from 'react';
 import { Button, Tooltip } from 'antd';
 import { CSVLink } from 'react-csv';
-import { ListDataContext, Store } from '..';
-import { Header } from './csvExporterButton';
-import { StoreContext } from './datastore'; // by importing it directly from here, instead of importing it from index.ts, will avoid throwing an undefined exception because of named/default module export
+import { ListDataContext, Store } from '../..';
+import { Header } from './types';
+import { StoreContext } from '../datastore'; // by importing it directly from here, instead of importing it from index.ts, will avoid throwing an undefined exception because of named/default module export
 
 type Props<T> = {
     title: string;
     headers?: Header<T>[];
     fetchData: (store: ListDataContext<T>) => T[];
+
+    filename?: string;
 };
 
 type State<T> = { data: T[] };
@@ -40,7 +42,8 @@ export class ButtonExportBase<T> extends React.Component<Props<T>, State<T>> {
 
     fetchData = () => {
         const store: ListDataContext<T> = Store.getStore(this.context.name);
-        this.setState({ data: store.activeData }, () => {
+
+        this.setState({ data: this.props.fetchData(store) }, () => {
             // click the CSVLink component to trigger the CSV download
             if (this.csvLink.current != null) (this.csvLink.current as any).link.click();
         });
@@ -52,14 +55,15 @@ export class ButtonExportBase<T> extends React.Component<Props<T>, State<T>> {
         });
 
         return (
-            <Tooltip title="Download the current table data through a file">
-                <Button type={'default'} onClick={this.fetchData}>
+            <Tooltip title="Download the current selection">
+                <Button type={'primary'} onClick={this.fetchData} style={{ float: 'right', marginRight: 10 }}>
                     <CSVLink
                         data={this.state.data}
                         className="hidden"
                         ref={(r: any) => (this.csvLink = r)}
                         target="_blank"
                         headers={convertedHeaders}
+                        filename={this.props.filename}
                     >
                         {this.props.title}
                     </CSVLink>

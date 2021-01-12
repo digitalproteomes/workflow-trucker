@@ -2,11 +2,14 @@ from flask import Blueprint
 from flask import Flask, jsonify, request
 from flask_api import status
 from bson import ObjectId
+import datetime
 
 
 from persistence import MSRunDAO
 from persistence import projectDAO
+from persistence import artefactDAO
 from persistence import clinicalSampleDAO, msReadySamplesDAO
+from model.bulkCreateResponseDTO import BulkCreateResponseDTO
 
 msrun_api = Blueprint('msrun_api', __name__)
 
@@ -45,38 +48,6 @@ def getMSRunById():
         return 'MS Run with id does not exist.', status.HTTP_404_NOT_FOUND
 
 
-@msrun_api.route('/msruns', methods=['POST'])
-def createMSRun():
-    data = request.json
-    projectId = data.get('projectId')
-    name = data.get('name')
-    protocolId = data.get('protocolId')
-    instrumentId = data.get('instrumentId')
-    runCode = data.get('runCode')
-    workflowTag = data.get('workflowTag')
-    msReadySampleId = data.get('msReadySampleId')
-    description = data.get('description')
-    processingPerson = data.get('processingPerson')
-
-    new_msrun = {
-        "msReadySampleId": msReadySampleId,
-        "clinicalSamples": clinicalSamples,
-        "name": name,
-        "projectId": projectId,
-        "protocolId": protocolId,
-        "instrumentId": instrumentId,
-        "runCode": runCode,
-        "updatedDate": datetime.datetime.now(),
-        "createdDate": datetime.datetime.now(),
-        "workflowTag": workflowTag,
-        "processingPerson": processingPerson
-    }
-
-    created_ms_run = MSRunDAO.createMsRun(new_msrun)
-
-    return jsonify(created_ms_run), status.HTTP_200_OK
-
-
 @msrun_api.route('/msruns', methods=['DELETE'])
 def deleteRun():
     id = request.args.get('id')
@@ -103,3 +74,60 @@ def getMsRunsByClinicalSampleId():
         return jsonify(msruns), status.HTTP_200_OK
     else:
         return 'Clinical Sample with id does not exist.', status.HTTP_404_NOT_FOUND
+
+
+@msrun_api.route('/msruns', methods=['POST'])
+def createMSRuns():
+    data = request.json
+    msRuns = data.get('samples')
+    responseDTO = BulkCreateResponseDTO()
+
+    for i in msRuns:
+        msReadySample = msReadySamplesDAO.getMSReadySampleByName(
+            i['msReadySampleName'])
+
+        sop = "NA"
+        if(msReadySample != None):
+            if i['runMode'] == "DIA":
+                entry = artefactDAO.getArtefactById(i['SOPDIA'])
+                if(entry != None):
+                    sop = entry['name']
+            elif i['runMode'] == "DDA":
+                entry = artefactDAO.getArtefactById(i['SOPDDA'])
+                if(entry != None):
+                    sop = entry['name']
+
+            description = ""
+            if i['description'] != None:
+                description = i['description']
+
+            existingMSRun = MSRunDAO.getMsRunByName(i['name'])
+
+            if(existingMSRun != None):
+                MSRunDAO.updateMSRun(
+                    existingMSRun['id'], msReadySample['id'], msReadySample['clinicalSamples'], i['instrumentId'], sop,
+                    description, i['instrumentMethod'], i['processingPerson'])
+                responseDTO.appendOverwritten(i['name'])
+
+            else:
+                new_msrun = {
+                    "clinicalSamples": msReadySample['clinicalSamples'],
+                    "msReadySampleId": msReadySample['id'],
+                    "name": i['name'],
+                    "projectId": i['projectId'],
+                    "protocolId": i['runMode'],
+                    "instrumentId": i['instrumentId'],
+                    "sopFileName": sop,
+                    "instrumentMethod": i['instrumentMethod'],
+                    "updatedDate": datetime.datetime.now(),
+                    "createdDate": datetime.datetime.now(),
+                    "workflowTag": "Library Generation",
+                    "description": description,
+                    "processingPerson": i['processingPerson'],
+                }
+                new_run = MSRunDAO.createMsRun(new_msrun)
+                responseDTO.appendCreateSuccess(i['name'])
+        else:
+            responseDTO.appendCreateFail(i['name'])
+
+    return responseDTO.toJson(), status.HTTP_200_OK

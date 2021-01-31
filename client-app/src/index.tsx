@@ -7,6 +7,7 @@ import { Constants } from './app/default-data/constants';
 
 async function initialize() {
     await Constants.InitAsync();
+    Constants.setActiveProject(Constants.projects[0]);
 }
 
 initialize().then(() => {

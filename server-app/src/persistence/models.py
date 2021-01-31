@@ -20,7 +20,7 @@ instance = Instance(db.WorkflowDB)
 
 @instance.register
 class Project(Document):
-    projectId = fields.IntegerField(required=True)
+    projectId = fields.StrField(required=True)
     name = fields.StrField(required=True)
     ownerName = fields.StrField(required=True)
     ownerORCID = fields.StrField(required=True)

@@ -1,12 +1,10 @@
 import React, { FunctionComponent, useState } from 'react';
 
 import { Project } from '../../types';
-import { ProjectView } from '../../functional-building-blocks/projects';
+import { ProjectView, ButtonEditProject } from '../../functional-building-blocks/projects';
 import { Constants } from '../../default-data/constants';
 import { Row, Col, Button, Divider, Card, Steps } from 'antd';
 import { LockOutlined, DownloadOutlined } from '@ant-design/icons';
-
-import { ButtonEditProject } from '../../functional-building-blocks/projects/hlc/buttonEdit';
 
 export const ProjectPage: FunctionComponent = () => {
     const [project, setProject] = useState<Project>(Constants.activeProject);

@@ -20,6 +20,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { CollapseType } from 'antd/lib/layout/Sider';
 import { Constants } from '../default-data/constants';
 import { Project } from '../types';
+import { ButtonCreateProject } from '../functional-building-blocks/projects';
+import { Notifications } from '../common';
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider, Header } = Layout;
@@ -29,7 +31,7 @@ const { Option } = Select;
 export const BasicLayout = withRouter((props) => {
     const [isCollapsed, setCollapsedFlag] = useState<boolean>(false);
     // when this basic layout is instantiated, the projects are already loaded
-    const [activeProject, setActiveProject] = useState<Project>(Constants.activeProject);
+    const activeProject: Project = Constants.activeProject;
     const projects: Project[] = Constants.projects;
 
     function onCollapse(isCollapsed: boolean, type: CollapseType) {
@@ -40,8 +42,6 @@ export const BasicLayout = withRouter((props) => {
 
     // wait - projects - the active project could be set as null, and have a nice loading screen until the initial data is loaded from the server
     function resetActiveProject(newActiveProject: Project) {
-        setActiveProject(newActiveProject);
-
         Constants.setActiveProject(newActiveProject);
 
         props.history.push('/');
@@ -49,9 +49,6 @@ export const BasicLayout = withRouter((props) => {
 
     let selectedMenuEntry = props.location.pathname;
     if (selectedMenuEntry === '/') selectedMenuEntry = '/about';
-
-    const projectId = activeProject.id;
-    const projectName = activeProject.name;
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
@@ -72,17 +69,32 @@ export const BasicLayout = withRouter((props) => {
                     theme="dark"
                     defaultSelectedKeys={[`/about`]}
                     selectedKeys={[selectedMenuEntry]}
-                    defaultOpenKeys={[`${projectId}`, `/samples`]}
+                    defaultOpenKeys={[`${activeProject.id}`, `/samples`]}
                 >
                     <Menu.Item key={'/about'} icon={<HomeOutlined />}>
                         <Link to={`/about`}>Home</Link>
                     </Menu.Item>
-                    {getSubmenu(projectId, projectName)}
+                    {getSubmenu(activeProject.id, activeProject.name)}
                 </Menu>
             </Sider>
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }}>
                     <div style={{ float: 'right', alignContent: 'horizontal' }}>
+                        <ButtonCreateProject
+                            onCreateProjectSuccessful={async (project) => {
+                                await Constants.InitAsync();
+
+                                // todo - for some reason, setting the selection programatically in the Select component is not working
+                                // resetActiveProject(project);
+                                // delete the refresh below when the active project selection works properly
+                                props.history.push('/');
+
+                                Notifications.queueSuccess(
+                                    'Success!',
+                                    'Project creation was successful. It is now available for selection.',
+                                );
+                            }}
+                        />
                         <Text style={{ paddingRight: 16, paddingLeft: 4 }}>Select current project:</Text>
                         <Select
                             defaultValue={activeProject.id}
@@ -92,7 +104,7 @@ export const BasicLayout = withRouter((props) => {
                             style={{ width: 260, paddingRight: 16 }}
                         >
                             {projects.map((project) => (
-                                <Option key={project.id} value={project.id}>
+                                <Option key={project.projectId} value={project.id}>
                                     {project.name}
                                 </Option>
                             ))}

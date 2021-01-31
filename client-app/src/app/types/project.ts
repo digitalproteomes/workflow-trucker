@@ -1,7 +1,7 @@
 export class Project {
-    id: string = '';
+    id: string = ''; // db project id
 
-    projectId: string = '';
+    projectId: string = ''; // display project id
 
     name: string = '';
 

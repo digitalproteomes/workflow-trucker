@@ -16,8 +16,6 @@ export class Constants {
 
     public static async InitAsync(): Promise<void> {
         this.projects = await Api.fetchProjects();
-
-        this.setActiveProject(this.projects[0]);
     }
 
     static setActiveProject(newActiveProject: Project) {

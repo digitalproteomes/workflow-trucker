@@ -1,3 +1,5 @@
+import datetime
+
 from flask import Blueprint
 from flask import Flask, jsonify, request
 from flask_api import status
@@ -26,14 +28,14 @@ def getProjectById():
 @project_api.route('/projects', methods=['POST'])
 def createProject():
     data = request.json
-    id = data.get('id')
+    projectId = data.get('projectId')
     name = data.get('name')
     ownerName = data.get('ownerName')
     ownerORCID = data.get('ownerORCID')
     description = data.get('description')
 
     new_project = {
-        "projectId": id,
+        "projectId": projectId,
         "name": name,
         "ownerName": ownerName,
         "ownerORCID": ownerORCID,

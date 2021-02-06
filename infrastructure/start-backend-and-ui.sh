@@ -1,0 +1,1 @@
+docker-compose -f docker-compose.backend-and-ui.yml up

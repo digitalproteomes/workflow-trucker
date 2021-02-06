@@ -1,0 +1,40 @@
+# get inspired here https://docs.docker.com/compose/compose-file/
+
+version: "3.1"
+
+networks:
+  backend:
+  ui:
+
+services:
+  mongo:
+    image: mongo:3.6.21
+    restart: always
+    ports:
+      - 27017:27017
+    # the port mapping above should not be necessary. we have it so the db is accessible through the local host instead of just within the docker-compose network. This is a security issue.
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - backend
+
+  server-app:
+    image: proteo-pile-server:0.1
+    restart: always
+    environment:
+      - WorkflowEnvironment=Docker
+    ports:
+      - 5000:5000
+    networks:
+      - backend
+    depends_on:
+      - mongo
+  client-app:
+    image: proteo-pile-ui:0.1
+    restart: always
+    ports:
+      - 8000:80
+    networks:
+      - ui
+      
